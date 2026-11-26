@@ -90,7 +90,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 
 | ID | Specs | Tarea | Ruta | Estado | Commit |
 |---|---|---|---|---|---|
-| T1 | S1, S4 | Resolver las decisiones abiertas (ver L6 y L10) | en línea | en curso: falta AdSense; dominio y Cloudflare pasan a T14 | — |
+| T1 | S1, S4 | Resolver las decisiones abiertas (ver L6, L10 y L11) | en línea | hecha; dominio y Cloudflare pasan a T14 | — |
 | T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | en línea | pendiente | — |
 | T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | en línea | pendiente | — |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | en línea | pendiente | — |
@@ -173,4 +173,7 @@ Se crea este documento.
 - AdSense: «que es AdSense?». Sigue abierta; se explicó qué es y se espera su decisión.
 - Dominio y Cloudflare: «luego vemos eso». Se decide en T14.
 
-Siguiente paso: arrancar T2 en `sitio/`. La decisión de AdSense no lo bloquea: solo cambia si se agrega o no un script en T6.
+**L11** (26/11/2026): «lo quitamos, al final, luego se puede agregar, no?»
+Decisión: el sitio nuevo sale sin AdSense. Si se decide agregarlo, es una tarea chica: un campo en la configuración del sitio (ID de cliente y activo) y el script cargado con `next/script` en modo diferido. No se deja preparado de antemano.
+
+Siguiente paso: arrancar T2 en `sitio/`.
