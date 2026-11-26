@@ -8,7 +8,7 @@ Este repositorio contiene **solo el frontend**: vistas, estilos, scripts e imág
 
 El contenido es una copia fiel del frontend en producción, sin cambios. Sirve como línea base para el rediseño.
 
-Para conocer qué producto es, a quién se dirige y qué restricciones tiene, lee [`PRODUCT.md`](PRODUCT.md). La crítica de diseño de la página de inicio actual está en [`.impeccable/critique/`](.impeccable/critique/).
+Para conocer qué producto es, a quién se dirige y qué restricciones tiene, lee [`PRODUCT.md`](PRODUCT.md). La crítica de diseño del sitio actual (inicio, guía y blog) está en [`CRITICA.md`](CRITICA.md); el archivo de cada corrida queda en [`.impeccable/critique/`](.impeccable/critique/).
 
 ## Estructura
 
