@@ -83,6 +83,15 @@
         ],
         "createdAt": "2026-11-26T20:53:49.090Z",
         "reason": "agente: Open Sans es la tipografía del sitio actual; el usuario pidió conservar la página y solo modernizarla"
+      },
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "files": [
+          "public/web/css/inicio.css"
+        ],
+        "createdAt": "2026-11-26T23:01:26.108Z",
+        "reason": "agente: Open Sans es la tipografía de la marca en el sitio actual; Gian aprobó la v4 que la conserva"
       }
     ]
   }
