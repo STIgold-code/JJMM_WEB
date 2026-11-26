@@ -1,0 +1,134 @@
+name: Sitio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'sitio/**'
+      - '.github/workflows/sitio.yml'
+  pull_request:
+    paths:
+      - 'sitio/**'
+      - '.github/workflows/sitio.yml'
+
+concurrency:
+  group: sitio-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: sitio
+
+env:
+  NODE_VERSION: '24'
+  NEXT_TELEMETRY_DISABLED: '1'
+
+jobs:
+  calidad:
+    name: Tipos, lint, pruebas de unidad y compilación
+    runs-on: ubuntu-latest
+    env:
+      # La compilación no se conecta a la base de datos; estos valores solo la satisfacen.
+      DATABASE_URI: postgres://ci:ci@127.0.0.1:5432/ci
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: sitio/package.json
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: sitio/pnpm-lock.yaml
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Generar secreto de Payload desechable
+        run: echo "PAYLOAD_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+
+      - name: Verificar tipos
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Formato
+        run: pnpm format:check
+
+      - name: Pruebas de unidad
+        run: pnpm test
+
+      - name: Compilar
+        run: pnpm build
+
+  extremo-a-extremo:
+    name: Playwright y Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: calidad
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: ci
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: sitio_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ci -d sitio_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URI: postgres://ci:ci@localhost:5432/sitio_ci
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: sitio/package.json
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: sitio/pnpm-lock.yaml
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Generar secreto de Payload desechable
+        run: echo "PAYLOAD_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+
+      - name: Compilar
+        run: pnpm build
+
+      - name: Instalar navegador de Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Pruebas extremo a extremo
+        # Playwright levanta la aplicación compilada con `pnpm start` (ver playwright.config.ts).
+        run: pnpm test:e2e
+
+      - name: Lighthouse CI
+        # LHCI levanta la aplicación con `pnpm start` y aplica los límites de lighthouserc.json.
+        run: pnpm lighthouse
+
+      - name: Guardar reportes
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: reportes-sitio
+          path: |
+            sitio/playwright-report/
+            sitio/.lighthouseci/
+          retention-days: 14

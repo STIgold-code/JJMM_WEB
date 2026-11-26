@@ -1,0 +1,33 @@
+# Dependencias
+/node_modules
+/.pnp
+.pnp.js
+
+# Next.js y compilación
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# Variables de entorno: solo se versiona .env.example
+.env
+.env*.local
+
+# Archivos subidos en local cuando Wasabi no está configurado
+/media
+
+# Pruebas
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/.lighthouseci/
+
+# Sistema y editores
+.DS_Store
+*.pem
+/.idea/
+npm-debug.log*
+pnpm-debug.log*

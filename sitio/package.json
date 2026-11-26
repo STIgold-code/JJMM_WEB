@@ -1,0 +1,64 @@
+{
+  "name": "sitio-jjmm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sitio web y panel administrativo del Estudio Contable JJMM (Next.js + Payload CMS).",
+  "type": "module",
+  "packageManager": "pnpm@10.30.3",
+  "scripts": {
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "lighthouse": "lhci autorun",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation WASABI_BUCKET=importmap WASABI_REGION=importmap WASABI_ENDPOINT=https://importmap.invalid WASABI_ACCESS_KEY_ID=importmap WASABI_SECRET_ACCESS_KEY=importmap payload generate:importmap"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.94.2",
+    "@payloadcms/next": "3.94.2",
+    "@payloadcms/richtext-lexical": "3.94.2",
+    "@payloadcms/storage-s3": "3.94.2",
+    "@payloadcms/ui": "3.94.2",
+    "cross-env": "7.0.3",
+    "graphql": "16.15.0",
+    "next": "16.4.6",
+    "payload": "3.94.2",
+    "react": "19.2.9",
+    "react-dom": "19.2.9",
+    "sharp": "0.35.4"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.1",
+    "@lhci/cli": "0.16.1",
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.19.9",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "eslint": "10.15.0",
+    "eslint-config-next": "16.4.6",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.10.1",
+    "typescript": "5.9.3",
+    "vite-tsconfig-paths": "6.0.5",
+    "vitest": "4.0.18"
+  },
+  "engines": {
+    "node": "^22.23.5 || ^24.22.3 || >=26.13.1",
+    "pnpm": "^10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}
