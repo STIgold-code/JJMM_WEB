@@ -124,7 +124,7 @@ button{font:inherit}
 .hero-slide.completa.actual .imagen-completa{animation:none}
 .hero-slide.completa::after{background:linear-gradient(0deg,rgb(10 30 55 / .7) 0%,rgb(10 30 55 / 0) 30%)}
 .hero-sello{width:6.5rem;height:6.5rem;margin-bottom:1rem;background:var(--blanco);border-radius:50%;padding:.3rem;box-shadow:0 8px 20px rgb(0 0 0 / .3)}
-.hero-texto{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:6.5rem}
+.hero-texto{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:10.5rem}
 .hero-texto > *{max-width:36rem}
 .hero-slide.actual .hero-texto > *{animation:subir .9s var(--salida) both}
 .hero-slide.actual .hero-texto > :nth-child(2){animation-delay:.12s}
@@ -138,7 +138,7 @@ button{font:inherit}
 .hero-lista li{display:flex;align-items:center;gap:.6rem;font-weight:600}
 .hero-lista .icono{color:var(--amarillo)}
 .hero-acciones{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.75rem}
-.hero-controles{position:absolute;z-index:2;inset:auto 0 1.5rem 0}
+.hero-controles{position:absolute;z-index:2;inset:auto 0 5.75rem 0}
 .hero-controles .contenedor{display:flex;align-items:center;gap:.6rem}
 .progresos{display:flex;gap:.5rem;flex:1;max-width:22rem}
 .progresos button{flex:1;height:2.75rem;border:0;background:none;cursor:pointer;padding:0;display:flex;align-items:center}
@@ -152,17 +152,16 @@ button{font:inherit}
 .hero-boton{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid rgb(255 255 255 / .45);background:rgb(15 51 84 / .35);color:var(--blanco);cursor:pointer;backdrop-filter:blur(4px);transition:background-color .2s}
 .hero-boton:hover{background:var(--blanco);color:var(--azul-hondo)}
 
-/* Quiénes somos y cifras */
-.nosotros-rejilla{display:grid;gap:2.5rem;align-items:center}
-.nosotros-texto h2{font-size:clamp(1.9rem,4.6vw,2.6rem);color:var(--azul-hondo);text-transform:uppercase;letter-spacing:.03em}
-.nosotros-texto p{margin-top:1rem;color:var(--tinta-suave)}
+/* Quiénes somos: los círculos sobresalen del hero y el texto va debajo, compacto */
+.nosotros{position:relative;z-index:3;margin-top:-4.75rem;padding-bottom:clamp(2.25rem,5vw,3.25rem)}
+.nosotros-texto{margin:1.75rem auto 0;max-width:58rem;text-align:center;font-size:1rem;color:var(--tinta-suave)}
 .nosotros-texto strong{color:var(--azul-hondo)}
-.circulos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;max-width:30rem;margin-inline:auto;width:100%}
-.circulos li{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#22609a,var(--azul-hondo) 70%);color:var(--blanco);border:5px solid var(--cielo);box-shadow:0 12px 26px rgb(15 51 84 / .22);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;line-height:1.25;transition:transform .35s var(--salida),box-shadow .35s var(--salida)}
-.circulos li:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 18px 32px rgb(15 51 84 / .28)}
-.circulos small{font-size:.8rem;color:var(--sobre-azul)}
-.circulos b{font:600 clamp(2rem,6vw,2.6rem)/1.05 var(--titulo);font-variant-numeric:tabular-nums}
-.circulos span{font-size:.8rem;line-height:1.3;max-width:8.5rem;color:var(--sobre-azul)}
+.circulos{display:grid;grid-template-columns:repeat(2,minmax(0,10.5rem));justify-content:center;gap:.85rem}
+.circulos li{aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 30% 25%,#22609a,var(--azul-hondo) 70%);color:var(--blanco);border:5px solid var(--blanco);box-shadow:0 14px 30px rgb(0 0 0 / .22);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.8rem;line-height:1.25;transition:transform .35s var(--salida),box-shadow .35s var(--salida)}
+.circulos li:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 20px 36px rgb(0 0 0 / .26)}
+.circulos small{font-size:.75rem;color:var(--sobre-azul)}
+.circulos b{font:600 1.9rem/1.05 var(--titulo);font-variant-numeric:tabular-nums}
+.circulos span{font-size:.75rem;line-height:1.3;max-width:7.25rem;color:var(--sobre-azul)}
 .circulos b span{font:inherit;color:inherit;max-width:none}
 
 /* Banner SIGE Mype del sitio actual */
@@ -314,15 +313,19 @@ button{font:inherit}
 @media (min-width:46rem){
   .solo-amplio{display:inline-flex !important}
   .selector-plan{display:none}
-  .hero-texto{justify-content:center;padding-bottom:3rem}
-  .hero-slide.completa .hero-texto{justify-content:flex-end;padding-bottom:6.5rem}
+  .hero-texto{justify-content:center;padding-bottom:7rem}
+  .hero-slide.completa .hero-texto{justify-content:flex-end;padding-bottom:11rem}
+  .hero-controles{bottom:6.5rem}
   .hero-sello{width:7.5rem;height:7.5rem}
   .hero-slide::after{background:linear-gradient(90deg,rgb(10 30 55 / .9) 0%,rgb(10 30 55 / .7) 40%,rgb(10 30 55 / .1) 75%)}
   .hero-slide.derecha::after{background:linear-gradient(270deg,rgb(10 30 55 / .9) 0%,rgb(10 30 55 / .7) 40%,rgb(10 30 55 / .1) 75%)}
   .hero-slide.derecha .hero-texto{align-items:flex-end;text-align:right}
   .hero-slide.derecha .hero-lista li{justify-content:flex-end}
   .hero-slide.derecha .hero-acciones{justify-content:flex-end}
-  .circulos{gap:1.25rem}
+  .nosotros{margin-top:-5.5rem}
+  .circulos{grid-template-columns:repeat(4,minmax(0,11rem));gap:1.5rem}
+  .circulos b{font-size:2.5rem}
+  .circulos span{font-size:.8rem;max-width:8.5rem}
   .valores{grid-template-columns:repeat(3,1fr)}
   .contacto-rejilla{grid-template-columns:1.1fr .9fr}
   .pie-rejilla{grid-template-columns:1fr auto 1fr}
@@ -336,7 +339,6 @@ button{font:inherit}
   .navegacion a::after{content:"";position:absolute;left:0;right:0;bottom:.3rem;height:3px;border-radius:2px;background:var(--amarillo);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--salida)}
   .navegacion a:hover::after,.navegacion a[aria-current="true"]::after{transform:scaleX(1)}
   .navegacion img{height:1.6rem;width:auto;border-radius:.2rem}
-  .nosotros-rejilla{grid-template-columns:1.1fr .9fr;gap:4rem}
   .servicios-rejilla{grid-template-columns:minmax(0,27rem) 1fr;gap:4rem}
   .valores{grid-template-columns:repeat(6,1fr)}
 }
@@ -497,19 +499,16 @@ button{font:inherit}
     </div>
   </section>
 
-  <section class="seccion" id="quienes-somos" aria-labelledby="t-nosotros">
-    <div class="contenedor nosotros-rejilla">
-      <div class="nosotros-texto revelar">
-        <h2 id="t-nosotros">Quiénes somos</h2>
-        <p>Somos el <strong>Estudio Contable JJMM S.A.C.</strong>, empresa que busca la satisfacción de sus clientes y la excelencia en la prestación de servicios.</p>
-        <p>Asumimos como máxima prioridad desarrollar en todos los niveles de la organización un <strong>Sistema de Gestión de Calidad Genuino</strong> que se mantenga en el tiempo, con un alto índice de responsabilidad, calidad y profesionalismo, promoviendo la mejora continua en nuestros servicios. Con base en esa retroalimentación creamos el sistema de gestión empresarial <strong>SIGE Mype</strong>.</p>
-      </div>
+  <section class="nosotros" id="quienes-somos" aria-labelledby="t-nosotros">
+    <div class="contenedor">
+      <h2 class="oculto" id="t-nosotros">Quiénes somos</h2>
       <ul class="circulos">
         <li class="revelar"><small>Más de</small><b data-contar="100">100</b><span>clientes de outsourcing de una amplia variedad de sectores</span></li>
         <li class="revelar" style="--retraso:.1s"><small>Más de</small><b data-contar="100">100</b><span>requerimientos de SUNAT atendidos satisfactoriamente</span></li>
         <li class="revelar" style="--retraso:.2s"><small>Más de</small><b><span data-contar="10">10</span> años</b><span>de experiencia profesional brindando soluciones integrales</span></li>
         <li class="revelar" style="--retraso:.3s"><small>Más de</small><b data-contar="20">20</b><span>empresas constituidas</span></li>
       </ul>
+      <p class="nosotros-texto revelar">Somos el <strong>Estudio Contable JJMM S.A.C.</strong>, empresa que busca la satisfacción de sus clientes y la excelencia en la prestación de servicios. Desarrollamos en todos los niveles de la organización un <strong>Sistema de Gestión de Calidad Genuino</strong>, con un alto índice de responsabilidad, calidad y profesionalismo, y promovemos la mejora continua en nuestros servicios. Con base en esa retroalimentación creamos el sistema de gestión empresarial <strong>SIGE Mype</strong>.</p>
     </div>
   </section>
 
