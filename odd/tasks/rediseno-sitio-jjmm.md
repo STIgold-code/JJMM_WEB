@@ -2,7 +2,7 @@
 
 Objetivo: reemplazar por completo el sitio público y su panel por una aplicación nueva con panel administrativo, construida con Claude Code.
 Stack: Next.js + Payload CMS (una sola aplicación) · TypeScript estricto · PostgreSQL · Railway · Wasabi · Cloudflare. Runner de pruebas: Vitest (unidad) y Playwright (extremo a extremo), con Lighthouse CI.
-Entrega: commits por unidad de trabajo; la rama y el repositorio quedan por definir en T1.
+Entrega: commits por unidad de trabajo en `main` de este mismo repositorio. El proyecto nuevo vive en la carpeta `sitio/` y, al terminar, reemplaza al resto del repositorio (T16).
 
 ## Specs
 
@@ -90,7 +90,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 
 | ID | Specs | Tarea | Ruta | Estado | Commit |
 |---|---|---|---|---|---|
-| T1 | S1, S4 | Resolver las decisiones abiertas (ver Log) | en línea | pendiente | — |
+| T1 | S1, S4 | Resolver las decisiones abiertas (ver L6 y L10) | en línea | en curso: falta AdSense; dominio y Cloudflare pasan a T14 | — |
 | T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | en línea | pendiente | — |
 | T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | en línea | pendiente | — |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | en línea | pendiente | — |
@@ -105,6 +105,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
 | T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | pendiente | — |
 | T15 | S1 | Salida a producción: cambio de DNS con aprobación de Gian y verificación | en línea | pendiente | — |
+| T16 | S1 | Borrar el sitio anterior del repositorio y dejar solo el proyecto nuevo, con confirmación explícita de Gian antes de borrar | en línea | pendiente | — |
 
 Ruta: todas en línea por defecto. Se delega solo si se cumple un disparador (unidades paralelas independientes o contexto largo), y queda registrado aquí.
 
@@ -166,4 +167,10 @@ Se crea este documento.
   - transiciones: `slideleft`, `fade`, `papercut` y `slidedown`;
   - textos: `lfl`, `lft` y `lfr` escalonados entre 1000 y 2500 ms, y `randomrotate`.
 
-Siguiente paso: resolver T1 y arrancar T2.
+**L10** (26/11/2026), respuestas de Gian a las decisiones abiertas:
+- Repositorio: «este mismo repo pero en otra carpeta, luego borrarás todo y solo dejarás esta». El proyecto va en `sitio/`; el borrado final es T16 y requiere su confirmación explícita.
+- Comentarios del blog: «Quitarlos». No se migran ni se implementan.
+- AdSense: «que es AdSense?». Sigue abierta; se explicó qué es y se espera su decisión.
+- Dominio y Cloudflare: «luego vemos eso». Se decide en T14.
+
+Siguiente paso: arrancar T2 en `sitio/`. La decisión de AdSense no lo bloquea: solo cambia si se agrega o no un script en T6.
