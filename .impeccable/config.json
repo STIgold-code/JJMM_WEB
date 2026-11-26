@@ -1,0 +1,89 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "mockup/index.html"
+        ],
+        "createdAt": "2026-11-25T15:26:22.122Z",
+        "reason": "agente: falso positivo del análisis estático; el relleno lo aportan .contenedor, summary y las celdas, verificado en las capturas a 390 y 1440 px"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "mockup/inicio-identidad.html"
+        ],
+        "createdAt": "2026-11-26T18:01:16.767Z",
+        "reason": "agente: falso positivo del análisis estático; el relleno lo aportan .contenedor, summary y las celdas, verificado en las capturas a 390 y 1440 px"
+      },
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "files": [
+          "mockup/inicio-identidad.html"
+        ],
+        "createdAt": "2026-11-26T18:01:17.981Z",
+        "reason": "agente: Open Sans es la tipografía del sitio actual y el usuario pidió respetar la identidad de la empresa"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "mockup/inicio-v3.html"
+        ],
+        "createdAt": "2026-11-26T19:44:29.843Z",
+        "reason": "agente: falso positivo del análisis estático; el relleno lo aportan .contenedor y las celdas, verificado en las capturas a 390 y 1440 px"
+      },
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "files": [
+          "mockup/inicio-v3.html"
+        ],
+        "createdAt": "2026-11-26T19:44:30.903Z",
+        "reason": "agente: Open Sans es la tipografía del sitio actual; el usuario pidió conservar la página y solo modernizarla"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "mockup/inicio-v4.html"
+        ],
+        "createdAt": "2026-11-26T20:03:33.839Z",
+        "reason": "agente: falso positivo del análisis estático; el relleno lo aportan .contenedor y los bloques internos, verificado en las capturas a 390 y 1440 px"
+      },
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "files": [
+          "mockup/inicio-v4.html"
+        ],
+        "createdAt": "2026-11-26T20:03:34.929Z",
+        "reason": "agente: Open Sans es la tipografía del sitio actual; el usuario pidió conservar la página y solo modernizarla"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "mockup/inicio-v5.html"
+        ],
+        "createdAt": "2026-11-26T20:53:47.918Z",
+        "reason": "agente: falso positivo del análisis estático; el relleno lo aportan .contenedor y los bloques internos, verificado en las capturas a 390 y 1440 px"
+      },
+      {
+        "rule": "overused-font",
+        "value": "open sans",
+        "files": [
+          "mockup/inicio-v5.html"
+        ],
+        "createdAt": "2026-11-26T20:53:49.090Z",
+        "reason": "agente: Open Sans es la tipografía del sitio actual; el usuario pidió conservar la página y solo modernizarla"
+      }
+    ]
+  }
+}

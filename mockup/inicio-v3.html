@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JJMM | Estudio Contable | Asesoría contable y tributaria en Lima</title>
+<meta name="description" content="Estudio Contable JJMM S.A.C.: outsourcing contable para MYPE en Lima con el sistema de gestión empresarial SIGE Mype. Escríbenos por WhatsApp.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/banner-sige-mype.webp" as="image" media="(min-width: 46rem)">
+<style>
+@font-face{font-family:"Oswald";font-weight:200 700;font-display:swap;src:url("fonts/oswald-latin.woff2") format("woff2")}
+@font-face{font-family:"Open Sans";font-weight:300 800;font-display:swap;src:url("fonts/open-sans-latin.woff2") format("woff2")}
+
+:root{
+  --azul:#1d629c;
+  --azul-hondo:#154771;
+  --azul-noche:#0f3354;
+  --azul-claro:#85a4d2;
+  --cielo:#eaf1f8;
+  --amarillo:#feee00;
+  --amarillo-hondo:#e6d600;
+  --oro:#c89628;
+  --gris:#f5f5f5;
+  --linea:#d7dfe9;
+  --blanco:#fff;
+  --tinta:#1f2d3d;
+  --tinta-suave:#4b5b6d;
+  --sobre-azul:#dbe8f5;
+  --verde:#1f8a4c;
+  --titulo:"Oswald","Arial Narrow",sans-serif;
+  --texto:"Open Sans",system-ui,sans-serif;
+  --ancho:73rem;
+  --borde:clamp(1rem,4vw,2.5rem);
+  --salida:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:6.5rem;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--texto);font-size:1.0625rem;line-height:1.65;color:var(--tinta);background:var(--blanco)}
+::selection{background:var(--amarillo);color:var(--azul-noche)}
+img,svg{max-width:100%;display:block}
+a{color:var(--azul);text-underline-offset:.2em}
+:focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:4px}
+.oscuro :focus-visible{outline-color:var(--amarillo)}
+h1,h2,h3{font-family:var(--titulo);font-weight:600;line-height:1.15;margin:0;text-wrap:balance;letter-spacing:.01em}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+.icono{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.contenedor{max-width:var(--ancho);margin-inline:auto;padding-inline:var(--borde)}
+.oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.saltar{position:absolute;left:1rem;top:-4rem;z-index:80;background:var(--amarillo);color:var(--azul-noche);padding:.75rem 1rem;font-weight:700}
+.saltar:focus{top:1rem}
+.seccion{padding-block:clamp(3.25rem,8vw,5.5rem)}
+.titulo-seccion{font-size:clamp(1.9rem,5vw,2.75rem);color:var(--azul-hondo);text-align:center;text-transform:uppercase;letter-spacing:.03em}
+.titulo-seccion::after{content:"";display:block;width:4.5rem;height:4px;margin:.9rem auto 0;border-radius:2px;background:var(--amarillo)}
+.bajada{margin:1.1rem auto 0;max-width:44rem;text-align:center;color:var(--tinta-suave)}
+
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:3rem;padding:.7rem 1.4rem;border-radius:2rem;border:2px solid transparent;font-family:var(--titulo);font-weight:600;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background-color .2s var(--salida),color .2s var(--salida),transform .2s var(--salida)}
+.boton:active{transform:translateY(1px)}
+.boton-contacto{background:var(--amarillo);color:var(--azul-noche)}
+.boton-contacto:hover{background:var(--amarillo-hondo)}
+.boton-linea{border-color:currentColor;color:var(--blanco)}
+.boton-linea:hover{background:var(--blanco);color:var(--azul-hondo);border-color:var(--blanco)}
+.boton-azul{background:var(--azul);color:var(--blanco)}
+.boton-azul:hover{background:var(--azul-hondo)}
+
+/* Barra superior: redes y contacto, como en el sitio actual */
+.barra-superior{background:var(--azul-hondo);color:var(--sobre-azul);font-size:.9rem}
+.barra-superior .contenedor{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:2.75rem}
+.redes{display:flex;gap:.25rem}
+.redes a{display:grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;color:var(--blanco)}
+.redes a:hover{background:rgb(255 255 255 / .14)}
+.redes .icono{width:1.1rem;height:1.1rem}
+.contacto-rapido{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.25rem 1.25rem}
+.contacto-rapido a{display:inline-flex;align-items:center;gap:.4rem;min-height:2.5rem;color:var(--blanco);text-decoration:none;font-variant-numeric:tabular-nums}
+.contacto-rapido a:hover{color:var(--amarillo)}
+.contacto-rapido .solo-amplio{display:none}
+
+/* Cabecera blanca con logotipo, menú y sello */
+.cabecera{position:sticky;top:0;z-index:50;background:rgb(255 255 255 / .97);backdrop-filter:blur(8px);box-shadow:0 2px 14px rgb(15 51 84 / .1)}
+.cabecera .contenedor{display:flex;align-items:center;gap:1rem;min-height:5rem}
+.marca{margin-right:auto}
+.marca img{height:3.75rem;width:auto}
+.sello-cabecera{display:none;height:3.5rem;width:auto}
+.menu-boton{display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.4rem .9rem;border-radius:2rem;background:var(--azul);border:0;color:var(--blanco);font:600 1rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.navegacion{display:none;position:absolute;inset:100% 0 auto 0;background:var(--azul);padding:.25rem var(--borde) 1.25rem;box-shadow:0 12px 20px rgb(15 51 84 / .25)}
+.navegacion.abierta{display:block}
+.navegacion a{display:flex;align-items:center;min-height:3rem;color:var(--blanco);font:500 1.1rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgb(255 255 255 / .2)}
+.navegacion a:hover{color:var(--amarillo)}
+.navegacion img{height:1.6rem;width:auto;border-radius:.2rem}
+
+/* Slider: las cuatro portadas del sitio actual */
+.slider{position:relative;background:var(--azul-noche);overflow:hidden}
+.slides{display:grid}
+.slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .8s var(--salida),visibility 0s linear .8s;position:relative}
+.slide.actual{opacity:1;visibility:visible;transition:opacity .8s var(--salida)}
+.slide img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.slide-plan img{object-position:15% 0}
+.slide:first-child img{object-position:0 50%}
+.slide-capa{display:none}
+.slider-controles{position:absolute;inset:auto 0 .75rem 0;display:flex;justify-content:center;align-items:center;gap:.5rem}
+.slider-flecha,.slider-pausa{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:50%;border:0;background:rgb(15 51 84 / .7);color:var(--blanco);cursor:pointer}
+.slider-flecha:hover,.slider-pausa:hover{background:var(--azul-noche)}
+.puntos{display:flex;gap:.15rem;padding:0 .35rem;border-radius:2rem;background:rgb(15 51 84 / .55)}
+.puntos button{width:2.25rem;height:2.75rem;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+.puntos button::before{content:"";width:.7rem;height:.7rem;border-radius:50%;background:rgb(255 255 255 / .55);transition:background-color .2s,transform .2s}
+.puntos button[aria-current="true"]::before{background:var(--amarillo);transform:scale(1.25)}
+.slider :focus-visible{outline-color:var(--amarillo)}
+
+/* Banda azul: Contamos con Sistema de Calidad Genuino */
+.banda{background:var(--azul);color:var(--blanco);padding-block:2.5rem 5rem;clip-path:polygon(0 0,100% 0,100% calc(100% - 2.75rem),0 100%)}
+.banda h1{font-size:clamp(1.85rem,5.4vw,3rem)}
+.banda h1 b{color:var(--amarillo);font-weight:600}
+.banda h2{margin-top:.6rem;font-family:var(--texto);font-size:clamp(1.05rem,2.4vw,1.3rem);font-weight:400;font-style:italic;color:var(--sobre-azul)}
+.banda-acciones{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.75rem}
+
+/* Quiénes somos y cifras en círculos */
+.nosotros{padding-block:2.5rem clamp(3.5rem,8vw,5rem)}
+.nosotros-texto{max-width:52rem;margin-inline:auto;font-size:1.075rem;text-align:center}
+.nosotros-texto strong{color:var(--azul-hondo)}
+.circulos{margin-top:2.75rem;display:grid;grid-template-columns:repeat(2,minmax(0,11rem));justify-content:center;gap:1.25rem}
+.circulos li{aspect-ratio:1;border-radius:50%;background:var(--azul-hondo);color:var(--blanco);border:5px solid var(--cielo);box-shadow:0 10px 24px rgb(15 51 84 / .22);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.1rem;line-height:1.25;transition:transform .3s var(--salida)}
+.circulos li:hover{transform:translateY(-4px)}
+.circulos small{font-size:.75rem}
+.circulos b{font:600 2.1rem/1.05 var(--titulo)}
+.circulos span{font-size:.7rem;line-height:1.3;max-width:7.75rem}
+
+/* Servicios: rueda SIGE Mype y detalle de cada área */
+.servicios{background:var(--gris)}
+.servicios-rejilla{margin-top:2.5rem;display:grid;gap:2rem;align-items:start}
+.rueda-imagen{width:100%;max-width:25rem;height:auto;margin-inline:auto}
+.areas-pestanas{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+.areas-pestanas button{min-width:2.9rem;min-height:2.9rem;padding:0 .7rem;border-radius:2rem;border:2px solid var(--azul);background:var(--blanco);color:var(--azul-hondo);font:600 1rem var(--titulo);letter-spacing:.03em;cursor:pointer;transition:background-color .2s,color .2s}
+.areas-pestanas button:hover{background:var(--cielo)}
+.areas-pestanas button[aria-selected="true"]{background:var(--azul);color:var(--blanco)}
+.area-panel{background:var(--blanco);border-radius:.9rem;padding:1.5rem 1.5rem 1.6rem;box-shadow:0 10px 30px rgb(15 51 84 / .08)}
+.area-panel[hidden]{display:none}
+.area-panel h3{font-size:1.7rem;color:var(--azul-hondo)}
+.area-panel h3 span{color:#946a10;margin-right:.35rem}
+.area-panel p{margin-top:.75rem;color:var(--tinta-suave)}
+.area-panel ul{margin-top:1rem;display:grid;gap:.4rem}
+.area-panel li{position:relative;padding-left:1.6rem}
+.area-panel li::before{content:"";position:absolute;left:0;top:.35em;width:1.05rem;height:1.05rem;border-radius:50%;background:var(--azul) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.500' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E") center/70% no-repeat}
+.area-panel .boton{margin-top:1.4rem}
+.aparece{animation:aparece .45s var(--salida)}
+@keyframes aparece{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Planes: la misma tabla, legible en el celular */
+.tabla-marco{margin-top:2.5rem;overflow-x:auto;border-radius:.9rem;box-shadow:0 10px 30px rgb(15 51 84 / .1);background:var(--blanco)}
+.tabla-marco:focus-visible{outline-offset:2px}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:46rem;font-size:.95rem}
+th,td{padding:.75rem .9rem;border-bottom:1px solid var(--linea);vertical-align:middle}
+thead th{position:sticky;top:0;background:var(--azul);color:var(--blanco);font:600 1.2rem/1.2 var(--titulo);letter-spacing:.03em;text-align:center;padding-block:1rem}
+thead th:first-child{text-align:left;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;background:var(--azul-hondo)}
+thead th b{color:var(--amarillo);font-weight:600}
+tbody th{position:sticky;left:0;z-index:1;background:var(--blanco);text-align:left;font-weight:400;min-width:15rem;box-shadow:1px 0 0 var(--linea)}
+tbody tr:nth-child(even) th,tbody tr:nth-child(even) td{background:#f7fafd}
+td{text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.si,.no{display:inline-grid;place-items:center;width:1.6rem;height:1.6rem;border-radius:50%}
+.si{background:#e3f3ea;color:var(--verde)}
+.no{background:#f1f3f6;color:#7a8696}
+.si .icono,.no .icono{width:1rem;height:1rem;stroke-width:3}
+tfoot td{padding-block:1.1rem;border-bottom:0}
+tfoot .boton{min-height:2.75rem;padding-inline:1.1rem;font-size:.95rem}
+.tabla-pie{margin-top:.9rem;text-align:center;font-size:.9rem;color:var(--tinta-suave)}
+
+/* ¿Por qué elegirnos? */
+.elegirnos{position:relative;color:var(--blanco);background:var(--azul-noche) url("img/elegirnos.webp") center/cover no-repeat;isolation:isolate}
+.elegirnos::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(15 51 84 / .9),rgb(21 71 113 / .88));z-index:-1}
+.elegirnos .titulo-seccion{color:var(--blanco)}
+.elegirnos .bajada{color:var(--sobre-azul)}
+.valores{margin-top:2.5rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.valores li{display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:1.5rem 1rem;border-radius:.9rem;background:rgb(255 255 255 / .07);border:1px solid rgb(255 255 255 / .16);text-align:center;transition:background-color .25s var(--salida),transform .25s var(--salida)}
+.valores li:hover{background:rgb(255 255 255 / .13);transform:translateY(-3px)}
+.valores .icono{width:2.6rem;height:2.6rem;color:var(--amarillo);stroke-width:1.6}
+.valores span{font:500 1.2rem var(--titulo);letter-spacing:.04em;text-transform:uppercase}
+
+/* Nuestros clientes */
+.clientes{overflow:hidden}
+.cinta{margin-top:2.5rem}
+.cinta ul{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1.75rem 2.75rem}
+.cinta li{width:9.5rem;height:5.5rem;display:grid;place-items:center}
+.cinta img{width:100%;height:100%;object-fit:contain;filter:grayscale(1);opacity:.8;transition:filter .3s,opacity .3s}
+.cinta li:hover img{filter:none;opacity:1}
+
+/* Contáctanos */
+.contacto{background:var(--gris)}
+.contacto-rejilla{margin-top:2.5rem;display:grid;gap:1.5rem}
+.canales{display:grid;gap:1rem;align-content:start}
+.canal{display:flex;align-items:center;gap:1rem;padding:1.15rem 1.25rem;border-radius:.9rem;background:var(--blanco);box-shadow:0 6px 20px rgb(15 51 84 / .07);text-decoration:none;color:var(--tinta);transition:transform .2s var(--salida),box-shadow .2s var(--salida)}
+.canal:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgb(15 51 84 / .13)}
+.canal-icono{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;background:var(--azul);color:var(--blanco);flex:none}
+.canal-whatsapp .canal-icono{background:var(--amarillo);color:var(--azul-noche)}
+.canal strong{display:block;font:600 1.25rem/1.2 var(--titulo);color:var(--azul-hondo);letter-spacing:.02em}
+.canal span{font-size:.95rem;color:var(--tinta-suave)}
+.mapa{border-radius:.9rem;overflow:hidden;min-height:20rem;background:var(--cielo);box-shadow:0 6px 20px rgb(15 51 84 / .07)}
+.mapa iframe{display:block;width:100%;height:100%;min-height:20rem;border:0}
+
+/* Pie: sedes a los lados y logotipo al centro, como en el sitio actual */
+.pie{background:var(--azul-noche);color:var(--sobre-azul);padding-block:3.5rem 2rem}
+.pie-rejilla{display:grid;gap:2rem;align-items:center}
+.pie h3{font-size:1.35rem;color:var(--blanco);letter-spacing:.03em}
+.pie address{margin-top:.5rem;font-style:normal;line-height:1.8}
+.pie a{color:var(--blanco);text-underline-offset:.2em}
+.pie a:hover{color:var(--amarillo)}
+.pie-logo{justify-self:center;text-align:center}
+.pie-logo img{width:11rem;height:auto;margin-inline:auto}
+.pie-logo p{margin-top:.75rem;font-style:italic;max-width:18rem}
+.pie-legal{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgb(255 255 255 / .16);font-size:.9rem;text-align:center}
+
+/* WhatsApp flotante */
+.flotante{position:fixed;right:1rem;bottom:1rem;z-index:60;display:inline-flex;align-items:center;gap:.5rem;min-height:3.5rem;padding:0 1.25rem 0 1rem;border-radius:2rem;background:var(--amarillo);color:var(--azul-noche);font:600 1.05rem var(--titulo);letter-spacing:.04em;text-transform:uppercase;text-decoration:none;box-shadow:0 10px 24px rgb(15 51 84 / .3)}
+.flotante:hover{background:var(--amarillo-hondo)}
+.flotante .icono{width:1.6rem;height:1.6rem}
+
+/* Notas del mockup: no forman parte del diseño */
+.notas{background:#fff8d6;border-top:3px dashed var(--oro);padding-block:2rem 6rem;font-size:.95rem;color:#4a3d05}
+.notas h2{font-size:1.4rem}
+.notas ul{margin-top:.75rem;display:grid;gap:.4rem;list-style:disc;padding-left:1.25rem;max-width:54rem}
+
+@media (min-width:46rem){
+  .slide img{aspect-ratio:1920/500}
+  .slide-capa{display:flex;position:absolute;right:6%;top:50%;transform:translateY(-50%);flex-direction:column;gap:.6rem}
+  .slide-capa li{display:flex;align-items:center;gap:.6rem;padding:.55rem 1.1rem .55rem .9rem;border-radius:2rem;background:rgb(15 51 84 / .78);border:1px solid rgb(120 220 255 / .65);color:var(--blanco);font:500 clamp(.95rem,1.4vw,1.2rem) var(--titulo);letter-spacing:.03em;backdrop-filter:blur(4px)}
+  .slide-capa li::before{content:"";width:0;height:0;border-left:.55rem solid #7fe3ff;border-block:.35rem solid transparent}
+  .contacto-rapido .solo-amplio{display:inline-flex}
+  .circulos{grid-template-columns:repeat(4,minmax(0,11.5rem))}
+  .circulos small{font-size:.8rem}
+  .circulos b{font-size:2.5rem}
+  .circulos span{font-size:.78rem;max-width:8.5rem}
+  .valores{grid-template-columns:repeat(3,1fr)}
+  .contacto-rejilla{grid-template-columns:minmax(0,24rem) 1fr}
+  .pie-rejilla{grid-template-columns:1fr auto 1fr}
+  .pie-rejilla > div:last-child{text-align:right}
+}
+@media (min-width:70rem){
+  .menu-boton{display:none}
+  .sello-cabecera{display:block}
+  .navegacion{display:flex;align-items:center;position:static;background:none;padding:0;gap:1.25rem;box-shadow:none}
+  .navegacion a{min-height:2.75rem;font-size:.98rem;border:0;color:var(--azul-hondo);position:relative}
+  .navegacion a::after{content:"";position:absolute;left:0;right:0;bottom:.35rem;height:2px;background:var(--amarillo);transform:scaleX(0);transition:transform .25s var(--salida)}
+  .navegacion a:hover{color:var(--azul)}
+  .navegacion a:hover::after{transform:scaleX(1)}
+  .servicios-rejilla{grid-template-columns:minmax(0,25rem) 1fr;gap:3.5rem}
+  .valores{grid-template-columns:repeat(6,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<svg width="0" height="0" class="oculto" aria-hidden="true" focusable="false">
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9.1 8.4c0 3.1 2.7 6 6.2 6.5l1.1-1.6-2-1.2-.9.8a4.6 4.6 0 0 1-2.2-2.2l.8-.9-1.2-2z"/></symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2L21 15v3a3 3 0 0 1-3 3A15 15 0 0 1 3 6a3 3 0 0 1 3-3z"/></symbol>
+  <symbol id="i-correo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.500"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-der" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-pausa" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-si" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="i-no" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7 7 17"/></symbol>
+  <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2.500" y="5.500" width="19" height="13" rx="3.500"/><path d="m10 9 5 3-5 3z"/></symbol>
+  <symbol id="i-excelencia" viewBox="0 0 24 24"><path d="M7 11v9H4v-9zM7 11l4-7a2 2 0 0 1 3 2l-1 4h6a2 2 0 0 1 2 2.300l-1.300 6A2 2 0 0 1 17.700 20H7"/></symbol>
+  <symbol id="i-compromiso" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M8 21h8M10 17h4v4h-4z"/></symbol>
+  <symbol id="i-innovacion" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.700.500 1.100 1.200 1.100 2.100h4.800c0-.900.400-1.600 1.100-2.100A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-confidencialidad" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+  <symbol id="i-equidad" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M4 7h16M4 7l-2.500 6a3 3 0 0 0 5 0zM20 7l-2.500 6a3 3 0 0 0 5 0z"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.500"/><path d="M15.500 14.300A5 5 0 0 1 21 19"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.200 7-11.500a7 7 0 0 0-14 0C5 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></symbol>
+</svg>
+
+<div class="barra-superior oscuro">
+  <div class="contenedor">
+    <ul class="redes" aria-label="Redes sociales">
+      <li><a href="https://www.facebook.com/Grupo-Contable-JJMM-1375492852750200/" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-facebook"/></svg><span class="oculto">Facebook</span></a></li>
+      <li><a href="https://twitter.com/CONTABLEJJMMSAC" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg><span class="oculto">X (Twitter)</span></a></li>
+      <li><a href="https://www.youtube.com/channel/UC_3EI0DpkhlLKGBGfvY2oXg" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-youtube"/></svg><span class="oculto">YouTube</span></a></li>
+    </ul>
+    <div class="contacto-rapido">
+      <a class="solo-amplio" href="mailto:contabilidad@jjmm.com.pe"><svg class="icono" aria-hidden="true"><use href="#i-correo"/></svg>contabilidad@jjmm.com.pe</a>
+      <a href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>951 965 242</a>
+      <a class="solo-amplio" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>952 249 102</a>
+    </div>
+  </div>
+</div>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="/"><img src="../public/web/images/logo-lenin.png" alt="Estudio Contable JJMM, Mariñas y Asociados: inicio" width="216" height="117"></a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="navegacion">
+      <svg class="icono" aria-hidden="true"><use href="#i-menu"/></svg>Menú
+    </button>
+    <nav class="navegacion" id="navegacion" aria-label="Principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="/blog">Blog</a>
+      <a href="#contacto">Contacto</a>
+      <a href="/guia">Guía de clientes</a>
+      <a href="https://sigefact.pse.pe/" rel="noopener"><img src="../public/web/images/sigefact.png" alt="SIGEFact, facturación electrónica"></a>
+    </nav>
+    <img class="sello-cabecera" src="../public/web/images/logo-grupo-lenin.png" alt="Sello SIGE Mype del Grupo JJMM" width="120" height="86">
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="slider" id="inicio" aria-roledescription="carrusel" aria-label="Portadas del Estudio Contable JJMM">
+    <div class="slides">
+      <div class="slide actual" role="group" aria-roledescription="diapositiva" aria-label="1 de 4">
+        <picture>
+          <source media="(max-width: 45.99rem)" srcset="img/banner-sige-mype-movil.webp" width="800" height="365">
+          <img src="img/banner-sige-mype.webp" width="1600" height="417" fetchpriority="high" alt="Contamos con Sistema de Gestión Empresarial SIGE Mype. Somos más que un estudio contable. Asesoría gratuita.">
+        </picture>
+      </div>
+      <div class="slide slide-plan" role="group" aria-roledescription="diapositiva" aria-label="2 de 4" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 45.99rem)" srcset="img/slide-plan-movil.webp" width="800" height="545">
+          <img src="img/slide-plan.webp" width="1600" height="413" loading="lazy" alt="Nuestro plan de trabajo: profesional del Grupo JJMM con el logotipo del estudio en la camisa.">
+        </picture>
+        <ul class="slide-capa" aria-label="Nuestro plan de trabajo">
+          <li>Diagnóstico de su empresa</li>
+          <li>Diagrama de flujo integral</li>
+          <li>Asesoramiento en tecnología</li>
+          <li>Outsourcing empresarial</li>
+        </ul>
+      </div>
+      <div class="slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 4" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 45.99rem)" srcset="img/slide-equipo-movil.webp" width="800" height="417">
+          <img src="img/equipo-sello-sige.webp" width="1600" height="417" loading="lazy" alt="Equipo del estudio trabajando en reportes financieros con el sello SIGE Mype.">
+        </picture>
+      </div>
+      <div class="slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 4" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 45.99rem)" srcset="img/equipo-taza-jjmm.webp" width="960" height="417">
+          <img src="img/slide-taza.webp" width="1600" height="417" loading="lazy" alt="Reunión de trabajo con una taza del Grupo JJMM y reportes financieros sobre la mesa.">
+        </picture>
+      </div>
+    </div>
+    <div class="slider-controles">
+      <button class="slider-flecha" type="button" data-paso="-1"><svg class="icono" aria-hidden="true"><use href="#i-izq"/></svg><span class="oculto">Portada anterior</span></button>
+      <div class="puntos">
+        <button type="button" aria-current="true"><span class="oculto">Portada 1</span></button>
+        <button type="button"><span class="oculto">Portada 2</span></button>
+        <button type="button"><span class="oculto">Portada 3</span></button>
+        <button type="button"><span class="oculto">Portada 4</span></button>
+      </div>
+      <button class="slider-flecha" type="button" data-paso="1"><svg class="icono" aria-hidden="true"><use href="#i-der"/></svg><span class="oculto">Portada siguiente</span></button>
+      <button class="slider-pausa" type="button" aria-pressed="false"><svg class="icono" aria-hidden="true"><use href="#i-pausa"/></svg><span class="oculto">Pausar el carrusel</span></button>
+    </div>
+  </section>
+
+  <section class="banda oscuro" id="quienes-somos" aria-labelledby="titulo">
+    <div class="contenedor">
+      <h1 id="titulo">Contamos con <b>Sistema de Calidad</b> Genuino</h1>
+      <h2>Cada empresa guiada por nuestro sistema, llega a ser líder.</h2>
+      <div class="banda-acciones">
+        <a class="boton boton-contacto" id="accion" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20empresa."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Pide tu asesoría gratuita</a>
+        <a class="boton boton-linea" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>Llamar 952 249 102</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="nosotros" aria-label="Quiénes somos">
+    <div class="contenedor">
+      <p class="nosotros-texto">Somos el <strong>Estudio Contable JJMM S.A.C.</strong>, empresa que busca la satisfacción de sus clientes y la excelencia en la prestación de servicios. Asumimos como máxima prioridad desarrollar en todos los niveles de la organización un <strong>Sistema de Gestión de Calidad Genuino</strong> que se mantenga en el tiempo, con un alto índice de responsabilidad, calidad y profesionalismo, promoviendo la mejora continua en la ejecución y provisión de nuestros servicios. Con base en esa retroalimentación creamos el sistema de gestión empresarial <strong>SIGE Mype</strong>.</p>
+      <ul class="circulos">
+        <li><small>Más de</small><b>100</b><span>clientes de outsourcing de una amplia variedad de sectores</span></li>
+        <li><small>Más de</small><b>100</b><span>requerimientos de SUNAT atendidos satisfactoriamente</span></li>
+        <li><small>Más de</small><b>10 años</b><span>de experiencia profesional brindando soluciones integrales</span></li>
+        <li><small>Más de</small><b>20</b><span>empresas constituidas</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion servicios" id="servicios" aria-labelledby="t-servicios">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="t-servicios">Nuestros servicios empresariales integrales</h2>
+      <div class="servicios-rejilla">
+        <img class="rueda-imagen" src="img/rueda-sige-mype.webp" width="500" height="550" loading="lazy" alt="Rueda SIGE Mype: la contabilidad al centro, rodeada por nueve áreas de servicio en un ciclo de mejora continua.">
+        <div>
+          <div class="areas-pestanas" role="tablist" aria-label="Áreas de servicio SIGE Mype">
+            <button type="button" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="true">P1</button>
+            <button type="button" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1">P2</button>
+            <button type="button" role="tab" id="tab-3" aria-controls="panel-3" aria-selected="false" tabindex="-1">P3</button>
+            <button type="button" role="tab" id="tab-4" aria-controls="panel-4" aria-selected="false" tabindex="-1">P4</button>
+            <button type="button" role="tab" id="tab-5" aria-controls="panel-5" aria-selected="false" tabindex="-1">P5</button>
+            <button type="button" role="tab" id="tab-6" aria-controls="panel-6" aria-selected="false" tabindex="-1">P6</button>
+            <button type="button" role="tab" id="tab-7" aria-controls="panel-7" aria-selected="false" tabindex="-1">P7</button>
+            <button type="button" role="tab" id="tab-8" aria-controls="panel-8" aria-selected="false" tabindex="-1">P8</button>
+            <button type="button" role="tab" id="tab-9" aria-controls="panel-9" aria-selected="false" tabindex="-1">P9</button>
+          </div>
+
+          <div class="area-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+            <h3><span>P1:</span>Legal</h3>
+            <p>Un equipo de abogados y contadores especializados en diversos campos para el sector empresarial peruano y la inversión extranjera. Nuestro objetivo es dar información precisa en aplicación de las normas comerciales vigentes, contemplando asuntos societarios y contractuales, para resolver tus necesidades y requerimientos legales de manera oportuna.</p>
+            <ul><li>Asesoría legal</li><li>Servicios legales</li><li>Asesoría contable legal</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20Legal."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+            <h3><span>P2:</span>Tributaria</h3>
+            <p>Un equipo de contadores especialistas en diversos campos para el sector empresarial peruano y la inversión extranjera. Nuestro objetivo es brindar solución ante las contingencias que generan los cambios en las normas tributarias, con atención personalizada a entidades privadas, nacionales o extranjeras, cualquiera sea su régimen tributario.</p>
+            <ul><li>Consultas tributarias</li><li>Problemática fiscal</li><li>Cumplimiento de las normas tributarias</li><li>Asesoría contable tributaria</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20Tributario."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+            <h3><span>P3:</span>Laboral</h3>
+            <p>Contadores y abogados laboralistas trabajamos en equipo. Somos especialistas con gran experiencia en derecho laboral y de la seguridad social, y asesoramos en diversas cuestiones de ese ámbito, tanto a personas naturales como a empresas, cualquiera sea su régimen laboral.</p>
+            <ul><li>Manejo de nóminas</li><li>Indemnizaciones</li><li>Informes sobre consultas específicas</li><li>Asesoría contable laboral</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20Laboral."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" hidden>
+            <h3><span>P4:</span>Administración</h3>
+            <p>Administradores especialistas evaluamos y asesoramos a empresas que buscan mayor eficiencia y eficacia en el uso de sus recursos humanos, con un sistema de organización que cubre todas las etapas de la administración en una estructura simple, dinámica y actual.</p>
+            <ul><li>Reducción de procesos inútiles y repetidos</li><li>Optimización de procedimientos administrativos y organizativos</li><li>Herramientas de gestión que garanticen una correcta toma de decisiones</li><li>Análisis y optimización de recursos propios poco utilizados</li><li>Diseño e implementación de actividades y funciones administrativas y operativas</li><li>Diseño e implementación de políticas, normas y procedimientos</li><li>Diseño e implementación de formatos de control administrativo</li><li>Asesoría contable administrativa</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20de%20Administraci%C3%B3n."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-5" aria-labelledby="tab-5" hidden>
+            <h3><span>P5:</span>Financiera</h3>
+            <p>El área financiera es una pieza fundamental para el desarrollo y la sostenibilidad de cualquier negocio. Es habitual que emprendedores y pymes se concentren en qué, cómo y para quién producir antes de pensar en las finanzas; sin embargo, las finanzas son una de las áreas más importantes para que el negocio siga en marcha.</p>
+            <ul><li>Registro de operaciones contables y datos financieros</li><li>Planificación, análisis y evaluación de la información registrada</li><li>Búsqueda y selección de fuentes de financiamiento</li><li>Opciones de inversión para el negocio</li><li>Control de las operaciones ejecutadas</li><li>Flujos proyectados</li><li>Asesoría contable financiera</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20Financiero."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-6" aria-labelledby="tab-6" hidden>
+            <h3><span>P6:</span>Sistema de calidad</h3>
+            <p>Un sistema de gestión de calidad es una herramienta que permite a cualquier organización planear, ejecutar y controlar las actividades necesarias para cumplir su misión, prestando servicios con altos estándares de calidad medidos a través de indicadores de satisfacción de los usuarios.</p>
+            <ul><li>Sistema de calidad SIGE Mype</li><li>Sistemas de calidad ISO</li><li>Seguridad y salud en el trabajo (SUNAFIL)</li><li>Homologaciones</li><li>Asesoría contable en sistemas de calidad</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20de%20Sistema%20de%20calidad."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-7" aria-labelledby="tab-7" hidden>
+            <h3><span>P7:</span>Tecnología de la información</h3>
+            <p>Nuestro servicio de mantenimiento informático busca evitar incidencias y, si se producen, resolverlas rápido, para que tus equipos y los datos que guardan estén siempre a salvo. Con especialistas de calidad velamos por tu tranquilidad y la continuidad de tu negocio.</p>
+            <ul><li>Soporte remoto</li><li>Configuración de redes</li><li>Copias de respaldo de datos</li><li>Cableado estructurado</li><li>Diagnóstico</li><li>Asesoría contable en tecnología de la información</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20de%20Tecnolog%C3%ADa."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-8" aria-labelledby="tab-8" hidden>
+            <h3><span>P8:</span>Comercio exterior</h3>
+            <p>Especialistas en comercio internacional de amplia trayectoria. El auge del comercio exterior del Perú impulsa el crecimiento económico del país, y las pequeñas y medianas empresas aumentan sus exportaciones e importaciones: estamos preparados para acompañar ese crecimiento.</p>
+            <ul><li>Asesoría en importaciones y exportaciones</li><li>Trámite de devolución de impuestos (exportadores, pagos en exceso)</li><li>Drawback y devolución de IGV a exportadores ante SUNAT</li><li>Asesoría contable en comercio exterior</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20de%20Comercio%20exterior."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+          <div class="area-panel" role="tabpanel" id="panel-9" aria-labelledby="tab-9" hidden>
+            <h3><span>P9:</span>Auditorías y precios de transferencia</h3>
+            <p>Nuestro equipo está conformado por profesionales con amplia experiencia en auditoría y consultoría en firmas internacionales, que aseguran un servicio de alta calidad en el momento que lo necesitas.</p>
+            <ul><li>Auditoría de estados financieros</li><li>Evaluación de control interno</li><li>Auditoría financiera</li><li>Auditoría tributaria</li><li>Exámenes especiales y peritajes</li><li>Asesoría contable en auditorías</li></ul>
+            <a class="boton boton-azul" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20servicio%20de%20Auditor%C3%ADa."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Consultar este servicio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion" id="planes" aria-labelledby="t-planes">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="t-planes">Nuestros planes</h2>
+      <p class="bajada">Outsourcing contable para pymes. Compara lo que incluye cada plan y consúltanos por el que necesitas.</p>
+      <div class="tabla-marco" tabindex="0" role="region" aria-label="Comparación de planes de outsourcing contable">
+        <table>
+          <thead>
+            <tr><th scope="col">Outsourcing contable para pymes</th><th scope="col">Emprende</th><th scope="col">SIGE<b>Mype</b> I</th><th scope="col">SIGE<b>Mype</b> II</th><th scope="col">SIGE<b>Mype</b> Business</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Para empresas con ventas anuales hasta de</th><td>Consultar</td><td>Consultar</td><td>Consultar</td><td>Consultar</td></tr>
+            <tr><th scope="row">Gestión integral de planilla hasta</th><td>2 trabajadores</td><td>4 trabajadores</td><td>6 trabajadores</td><td>12 trabajadores</td></tr>
+            <tr><th scope="row">Registro contable mensual de los comprobantes de compra y venta</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Cálculo mensual del Impuesto a la Renta</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Cálculo mensual del IGV</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Cálculo y declaración mensual de la planilla electrónica</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Declaración del PDT 621 (IGV y Renta)</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Impresión del Registro de Compras y Ventas en formato SUNAT</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Libro Diario Simplificado mensual</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Libro Diario y Libro Mayor mensual</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Libro Bancos mensual</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Otros libros obligatorios</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Manejo de Kardex</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Asesoría tributaria según tu régimen y sector económico</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Asesoría tributaria y financiera en tu empresa</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Elaboración y presentación de la DAOT</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Determinación y declaración del Impuesto a la Renta anual</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Estados financieros intermedios</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td></tr>
+            <tr><th scope="row">Una visita al mes para recoger y enviar documentación contable</th><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="no"><svg class="icono" aria-hidden="true"><use href="#i-no"/></svg><span class="oculto">No</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+            <tr><th scope="row">Costo por trabajador adicional en planilla</th><td>Consultar</td><td>Consultar</td><td>Consultar</td><td>Consultar</td></tr>
+            <tr><th scope="row">Límite de registro de comprobantes de pago</th><td>Consultar</td><td>Consultar</td><td>Consultar</td><td>Consultar</td></tr>
+            <tr><th scope="row">Elaboración y presentación de libros electrónicos</th><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td><td><span class="si"><svg class="icono" aria-hidden="true"><use href="#i-si"/></svg><span class="oculto">Sí</span></span></td></tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td><a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20Emprende.">Solicitar<span class="oculto"> el plan Emprende</span></a></td>
+              <td><a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20I.">Solicitar<span class="oculto"> el plan SIGEMype I</span></a></td>
+              <td><a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20II.">Solicitar<span class="oculto"> el plan SIGEMype II</span></a></td>
+              <td><a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20Business.">Solicitar<span class="oculto"> el plan SIGEMype Business</span></a></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="tabla-pie">Precio de cada plan: consultar. En el celular, desliza la tabla hacia los lados para ver todos los planes.</p>
+    </div>
+  </section>
+
+  <section class="seccion elegirnos oscuro" aria-labelledby="t-elegirnos">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="t-elegirnos">¿Por qué elegirnos?</h2>
+      <p class="bajada">Aquí tienes algunas de las razones para escoger nuestros servicios.</p>
+      <ul class="valores">
+        <li><svg class="icono" aria-hidden="true"><use href="#i-excelencia"/></svg><span>Excelencia</span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-compromiso"/></svg><span>Compromiso</span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-innovacion"/></svg><span>Innovación</span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-confidencialidad"/></svg><span>Confidencialidad</span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-equidad"/></svg><span>Equidad</span></li>
+        <li><svg class="icono" aria-hidden="true"><use href="#i-equipo"/></svg><span>Trabajo en equipo</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion clientes" aria-labelledby="t-clientes">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="t-clientes">Nuestros clientes</h2>
+    </div>
+    <div class="cinta contenedor">
+      <ul aria-label="Algunos de nuestros clientes">
+        <li><img src="../public/web/images/client-logo1.png" alt="Cadex" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo2.png" alt="Cliente del estudio (nombre por confirmar)" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo3.png" alt="Insutec" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo4.png" alt="Interfreeze" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo5.png" alt="Líneas Perú Travel" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo6.png" alt="Cliente del estudio (nombre por confirmar)" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo7.png" alt="Lineaz Tour Operador" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo8.png" alt="Empresa Pesquera Yabafish S.A.C." loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo9.png" alt="Faser Rent a Car" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo10.png" alt="Samari S.A.C." loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo11.png" alt="STI Gold" loading="lazy"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion contacto" id="contacto" aria-labelledby="t-contacto">
+    <div class="contenedor">
+      <h2 class="titulo-seccion" id="t-contacto">Contáctanos</h2>
+      <p class="bajada">Escríbenos o llámanos y te respondemos el mismo día hábil.</p>
+      <div class="contacto-rejilla">
+        <div class="canales">
+          <a class="canal canal-whatsapp" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><span class="canal-icono"><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg></span><span><strong>WhatsApp</strong><span>951 965 242</span></span></a>
+          <a class="canal" href="tel:+51952249102"><span class="canal-icono"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg></span><span><strong>Llámanos</strong><span>952 249 102</span></span></a>
+          <a class="canal" href="mailto:contabilidad@jjmm.com.pe"><span class="canal-icono"><svg class="icono" aria-hidden="true"><use href="#i-correo"/></svg></span><span><strong>Correo</strong><span>contabilidad@jjmm.com.pe</span></span></a>
+        </div>
+        <div class="mapa">
+          <iframe title="Mapa de ubicación del Estudio Contable JJMM en Lima" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15608.707509981834!2d-77.08950189118585!3d-12.03134101480463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ceb0a5b6860b%3A0xb62bd9617941db!2sESTUDIO+CONTABLE+JJMM+SAC!5e0!3m2!1ses!2spe!4v1520698936292"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie oscuro">
+  <div class="contenedor">
+    <div class="pie-rejilla">
+      <div>
+        <h3>Sede San Martín de Porres</h3>
+        <address>Jr. Iquitos 593<br>San Martín de Porres, Lima<br>Celular: <a href="tel:+51951965242">951 965 242</a> · <a href="tel:+51952249102">952 249 102</a><br><a href="mailto:contabilidad@jjmm.com.pe">contabilidad@jjmm.com.pe</a></address>
+      </div>
+      <div class="pie-logo">
+        <img src="../public/web/images/jjmm-white.svg" alt="Estudio Contable JJMM, Mariñas y Asociados" width="176" height="58">
+        <p>Cada empresa guiada por nuestro sistema, llega a ser líder.</p>
+      </div>
+      <div>
+        <h3>Sede San Isidro</h3>
+        <address>Calle Gorriones 151<br>San Isidro, Lima<br>Celular: <a href="tel:+51951965242">951 965 242</a> · <a href="tel:+51952249102">952 249 102</a><br><a href="mailto:contabilidad@jjmm.com.pe">contabilidad@jjmm.com.pe</a></address>
+      </div>
+    </div>
+    <p class="pie-legal">© 2026 Estudio Contable JJMM S.A.C. · Grupo JJMM</p>
+  </div>
+</footer>
+
+<aside class="notas" aria-labelledby="t-notas">
+  <div class="contenedor">
+    <h2 id="t-notas">Notas del mockup (no forman parte del diseño)</h2>
+    <ul>
+      <li>Versión 3: conserva las secciones, el orden, los textos y las imágenes del sitio actual. Solo se moderniza la presentación.</li>
+      <li>El formulario de contacto se reemplazó por WhatsApp, llamada y correo, porque el actual envía a una dirección que no existe.</li>
+      <li>Se retiraron los teléfonos fijos y el «S/ 10.00» de la tabla, que contradicen las reglas del estudio; esas celdas dicen «Consultar».</li>
+      <li>«Asesoría gratuita» repite la oferta del banner actual. Falta que el estudio confirme su vigencia.</li>
+      <li>Falta definir qué celular atiende cada sede y cuáles tienen WhatsApp; hoy ambas sedes muestran los dos.</li>
+      <li>Dos logotipos de clientes no tienen nombre legible (<code>client-logo2.png</code> y <code>client-logo6.png</code>).</li>
+      <li>La sede Miraflores se agrega cuando el sitio sea administrable.</li>
+      <li>Las imágenes son las del sitio actual, convertidas a WebP en <code>mockup/img/</code>.</li>
+    </ul>
+  </div>
+</aside>
+
+<a class="flotante" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a>
+
+<script>
+(function () {
+  var menuBoton = document.querySelector('.menu-boton');
+  var nav = document.getElementById('navegacion');
+  function cerrarMenu() { nav.classList.remove('abierta'); menuBoton.setAttribute('aria-expanded', 'false'); }
+  menuBoton.addEventListener('click', function () {
+    var abierta = nav.classList.toggle('abierta');
+    menuBoton.setAttribute('aria-expanded', String(abierta));
+  });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) cerrarMenu(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('abierta')) { cerrarMenu(); menuBoton.focus(); }
+  });
+
+  // Slider: avance manual, avance automático pausable y sin movimiento si se pide reducirlo.
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var puntos = Array.prototype.slice.call(document.querySelectorAll('.puntos button'));
+  var pausa = document.querySelector('.slider-pausa');
+  var actual = 0;
+  var temporizador = null;
+  var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function mostrar(n) {
+    actual = (n + slides.length) % slides.length;
+    slides.forEach(function (s, i) {
+      s.classList.toggle('actual', i === actual);
+      s.setAttribute('aria-hidden', String(i !== actual));
+    });
+    puntos.forEach(function (p, i) { p.setAttribute('aria-current', String(i === actual)); });
+  }
+  function iniciar() { detener(); temporizador = setInterval(function () { mostrar(actual + 1); }, 6000); }
+  function detener() { if (temporizador) { clearInterval(temporizador); temporizador = null; } }
+  function marcarPausa(pausado) {
+    pausa.setAttribute('aria-pressed', String(pausado));
+    pausa.querySelector('use').setAttribute('href', pausado ? '#i-play' : '#i-pausa');
+    pausa.querySelector('.oculto').textContent = pausado ? 'Reanudar el carrusel' : 'Pausar el carrusel';
+  }
+  document.querySelectorAll('.slider-flecha').forEach(function (b) {
+    b.addEventListener('click', function () { mostrar(actual + Number(b.dataset.paso)); if (temporizador) iniciar(); });
+  });
+  puntos.forEach(function (p, i) { p.addEventListener('click', function () { mostrar(i); if (temporizador) iniciar(); }); });
+  pausa.addEventListener('click', function () {
+    if (temporizador) { detener(); marcarPausa(true); } else { iniciar(); marcarPausa(false); }
+  });
+  var slider = document.querySelector('.slider');
+  slider.addEventListener('focusin', function () { if (temporizador) detener(); });
+  if (reducir) { marcarPausa(true); } else { iniciar(); }
+
+  // Pestañas P1 a P9: muestran el detalle de cada área, como la rueda del sitio actual.
+  var pestanas = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function activar(pestana, enfocar) {
+    pestanas.forEach(function (p) {
+      var activa = p === pestana;
+      p.setAttribute('aria-selected', String(activa));
+      p.tabIndex = activa ? 0 : -1;
+      var panel = document.getElementById(p.getAttribute('aria-controls'));
+      panel.hidden = !activa;
+      if (activa) { panel.classList.remove('aparece'); void panel.offsetWidth; panel.classList.add('aparece'); }
+    });
+    if (enfocar) pestana.focus();
+  }
+  pestanas.forEach(function (p, i) {
+    p.addEventListener('click', function () { activar(p, false); });
+    p.addEventListener('keydown', function (e) {
+      var destino = null;
+      if (e.key === 'ArrowRight') destino = pestanas[(i + 1) % pestanas.length];
+      if (e.key === 'ArrowLeft') destino = pestanas[(i - 1 + pestanas.length) % pestanas.length];
+      if (e.key === 'Home') destino = pestanas[0];
+      if (e.key === 'End') destino = pestanas[pestanas.length - 1];
+      if (destino) { e.preventDefault(); activar(destino, true); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estudio Contable JJMM | Contabilidad para MYPE en Lima</title>
+<meta name="description" content="Estudio Contable JJMM lleva la contabilidad, los impuestos y la planilla de tu MYPE en Lima con su sistema SIGE Mype. Escríbenos por WhatsApp.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Barlow Condensed";font-weight:600;font-display:swap;src:url("fonts/barlow-condensed-600-latin.woff2") format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:800;font-display:swap;src:url("fonts/barlow-condensed-800-latin.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-weight:400;font-display:swap;src:url("fonts/barlow-400-latin.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-weight:500;font-display:swap;src:url("fonts/barlow-500-latin.woff2") format("woff2")}
+@font-face{font-family:"Barlow";font-weight:700;font-display:swap;src:url("fonts/barlow-700-latin.woff2") format("woff2")}
+
+:root{
+  --azul:#0c2f73;
+  --azul-hondo:#081f4e;
+  --azul-vivo:#1d55c4;
+  --amarillo:#ffd21f;
+  --amarillo-hondo:#f2c100;
+  --pared:#e9eef6;
+  --blanco:#ffffff;
+  --tinta:#0a1a3a;
+  --tinta-suave:#3b4a6b;
+  --sobre-azul:#cfdcf7;
+  --rojo:#c0301a;
+  --rotulo:"Barlow Condensed","Arial Narrow",sans-serif;
+  --texto:"Barlow",system-ui,sans-serif;
+  --ancho:72rem;
+  --borde:clamp(1rem,4vw,2.5rem);
+  --salida:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--texto);font-size:1.0625rem;line-height:1.55;color:var(--tinta);background:var(--blanco);padding-bottom:4.5rem}
+::selection{background:var(--amarillo);color:var(--tinta)}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:.08em}
+:focus-visible{outline:3px solid var(--amarillo);outline-offset:3px;border-radius:2px}
+.claro :focus-visible{outline-color:var(--azul-vivo)}
+h1,h2,h3{font-family:var(--rotulo);font-weight:800;text-transform:uppercase;line-height:.96;margin:0;text-wrap:balance;letter-spacing:.005em}
+h2{font-size:clamp(2.25rem,7vw,4rem)}
+h3{font-size:clamp(1.5rem,4vw,2rem);line-height:1}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+.icono{width:1.35em;height:1.35em;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.contenedor{max-width:var(--ancho);margin-inline:auto;padding-inline:var(--borde)}
+.oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.saltar{position:absolute;left:1rem;top:-4rem;z-index:50;background:var(--amarillo);color:var(--tinta);padding:.75rem 1rem;font-weight:700}
+.saltar:focus{top:1rem}
+
+/* Filete: doble línea inscrita de los letreros pintados */
+.panel{position:relative;isolation:isolate}
+.panel::before,.panel::after{content:"";position:absolute;pointer-events:none;border-style:solid;border-color:currentColor;z-index:-1}
+.panel::before{inset:.5rem;border-width:2px}
+.panel::after{inset:.875rem;border-width:1px;opacity:.55}
+
+/* Botones */
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3rem;padding:.7rem 1.25rem;font-family:var(--rotulo);font-weight:800;font-size:1.25rem;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;border:2px solid transparent;transition:background-color .2s var(--salida),color .2s var(--salida),transform .2s var(--salida)}
+.boton:active{transform:translateY(1px)}
+.boton-contacto{background:var(--amarillo);color:var(--tinta)}
+.boton-contacto:hover{background:var(--amarillo-hondo)}
+.boton-linea{border-color:currentColor}
+.boton-linea:hover{background:var(--blanco);color:var(--azul)}
+.claro .boton-linea:hover{background:var(--azul);color:var(--blanco)}
+
+/* Cabecera */
+.cabecera{position:sticky;top:0;z-index:30;background:var(--azul);color:var(--blanco);border-bottom:2px solid var(--azul-hondo)}
+.cabecera .contenedor{display:flex;align-items:center;gap:1rem;min-height:4rem}
+.marca{display:flex;align-items:center;margin-right:auto;text-decoration:none}
+.marca img{height:2.5rem;width:auto}
+.menu-boton{display:inline-flex;align-items:center;gap:.5rem;min-height:2.75rem;padding:.4rem .75rem;background:none;border:2px solid var(--sobre-azul);color:inherit;font:800 1.1rem var(--rotulo);text-transform:uppercase;letter-spacing:.03em;cursor:pointer}
+.navegacion{display:none;position:absolute;inset:100% 0 auto 0;background:var(--azul-hondo);padding:.5rem var(--borde) 1.25rem}
+.navegacion.abierta{display:block}
+.navegacion a{display:flex;align-items:center;min-height:3rem;font:800 1.5rem var(--rotulo);text-transform:uppercase;letter-spacing:.02em;text-decoration:none;border-bottom:1px solid rgb(207 220 247 / .25)}
+.navegacion a:hover{color:var(--amarillo)}
+.cabecera .boton-contacto{display:none}
+.cabecera .llamar{display:none;align-items:center;gap:.4rem;min-height:2.75rem;font:800 1.1rem var(--rotulo);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;font-variant-numeric:tabular-nums;white-space:nowrap}
+.llamar-numero{display:none}
+.cabecera .llamar:hover,.cabecera .acceso:hover{color:var(--amarillo)}
+.cabecera .acceso{display:inline-flex;align-items:center;min-height:2.75rem;padding-inline:.25rem;font:800 1.1rem var(--rotulo);letter-spacing:.03em;text-transform:uppercase}
+.plan :focus-visible{outline-color:var(--azul)}
+.sede :focus-visible{outline-color:var(--amarillo)}
+.barra a:focus-visible{outline-offset:-5px;outline-color:var(--azul)}
+.barra a:last-child:focus-visible{outline-color:var(--amarillo)}
+.area[open] > ul,.comparar[open] > .tabla-marco{animation:barrido .45s var(--salida)}
+
+/* Portada: el rótulo */
+.portada{position:relative;z-index:2;background:var(--azul);color:var(--blanco);padding-block:clamp(2rem,6vw,4.5rem) 0}
+.portada h1{font-size:clamp(2.6rem,11.2vw,6rem);max-width:13ch}
+.portada h1 span{display:block;font-weight:600;color:var(--sobre-azul)}
+.portada-apoyo{margin-top:1.25rem;max-width:34rem;font-size:1.125rem;color:var(--sobre-azul)}
+.portada-apoyo strong{color:var(--blanco);font-weight:700}
+.portada-fila{display:grid;gap:1.75rem;margin-top:2rem;align-items:end}
+.placa{display:block;background:var(--amarillo);color:var(--tinta);padding:1.75rem 1.5rem 1.6rem;text-decoration:none;margin-bottom:-2.5rem;transition:background-color .2s var(--salida)}
+.placa:hover{background:var(--amarillo-hondo)}
+.placa-accion{display:flex;align-items:center;gap:.5rem;font:800 1.35rem var(--rotulo);text-transform:uppercase;letter-spacing:.03em}
+.placa-numero{display:block;margin-top:.15rem;font:800 clamp(2.9rem,14vw,5.5rem)/.95 var(--rotulo);font-variant-numeric:tabular-nums;white-space:nowrap}
+.placa-nota{display:block;margin-top:.5rem;font-weight:500}
+.portada-llamar{display:inline-flex;align-items:center;gap:.5rem;min-height:2.75rem;font-weight:500;color:var(--sobre-azul)}
+.portada-llamar strong{color:var(--blanco);font-variant-numeric:tabular-nums}
+
+/* Toldo: se usa una sola vez */
+.toldo{height:2.75rem;background:repeating-linear-gradient(90deg,var(--azul) 0 3rem,var(--blanco) 3rem 6rem);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% 1.25rem no-repeat,radial-gradient(1.5rem 1.5rem at 50% 0,#000 97%,transparent) 0 1.25rem/3rem 1.5rem repeat-x;
+  mask:linear-gradient(#000 0 0) top/100% 1.25rem no-repeat,radial-gradient(1.5rem 1.5rem at 50% 0,#000 97%,transparent) 0 1.25rem/3rem 1.5rem repeat-x}
+
+.seccion{padding-block:clamp(3.5rem,9vw,6.5rem)}
+.seccion > .contenedor > p.entrada{margin-top:1rem;max-width:40rem;font-size:1.125rem;color:var(--tinta-suave)}
+.pared{background:var(--pared)}
+.azul{background:var(--azul);color:var(--blanco)}
+.azul p.entrada{color:var(--sobre-azul) !important}
+
+/* Vencimientos */
+.vence{padding-top:0}
+.vence .toldo{margin-bottom:clamp(3.5rem,8vw,5rem)}
+.vence-guia{margin-top:1.5rem;color:var(--tinta-suave)}
+.vence-guia a{color:var(--azul);font-weight:700}
+.vence-cuerpo{display:grid;gap:2rem;margin-top:2rem}
+.digitos{border:0;padding:0;margin:0;min-width:0}
+.digitos legend{padding:0;font-weight:700;margin-bottom:.75rem}
+.digitos-lista{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.digitos label{display:flex;align-items:center;justify-content:center;min-height:3.75rem;padding:.5rem .75rem;background:var(--blanco);color:var(--azul);border:2px solid var(--azul);font:800 1.6rem/1 var(--rotulo);white-space:nowrap;cursor:pointer;transition:background-color .18s var(--salida),color .18s var(--salida)}
+.digitos label.ancho{grid-column:1/-1;font-size:1.35rem;letter-spacing:.02em;text-transform:uppercase}
+.digitos label:hover{background:#d5e0f5}
+.digitos input:checked + label{background:var(--azul);color:var(--blanco)}
+.digitos input:focus-visible + label{outline:3px solid var(--azul-vivo);outline-offset:3px}
+.fecha{background:var(--blanco);color:var(--rojo);padding:2rem 1.75rem 1.75rem}
+.fecha > *{color:var(--tinta)}
+.fecha-rotulo{font-weight:700}
+.fecha-dia{display:block;margin-top:.35rem;font:800 clamp(2.5rem,9vw,4.25rem)/.95 var(--rotulo);text-transform:uppercase;color:var(--rojo)}
+.fecha-periodo{display:block;margin-top:.5rem;color:var(--tinta-suave)}
+.fecha-aviso{margin-top:1rem;padding-top:1rem;border-top:1px solid #c9d2e3;font-size:.95rem;color:var(--tinta-suave)}
+.fecha .boton{margin-top:1.25rem;width:100%}
+.barrido{animation:barrido .5s var(--salida)}
+@keyframes barrido{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* Directorio de áreas */
+.directorio{margin-top:2.5rem;border-top:2px solid var(--azul);display:grid}
+.area{border-bottom:2px solid var(--azul)}
+.area summary{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;padding:1rem 0;cursor:pointer;list-style:none}
+.area summary::-webkit-details-marker{display:none}
+.area-placa{display:grid;place-items:center;width:3.5rem;height:3.5rem;background:var(--azul);color:var(--blanco);font:800 1.75rem/1 var(--rotulo)}
+.area-nombre{display:block;font:800 1.6rem/1 var(--rotulo);text-transform:uppercase;color:var(--azul)}
+.area-que{display:block;margin-top:.3rem;color:var(--tinta-suave);line-height:1.4}
+.area-flecha{transition:transform .25s var(--salida);color:var(--azul)}
+.area[open] .area-flecha{transform:rotate(180deg)}
+.area summary:hover .area-placa{background:var(--azul-vivo)}
+.area ul{padding:0 0 1.25rem 4.5rem;display:grid;gap:.4rem}
+.area li{position:relative;padding-left:1.1rem}
+.area li::before{content:"";position:absolute;left:0;top:.62em;width:.45rem;height:.45rem;background:var(--azul)}
+.centro{margin-top:2rem;display:grid;gap:1rem;align-items:center;background:var(--pared);padding:1.25rem 1.5rem}
+.centro strong{font:800 1.5rem/1.05 var(--rotulo);text-transform:uppercase;color:var(--azul)}
+
+/* Planes */
+.planes{display:grid;gap:1.25rem;margin-top:2.5rem}
+.plan{background:var(--blanco);color:var(--azul);padding:2rem 1.75rem 1.75rem;display:flex;flex-direction:column}
+.plan > *{color:var(--tinta)}
+.plan h3{color:var(--azul)}
+.plan-ancla{margin-top:.6rem;font-weight:700;font-size:1.125rem}
+.plan-ancla b{font:800 2.5rem/1 var(--rotulo);color:var(--azul);margin-right:.2rem}
+.plan ul{margin-top:1rem;display:grid;gap:.45rem;flex:1;align-content:start}
+.plan li{position:relative;padding-left:1.1rem;line-height:1.4}
+.plan li::before{content:"";position:absolute;left:0;top:.55em;width:.45rem;height:.45rem;background:var(--azul)}
+.plan li.suma{padding-left:0;font-weight:700;color:var(--azul)}
+.plan li.suma::before{display:none}
+.plan-precio{margin-top:1.25rem;padding-top:1rem;border-top:1px solid #c9d2e3;font-weight:500;color:var(--tinta-suave)}
+.plan .boton{margin-top:1rem;width:100%}
+.comparar{margin-top:2rem;border:2px solid var(--sobre-azul)}
+.comparar summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3.5rem;padding:.75rem 1.25rem;cursor:pointer;font:800 1.35rem var(--rotulo);text-transform:uppercase;letter-spacing:.02em;list-style:none}
+.comparar summary::-webkit-details-marker{display:none}
+.comparar[open] .area-flecha{transform:rotate(180deg)}
+.comparar .area-flecha{color:inherit}
+.tabla-marco{overflow-x:auto;background:var(--blanco);color:var(--tinta)}
+table{border-collapse:collapse;width:100%;min-width:38rem;font-size:.95rem}
+th,td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid #c9d2e3;vertical-align:top}
+thead th{font:800 1.15rem var(--rotulo);text-transform:uppercase;color:var(--azul);position:sticky;top:0;background:var(--blanco)}
+tbody th{font-weight:500;position:sticky;left:0;background:var(--blanco);max-width:15rem}
+td{font-variant-numeric:tabular-nums;white-space:nowrap}
+td.si{font-weight:700;color:var(--azul)}
+td.no{color:#5d6a85}
+
+/* Clientes */
+.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1.75rem 2.5rem;margin-top:2.5rem;padding-block:1.75rem;border-block:2px solid var(--azul)}
+.logos li{display:grid;place-items:center;width:7.5rem;min-height:4rem}
+.logos img{max-height:4rem;width:auto;object-fit:contain}
+.hechos{margin-top:0;display:grid;gap:0}
+.hechos li{padding:.9rem 0;border-bottom:2px solid var(--azul);font:800 1.6rem/1.05 var(--rotulo);text-transform:uppercase;color:var(--azul)}
+.valores{margin-top:1.75rem;max-width:40rem;color:var(--tinta-suave)}
+
+/* Sedes */
+.sedes{display:grid;gap:1.25rem;margin-top:2.5rem}
+.sede{background:var(--azul);color:var(--blanco);padding:2rem 1.75rem 1.75rem}
+.sede address{margin-top:.75rem;font-style:normal;color:var(--sobre-azul);font-size:1.125rem}
+.sede .boton{margin-top:1.25rem}
+.contacto-fila{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.75rem}
+
+/* Pie */
+.pie{background:var(--azul-hondo);color:var(--blanco);padding-block:3.5rem 2.5rem}
+.pie-lema{font:800 clamp(1.9rem,6vw,3.25rem)/1 var(--rotulo);text-transform:uppercase;max-width:18ch;text-wrap:balance}
+.pie-enlaces{margin-top:2rem;display:grid;gap:.25rem}
+.pie-enlaces a{display:inline-flex;align-items:center;min-height:2.75rem;color:var(--sobre-azul)}
+.pie-enlaces a:hover{color:var(--amarillo)}
+.pie-legal{margin-top:2rem;padding-top:1.25rem;border-top:1px solid rgb(207 220 247 / .25);font-size:.95rem;color:var(--sobre-azul)}
+
+/* Barra de contacto fija en el celular */
+.barra{position:fixed;inset:auto 0 0 0;z-index:40;display:grid;grid-template-columns:1.35fr 1fr;background:var(--azul-hondo);border-top:2px solid var(--azul-hondo)}
+.barra a{display:flex;align-items:center;justify-content:center;gap:.5rem;min-height:3.75rem;font:800 1.35rem var(--rotulo);text-transform:uppercase;letter-spacing:.02em;text-decoration:none}
+.barra a:first-child{background:var(--amarillo);color:var(--tinta)}
+.barra a:last-child{color:var(--blanco)}
+
+@media (min-width:46rem){
+  .digitos-lista{grid-template-columns:repeat(6,1fr)}
+  .vence-cuerpo{grid-template-columns:1.1fr 1fr;align-items:start}
+  .directorio{grid-template-columns:repeat(2,1fr);column-gap:2.5rem}
+  .planes{grid-template-columns:repeat(2,1fr)}
+  .sedes{grid-template-columns:repeat(2,1fr)}
+  .hechos{grid-template-columns:repeat(3,1fr);column-gap:2.5rem}
+  .centro{grid-template-columns:auto 1fr}
+  .pie-enlaces{grid-template-columns:repeat(2,max-content);column-gap:3rem}
+}
+@media (min-width:78rem){
+  .llamar-numero{display:inline}
+  .navegacion{gap:1.75rem !important}
+}
+@media (min-width:68rem){
+  body{padding-bottom:0}
+  .barra{display:none}
+  .menu-boton{display:none}
+  .navegacion{display:flex;position:static;background:none;padding:0;gap:1rem}
+  .navegacion a{min-height:2.75rem;font-size:1.2rem;border:0}
+  .cabecera .boton-contacto{display:inline-flex;min-height:2.75rem;font-size:1.1rem}
+  .portada h1{max-width:none;font-size:4.4rem}
+  .portada-fila{grid-template-columns:1fr 40rem;gap:3rem}
+  .placa{padding:2.25rem 2rem 2rem}
+  .placa-numero{font-size:6rem}
+  .cabecera .llamar{display:inline-flex}
+  .cabecera .acceso{display:none}
+  .directorio{grid-template-columns:repeat(3,1fr)}
+  .planes{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<svg width="0" height="0" class="oculto" aria-hidden="true" focusable="false">
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path d="M9.1 8.4c0 3.1 2.7 6 6.2 6.5l1.1-1.6-2-1.2-.9.8a4.6 4.6 0 0 1-2.2-2.2l.8-.9-1.2-2z"/></symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M6 3h3l1.5 4.5-2 1.5a12 12 0 0 0 6.5 6.5l1.5-2L21 15v3a3 3 0 0 1-3 3A15 15 0 0 1 3 6a3 3 0 0 1 3-3z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.500C5 14.800 12 21 12 21z"/><circle cx="12" cy="9.500" r="2.500"/></symbol>
+  <symbol id="i-correo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+</svg>
+
+<header class="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="#contenido"><img src="../public/web/images/jjmm-white.svg" alt="Estudio Contable JJMM, inicio" width="120" height="40"></a>
+    <a class="acceso" href="https://sigefact.pse.pe/" rel="noopener">SIGEFact</a>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="navegacion">
+      <svg class="icono" aria-hidden="true"><use href="#i-menu"/></svg>Menú
+    </button>
+    <nav class="navegacion" id="navegacion" aria-label="Principal">
+      <a href="#vencimientos">Vencimientos</a>
+      <a href="#areas">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="#sedes">Sedes</a>
+      <a href="https://sigefact.pse.pe/" rel="noopener">SIGEFact</a>
+    </nav>
+    <a class="llamar" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>Llamar <span class="llamar-numero">952 249 102</span></a>
+    <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables.">
+      <svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="portada" aria-labelledby="titulo">
+    <div class="contenedor">
+      <h1 id="titulo">Cumple con SUNAT. <span>Nosotros llevamos tu contabilidad.</span></h1>
+      <div class="portada-fila">
+        <div>
+          <p class="portada-apoyo"><strong>Estudio Contable JJMM</strong> lleva la contabilidad, los impuestos y la planilla de tu MYPE en Lima. Tú te ocupas de tu negocio.</p>
+          <p style="margin-top:1rem"><a class="portada-llamar" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>O llama al <strong>952 249 102</strong></a></p>
+        </div>
+        <a class="placa panel" id="placa" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20para%20mi%20empresa.">
+          <span class="placa-accion"><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Escríbenos por WhatsApp</span>
+          <span class="placa-numero">951 965 242</span>
+          <span class="placa-nota">Cuéntanos tu caso y te orientamos.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion pared vence claro" id="vencimientos" aria-labelledby="t-vence">
+    <div class="toldo" aria-hidden="true"></div>
+    <div class="contenedor">
+      <h2 id="t-vence">¿Cuándo vence tu declaración?</h2>
+      <p class="entrada">SUNAT fija la fecha según el último dígito de tu RUC. Elige el tuyo.</p>
+      <div class="vence-cuerpo">
+        <fieldset class="digitos">
+          <legend>Último dígito de tu RUC</legend>
+          <div class="digitos-lista">
+            <input class="oculto" type="radio" name="digito" id="d0" value="0" checked><label for="d0">0</label>
+            <input class="oculto" type="radio" name="digito" id="d1" value="1"><label for="d1">1</label>
+            <input class="oculto" type="radio" name="digito" id="d2" value="2"><label for="d2">2 y 3</label>
+            <input class="oculto" type="radio" name="digito" id="d4" value="4"><label for="d4">4 y 5</label>
+            <input class="oculto" type="radio" name="digito" id="d6" value="6"><label for="d6">6 y 7</label>
+            <input class="oculto" type="radio" name="digito" id="d8" value="8"><label for="d8">8 y 9</label>
+            <input class="oculto" type="radio" name="digito" id="db" value="b"><label class="ancho" for="db">Buen contribuyente</label>
+          </div>
+          <p class="vence-guia">¿Ya eres cliente? Revisa todos tus vencimientos en la <a href="/guia">guía de clientes</a>.</p>
+        </fieldset>
+        <div class="fecha panel" id="fecha" aria-live="polite">
+          <span class="fecha-rotulo">Tu declaración mensual vence el</span>
+          <span class="fecha-dia" id="fecha-dia">Lunes 14 de diciembre</span>
+          <span class="fecha-periodo">Período tributario: noviembre de 2026</span>
+          <p class="fecha-aviso">Fechas de ejemplo para este mockup. El sitio mostrará el cronograma oficial de SUNAT.</p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20necesito%20ayuda%20con%20mi%20declaraci%C3%B3n%20mensual.">
+            <svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>Necesito ayuda para declarar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion claro" id="areas" aria-labelledby="t-areas">
+    <div class="contenedor">
+      <h2 id="t-areas">Nueve áreas, un solo estudio</h2>
+      <p class="entrada">SIGE Mype es nuestro sistema de trabajo. Ordena nueve áreas de servicio alrededor de tu contabilidad y las revisa en un ciclo de mejora continua. Tú tratas con un solo equipo.</p>
+
+      <div class="directorio">
+        <details class="area">
+          <summary><span class="area-placa">P1</span><span><span class="area-nombre">Legal</span><span class="area-que">Contratos, sociedades y consultas legales de tu empresa.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Asesoría legal</li><li>Servicios legales</li><li>Asuntos societarios y contractuales</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P2</span><span><span class="area-nombre">Tributaria</span><span class="area-que">Tus impuestos al día y respuesta ante SUNAT, según tu régimen.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Consultas tributarias</li><li>Problemática fiscal</li><li>Cumplimiento de las normas tributarias</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P3</span><span><span class="area-nombre">Laboral</span><span class="area-que">Planilla, indemnizaciones y consultas laborales.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Manejo de nóminas</li><li>Indemnizaciones</li><li>Informes sobre consultas específicas</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P4</span><span><span class="area-nombre">Administración</span><span class="area-que">Procesos, funciones y controles para ordenar tu empresa.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Optimización de procedimientos administrativos</li><li>Herramientas de gestión para decidir mejor</li><li>Políticas, normas y procedimientos</li><li>Formatos de control administrativo</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P5</span><span><span class="area-nombre">Financiera</span><span class="area-que">Flujos proyectados, financiamiento e inversión.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Registro de operaciones contables y financieras</li><li>Análisis y evaluación de la información</li><li>Búsqueda de fuentes de financiamiento</li><li>Opciones de inversión</li><li>Flujos proyectados</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P6</span><span><span class="area-nombre">Sistema de calidad</span><span class="area-que">SIGE Mype, ISO, seguridad y salud en el trabajo.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Sistema de calidad SIGE Mype</li><li>Sistemas de calidad ISO</li><li>Seguridad y salud en el trabajo (SUNAFIL)</li><li>Homologaciones</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P7</span><span><span class="area-nombre">Tecnología</span><span class="area-que">Soporte, redes y respaldo de tus datos.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Soporte remoto</li><li>Configuración de redes</li><li>Copias de respaldo de datos</li><li>Cableado estructurado</li><li>Diagnóstico</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P8</span><span><span class="area-nombre">Comercio exterior</span><span class="area-que">Importaciones, exportaciones y devolución de impuestos.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Asesoría en importaciones y exportaciones</li><li>Trámite de devolución de impuestos</li><li>Drawback y devolución de IGV a exportadores ante SUNAT</li></ul>
+        </details>
+        <details class="area">
+          <summary><span class="area-placa">P9</span><span><span class="area-nombre">Auditoría</span><span class="area-que">Auditorías, control interno y precios de transferencia.</span></span><svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+          <ul><li>Auditoría de estados financieros</li><li>Evaluación de control interno</li><li>Auditoría financiera y tributaria</li><li>Exámenes especiales y peritajes</li><li>Precios de transferencia</li></ul>
+        </details>
+      </div>
+
+      <div class="centro">
+        <strong>¿No sabes qué área necesitas?</strong>
+        <p>Cuéntanos tu caso y te decimos por dónde empezar. <a href="https://wa.me/51951965242?text=Hola%2C%20quiero%20saber%20qu%C3%A9%20servicio%20necesita%20mi%20empresa.">Escríbenos por WhatsApp</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion azul" id="planes" aria-labelledby="t-planes">
+    <div class="contenedor">
+      <h2 id="t-planes">Planes de outsourcing contable</h2>
+      <p class="entrada">Elige según cuántos trabajadores tienes en planilla. Te cotizamos según tus ventas y tu volumen de comprobantes.</p>
+
+      <div class="planes">
+        <article class="plan panel">
+          <h3>Emprende</h3>
+          <p class="plan-ancla"><b>2</b> trabajadores en planilla, como máximo</p>
+          <ul>
+            <li>Registro mensual de compras y ventas</li>
+            <li>Cálculo mensual de IGV e Impuesto a la Renta</li>
+            <li>Declaración mensual ante SUNAT (PDT 621)</li>
+            <li>Planilla electrónica mensual</li>
+            <li>Libros electrónicos y Libro Diario Simplificado</li>
+            <li>Asesoría tributaria según tu régimen</li>
+          </ul>
+          <p class="plan-precio">Precio: consultar</p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20Emprende.">Consultar<span class="oculto"> el plan Emprende</span></a>
+        </article>
+        <article class="plan panel">
+          <h3>SIGEMype I</h3>
+          <p class="plan-ancla"><b>4</b> trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma">Todo lo de Emprende, más:</li>
+            <li>Libro Diario y Libro Mayor</li>
+            <li>Libro Bancos</li>
+          </ul>
+          <p class="plan-precio">Precio: consultar</p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20I.">Consultar<span class="oculto"> el plan SIGEMype I</span></a>
+        </article>
+        <article class="plan panel">
+          <h3>SIGEMype II</h3>
+          <p class="plan-ancla"><b>6</b> trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma">Todo lo de SIGEMype I, más:</li>
+            <li>Otros libros obligatorios</li>
+            <li>Una visita al mes para recoger y entregar tu documentación</li>
+          </ul>
+          <p class="plan-precio">Precio: consultar</p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20II.">Consultar<span class="oculto"> el plan SIGEMype II</span></a>
+        </article>
+        <article class="plan panel">
+          <h3>SIGEMype Business</h3>
+          <p class="plan-ancla"><b>12</b> trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma">Todo lo de SIGEMype II, más:</li>
+            <li>Manejo de Kardex (control de inventario)</li>
+            <li>Asesoría tributaria y financiera en tu empresa</li>
+            <li>Impuesto a la Renta anual</li>
+          </ul>
+          <p class="plan-precio">Precio: consultar</p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20Business.">Consultar<span class="oculto"> el plan SIGEMype Business</span></a>
+        </article>
+      </div>
+
+      <details class="comparar">
+        <summary>Ver la comparación completa<svg class="icono area-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></summary>
+        <div class="tabla-marco" tabindex="0" role="region" aria-label="Comparación completa de planes">
+          <table>
+            <thead><tr><th scope="col">Servicio</th><th scope="col">Emprende</th><th scope="col">SIGEMype I</th><th scope="col">SIGEMype II</th><th scope="col">Business</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Registro mensual de comprobantes de compra y venta</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Cálculo mensual del Impuesto a la Renta</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Cálculo mensual del IGV</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Planilla electrónica mensual</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Declaración del PDT 621 (IGV y Renta)</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Registro de Compras y Ventas en formato SUNAT</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Libro Diario Simplificado</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Libro Diario y Libro Mayor</th><td class="no">No</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Libro Bancos</th><td class="no">No</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Otros libros obligatorios</th><td class="no">No</td><td class="no">No</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Manejo de Kardex</th><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Asesoría tributaria según régimen y sector</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Asesoría tributaria y financiera en tu empresa</th><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Declaración anual de operaciones con terceros (DAOT)</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Impuesto a la Renta anual</th><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Visita mensual para recoger y entregar documentación</th><td class="no">No</td><td class="no">No</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+              <tr><th scope="row">Trabajadores en planilla incluidos</th><td>2</td><td>4</td><td>6</td><td>12</td></tr>
+              <tr><th scope="row">Libros electrónicos</th><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td><td class="si">Sí</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="seccion claro" aria-labelledby="t-clientes">
+    <div class="contenedor">
+      <h2 id="t-clientes">Más de 100 empresas llevan su contabilidad con JJMM</h2>
+      <ul class="logos" aria-label="Algunos de nuestros clientes">
+        <li><img src="../public/web/images/client-logo1.png" alt="Cadex" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo2.png" alt="" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo3.png" alt="Insutec" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo4.png" alt="Interfreeze" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo5.png" alt="Líneas Perú Travel" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo6.png" alt="" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo7.png" alt="Lineaz Tour Operador" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo8.png" alt="Empresa Pesquera Yabafish S.A.C." loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo9.png" alt="Faser Rent a Car" loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo10.png" alt="Samari S.A.C." loading="lazy"></li>
+        <li><img src="../public/web/images/client-logo11.png" alt="STI Gold" loading="lazy"></li>
+      </ul>
+      <ul class="hechos">
+        <li>Más de 100 requerimientos de SUNAT atendidos</li>
+        <li>Más de 10 años de experiencia</li>
+        <li>Más de 20 empresas constituidas</li>
+      </ul>
+      <p class="valores">Trabajamos con seis valores: excelencia, compromiso, innovación, confidencialidad, equidad y trabajo en equipo.</p>
+    </div>
+  </section>
+
+  <section class="seccion pared claro" id="sedes" aria-labelledby="t-sedes">
+    <div class="contenedor">
+      <h2 id="t-sedes">Dos sedes en Lima</h2>
+      <div class="sedes">
+        <article class="sede panel">
+          <h3>San Martín de Porres</h3>
+          <address>Jr. Iquitos 593<br>San Martín de Porres, Lima</address>
+          <a class="boton boton-linea" href="https://www.google.com/maps/search/?api=1&query=Jr.+Iquitos+593%2C+San+Mart%C3%ADn+de+Porres%2C+Lima" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-pin"/></svg>Cómo llegar</a>
+        </article>
+        <article class="sede panel">
+          <h3>San Isidro</h3>
+          <address>Calle Gorriones 151<br>San Isidro, Lima</address>
+          <a class="boton boton-linea" href="https://www.google.com/maps/search/?api=1&query=Calle+Gorriones+151%2C+San+Isidro%2C+Lima" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-pin"/></svg>Cómo llegar</a>
+        </article>
+      </div>
+      <div class="contacto-fila">
+        <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp 951 965 242</a>
+        <a class="boton boton-linea" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>Llamar 952 249 102</a>
+        <a class="boton boton-linea" href="mailto:contabilidad@jjmm.com.pe"><svg class="icono" aria-hidden="true"><use href="#i-correo"/></svg>Correo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p class="pie-lema">Cada empresa guiada por nuestro sistema, llega a ser líder.</p>
+    <nav class="pie-enlaces" aria-label="Pie de página">
+      <a href="/guia">Guía de clientes</a>
+      <a href="/blog">Blog</a>
+      <a href="https://sigefact.pse.pe/" rel="noopener">Facturación electrónica SIGEFact</a>
+      <a href="mailto:contabilidad@jjmm.com.pe">contabilidad@jjmm.com.pe</a>
+    </nav>
+    <p class="pie-legal">© 2026 Estudio Contable JJMM S.A.C. · Grupo JJMM</p>
+  </div>
+</footer>
+
+<div class="barra" role="group" aria-label="Contacto rápido">
+  <a href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="icono" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a>
+  <a href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>Llamar</a>
+</div>
+
+<script>
+(function () {
+  var boton = document.querySelector('.menu-boton');
+  var nav = document.getElementById('navegacion');
+  boton.addEventListener('click', function () {
+    var abierta = nav.classList.toggle('abierta');
+    boton.setAttribute('aria-expanded', String(abierta));
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { nav.classList.remove('abierta'); boton.setAttribute('aria-expanded', 'false'); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('abierta')) {
+      nav.classList.remove('abierta'); boton.setAttribute('aria-expanded', 'false'); boton.focus();
+    }
+  });
+
+  // Fechas de ejemplo: se reemplazan por el cronograma oficial de SUNAT.
+  var fechas = { '0': 'Lunes 14 de diciembre', '1': 'Martes 15 de diciembre', '2': 'Miércoles 16 de diciembre', '4': 'Jueves 17 de diciembre', '6': 'Viernes 18 de diciembre', '8': 'Lunes 21 de diciembre', 'b': 'Martes 22 de diciembre' };
+  var dia = document.getElementById('fecha-dia');
+  document.querySelectorAll('input[name="digito"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      dia.textContent = fechas[radio.value];
+      dia.classList.remove('barrido');
+      void dia.offsetWidth;
+      dia.classList.add('barrido');
+    });
+  });
+})();
+</script>
+</body>
+</html>

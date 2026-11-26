@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JJMM | Estudio Contable | Asesoría contable y tributaria en Lima</title>
+<meta name="description" content="Estudio Contable JJMM S.A.C.: outsourcing contable para MYPE en Lima con el sistema de gestión empresarial SIGE Mype. Escríbenos por WhatsApp.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/hero-plan.webp" as="image">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+@font-face{font-family:"Oswald";font-weight:200 700;font-display:swap;src:url("fonts/oswald-latin.woff2") format("woff2")}
+@font-face{font-family:"Open Sans";font-weight:300 800;font-display:swap;src:url("fonts/open-sans-latin.woff2") format("woff2")}
+
+:root{
+  --azul:#1d629c;
+  --azul-hondo:#154771;
+  --azul-noche:#0f3354;
+  --cielo:#eaf1f8;
+  --amarillo:#feee00;
+  --amarillo-hondo:#e6d600;
+  --oro:#c89628;
+  --gris:#f4f6f9;
+  --linea:#dbe3ec;
+  --blanco:#fff;
+  --tinta:#1f2d3d;
+  --tinta-suave:#4b5b6d;
+  --sobre-azul:#dbe8f5;
+  --titulo:"Oswald","Arial Narrow",sans-serif;
+  --texto:"Open Sans",system-ui,sans-serif;
+  --ancho:75rem;
+  --borde:clamp(1rem,4vw,2.5rem);
+  --radio:.6rem;
+  --salida:cubic-bezier(.16,1,.3,1);
+  --duracion:7s;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--texto);font-size:1.0625rem;line-height:1.65;color:var(--tinta);background:var(--blanco)}
+body.menu-abierto{overflow:hidden}
+::selection{background:var(--amarillo);color:var(--azul-noche)}
+img,svg{max-width:100%;display:block}
+a{color:var(--azul);text-underline-offset:.2em}
+:focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:4px}
+.oscuro :focus-visible{outline-color:var(--amarillo)}
+h1,h2,h3{font-family:var(--titulo);font-weight:600;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:.01em}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+button{font:inherit}
+.icono{width:1.25em;height:1.25em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.marca-icono{width:1.15em;height:1.15em;flex:none;fill:currentColor}
+.contenedor{max-width:var(--ancho);margin-inline:auto;padding-inline:var(--borde)}
+.oculto{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.saltar{position:absolute;left:1rem;top:-4rem;z-index:90;background:var(--amarillo);color:var(--azul-noche);padding:.75rem 1rem;font-weight:700}
+.saltar:focus{top:1rem}
+.seccion{padding-block:clamp(3.5rem,8vw,6rem)}
+.encabezado{display:grid;gap:.75rem;max-width:46rem}
+.encabezado h2{font-size:clamp(2rem,5vw,3rem);color:var(--azul-hondo);text-transform:uppercase;letter-spacing:.02em}
+.encabezado h2 b{color:var(--azul);font-weight:600}
+.encabezado p{color:var(--tinta-suave)}
+.encabezado.centro{margin-inline:auto;text-align:center}
+.linea-titulo{display:block;width:3.5rem;height:4px;border-radius:2px;background:var(--amarillo)}
+.centro .linea-titulo{margin-inline:auto}
+
+/* Aparición al hacer scroll: el contenido es visible sin JavaScript */
+.js .revelar{opacity:0;transform:translateY(28px);transition:opacity .8s var(--salida),transform .8s var(--salida);transition-delay:var(--retraso,0s)}
+.js .revelar.visible{opacity:1;transform:none}
+
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:3rem;padding:.7rem 1.4rem;border-radius:var(--radio);border:2px solid transparent;font-family:var(--titulo);font-weight:600;font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background-color .25s var(--salida),color .25s var(--salida),transform .25s var(--salida),box-shadow .25s var(--salida)}
+.boton:hover{transform:translateY(-2px)}
+.boton-contacto{background:var(--amarillo);color:var(--azul-noche);box-shadow:0 4px 10px rgb(0 0 0 / .16)}
+.boton-contacto:hover{background:var(--amarillo-hondo)}
+.boton-linea{border-color:rgb(255 255 255 / .85);color:var(--blanco);background:rgb(15 51 84 / .25)}
+.boton-linea:hover{background:var(--blanco);color:var(--azul-hondo);border-color:var(--blanco)}
+.boton-azul{background:var(--azul);color:var(--blanco)}
+.boton-azul:hover{background:var(--azul-hondo)}
+.enlace-flecha{display:inline-flex;align-items:center;gap:.4rem;font:600 1rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--amarillo)}
+.enlace-flecha .icono{transition:transform .25s var(--salida)}
+.enlace-flecha:hover .icono{transform:translateX(4px)}
+
+/* Barra superior y cabecera */
+.barra-superior{background:var(--azul-noche);color:var(--sobre-azul);font-size:.9rem}
+.barra-superior .contenedor{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:2.6rem}
+.redes{display:flex;gap:.15rem}
+.redes a{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;color:var(--sobre-azul);transition:background-color .2s,color .2s}
+.redes a:hover{background:rgb(255 255 255 / .12);color:var(--blanco)}
+.contacto-rapido{display:flex;gap:1.25rem}
+.contacto-rapido a{display:inline-flex;align-items:center;gap:.45rem;min-height:2.4rem;color:var(--blanco);text-decoration:none;font-variant-numeric:tabular-nums}
+.contacto-rapido a:hover{color:var(--amarillo)}
+.solo-amplio{display:none !important}
+.cabecera{position:sticky;top:0;z-index:60;background:var(--blanco);border-bottom:1px solid var(--linea);transition:box-shadow .3s var(--salida)}
+.cabecera.compacta{box-shadow:0 4px 20px rgb(15 51 84 / .12)}
+.cabecera .contenedor{display:flex;align-items:center;gap:1.25rem;min-height:5.25rem;transition:min-height .3s var(--salida)}
+.cabecera.compacta .contenedor{min-height:4.25rem}
+.marca{margin-right:auto}
+.marca img{height:3.8rem;width:auto;transition:height .3s var(--salida)}
+.cabecera.compacta .marca img{height:3.1rem}
+.sello-cabecera{display:none;height:3.4rem;width:auto}
+.menu-boton{display:grid;place-items:center;width:3rem;height:3rem;border-radius:var(--radio);background:var(--azul);border:0;color:var(--blanco);cursor:pointer}
+.navegacion a{text-decoration:none}
+.panel-menu{position:fixed;inset:0;z-index:80;visibility:hidden;pointer-events:none}
+.panel-menu.abierto{visibility:visible;pointer-events:auto}
+.panel-fondo{position:absolute;inset:0;background:rgb(10 25 45 / .55);opacity:0;transition:opacity .35s var(--salida)}
+.panel-menu.abierto .panel-fondo{opacity:1}
+.panel-cuerpo{position:absolute;inset:0 0 0 auto;width:min(22rem,86vw);background:var(--azul-hondo);color:var(--blanco);padding:1.25rem 1.5rem 2rem;transform:translateX(100%);transition:transform .4s var(--salida);display:flex;flex-direction:column;overflow-y:auto}
+.panel-menu.abierto .panel-cuerpo{transform:none}
+.panel-cerrar{align-self:flex-end;display:grid;place-items:center;width:3rem;height:3rem;border-radius:var(--radio);border:0;background:rgb(255 255 255 / .1);color:var(--blanco);cursor:pointer}
+.panel-cuerpo nav{margin-top:1rem;display:grid}
+.panel-cuerpo nav a{display:flex;align-items:center;justify-content:space-between;min-height:3.25rem;color:var(--blanco);font:500 1.25rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid rgb(255 255 255 / .14)}
+.panel-cuerpo nav a[aria-current="true"]{color:var(--amarillo)}
+.panel-cuerpo nav img{height:1.7rem;width:auto;border-radius:.2rem}
+.panel-cuerpo .boton{margin-top:1.75rem}
+
+/* Hero: slider a todo el ancho con las fotos del estudio */
+.hero{position:relative;height:clamp(34rem,82svh,40rem);overflow:hidden;background:var(--azul-noche);color:var(--blanco);touch-action:pan-y}
+.hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1s var(--salida),visibility 0s linear 1s}
+.hero-slide.actual{opacity:1;visibility:visible;transition:opacity 1s var(--salida)}
+.hero-slide > img,.hero-slide > picture > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--escritorio-x,50%) 35%;transform:scale(1.04);transform-origin:center}
+.hero-slide.actual > img{animation:acercar calc(var(--duracion) + 1.5s) linear both}
+@keyframes acercar{from{transform:scale(1.04)}to{transform:scale(1.14)}}
+.hero-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgb(10 30 55 / .92) 0%,rgb(10 30 55 / .55) 55%,rgb(10 30 55 / .25) 100%)}
+/* Portada que ya trae su propio texto: se muestra completa sobre una versión desenfocada de sí misma */
+.hero-slide.completa .fondo-desenfocado{inset:-2rem;width:calc(100% + 4rem);height:calc(100% + 4rem);filter:blur(22px) brightness(.55) saturate(1.2);animation:none;transform:none}
+.hero-slide.completa .imagen-completa{object-fit:contain;object-position:50% 42%;transform:none}
+.hero-slide.completa.actual .imagen-completa{animation:none}
+.hero-slide.completa::after{background:linear-gradient(0deg,rgb(10 30 55 / .7) 0%,rgb(10 30 55 / 0) 30%)}
+.hero-sello{width:6.5rem;height:6.5rem;margin-bottom:1rem;background:var(--blanco);border-radius:50%;padding:.3rem;box-shadow:0 8px 20px rgb(0 0 0 / .3)}
+.hero-texto{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:6.5rem}
+.hero-texto > *{max-width:36rem}
+.hero-slide.actual .hero-texto > *{animation:subir .9s var(--salida) both}
+.hero-slide.actual .hero-texto > :nth-child(2){animation-delay:.12s}
+.hero-slide.actual .hero-texto > :nth-child(3){animation-delay:.24s}
+.hero-slide.actual .hero-texto > :nth-child(4){animation-delay:.36s}
+@keyframes subir{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero h1,.hero h2{font-size:clamp(2.2rem,7vw,3.9rem);text-shadow:0 2px 16px rgb(0 0 0 / .3)}
+.hero h1 b,.hero h2 b{color:var(--amarillo);font-weight:600}
+.hero-sub{margin-top:.9rem;font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--sobre-azul)}
+.hero-lista{margin-top:1rem;display:grid;gap:.45rem}
+.hero-lista li{display:flex;align-items:center;gap:.6rem;font-weight:600}
+.hero-lista .icono{color:var(--amarillo)}
+.hero-acciones{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.75rem}
+.hero-controles{position:absolute;z-index:2;inset:auto 0 1.5rem 0}
+.hero-controles .contenedor{display:flex;align-items:center;gap:.6rem}
+.progresos{display:flex;gap:.5rem;flex:1;max-width:22rem}
+.progresos button{flex:1;height:2.75rem;border:0;background:none;cursor:pointer;padding:0;display:flex;align-items:center}
+.progresos span{display:block;width:100%;height:4px;border-radius:2px;background:rgb(255 255 255 / .3);overflow:hidden}
+.progresos i{display:block;height:100%;width:0;background:var(--amarillo)}
+.progresos button.hecho i{width:100%}
+.progresos button[aria-current="true"] i{animation:llenar var(--duracion) linear forwards}
+.hero.pausado .progresos button[aria-current="true"] i{animation-play-state:paused}
+.sin-auto .progresos button[aria-current="true"] i{animation:none;width:100%}
+@keyframes llenar{from{width:0}to{width:100%}}
+.hero-boton{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid rgb(255 255 255 / .45);background:rgb(15 51 84 / .35);color:var(--blanco);cursor:pointer;backdrop-filter:blur(4px);transition:background-color .2s}
+.hero-boton:hover{background:var(--blanco);color:var(--azul-hondo)}
+
+
+/* Quiénes somos: banda azul con corte diagonal y cifras en anillo */
+.nosotros{background:var(--azul);color:var(--blanco);clip-path:polygon(0 2.5rem,100% 0,100% calc(100% - 2.5rem),0 100%);padding-block:clamp(5rem,10vw,7rem)}
+.nosotros-rejilla{display:grid;gap:2.5rem;align-items:center}
+.nosotros h2{font-size:clamp(2rem,5vw,2.9rem);text-transform:uppercase;letter-spacing:.02em}
+.nosotros .linea-titulo{margin-top:.75rem}
+.nosotros p{margin-top:1rem;color:var(--sobre-azul)}
+.nosotros strong{color:var(--blanco)}
+.anillos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+.anillo{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.25rem;line-height:1.25}
+.anillo svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.anillo circle{fill:none;stroke-width:5}
+.anillo .pista-anillo{stroke:rgb(255 255 255 / .18)}
+.anillo .avance-anillo{stroke:var(--amarillo);stroke-linecap:round;stroke-dasharray:289;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s var(--salida)}
+.js .anillo .avance-anillo{stroke-dashoffset:289}
+.js .anillo.visible .avance-anillo{stroke-dashoffset:0}
+.anillo small{font-size:.8rem;color:var(--sobre-azul)}
+.anillo b{font:600 clamp(2rem,6vw,2.6rem)/1.05 var(--titulo);font-variant-numeric:tabular-nums}
+.anillo span{font-size:.8rem;line-height:1.3;max-width:8.5rem;color:var(--sobre-azul)}
+.anillo b span{font:inherit;color:inherit;max-width:none}
+
+/* Servicios: rueda clicable y acordeón */
+.servicios-rejilla{margin-top:2.75rem;display:grid;gap:2.5rem;align-items:start}
+.rueda{position:relative;max-width:27rem;width:100%;margin-inline:auto}
+.rueda img{width:100%;height:auto}
+.rueda svg{position:absolute;inset:0;width:100%;height:100%}
+.rueda polygon{fill:rgb(255 255 255 / 0);stroke:transparent;stroke-width:4;cursor:pointer;transition:fill .25s,stroke .25s}
+.rueda polygon:hover{fill:rgb(255 255 255 / .22)}
+.rueda polygon.activo{fill:rgb(254 238 0 / .28);stroke:var(--amarillo)}
+.rueda-ayuda{margin-top:.75rem;text-align:center;font-size:.92rem;color:var(--tinta-suave)}
+.acordeon{border-top:1px solid var(--linea)}
+.acordeon-item{border-bottom:1px solid var(--linea)}
+.acordeon-boton{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;padding:1rem .25rem;border:0;background:none;text-align:left;cursor:pointer;color:var(--azul-hondo)}
+.acordeon-boton .numero{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:var(--radio);background:var(--cielo);color:var(--azul);font:600 1.05rem var(--titulo);transition:background-color .25s,color .25s}
+.acordeon-boton .nombre{font:600 1.3rem var(--titulo);letter-spacing:.02em}
+.acordeon-boton .icono{transition:transform .35s var(--salida);color:var(--azul)}
+.acordeon-boton:hover .numero{background:var(--azul);color:var(--blanco)}
+.acordeon-boton[aria-expanded="true"] .numero{background:var(--azul);color:var(--amarillo)}
+.acordeon-boton[aria-expanded="true"] .icono{transform:rotate(45deg)}
+.acordeon-cuerpo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--salida)}
+.acordeon-cuerpo > div{overflow:hidden}
+.acordeon-item.abierto .acordeon-cuerpo{grid-template-rows:1fr}
+.acordeon-cuerpo p{color:var(--tinta-suave);padding-left:3.75rem}
+.acordeon-cuerpo ul{margin-top:.75rem;padding-left:3.75rem;display:grid;gap:.35rem}
+.acordeon-cuerpo li{display:flex;gap:.55rem;align-items:flex-start}
+.acordeon-cuerpo li .icono{color:var(--azul);margin-top:.25rem;width:1.05rem;height:1.05rem;stroke-width:2.5}
+.acordeon-cuerpo .enlace-servicio{display:inline-flex;align-items:center;gap:.45rem;margin:1rem 0 1.25rem 3.75rem;font:600 .98rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--azul)}
+.acordeon-cuerpo .enlace-servicio:hover{color:var(--azul-hondo)}
+
+/* Planes: tarjetas con lo esencial y la comparación completa a un clic */
+.planes{background:var(--gris)}
+.tarjetas-plan{margin-top:2.75rem;display:grid;gap:1.25rem}
+.plan{position:relative;display:flex;flex-direction:column;background:var(--blanco);border-radius:calc(var(--radio) * 1.6);padding:1.75rem 1.5rem 1.5rem;border:1px solid var(--linea);box-shadow:0 10px 28px rgb(15 51 84 / .06);transition:transform .35s var(--salida),box-shadow .35s var(--salida),border-color .35s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgb(15 51 84 / .14);border-color:var(--azul)}
+.plan h3{font-size:1.6rem;color:var(--azul-hondo)}
+.plan h3 b{color:var(--azul);font-weight:600}
+.plan-ancla{margin-top:.75rem;display:flex;align-items:baseline;gap:.5rem;line-height:1.25;color:var(--tinta-suave);font-size:.95rem}
+.plan-ancla b{font:600 2.6rem/1 var(--titulo);color:var(--azul)}
+.plan ul{margin-top:1.1rem;display:grid;gap:.45rem;flex:1;align-content:start;font-size:.95rem}
+.plan li{display:flex;gap:.5rem;align-items:flex-start;line-height:1.4}
+.plan li .icono{color:var(--azul);margin-top:.15rem;width:1.05rem;height:1.05rem;stroke-width:2.5}
+.plan li.suma{font-weight:700;color:var(--azul-hondo)}
+.plan-precio{margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--linea);font:600 1.1rem var(--titulo);letter-spacing:.03em;color:var(--azul-hondo)}
+.plan-precio span{display:block;font:400 .85rem var(--texto);letter-spacing:0;color:var(--tinta-suave)}
+.plan .boton{margin-top:1rem;width:100%}
+.comparar{margin-top:2rem;text-align:center}
+.comparar-boton{display:inline-flex;align-items:center;gap:.55rem;min-height:3rem;padding:.6rem 1.25rem;border-radius:var(--radio);border:2px solid var(--azul);background:var(--blanco);color:var(--azul-hondo);font:600 1rem var(--titulo);letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background-color .2s,color .2s}
+.comparar-boton:hover{background:var(--azul);color:var(--blanco)}
+.comparar-boton .icono{transition:transform .35s var(--salida)}
+.comparar-boton[aria-expanded="true"] .icono{transform:rotate(180deg)}
+.comparar-cuerpo{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--salida)}
+.comparar-cuerpo.abierto{grid-template-rows:1fr}
+.comparar-cuerpo > div{overflow:hidden}
+.tabla-marco{margin-top:1.5rem;overflow-x:auto;border-radius:calc(var(--radio) * 1.6);background:var(--blanco);border:1px solid var(--linea)}
+.planes-tabla{border-collapse:separate;border-spacing:0;width:100%;min-width:46rem;font-size:.95rem;text-align:left}
+.planes-tabla th,.planes-tabla td{padding:.75rem 1rem;border-bottom:1px solid var(--linea)}
+.planes-tabla thead th{background:var(--azul);color:var(--blanco);font:600 1.15rem var(--titulo);letter-spacing:.03em;text-align:center}
+.planes-tabla thead th:first-child{text-align:left;font-size:.92rem;text-transform:uppercase;background:var(--azul-hondo)}
+.planes-tabla thead th b{color:var(--amarillo);font-weight:600}
+.planes-tabla tbody th{position:sticky;left:0;background:var(--blanco);font-weight:400;min-width:15rem;box-shadow:1px 0 0 var(--linea)}
+.planes-tabla td{text-align:center}
+.planes-tabla tbody tr:hover th,.planes-tabla tbody tr:hover td{background:#f5f9fd}
+.marca-si{color:var(--azul)}
+.marca-no{color:#a3afbd}
+.marca-si .icono,.marca-no .icono{width:1.25rem;height:1.25rem;margin-inline:auto;stroke-width:2.75}
+
+/* ¿Por qué elegirnos? */
+.elegirnos{position:relative;color:var(--blanco);background:var(--azul-noche) url("img/elegirnos.webp") center/cover no-repeat fixed;isolation:isolate}
+.elegirnos::before{content:"";position:absolute;inset:0;background:rgb(15 51 84 / .9);z-index:-1}
+.elegirnos .encabezado h2{color:var(--blanco)}
+.elegirnos .encabezado p{color:var(--sobre-azul)}
+.valores{margin-top:2.75rem;display:grid;gap:0;border-top:1px solid rgb(255 255 255 / .16)}
+.valores li{display:flex;align-items:center;gap:1.1rem;padding:1.25rem .5rem;border-bottom:1px solid rgb(255 255 255 / .16);transition:background-color .3s,padding-left .3s var(--salida)}
+.valores li:hover{background:rgb(255 255 255 / .05);padding-left:1rem}
+.valor-icono{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:var(--radio);border:1.5px solid var(--amarillo);color:var(--amarillo);flex:none;transition:background-color .3s,color .3s}
+.valores li:hover .valor-icono{background:var(--amarillo);color:var(--azul-noche)}
+.valor-icono .icono{width:1.5rem;height:1.5rem;stroke-width:1.8}
+.valores span.nombre{font:500 1.3rem var(--titulo);letter-spacing:.05em;text-transform:uppercase}
+
+/* Clientes: muro de logotipos */
+.logos{margin-top:2.5rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem}
+.logos li{width:calc(50% - .5rem);max-width:11.5rem;height:7rem;display:grid;place-items:center;padding:1rem;border-radius:var(--radio);border:1px solid var(--linea);background:var(--blanco);transition:transform .3s var(--salida),box-shadow .3s var(--salida),border-color .3s}
+.logos li:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgb(15 51 84 / .1);border-color:var(--azul)}
+.logos img{width:100%;height:100%;object-fit:contain;filter:grayscale(1);opacity:.75;transition:filter .3s,opacity .3s}
+.logos li:hover img{filter:none;opacity:1}
+
+/* Contáctanos: una pestaña por sede y formulario a WhatsApp */
+.contacto{background:var(--gris)}
+.contacto-rejilla{margin-top:2.75rem;display:grid;gap:1.5rem;align-items:start}
+.sedes{background:var(--blanco);border-radius:calc(var(--radio) * 1.6);border:1px solid var(--linea);overflow:hidden}
+.sedes-pestanas{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--linea)}
+.sedes-pestanas button{min-height:3.4rem;border:0;background:var(--gris);color:var(--tinta-suave);font:600 1rem var(--titulo);letter-spacing:.04em;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;transition:background-color .2s,color .2s,border-color .2s}
+.sedes-pestanas button[aria-selected="true"]{background:var(--blanco);color:var(--azul-hondo);border-bottom-color:var(--amarillo)}
+.sede{padding:1.5rem}
+.sede[hidden]{display:none}
+.sede address{font-style:normal;line-height:1.7}
+.sede address strong{display:block;font:600 1.25rem var(--titulo);color:var(--azul-hondo);letter-spacing:.02em}
+.sede-acciones{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.6rem}
+.sede-acciones a{display:inline-flex;align-items:center;gap:.45rem;min-height:2.75rem;padding:.45rem .9rem;border-radius:var(--radio);background:var(--cielo);color:var(--azul-hondo);text-decoration:none;font-weight:600;font-size:.95rem;transition:background-color .2s,color .2s}
+.sede-acciones a:hover{background:var(--azul);color:var(--blanco)}
+.sede-acciones a.whatsapp{background:var(--amarillo);color:var(--azul-noche)}
+.mapa{position:relative;margin-top:1.25rem;aspect-ratio:16/10;border-radius:var(--radio);overflow:hidden;background:var(--azul-hondo) url("img/hero-equipo.webp") center/cover;display:grid;place-items:center;text-align:center;color:var(--blanco);isolation:isolate;padding:1.5rem}
+.mapa::before{content:"";position:absolute;inset:0;background:rgb(15 51 84 / .8);z-index:-1}
+.mapa .icono{width:2rem;height:2rem;margin:0 auto .6rem;color:var(--amarillo)}
+.mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.formulario{background:var(--blanco);border-radius:calc(var(--radio) * 1.6);border:1px solid var(--linea);padding:1.75rem}
+.formulario h3{font-size:1.6rem;color:var(--azul-hondo)}
+.formulario > p{margin-top:.4rem;color:var(--tinta-suave);font-size:.95rem}
+.campo{margin-top:1.1rem;display:grid;gap:.4rem}
+.campo label{font-weight:600;font-size:.95rem}
+.campo input,.campo select,.campo textarea{width:100%;min-height:3rem;padding:.7rem .9rem;border:1.5px solid #b9c6d4;border-radius:var(--radio);font:inherit;font-size:1rem;color:var(--tinta);background:var(--blanco);transition:border-color .2s,box-shadow .2s}
+.campo textarea{min-height:7rem;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 4px rgb(29 98 156 / .15)}
+.campo [aria-invalid="true"]{border-color:#b3261e}
+.campo-error{font-size:.9rem;color:#b3261e}
+.campo-error:empty{display:none}
+.formulario .boton{margin-top:1.4rem;width:100%}
+
+/* Pie */
+.pie{background:var(--azul-noche);color:var(--sobre-azul);padding-block:3.5rem 2rem}
+.pie-rejilla{display:grid;gap:2rem;align-items:center}
+.pie h3{font-size:1.3rem;color:var(--blanco);letter-spacing:.03em}
+.pie address{margin-top:.5rem;font-style:normal;line-height:1.8}
+.pie a{color:var(--blanco);text-underline-offset:.2em}
+.pie a:hover{color:var(--amarillo)}
+.pie-logo{justify-self:center;text-align:center}
+.pie-logo img{width:11rem;height:auto;margin-inline:auto}
+.pie-logo p{margin-top:.75rem;font-style:italic;max-width:18rem}
+.pie-legal{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid rgb(255 255 255 / .16);font-size:.9rem;text-align:center}
+
+/* Flotantes */
+.flotante{position:fixed;right:1rem;bottom:1rem;z-index:70;display:flex;align-items:center;justify-content:center;width:3.6rem;height:3.6rem;border-radius:50%;background:#25d366;color:#0b2e17;box-shadow:0 12px 28px rgb(15 51 84 / .3);transition:transform .25s var(--salida)}
+.flotante:hover{transform:scale(1.08)}
+.flotante .marca-icono{width:1.8rem;height:1.8rem}
+.flotante-globo{position:absolute;right:calc(100% + .75rem);white-space:nowrap;padding:.5rem .85rem;border-radius:var(--radio);background:var(--blanco);color:var(--azul-hondo);font-weight:600;font-size:.92rem;box-shadow:0 8px 20px rgb(15 51 84 / .2);opacity:0;transform:translateX(8px);transition:opacity .3s,transform .3s var(--salida);pointer-events:none}
+.flotante:hover .flotante-globo,.flotante:focus-visible .flotante-globo,.flotante.saluda .flotante-globo{opacity:1;transform:none}
+.subir{position:fixed;right:1.3rem;bottom:5.4rem;z-index:70;display:grid;place-items:center;width:3rem;height:3rem;border-radius:var(--radio);border:0;background:var(--azul-hondo);color:var(--blanco);box-shadow:0 8px 20px rgb(15 51 84 / .3);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,transform .3s var(--salida),visibility 0s linear .3s}
+.subir.visible{opacity:1;visibility:visible;transform:none;transition:opacity .3s,transform .3s var(--salida)}
+
+/* Notas del mockup */
+.notas{background:#fff8d6;border-top:3px dashed var(--oro);padding-block:2rem 6rem;font-size:.95rem;color:#4a3d05}
+.notas h2{font-size:1.4rem}
+.notas ul{margin-top:.75rem;display:grid;gap:.4rem;list-style:disc;padding-left:1.25rem;max-width:56rem}
+
+@media (max-width:45.99rem){
+  .hero-slide[data-movil] img{object-position:var(--movil-x,50%) 50%}
+}
+@media (min-width:46rem){
+  .solo-amplio{display:inline-flex !important}
+  .hero-texto{justify-content:center;padding-bottom:3rem}
+  .hero-slide.completa .hero-texto{justify-content:flex-end;padding-bottom:6.5rem}
+  .hero-sello{width:7.5rem;height:7.5rem}
+  .hero-slide::after{background:linear-gradient(90deg,rgb(10 30 55 / .9) 0%,rgb(10 30 55 / .7) 40%,rgb(10 30 55 / .1) 75%)}
+  .hero-slide.derecha::after{background:linear-gradient(270deg,rgb(10 30 55 / .9) 0%,rgb(10 30 55 / .7) 40%,rgb(10 30 55 / .1) 75%)}
+  .hero-slide.derecha .hero-texto{align-items:flex-end;text-align:right}
+  .hero-slide.derecha .hero-lista li{justify-content:flex-end}
+  .hero-slide.derecha .hero-acciones{justify-content:flex-end}
+  .anillos{gap:1.5rem}
+  .valores{grid-template-columns:repeat(2,1fr);column-gap:3rem}
+  .logos li{width:11.5rem}
+  .tarjetas-plan{grid-template-columns:repeat(2,1fr)}
+  .pie-rejilla{grid-template-columns:1fr auto 1fr}
+  .pie-rejilla > div:last-child{text-align:right}
+}
+@media (min-width:70rem){
+  .menu-boton{display:none}
+  .sello-cabecera{display:block}
+  .navegacion{display:flex;align-items:center;gap:1.4rem}
+  .navegacion a{position:relative;display:flex;align-items:center;min-height:2.75rem;color:var(--azul-hondo);font:500 .98rem var(--titulo);letter-spacing:.05em;text-transform:uppercase}
+  .navegacion a::after{content:"";position:absolute;left:0;right:0;bottom:.3rem;height:3px;border-radius:2px;background:var(--amarillo);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--salida)}
+  .navegacion a:hover::after,.navegacion a[aria-current="true"]::after{transform:scaleX(1)}
+  .navegacion img{height:1.6rem;width:auto;border-radius:.2rem}
+  .nosotros-rejilla{grid-template-columns:1.05fr .95fr;gap:4rem}
+  .anillos{grid-template-columns:repeat(2,minmax(0,13rem));justify-content:end}
+  .servicios-rejilla{grid-template-columns:minmax(0,27rem) 1fr;gap:4rem}
+  .rueda-columna{position:sticky;top:7rem}
+  .tarjetas-plan{grid-template-columns:repeat(4,1fr)}
+  .valores{grid-template-columns:repeat(3,1fr)}
+  .contacto-rejilla{grid-template-columns:1fr 1fr}
+}
+@media (max-width:69.99rem){.navegacion{display:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .revelar{opacity:1;transform:none}
+  .js .anillo .avance-anillo{stroke-dashoffset:0}
+  .elegirnos{background-attachment:scroll}
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<svg width="0" height="0" class="oculto" aria-hidden="true" focusable="false">
+  <!-- Íconos de interfaz: Lucide (licencia ISC). Logotipos de marcas: Simple Icons (CC0). -->
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-correo" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-ruta" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="i-der" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  <symbol id="i-pausa" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="i-abajo" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-arriba" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7M12 19V5"/></symbol>
+  <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-check-circulo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-pulgar" viewBox="0 0 24 24"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></symbol>
+  <symbol id="i-trofeo" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="i-foco" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+  <symbol id="i-candado" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-balanza" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+  <symbol id="i-equipo" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="m-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+  <symbol id="m-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+  <symbol id="m-x" viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></symbol>
+  <symbol id="m-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+</svg>
+
+<div class="barra-superior">
+  <div class="contenedor">
+    <ul class="redes" aria-label="Redes sociales">
+      <li><a href="https://www.facebook.com/Grupo-Contable-JJMM-1375492852750200/" rel="noopener"><svg class="marca-icono" aria-hidden="true"><use href="#m-facebook"/></svg><span class="oculto">Facebook</span></a></li>
+      <li><a href="https://twitter.com/CONTABLEJJMMSAC" rel="noopener"><svg class="marca-icono" aria-hidden="true"><use href="#m-x"/></svg><span class="oculto">X (Twitter)</span></a></li>
+      <li><a href="https://www.youtube.com/channel/UC_3EI0DpkhlLKGBGfvY2oXg" rel="noopener"><svg class="marca-icono" aria-hidden="true"><use href="#m-youtube"/></svg><span class="oculto">YouTube</span></a></li>
+    </ul>
+    <div class="contacto-rapido">
+      <a class="solo-amplio" href="mailto:contabilidad@jjmm.com.pe"><svg class="icono" aria-hidden="true"><use href="#i-correo"/></svg>contabilidad@jjmm.com.pe</a>
+      <a href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>951 965 242</a>
+      <a class="solo-amplio" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>952 249 102</a>
+    </div>
+  </div>
+</div>
+
+<header class="cabecera" id="cabecera">
+  <div class="contenedor">
+    <a class="marca" href="/"><img src="img/logo-jjmm.png" alt="JJMM, Mariñas &amp; Asociados, Estudio Contable: inicio" width="223" height="125"></a>
+    <nav class="navegacion" aria-label="Principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="/blog">Blog</a>
+      <a href="#contacto">Contacto</a>
+      <a href="/guia">Guía de clientes</a>
+      <a href="https://sigefact.pse.pe/" rel="noopener"><img src="../public/web/images/sigefact.png" alt="SIGEFact, facturación electrónica"></a>
+    </nav>
+    <img class="sello-cabecera" src="../public/web/images/logo-grupo-lenin.png" alt="Sello SIGE Mype del Grupo JJMM" width="120" height="86">
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="panel-menu"><svg class="icono" aria-hidden="true"><use href="#i-menu"/></svg><span class="oculto">Abrir menú</span></button>
+  </div>
+</header>
+
+<div class="panel-menu" id="panel-menu" aria-hidden="true">
+  <div class="panel-fondo" data-cerrar></div>
+  <div class="panel-cuerpo" role="dialog" aria-modal="true" aria-label="Menú">
+    <button class="panel-cerrar" type="button" data-cerrar><svg class="icono" aria-hidden="true"><use href="#i-cerrar"/></svg><span class="oculto">Cerrar menú</span></button>
+    <nav aria-label="Principal en el celular">
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes-somos">Quiénes somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#planes">Planes</a>
+      <a href="/blog">Blog</a>
+      <a href="#contacto">Contacto</a>
+      <a href="/guia">Guía de clientes</a>
+      <a href="https://sigefact.pse.pe/" rel="noopener">Facturación<img src="../public/web/images/sigefact.png" alt="SIGEFact"></a>
+    </nav>
+    <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Escríbenos por WhatsApp</a>
+  </div>
+</div>
+
+<main id="contenido">
+
+  <section class="hero oscuro" id="inicio" aria-roledescription="carrusel" aria-label="Portadas del Estudio Contable JJMM">
+    <div class="hero-slide actual derecha" data-movil style="--movil-x:22%" role="group" aria-roledescription="diapositiva" aria-label="1 de 4">
+      <img src="img/hero-plan.webp" width="1920" height="968" alt="" fetchpriority="high">
+      <div class="contenedor hero-texto">
+        <h1>Contamos con <b>Sistema de Calidad</b> Genuino</h1>
+        <p class="hero-sub">Cada empresa guiada por nuestro sistema, llega a ser líder.</p>
+        <div class="hero-acciones">
+          <a class="boton boton-contacto" id="accion" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20empresa."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Asesoría gratuita</a>
+          <a class="boton boton-linea" href="#planes">Ver nuestros planes</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide completa" role="group" aria-roledescription="diapositiva" aria-label="2 de 4" aria-hidden="true">
+      <img class="fondo-desenfocado" src="img/banner-sige-mype.webp" width="1600" height="417" alt="" loading="lazy">
+      <picture>
+        <source media="(max-width: 45.99rem)" srcset="img/hero-sige-movil.webp" width="800" height="482">
+        <img class="imagen-completa" src="img/banner-sige-mype.webp" width="1600" height="417" loading="lazy" alt="Contamos con Sistema de Gestión Empresarial SIGE Mype. Somos más que un estudio contable. Asesoría gratuita.">
+      </picture>
+      <div class="contenedor hero-texto">
+        <div class="hero-acciones">
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20una%20asesor%C3%ADa%20gratuita%20para%20mi%20empresa."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Pide tu asesoría gratuita</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide derecha" data-movil style="--movil-x:38%" role="group" aria-roledescription="diapositiva" aria-label="3 de 4" aria-hidden="true">
+      <img src="img/hero-taza.webp" width="1920" height="500" alt="" loading="lazy">
+      <div class="contenedor hero-texto">
+        <img class="hero-sello" src="../public/web/images/sige-312.png" width="312" height="312" alt="Sello SIGE Mype del Grupo JJMM" loading="lazy">
+        <h2>Nuestro <b>plan de trabajo</b></h2>
+        <ul class="hero-lista">
+          <li><svg class="icono" aria-hidden="true"><use href="#i-check-circulo"/></svg>Diagnóstico de tu empresa</li>
+          <li><svg class="icono" aria-hidden="true"><use href="#i-check-circulo"/></svg>Diagrama de flujo integral</li>
+          <li><svg class="icono" aria-hidden="true"><use href="#i-check-circulo"/></svg>Asesoramiento en tecnología</li>
+          <li><svg class="icono" aria-hidden="true"><use href="#i-check-circulo"/></svg>Outsourcing empresarial</li>
+        </ul>
+        <div class="hero-acciones">
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20un%20diagn%C3%B3stico%20de%20mi%20empresa."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Pide tu diagnóstico</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide" data-movil style="--movil-x:56%" role="group" aria-roledescription="diapositiva" aria-label="4 de 4" aria-hidden="true">
+      <img src="img/hero-equipo.webp" width="1920" height="500" alt="" loading="lazy">
+      <div class="contenedor hero-texto">
+        <h2>Somos más que un <b>estudio contable</b></h2>
+        <p class="hero-sub">Contamos con el sistema de gestión empresarial SIGE Mype: nueve áreas de servicio alrededor de tu contabilidad.</p>
+        <div class="hero-acciones">
+          <a class="boton boton-contacto" href="#servicios">Conoce SIGE Mype</a>
+          <a class="boton boton-linea" href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>952 249 102</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-controles">
+      <div class="contenedor">
+        <div class="progresos">
+          <button type="button" aria-current="true"><span><i></i></span><b class="oculto">Portada 1</b></button>
+          <button type="button"><span><i></i></span><b class="oculto">Portada 2</b></button>
+          <button type="button"><span><i></i></span><b class="oculto">Portada 3</b></button>
+          <button type="button"><span><i></i></span><b class="oculto">Portada 4</b></button>
+        </div>
+        <button class="hero-boton" type="button" data-paso="-1"><svg class="icono" aria-hidden="true"><use href="#i-izq"/></svg><span class="oculto">Portada anterior</span></button>
+        <button class="hero-boton" type="button" data-paso="1"><svg class="icono" aria-hidden="true"><use href="#i-der"/></svg><span class="oculto">Portada siguiente</span></button>
+        <button class="hero-boton hero-pausa" type="button" aria-pressed="false"><svg class="icono" aria-hidden="true"><use href="#i-pausa"/></svg><span class="oculto">Pausar las portadas</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="nosotros oscuro" id="quienes-somos" aria-labelledby="t-nosotros">
+    <div class="contenedor nosotros-rejilla">
+      <div class="revelar">
+        <h2 id="t-nosotros">Quiénes somos</h2>
+        <span class="linea-titulo"></span>
+        <p>Somos el <strong>Estudio Contable JJMM S.A.C.</strong>, empresa que busca la satisfacción de sus clientes y la excelencia en la prestación de servicios.</p>
+        <p>Asumimos como máxima prioridad desarrollar en todos los niveles de la organización un <strong>Sistema de Gestión de Calidad Genuino</strong> que se mantenga en el tiempo, con un alto índice de responsabilidad, calidad y profesionalismo, promoviendo la mejora continua en nuestros servicios. Con base en esa retroalimentación creamos el sistema de gestión empresarial <strong>SIGE Mype</strong>.</p>
+      </div>
+      <ul class="anillos">
+        <li class="anillo revelar"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="pista-anillo" cx="50" cy="50" r="46"/><circle class="avance-anillo" cx="50" cy="50" r="46"/></svg><small>Más de</small><b data-contar="100">100</b><span>clientes de outsourcing de una amplia variedad de sectores</span></li>
+        <li class="anillo revelar" style="--retraso:.1s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="pista-anillo" cx="50" cy="50" r="46"/><circle class="avance-anillo" cx="50" cy="50" r="46"/></svg><small>Más de</small><b data-contar="100">100</b><span>requerimientos de SUNAT atendidos satisfactoriamente</span></li>
+        <li class="anillo revelar" style="--retraso:.2s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="pista-anillo" cx="50" cy="50" r="46"/><circle class="avance-anillo" cx="50" cy="50" r="46"/></svg><small>Más de</small><b><span data-contar="10">10</span> años</b><span>de experiencia profesional brindando soluciones integrales</span></li>
+        <li class="anillo revelar" style="--retraso:.3s"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="pista-anillo" cx="50" cy="50" r="46"/><circle class="avance-anillo" cx="50" cy="50" r="46"/></svg><small>Más de</small><b data-contar="20">20</b><span>empresas constituidas</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion" id="servicios" aria-labelledby="t-servicios">
+    <div class="contenedor">
+      <div class="encabezado centro revelar">
+        <h2 id="t-servicios">Nuestros servicios <b>empresariales integrales</b></h2>
+        <span class="linea-titulo"></span>
+        <p>Nueve áreas que trabajan alrededor de tu contabilidad con el sistema SIGE Mype.</p>
+      </div>
+      <div class="servicios-rejilla">
+        <div class="rueda-columna revelar">
+          <div class="rueda">
+            <img src="img/rueda-sige-mype.webp" width="500" height="550" loading="lazy" alt="Rueda SIGE Mype: la contabilidad al centro, rodeada por nueve áreas de servicio en un ciclo de mejora continua.">
+            <svg viewBox="0 0 500 550" aria-hidden="true" focusable="false">
+              <polygon data-area="1" points="62.7,169.0 170.6,78.4 215.3,192.0 166.7,232.8"/>
+              <polygon data-area="2" points="181.6,74.5 322.4,74.5 283.7,190.2 220.3,190.2"/>
+              <polygon data-area="3" points="333.4,78.4 441.3,169.0 337.3,232.8 288.7,192.0"/>
+              <polygon data-area="4" points="447.1,179.1 471.6,317.8 350.9,299.8 339.9,237.3"/>
+              <polygon data-area="5" points="469.5,329.3 399.1,451.3 318.3,359.9 350.0,304.9"/>
+              <polygon data-area="6" points="390.2,458.7 257.8,506.9 254.6,385.0 314.3,363.3"/>
+              <polygon data-area="7" points="246.2,506.9 113.8,458.7 189.7,363.3 249.4,385.0"/>
+              <polygon data-area="8" points="104.9,451.3 34.5,329.3 154.0,304.9 185.7,359.9"/>
+              <polygon data-area="9" points="32.4,317.8 56.9,179.1 164.1,237.3 153.1,299.8"/>
+            </svg>
+          </div>
+          <p class="rueda-ayuda">Toca un área de la rueda o ábrela en la lista.</p>
+        </div>
+        <div class="acordeon revelar" style="--retraso:.1s" id="acordeon"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion planes" id="planes" aria-labelledby="t-planes">
+    <div class="contenedor">
+      <div class="encabezado centro revelar">
+        <h2 id="t-planes">Nuestros <b>planes</b></h2>
+        <span class="linea-titulo"></span>
+        <p>Outsourcing contable para pymes. Elige según los trabajadores que tienes en planilla.</p>
+      </div>
+      <div class="tarjetas-plan">
+        <article class="plan revelar">
+          <h3>Emprende</h3>
+          <p class="plan-ancla"><b>2</b>trabajadores en planilla, como máximo</p>
+          <ul>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Registro contable mensual de compras y ventas</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>IGV, Renta y PDT 621 cada mes</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Planilla electrónica mensual</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Libro Diario Simplificado y libros electrónicos</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>DAOT y asesoría según tu régimen</li>
+          </ul>
+          <p class="plan-precio">Consultar<span>Precio según tus ventas y comprobantes</span></p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20Emprende.">Solicitar<span class="oculto"> el plan Emprende</span></a>
+        </article>
+        <article class="plan revelar" style="--retraso:.08s">
+          <h3>SIGE<b>Mype</b> I</h3>
+          <p class="plan-ancla"><b>4</b>trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma"><svg class="icono" aria-hidden="true"><use href="#i-mas"/></svg>Todo lo de Emprende, más:</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Libro Diario y Libro Mayor</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Libro Bancos</li>
+          </ul>
+          <p class="plan-precio">Consultar<span>Precio según tus ventas y comprobantes</span></p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20I.">Solicitar<span class="oculto"> el plan SIGEMype I</span></a>
+        </article>
+        <article class="plan revelar" style="--retraso:.16s">
+          <h3>SIGE<b>Mype</b> II</h3>
+          <p class="plan-ancla"><b>6</b>trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma"><svg class="icono" aria-hidden="true"><use href="#i-mas"/></svg>Todo lo de SIGEMype I, más:</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Otros libros obligatorios</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Una visita al mes para recoger y enviar tu documentación</li>
+          </ul>
+          <p class="plan-precio">Consultar<span>Precio según tus ventas y comprobantes</span></p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20II.">Solicitar<span class="oculto"> el plan SIGEMype II</span></a>
+        </article>
+        <article class="plan revelar" style="--retraso:.24s">
+          <h3>SIGE<b>Mype</b> Business</h3>
+          <p class="plan-ancla"><b>12</b>trabajadores en planilla, como máximo</p>
+          <ul>
+            <li class="suma"><svg class="icono" aria-hidden="true"><use href="#i-mas"/></svg>Todo lo de SIGEMype II, más:</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Manejo de Kardex</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Asesoría tributaria y financiera en tu empresa</li>
+            <li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>Impuesto a la Renta anual</li>
+          </ul>
+          <p class="plan-precio">Consultar<span>Precio según tus ventas y comprobantes</span></p>
+          <a class="boton boton-contacto" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20plan%20SIGEMype%20Business.">Solicitar<span class="oculto"> el plan SIGEMype Business</span></a>
+        </article>
+      </div>
+      <div class="comparar">
+        <button class="comparar-boton" type="button" aria-expanded="false" aria-controls="comparacion">Ver la comparación completa<svg class="icono" aria-hidden="true"><use href="#i-abajo"/></svg></button>
+      </div>
+      <div class="comparar-cuerpo" id="comparacion">
+        <div>
+          <div class="tabla-marco" tabindex="0" role="region" aria-label="Comparación completa de planes">
+            <table class="planes-tabla">
+              <thead><tr><th scope="col">Qué incluye</th><th scope="col">Emprende</th><th scope="col">SIGE<b>Mype</b> I</th><th scope="col">SIGE<b>Mype</b> II</th><th scope="col">SIGE<b>Mype</b> Business</th></tr></thead>
+              <tbody id="filas-planes"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion elegirnos oscuro" aria-labelledby="t-elegirnos">
+    <div class="contenedor">
+      <div class="encabezado revelar">
+        <h2 id="t-elegirnos">¿Por qué elegirnos?</h2>
+        <span class="linea-titulo"></span>
+        <p>Aquí tienes algunas de las razones para escoger nuestros servicios.</p>
+      </div>
+      <ul class="valores">
+        <li class="revelar"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-pulgar"/></svg></span><span class="nombre">Excelencia</span></li>
+        <li class="revelar" style="--retraso:.06s"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-trofeo"/></svg></span><span class="nombre">Compromiso</span></li>
+        <li class="revelar" style="--retraso:.12s"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-foco"/></svg></span><span class="nombre">Innovación</span></li>
+        <li class="revelar" style="--retraso:.18s"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-candado"/></svg></span><span class="nombre">Confidencialidad</span></li>
+        <li class="revelar" style="--retraso:.24s"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-balanza"/></svg></span><span class="nombre">Equidad</span></li>
+        <li class="revelar" style="--retraso:.3s"><span class="valor-icono"><svg class="icono" aria-hidden="true"><use href="#i-equipo"/></svg></span><span class="nombre">Trabajo en equipo</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion" aria-labelledby="t-clientes">
+    <div class="contenedor">
+      <div class="encabezado centro revelar">
+        <h2 id="t-clientes">Nuestros <b>clientes</b></h2>
+        <span class="linea-titulo"></span>
+      </div>
+      <ul class="logos" aria-label="Algunos de nuestros clientes">
+        <li class="revelar"><img src="../public/web/images/client-logo1.png" alt="Cadex" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.04s"><img src="../public/web/images/client-logo2.png" alt="Cliente del estudio (nombre por confirmar)" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.08s"><img src="../public/web/images/client-logo3.png" alt="Insutec" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.12s"><img src="../public/web/images/client-logo4.png" alt="Interfreeze" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.16s"><img src="../public/web/images/client-logo5.png" alt="Líneas Perú Travel" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.2s"><img src="../public/web/images/client-logo6.png" alt="Cliente del estudio (nombre por confirmar)" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.24s"><img src="../public/web/images/client-logo7.png" alt="Lineaz Tour Operador" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.28s"><img src="../public/web/images/client-logo8.png" alt="Empresa Pesquera Yabafish S.A.C." loading="lazy"></li>
+        <li class="revelar" style="--retraso:.32s"><img src="../public/web/images/client-logo9.png" alt="Faser Rent a Car" loading="lazy"></li>
+        <li class="revelar" style="--retraso:.36s"><img src="../public/web/images/client-logo10.png" alt="Samari S.A.C." loading="lazy"></li>
+        <li class="revelar" style="--retraso:.4s"><img src="../public/web/images/client-logo11.png" alt="STI Gold" loading="lazy"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion contacto" id="contacto" aria-labelledby="t-contacto">
+    <div class="contenedor">
+      <div class="encabezado centro revelar">
+        <h2 id="t-contacto">Contáctanos</h2>
+        <span class="linea-titulo"></span>
+        <p>Visítanos en cualquiera de nuestras sedes o escríbenos por WhatsApp.</p>
+      </div>
+      <div class="contacto-rejilla">
+        <div class="sedes revelar">
+          <div class="sedes-pestanas" role="tablist" aria-label="Sedes">
+            <button type="button" role="tab" id="pestana-smp" aria-controls="sede-smp" aria-selected="true">San Martín de Porres</button>
+            <button type="button" role="tab" id="pestana-si" aria-controls="sede-si" aria-selected="false" tabindex="-1">San Isidro</button>
+          </div>
+          <div class="sede" role="tabpanel" id="sede-smp" aria-labelledby="pestana-smp" data-mapa="Jr. Iquitos 593, San Martín de Porres, Lima">
+            <address><strong>Sede San Martín de Porres</strong>Jr. Iquitos 593, San Martín de Porres, Lima</address>
+            <div class="sede-acciones">
+              <a class="whatsapp" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>951 965 242</a>
+              <a href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>952 249 102</a>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Jr.+Iquitos+593%2C+San+Mart%C3%ADn+de+Porres%2C+Lima" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-ruta"/></svg>Cómo llegar</a>
+            </div>
+            <div class="mapa"><div><svg class="icono" aria-hidden="true"><use href="#i-pin"/></svg><button class="boton boton-contacto ver-mapa" type="button">Ver mapa</button></div></div>
+          </div>
+          <div class="sede" role="tabpanel" id="sede-si" aria-labelledby="pestana-si" data-mapa="Calle Gorriones 151, San Isidro, Lima" hidden>
+            <address><strong>Sede San Isidro</strong>Calle Gorriones 151, San Isidro, Lima</address>
+            <div class="sede-acciones">
+              <a class="whatsapp" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>951 965 242</a>
+              <a href="tel:+51952249102"><svg class="icono" aria-hidden="true"><use href="#i-telefono"/></svg>952 249 102</a>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Gorriones+151%2C+San+Isidro%2C+Lima" rel="noopener"><svg class="icono" aria-hidden="true"><use href="#i-ruta"/></svg>Cómo llegar</a>
+            </div>
+            <div class="mapa"><div><svg class="icono" aria-hidden="true"><use href="#i-pin"/></svg><button class="boton boton-contacto ver-mapa" type="button">Ver mapa</button></div></div>
+          </div>
+        </div>
+        <form class="formulario revelar" style="--retraso:.1s" id="formulario" novalidate>
+          <h3>Escríbenos</h3>
+          <p>Completa tus datos y te llevamos a WhatsApp con el mensaje listo para enviar.</p>
+          <div class="campo">
+            <label for="nombre">Nombre y apellido</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="error-nombre">
+            <span class="campo-error" id="error-nombre"></span>
+          </div>
+          <div class="campo">
+            <label for="servicio">¿Qué necesitas?</label>
+            <select id="servicio" name="servicio">
+              <option>Outsourcing contable (planes)</option>
+              <option>Asesoría tributaria</option>
+              <option>Planilla y asesoría laboral</option>
+              <option>Asesoría legal</option>
+              <option>Constitución de empresa</option>
+              <option>Otro servicio</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="mensaje">Cuéntanos tu caso</label>
+            <textarea id="mensaje" name="mensaje" required aria-describedby="error-mensaje"></textarea>
+            <span class="campo-error" id="error-mensaje"></span>
+          </div>
+          <button class="boton boton-contacto" type="submit"><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Enviar por WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie oscuro">
+  <div class="contenedor">
+    <div class="pie-rejilla">
+      <div>
+        <h3>Sede San Martín de Porres</h3>
+        <address>Jr. Iquitos 593<br>San Martín de Porres, Lima<br>Celular: <a href="tel:+51951965242">951 965 242</a> · <a href="tel:+51952249102">952 249 102</a><br><a href="mailto:contabilidad@jjmm.com.pe">contabilidad@jjmm.com.pe</a></address>
+      </div>
+      <div class="pie-logo">
+        <img src="img/logo-jjmm-pie.png" alt="JJMM, Mariñas &amp; Asociados, Estudio Contable" width="223" height="125">
+        <p>Cada empresa guiada por nuestro sistema, llega a ser líder.</p>
+      </div>
+      <div>
+        <h3>Sede San Isidro</h3>
+        <address>Calle Gorriones 151<br>San Isidro, Lima<br>Celular: <a href="tel:+51951965242">951 965 242</a> · <a href="tel:+51952249102">952 249 102</a><br><a href="mailto:contabilidad@jjmm.com.pe">contabilidad@jjmm.com.pe</a></address>
+      </div>
+    </div>
+    <p class="pie-legal">© 2026 Estudio Contable JJMM S.A.C. · Grupo JJMM</p>
+  </div>
+</footer>
+
+<aside class="notas" aria-labelledby="t-notas">
+  <div class="contenedor">
+    <h2 id="t-notas">Notas del mockup (no forman parte del diseño)</h2>
+    <ul>
+      <li>Versión 5: alternativa a la v4 con las mismas secciones, textos, imágenes y logotipo. Conserva el hero de la v4 con las cuatro portadas y cambia el resto de la presentación: servicios en acordeón, planes en tarjetas y una pestaña por sede.</li>
+      <li>El formulario arma el mensaje y abre WhatsApp, porque el actual envía a una dirección que no existe.</li>
+      <li>«Asesoría gratuita» repite la oferta del banner actual. Falta que el estudio confirme su vigencia.</li>
+      <li>Falta definir qué celular atiende cada sede y cuáles tienen WhatsApp.</li>
+      <li>Dos logotipos de clientes no tienen nombre legible (<code>client-logo2.png</code> y <code>client-logo6.png</code>).</li>
+      <li>La sede Miraflores se agrega cuando el sitio sea administrable.</li>
+      <li>Íconos de interfaz: Lucide (ISC). Logotipos de WhatsApp, Facebook, X y YouTube: Simple Icons (CC0).</li>
+    </ul>
+  </div>
+</aside>
+
+<button class="subir" type="button" id="subir"><svg class="icono" aria-hidden="true"><use href="#i-arriba"/></svg><span class="oculto">Volver arriba</span></button>
+<a class="flotante" id="flotante" href="https://wa.me/51951965242?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios%20contables."><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg><span class="flotante-globo">¿Te ayudamos? Escríbenos</span></a>
+
+<script>
+(function () {
+  var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function todos(sel, raiz) { return Array.prototype.slice.call((raiz || document).querySelectorAll(sel)); }
+
+  /* Cabecera compacta, volver arriba y sección activa */
+  var cabecera = document.getElementById('cabecera');
+  var subir = document.getElementById('subir');
+  function alHacerScroll() {
+    var y = window.scrollY;
+    cabecera.classList.toggle('compacta', y > 60);
+    subir.classList.toggle('visible', y > 700);
+  }
+  window.addEventListener('scroll', alHacerScroll, { passive: true });
+  alHacerScroll();
+  subir.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reducir ? 'auto' : 'smooth' }); });
+  var enlacesMenu = todos('a[href^="#"]', document.querySelector('.navegacion')).concat(todos('a[href^="#"]', document.getElementById('panel-menu')));
+  if ('IntersectionObserver' in window) {
+    var espia = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        enlacesMenu.forEach(function (a) { a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + e.target.id)); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['inicio', 'quienes-somos', 'servicios', 'planes', 'contacto'].forEach(function (id) { espia.observe(document.getElementById(id)); });
+  }
+
+  /* Menú móvil */
+  var panel = document.getElementById('panel-menu');
+  var abrirMenu = document.querySelector('.menu-boton');
+  function cambiarMenu(abrir) {
+    panel.classList.toggle('abierto', abrir);
+    panel.setAttribute('aria-hidden', String(!abrir));
+    abrirMenu.setAttribute('aria-expanded', String(abrir));
+    document.body.classList.toggle('menu-abierto', abrir);
+    if (abrir) panel.querySelector('.panel-cerrar').focus(); else abrirMenu.focus({ preventScroll: true });
+  }
+  abrirMenu.addEventListener('click', function () { cambiarMenu(true); });
+  panel.addEventListener('click', function (e) { if (e.target.closest('[data-cerrar]') || e.target.closest('a')) cambiarMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('abierto')) cambiarMenu(false); });
+
+  /* Hero: el avance lo marca la barra de progreso; se pausa al pasar el cursor, al enfocar o con el botón */
+  var hero = document.querySelector('.hero');
+  var slides = todos('.hero-slide');
+  var progresos = todos('.progresos button');
+  var pausa = document.querySelector('.hero-pausa');
+  var actual = 0;
+  var pausadoPorUsuario = reducir;
+  if (reducir) hero.classList.add('sin-auto', 'pausado');
+  function mostrar(n) {
+    actual = (n + slides.length) % slides.length;
+    slides.forEach(function (s, i) { s.classList.toggle('actual', i === actual); s.setAttribute('aria-hidden', String(i !== actual)); });
+    progresos.forEach(function (p, i) {
+      p.classList.toggle('hecho', i < actual);
+      p.removeAttribute('aria-current');
+      var barra = p.querySelector('i');
+      barra.style.animation = 'none'; void barra.offsetWidth; barra.style.animation = '';
+    });
+    progresos[actual].setAttribute('aria-current', 'true');
+  }
+  progresos.forEach(function (p, i) {
+    p.addEventListener('click', function () { mostrar(i); });
+    p.querySelector('i').addEventListener('animationend', function () { if (i === actual) mostrar(actual + 1); });
+  });
+  todos('.hero-boton[data-paso]').forEach(function (b) { b.addEventListener('click', function () { mostrar(actual + Number(b.dataset.paso)); }); });
+  function marcarPausa() {
+    pausa.setAttribute('aria-pressed', String(pausadoPorUsuario));
+    pausa.querySelector('use').setAttribute('href', pausadoPorUsuario ? '#i-play' : '#i-pausa');
+    pausa.querySelector('.oculto').textContent = pausadoPorUsuario ? 'Reanudar las portadas' : 'Pausar las portadas';
+    hero.classList.toggle('pausado', pausadoPorUsuario);
+    hero.classList.toggle('sin-auto', reducir && pausadoPorUsuario);
+  }
+  pausa.addEventListener('click', function () { pausadoPorUsuario = !pausadoPorUsuario; marcarPausa(); });
+  marcarPausa();
+  hero.addEventListener('mouseenter', function () { hero.classList.add('pausado'); });
+  hero.addEventListener('mouseleave', function () { if (!pausadoPorUsuario) hero.classList.remove('pausado'); });
+  hero.addEventListener('focusin', function () { hero.classList.add('pausado'); });
+  hero.addEventListener('focusout', function (e) { if (!hero.contains(e.relatedTarget) && !pausadoPorUsuario) hero.classList.remove('pausado'); });
+  hero.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') mostrar(actual + 1);
+    if (e.key === 'ArrowLeft') mostrar(actual - 1);
+  });
+  var inicioX = null;
+  hero.addEventListener('pointerdown', function (e) { inicioX = e.clientX; });
+  hero.addEventListener('pointerup', function (e) {
+    if (inicioX === null) return;
+    var dx = e.clientX - inicioX; inicioX = null;
+    if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1));
+  });
+
+  /* WhatsApp flotante: saluda una vez al llegar a la mitad de la página */
+  var flotante = document.getElementById('flotante');
+  var saludado = false;
+  window.addEventListener('scroll', function () {
+    if (saludado || window.scrollY < document.body.scrollHeight * .35) return;
+    saludado = true;
+    flotante.classList.add('saluda');
+    setTimeout(function () { flotante.classList.remove('saluda'); }, 4000);
+  }, { passive: true });
+
+  /* Aparición, cifras y anillos */
+  function contar(el) {
+    var meta = Number(el.dataset.contar);
+    if (reducir || !meta) return;
+    var inicio = null;
+    function paso(t) {
+      if (!inicio) inicio = t;
+      var avance = Math.min((t - inicio) / 1400, 1);
+      el.textContent = Math.round(meta * (1 - Math.pow(1 - avance, 3)));
+      if (avance < 1) requestAnimationFrame(paso); else el.textContent = meta;
+    }
+    requestAnimationFrame(paso);
+  }
+  if ('IntersectionObserver' in window && !reducir) {
+    var revelador = new IntersectionObserver(function (entradas, obs) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        todos('[data-contar]', e.target).forEach(contar);
+        obs.unobserve(e.target);
+      });
+    }, { threshold: .15 });
+    todos('.revelar').forEach(function (el) { revelador.observe(el); });
+  } else {
+    todos('.revelar').forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* Servicios: acordeón generado desde un listado y sincronizado con la rueda */
+  var AREAS = [
+    ['Legal', 'Un equipo de abogados y contadores especializados para el sector empresarial peruano y la inversión extranjera. Damos información precisa en aplicación de las normas comerciales vigentes, en asuntos societarios y contractuales.', ['Asesoría legal', 'Servicios legales', 'Asesoría contable legal']],
+    ['Tributaria', 'Contadores especialistas que dan solución ante las contingencias que generan los cambios en las normas tributarias, con atención personalizada, cualquiera sea tu régimen tributario.', ['Consultas tributarias', 'Problemática fiscal', 'Cumplimiento de las normas tributarias', 'Asesoría contable tributaria']],
+    ['Laboral', 'Contadores y abogados laboralistas con gran experiencia en derecho laboral y de la seguridad social, para personas naturales y empresas, cualquiera sea su régimen laboral.', ['Manejo de nóminas', 'Indemnizaciones', 'Informes sobre consultas específicas', 'Asesoría contable laboral']],
+    ['Administración', 'Evaluamos y asesoramos a empresas que buscan más eficiencia en el uso de sus recursos, con una organización simple, dinámica y actual.', ['Reducción de procesos inútiles y repetidos', 'Optimización de procedimientos administrativos', 'Herramientas de gestión para decidir mejor', 'Políticas, normas y procedimientos', 'Formatos de control administrativo']],
+    ['Financiera', 'Las finanzas son una de las áreas más importantes para que un negocio siga en marcha. Te ayudamos a ordenarlas y a planificar.', ['Registro de operaciones contables y financieras', 'Análisis y evaluación de la información', 'Fuentes de financiamiento', 'Opciones de inversión', 'Flujos proyectados']],
+    ['Sistema de calidad', 'Planea, ejecuta y controla las actividades de tu organización con altos estándares, medidos con indicadores de satisfacción de tus clientes.', ['Sistema de calidad SIGE Mype', 'Sistemas de calidad ISO', 'Seguridad y salud en el trabajo (SUNAFIL)', 'Homologaciones']],
+    ['Tecnología de la información', 'Prevenimos incidencias en tus equipos y, si ocurren, las resolvemos rápido, para que tus datos estén a salvo y tu negocio no se detenga.', ['Soporte remoto', 'Configuración de redes', 'Copias de respaldo de datos', 'Cableado estructurado', 'Diagnóstico']],
+    ['Comercio exterior', 'Especialistas en comercio internacional para acompañar a las pequeñas y medianas empresas que importan y exportan.', ['Asesoría en importaciones y exportaciones', 'Devolución de impuestos a exportadores y por pagos en exceso', 'Drawback y devolución de IGV ante SUNAT']],
+    ['Auditorías y precios de transferencia', 'Profesionales con amplia experiencia en auditoría y consultoría en firmas internacionales, para un servicio de alta calidad cuando lo necesitas.', ['Auditoría de estados financieros', 'Evaluación de control interno', 'Auditoría financiera y tributaria', 'Exámenes especiales y peritajes']]
+  ];
+  var acordeon = document.getElementById('acordeon');
+  acordeon.innerHTML = AREAS.map(function (a, i) {
+    var n = i + 1;
+    var lista = a[2].map(function (x) { return '<li><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg>' + x + '</li>'; }).join('');
+    return '<div class="acordeon-item" data-area="' + n + '">' +
+      '<h3><button class="acordeon-boton" type="button" aria-expanded="false" aria-controls="area-' + n + '" id="boton-area-' + n + '">' +
+      '<span class="numero">P' + n + '</span><span class="nombre">' + a[0] + '</span><svg class="icono" aria-hidden="true"><use href="#i-mas"/></svg></button></h3>' +
+      '<div class="acordeon-cuerpo" id="area-' + n + '" role="region" aria-labelledby="boton-area-' + n + '"><div>' +
+      '<p>' + a[1] + '</p><ul>' + lista + '</ul>' +
+      '<a class="enlace-servicio" href="https://wa.me/51951965242?text=' + encodeURIComponent('Hola, quiero información del servicio ' + a[0] + '.') + '"><svg class="marca-icono" aria-hidden="true"><use href="#m-whatsapp"/></svg>Consultar este servicio</a>' +
+      '</div></div></div>';
+  }).join('');
+  var items = todos('.acordeon-item');
+  var gajos = todos('.rueda polygon');
+  function abrirArea(n, desdeRueda) {
+    items.forEach(function (item) {
+      var abrir = Number(item.dataset.area) === n && !(item.classList.contains('abierto') && !desdeRueda);
+      item.classList.toggle('abierto', abrir);
+      item.querySelector('.acordeon-boton').setAttribute('aria-expanded', String(abrir));
+    });
+    var abierto = document.querySelector('.acordeon-item.abierto');
+    var activo = abierto ? Number(abierto.dataset.area) : 0;
+    gajos.forEach(function (g) { g.classList.toggle('activo', Number(g.dataset.area) === activo); });
+    if (desdeRueda && abierto && window.innerWidth < 1120) {
+      setTimeout(function () { abierto.scrollIntoView({ block: 'center', behavior: reducir ? 'auto' : 'smooth' }); }, 120);
+    }
+  }
+  items.forEach(function (item) {
+    item.querySelector('.acordeon-boton').addEventListener('click', function () { abrirArea(Number(item.dataset.area), false); });
+  });
+  gajos.forEach(function (g) { g.addEventListener('click', function () { abrirArea(Number(g.dataset.area), true); }); });
+  abrirArea(1, true);
+
+  /* Planes: comparación completa a un clic */
+  var S = 's', N = 'n';
+  var FILAS = [
+    ['Para empresas con ventas anuales hasta de', 'Consultar', 'Consultar', 'Consultar', 'Consultar'],
+    ['Gestión integral de planilla hasta', '2 trabajadores', '4 trabajadores', '6 trabajadores', '12 trabajadores'],
+    ['Registro contable mensual de compras y ventas', S, S, S, S],
+    ['Cálculo mensual del Impuesto a la Renta', S, S, S, S],
+    ['Cálculo mensual del IGV', S, S, S, S],
+    ['Cálculo y declaración mensual de la planilla electrónica', S, S, S, S],
+    ['Declaración del PDT 621 (IGV y Renta)', S, S, S, S],
+    ['Registro de Compras y Ventas en formato SUNAT', S, S, S, S],
+    ['Libro Diario Simplificado mensual', S, S, S, S],
+    ['Libro Diario y Libro Mayor mensual', N, S, S, S],
+    ['Libro Bancos mensual', N, S, S, S],
+    ['Otros libros obligatorios', N, N, S, S],
+    ['Manejo de Kardex', N, N, N, S],
+    ['Asesoría tributaria según tu régimen y sector', S, S, S, S],
+    ['Asesoría tributaria y financiera en tu empresa', N, N, N, S],
+    ['Elaboración y presentación de la DAOT', S, S, S, S],
+    ['Impuesto a la Renta anual', N, N, N, S],
+    ['Estados financieros intermedios', N, N, N, N],
+    ['Una visita al mes para recoger y enviar documentación', N, N, S, S],
+    ['Costo por trabajador adicional en planilla', 'Consultar', 'Consultar', 'Consultar', 'Consultar'],
+    ['Límite de registro de comprobantes de pago', 'Consultar', 'Consultar', 'Consultar', 'Consultar'],
+    ['Libros electrónicos', S, S, S, S]
+  ];
+  function celda(v) {
+    if (v === S) return '<td><span class="marca-si"><svg class="icono" aria-hidden="true"><use href="#i-check"/></svg><span class="oculto">Incluido</span></span></td>';
+    if (v === N) return '<td><span class="marca-no"><svg class="icono" aria-hidden="true"><use href="#i-x"/></svg><span class="oculto">No incluido</span></span></td>';
+    return '<td>' + v + '</td>';
+  }
+  document.getElementById('filas-planes').innerHTML = FILAS.map(function (f) {
+    return '<tr><th scope="row">' + f[0] + '</th>' + f.slice(1).map(celda).join('') + '</tr>';
+  }).join('');
+  var comparar = document.querySelector('.comparar-boton');
+  var comparacion = document.getElementById('comparacion');
+  comparar.addEventListener('click', function () {
+    var abrir = comparar.getAttribute('aria-expanded') !== 'true';
+    comparar.setAttribute('aria-expanded', String(abrir));
+    comparacion.classList.toggle('abierto', abrir);
+    comparar.firstChild.nodeValue = abrir ? 'Ocultar la comparación completa' : 'Ver la comparación completa';
+  });
+
+  /* Contacto: una pestaña por sede y mapa que se carga al pedirlo */
+  var pestanasSede = todos('.sedes-pestanas [role="tab"]');
+  function activarSede(i, enfocar) {
+    pestanasSede.forEach(function (p, j) {
+      var activa = i === j;
+      p.setAttribute('aria-selected', String(activa));
+      p.tabIndex = activa ? 0 : -1;
+      document.getElementById(p.getAttribute('aria-controls')).hidden = !activa;
+    });
+    if (enfocar) pestanasSede[i].focus();
+  }
+  pestanasSede.forEach(function (p, i) {
+    p.addEventListener('click', function () { activarSede(i, false); });
+    p.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); activarSede((i + 1) % pestanasSede.length, true); }
+    });
+  });
+  todos('.ver-mapa').forEach(function (boton) {
+    boton.addEventListener('click', function () {
+      var sede = boton.closest('.sede');
+      var mapa = sede.querySelector('.mapa');
+      var iframe = document.createElement('iframe');
+      iframe.title = 'Mapa de ' + sede.querySelector('strong').textContent;
+      iframe.src = 'https://www.google.com/maps?q=' + encodeURIComponent(sede.dataset.mapa) + '&output=embed';
+      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      mapa.appendChild(iframe);
+      iframe.focus();
+    });
+  });
+
+  /* Formulario: valida y abre WhatsApp con el mensaje armado */
+  var formulario = document.getElementById('formulario');
+  function marcarError(campo, texto) {
+    campo.setAttribute('aria-invalid', String(Boolean(texto)));
+    document.getElementById('error-' + campo.id).textContent = texto;
+  }
+  formulario.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = formulario.nombre, mensaje = formulario.mensaje;
+    marcarError(nombre, nombre.value.trim() ? '' : 'Escribe tu nombre para saber cómo dirigirnos a ti.');
+    marcarError(mensaje, mensaje.value.trim() ? '' : 'Cuéntanos en una línea qué necesitas.');
+    var invalido = formulario.querySelector('[aria-invalid="true"]');
+    if (invalido) { invalido.focus(); return; }
+    var texto = 'Hola, soy ' + nombre.value.trim() + '. Necesito: ' + formulario.servicio.value + '. ' + mensaje.value.trim();
+    window.open('https://wa.me/51951965242?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+  });
+})();
+</script>
+</body>
+</html>
