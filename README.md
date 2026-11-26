@@ -6,7 +6,7 @@ Este repositorio contiene **solo el frontend**: vistas, estilos, scripts e imág
 
 ## Estado actual
 
-El contenido es una copia fiel del frontend en producción, sin cambios. Sirve como línea base para el rediseño.
+La página de inicio (`resources/views/web/index.blade.php`) ya tiene el rediseño aprobado. El resto (guía de clientes, blog, autenticación y panel) sigue siendo la copia del frontend en producción.
 
 Para conocer qué producto es, a quién se dirige y qué restricciones tiene, lee [`PRODUCT.md`](PRODUCT.md). La crítica de diseño del sitio actual (inicio, guía y blog) está en [`CRITICA.md`](CRITICA.md); el archivo de cada corrida queda en [`.impeccable/critique/`](.impeccable/critique/).
 
@@ -23,7 +23,8 @@ Se conserva la estructura de carpetas de Laravel para que cualquier archivo pued
 | `resources/views/auth/`, `profile/`, `api/`, `vendor/` | Vistas de autenticación y perfil (Jetstream) |
 | `resources/css/`, `resources/js/` | Fuentes de Tailwind y Alpine que compila Laravel Mix |
 | `resources/lang/`, `resources/markdown/` | Textos de la interfaz, términos y política |
-| `public/web/` | CSS, JS e imágenes del sitio público |
+| `public/web/` | CSS, JS e imágenes del sitio público. El inicio usa `css/inicio.css`, `js/inicio.js`, `images/inicio/` y `fonts/` |
+| `mockup/` | Propuestas de rediseño. `inicio-v4.html` es la versión aprobada que hoy implementa `web/index.blade.php` |
 | `public/css/`, `public/js/` | Salida compilada de Laravel Mix |
 | `public/vendor/` | Recursos publicados de AdminLTE |
 

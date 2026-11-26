@@ -30,7 +30,9 @@ Se conserva la estructura de carpetas de Laravel para que cada archivo pueda vol
 
 Hay **tres frontends independientes** que no comparten layout, CSS ni JavaScript:
 
-1. **Sitio público** (`resources/views/web/index.blade.php`, `guia.blade.php`). Cada vista es un documento HTML completo, sin layout ni parciales: el `<head>`, el encabezado y el pie están duplicados en ambos archivos. Cargan a mano una plantilla antigua basada en jQuery desde `public/web/` (Revolution Slider, jCarousel, Owl Carousel, WOW, Font Awesome 4, varias versiones de jQuery a la vez). `public/web/` no pasa por ningún proceso de compilación: se edita directamente. Los estilos propios del estudio están en `public/web/css/estilos_lenin.css` y `servicios.css`; el resto es de la plantilla.
+1. **Sitio público** (`resources/views/web/index.blade.php`, `guia.blade.php`). Cada vista es un documento HTML completo, sin layout ni parciales. `public/web/` no pasa por ningún proceso de compilación: se edita directamente.
+   - **Inicio** (`index.blade.php`): rediseñado a partir del mockup aprobado `mockup/inicio-v4.html`. No usa jQuery ni plugins: sus estilos están en `public/web/css/inicio.css`, su comportamiento en `public/web/js/inicio.js` (slider, menú, pestañas, rueda, formulario a WhatsApp, animaciones al hacer scroll), sus imágenes en `public/web/images/inicio/` y sus fuentes en `public/web/fonts/`. Las animaciones reproducen las del sitio anterior (WOW y Revolution Slider) con CSS y respetan `prefers-reduced-motion`.
+   - **Guía de clientes** (`guia.blade.php`): sigue con la plantilla antigua basada en jQuery (Revolution Slider, jCarousel, Owl Carousel, WOW, Font Awesome 4, varias versiones de jQuery a la vez). Los estilos propios del estudio están en `public/web/css/estilos_lenin.css` y `servicios.css`; el resto es de la plantilla.
 
 2. **Blog, autenticación y perfil** (`resources/views/posts/`, `auth/`, `profile/`, `layouts/`). Usan Jetstream con Livewire 2, Tailwind 2 y Alpine 2, compilados con Laravel Mix. Las vistas del blog usan `<x-app-layout>` (`layouts/app.blade.php`), que monta `@livewire('navigation')`; las de autenticación usan `<x-guest-layout>`. La entrada de CSS es `resources/css/app.css`, que importa Tailwind y `resources/css/style.css`.
 
@@ -59,7 +61,7 @@ Las vistas dependen de datos, rutas y componentes que define el backend y que no
 ## Reglas de contenido
 
 - Textos visibles para el usuario en español neutro con tuteo (público peruano).
-- Solo se publican los celulares 951 965 242 y 952 249 102. Los teléfonos fijos no se publican; la línea base todavía los muestra en `web/index.blade.php` y `web/guia.blade.php`, y el rediseño debe retirarlos.
+- Solo se publican los celulares 951 965 242 y 952 249 102. Los teléfonos fijos no se publican; el inicio ya no los muestra, pero `web/guia.blade.php` todavía sí.
 - No se publican precios: los planes muestran "Consultar".
 - No inventes testimonios, casos de éxito, fotografías, cifras ni número de colegiatura. Las cifras y los planes válidos están documentados en `PRODUCT.md`.
 - El formulario de contacto no tiene backend funcional: el contacto se resuelve con enlaces de WhatsApp, llamada y correo.
