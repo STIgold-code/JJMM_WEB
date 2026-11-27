@@ -38,11 +38,14 @@ describe('Portada', () => {
     expect(html).toContain('--movil-x:22%')
   })
 
-  it('carga las demás portadas en diferido', () => {
+  // Las portadas ocultas están apiladas dentro de la primera pantalla: sin prioridad baja, el
+  // navegador las pide a la vez que la imagen principal y le quitan ancho de banda (LCP).
+  it('carga las demás portadas en diferido y con prioridad baja', () => {
     const html = dibujar({}, false)
 
     expect(html).toContain('loading="lazy"')
-    expect(html).not.toContain('fetchPriority')
+    expect(html).toContain('fetchPriority="low"')
+    expect(html).not.toContain('fetchPriority="high"')
   })
 
   it('usa h1 solo en el título principal y resalta la parte marcada', () => {

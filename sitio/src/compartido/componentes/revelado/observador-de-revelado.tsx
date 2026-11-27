@@ -3,37 +3,37 @@
 import { usePathname } from 'next/navigation'
 import { useEffect } from 'react'
 
-const SELECTOR = '.revelar:not(.visible)'
+import { estaEnPantalla } from './en-pantalla'
+
+const SELECTOR = '.revelar:not(.visible):not(.pendiente)'
 const UMBRAL = 0.15
 
-function mostrarTodos(elementos: readonly Element[]) {
-  elementos.forEach((elemento) => elemento.classList.add('visible'))
-}
-
-// Un solo observador para todo el sitio. Sin IntersectionObserver o con movimiento reducido
-// muestra todo de inmediato; sin JavaScript, la clase `js` no existe y nada se oculta.
+// Un solo observador para todo el sitio. El contenido se dibuja visible: lo que ya está en
+// pantalla al cargar no espera a JavaScript para verse (así no retrasa el LCP). Solo lo que
+// queda más abajo se oculta con `pendiente` y se anima al entrar en pantalla.
+// Sin IntersectionObserver o con movimiento reducido no se oculta nada.
 // Se vuelve a ejecutar al cambiar de ruta para observar el contenido de la página nueva.
 export function ObservadorDeRevelado() {
   const ruta = usePathname()
 
   useEffect(() => {
-    const elementos = Array.from(document.querySelectorAll(SELECTOR))
     const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reducir || !('IntersectionObserver' in window)) {
-      mostrarTodos(elementos)
-      return
-    }
+    if (reducir || !('IntersectionObserver' in window)) return
     const observador = new IntersectionObserver(
       (entradas) => {
         entradas.forEach((entrada) => {
           if (!entrada.isIntersecting) return
-          entrada.target.classList.add('visible')
+          entrada.target.classList.replace('pendiente', 'visible')
           observador.unobserve(entrada.target)
         })
       },
       { threshold: UMBRAL },
     )
-    elementos.forEach((elemento) => observador.observe(elemento))
+    document.querySelectorAll(SELECTOR).forEach((elemento) => {
+      if (estaEnPantalla(elemento.getBoundingClientRect(), window.innerHeight)) return
+      elemento.classList.add('pendiente')
+      observador.observe(elemento)
+    })
     return () => observador.disconnect()
   }, [ruta])
 

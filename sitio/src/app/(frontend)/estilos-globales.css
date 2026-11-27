@@ -218,27 +218,28 @@ button {
 }
 
 /* Aparición al hacer scroll (propsDeRevelado + ObservadorDeRevelado).
-   El contenido es visible sin JavaScript: solo se oculta si <html> tiene la clase js. */
-.js .revelar {
+   El contenido se dibuja visible. El observador marca con `pendiente` solo lo que queda
+   debajo de la primera pantalla y lo pasa a `visible` cuando entra: así lo que ya se ve al
+   cargar no depende de JavaScript ni retrasa el LCP. */
+.revelar.pendiente {
   opacity: 0;
   transform: translateY(28px);
+}
+
+.revelar.pendiente.desde-izquierda {
+  transform: translateX(-48px);
+}
+
+.revelar.pendiente.desde-derecha {
+  transform: translateX(48px);
+}
+
+/* La transición vive en el estado final: se anima al aparecer, no al ocultarse. */
+.revelar.visible {
   transition:
     opacity 0.8s var(--salida),
     transform 0.8s var(--salida);
   transition-delay: var(--retraso, 0s);
-}
-
-.js .revelar.desde-izquierda {
-  transform: translateX(-48px);
-}
-
-.js .revelar.desde-derecha {
-  transform: translateX(48px);
-}
-
-.js .revelar.visible {
-  opacity: 1;
-  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -253,9 +254,9 @@ button {
     transition: none !important;
   }
 
-  .js .revelar,
-  .js .revelar.desde-izquierda,
-  .js .revelar.desde-derecha {
+  .revelar.pendiente,
+  .revelar.pendiente.desde-izquierda,
+  .revelar.pendiente.desde-derecha {
     opacity: 1;
     transform: none;
   }

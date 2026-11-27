@@ -25,24 +25,13 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadatosPorDefecto(urlDelSitio(), await obtenerDatosDelSitio())
 }
 
-// Marca <html> antes de pintar para que `.revelar` oculte solo cuando hay JavaScript.
-const MARCAR_JS = "document.documentElement.classList.add('js')"
-
 interface PropiedadesLayoutPublico {
   children: ReactNode
 }
 
 export default function LayoutPublico({ children }: PropiedadesLayoutPublico) {
   return (
-    // La clase `js` la agrega el script antes de hidratar; no es una discrepancia real.
-    <html
-      lang="es-PE"
-      className={`${oswald.variable} ${openSans.variable}`}
-      suppressHydrationWarning
-    >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: MARCAR_JS }} />
-      </head>
+    <html lang="es-PE" className={`${oswald.variable} ${openSans.variable}`}>
       <body>
         <a className="saltar" href="#contenido">
           Saltar al contenido

@@ -20,8 +20,12 @@ interface PropsImagenDePortada {
 const textoAlternativo = (portada: PortadaPublica) =>
   portada.imagenEsDecorativa ? '' : portada.imagen.alt
 
+// Las portadas ocultas están apiladas dentro de la primera pantalla, así que el navegador las
+// trata como visibles y las pide con prioridad alta. `low` evita que compitan con la primera.
+const PRIORIDAD_BAJA = { fetchPriority: 'low' } as const
+
 const prioridad = (primera: boolean) =>
-  primera ? ({ preload: true, fetchPriority: 'high', loading: 'eager' } as const) : {}
+  primera ? ({ preload: true, fetchPriority: 'high', loading: 'eager' } as const) : PRIORIDAD_BAJA
 
 // Portada con la imagen a todo el ancho, encuadrada en el celular según el panel.
 function ImagenDeFondo({ portada, primera }: PropsImagenDePortada) {
@@ -67,7 +71,14 @@ function ImagenCompleta({ portada, primera }: PropsImagenDePortada) {
   })
   return (
     <>
-      <Image className={estilos.fondoDesenfocado} src={imagen.url} alt="" fill sizes="40vw" />
+      <Image
+        className={estilos.fondoDesenfocado}
+        src={imagen.url}
+        alt=""
+        fill
+        sizes="40vw"
+        {...PRIORIDAD_BAJA}
+      />
       <picture>
         {fuenteDeCelular(portada.imagenParaCelular, alt)}
         {/* <img> con las props de getImageProps: next/image no admite <picture>. */}

@@ -103,7 +103,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | delegada (contexto largo) | hecha; falta verificar en navegador (CI detenida) | ver L20 |
 | T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | delegada (contexto largo) + verificación independiente | hecha; límites de Lighthouse sin medir (CI detenida) | ver L21 |
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
-| T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | pendiente | — |
+| T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | en curso: Railway en marcha; faltan Wasabi, Cloudflare, dominio y respaldos | ver L22 |
 | T15 | S1 | Salida a producción: cambio de DNS con aprobación de Gian y verificación | en línea | pendiente | — |
 | T16 | S1 | Borrar el sitio anterior del repositorio y dejar solo el proyecto nuevo, con confirmación explícita de Gian antes de borrar | en línea | pendiente | — |
 
@@ -304,3 +304,20 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
   - la caché es por instancia, así que con varias réplicas en Railway hace falta un `cacheHandler` compartido;
   - guardar un borrador sobre algo publicado revalida de más.
 - Verificado: `typecheck`, `lint`, `format:check`, `test` (545 pruebas) y `build` del escritor.
+
+**L22** (27/11/2026): «amiwo pon todo en railway» y «ya está en publico, hazlo»
+- Railway (cuenta `code@stigold.com`), proyecto `jjmm-web`:
+  - servicio `web` con Railpack y Node 24.22.3;
+  - PostgreSQL;
+  - volumen en `/app/media` para los archivos del panel, sin Wasabi por ahora;
+  - dominio `https://web-production-bc6921c6.up.railway.app`.
+- Variables: `DATABASE_URI` (referencia a Postgres), `PAYLOAD_SECRET`, `NEXT_PUBLIC_SITE_URL`, `ENCABEZADO_IP_CLIENTE` y `RAILPACK_NODE_VERSION`.
+- Despliegue con `railway up sitio --path-as-root --service web`. El `preDeployCommand` de `railway.json` no se aplicó, así que las migraciones pasan a `prodMigrations` (documentado por Payload): se aplican al iniciar el servidor en producción.
+- Las 21 imágenes de la carga inicial se copiaron a `sitio/semilla/imagenes/`. La carga ya no depende del sitio anterior, lo que deja libre T16.
+- La migración y `pnpm semilla` se corrieron dentro del contenedor. Comprobado con peticiones reales: `/`, `/guia`, `/blog` y `/admin` responden 200, y `/blog/posts/:slug` redirige con 301.
+- Error propio: se listaron las variables con `--kv` y se vieron los valores. `PAYLOAD_SECRET` se rotó; la contraseña de PostgreSQL quedó vista en el historial de la sesión (solo sirve dentro de la red interna de Railway).
+- Gian hizo público el repositorio y la CI empezó a correr. Se revisó el historial: no hay credenciales ni `.env` versionados.
+- Primera corrida de Playwright: 45 de 48 pruebas. Dos causas corregidas en `dbc76c7`:
+  - la tabla de planes repetía el nombre accesible de su sección;
+  - axe medía el contraste en medio del fundido de entrada.
+- Segunda corrida: 48 de 48. Lighthouse en móvil cumple rendimiento, CLS y peso de JavaScript, y falla solo el LCP: 3,35 s en el inicio y 2,89 s en `/guia` y `/blog`, contra 2,5 s. En análisis.
