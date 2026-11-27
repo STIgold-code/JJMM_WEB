@@ -62,10 +62,17 @@
   animation-play-state: paused;
 }
 
-/* Sin avance automático (movimiento reducido y pausa elegida): la barra se ve llena. */
-.sinAvance .corriendo .relleno {
-  animation: none;
-  transform: none;
+/* Con movimiento reducido la hoja global quita todas las animaciones. La barra de progreso
+   se exceptúa: su final es lo que hace avanzar el carrusel, y llenar una línea de 4 px no es
+   el tipo de movimiento que esa preferencia busca evitar. */
+@media (prefers-reduced-motion: reduce) {
+  .corriendo .relleno {
+    animation: llenar var(--duracion) linear forwards !important;
+  }
+
+  .pausado .corriendo .relleno {
+    animation-play-state: paused !important;
+  }
 }
 
 .boton {

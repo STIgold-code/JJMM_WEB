@@ -44,12 +44,9 @@ function Progresos({ cantidad, carrusel }: PropsControles) {
 
 export function ControlesDelCarrusel({ cantidad, carrusel }: PropsControles) {
   const { actual, mostrar, alternarPausa, pausadoPorUsuario } = carrusel
-  const estado = [
-    carrusel.pausado ? estilos.pausado : '',
-    carrusel.sinAvance ? estilos.sinAvance : '',
-  ]
+  const estado = carrusel.pausado ? estilos.pausado : ''
   return (
-    <div className={`${estilos.controles} ${estado.join(' ')}`}>
+    <div className={`${estilos.controles} ${estado}`}>
       <div className={`contenedor ${estilos.fila}`}>
         <Progresos cantidad={cantidad} carrusel={carrusel} />
         <button className={estilos.boton} type="button" onClick={() => mostrar(actual - 1)}>

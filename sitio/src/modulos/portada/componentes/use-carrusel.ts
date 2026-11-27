@@ -2,8 +2,6 @@
 
 import { useCallback, useState } from 'react'
 
-import { useReducirMovimiento } from './use-reducir-movimiento'
-
 export interface EstadoDelCarrusel {
   actual: number
   // Cambia en cada avance para reiniciar la barra de progreso.
@@ -11,22 +9,20 @@ export interface EstadoDelCarrusel {
   // false hasta el primer cambio: la primera portada no repite su transición al cargar.
   cambiado: boolean
   pausado: boolean
-  // Sin avance automático porque se pidió reducir el movimiento y la pausa sigue puesta.
-  sinAvance: boolean
   pausadoPorUsuario: boolean
   mostrar: (indice: number) => void
   alternarPausa: () => void
   pausarMientras: (activa: boolean) => void
 }
 
-// Estado del hero. Con movimiento reducido arranca pausado, como la v4.
+// Estado del hero. Por defecto avanza solo, también con movimiento reducido: en ese caso las
+// portadas cambian sin transiciones (las desactiva la hoja de estilos global). Lo detiene el
+// botón de pausa.
 export function useCarrusel(cantidad: number): EstadoDelCarrusel {
-  const reducir = useReducirMovimiento()
   const [actual, setActual] = useState(0)
   const [vuelta, setVuelta] = useState(0)
-  const [eleccion, setEleccion] = useState<boolean | null>(null)
+  const [pausadoPorUsuario, setPausadoPorUsuario] = useState(false)
   const [pausaTemporal, setPausaTemporal] = useState(false)
-  const pausadoPorUsuario = eleccion ?? reducir
 
   const mostrar = useCallback(
     (indice: number) => {
@@ -41,10 +37,9 @@ export function useCarrusel(cantidad: number): EstadoDelCarrusel {
     vuelta,
     cambiado: vuelta > 0,
     pausado: pausadoPorUsuario || pausaTemporal,
-    sinAvance: reducir && pausadoPorUsuario,
     pausadoPorUsuario,
     mostrar,
-    alternarPausa: () => setEleccion(!pausadoPorUsuario),
+    alternarPausa: () => setPausadoPorUsuario((anterior) => !anterior),
     pausarMientras: setPausaTemporal,
   }
 }

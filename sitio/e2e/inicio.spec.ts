@@ -64,19 +64,37 @@ test.describe('Hero', () => {
     await expect(visible(4)).toHaveAttribute('aria-hidden', 'false', { timeout: 15_000 })
   })
 
-  test('se pausa con el botón y con movimiento reducido arranca en pausa', async ({ page }) => {
+  test('se pausa con el botón y deja de avanzar', async ({ page }) => {
     await page.goto('/')
+    const hero = page.locator('#inicio')
     const pausa = page.getByRole('button', { name: 'Pausar las portadas' })
 
     await expect(pausa).toHaveAttribute('aria-pressed', 'false')
     await pausa.click()
     await expect(pausa).toHaveAttribute('aria-pressed', 'true')
 
+    await page.waitForTimeout(11_000)
+    await expect(hero.getByRole('group', { name: '1 de 4' })).toHaveAttribute(
+      'aria-hidden',
+      'false',
+    )
+  })
+
+  // Por defecto el carrusel avanza solo, también para quien pidió reducir el movimiento:
+  // en ese caso cambia de portada sin transiciones, y el botón de pausa sigue disponible.
+  test('con movimiento reducido también avanza solo', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
-    await page.reload()
+    await page.goto('/')
+    const hero = page.locator('#inicio')
+
     await expect(page.getByRole('button', { name: 'Pausar las portadas' })).toHaveAttribute(
       'aria-pressed',
-      'true',
+      'false',
+    )
+    await expect(hero.getByRole('group', { name: '2 de 4', includeHidden: true })).toHaveAttribute(
+      'aria-hidden',
+      'false',
+      { timeout: 15_000 },
     )
   })
 })
