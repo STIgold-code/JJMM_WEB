@@ -38,15 +38,19 @@
   overflow: hidden;
 }
 
+/* El relleno se anima con `transform`, no con `width`: así lo resuelve el compositor y no
+   obliga a recalcular la maquetación en cada cuadro durante toda la portada. */
 .relleno {
   display: block;
   height: 100%;
-  width: 0;
+  width: 100%;
   background: var(--amarillo);
+  transform: scaleX(0);
+  transform-origin: left center;
 }
 
 .hecho .relleno {
-  width: 100%;
+  transform: none;
 }
 
 /* La barra de la portada actual se llena en `--duracion`; al terminar, avanza. */
@@ -61,7 +65,7 @@
 /* Sin avance automático (movimiento reducido y pausa elegida): la barra se ve llena. */
 .sinAvance .corriendo .relleno {
   animation: none;
-  width: 100%;
+  transform: none;
 }
 
 .boton {
@@ -85,11 +89,11 @@
 
 @keyframes llenar {
   from {
-    width: 0;
+    transform: scaleX(0);
   }
 
   to {
-    width: 100%;
+    transform: none;
   }
 }
 
