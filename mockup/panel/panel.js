@@ -203,77 +203,8 @@
       </div>`
   }
 
-  // ---------------------------------------------------------------- Buscador global
-  const INDICE = [
-    ['Inicio', 'Pantalla', 'inicio.html'],
-    ['Mensajes de contacto', 'Pantalla', 'mensajes.html'],
-    ['Planes', 'Pantalla', 'planes.html'],
-    ['Emprende', 'Plan', 'plan-editar.html'],
-    ['SIGEMype I', 'Plan', 'plan-editar.html'],
-    ['SIGEMype II', 'Plan', 'plan-editar.html'],
-    ['SIGEMype Business', 'Plan', 'plan-editar.html'],
-    ['Página de inicio', 'Pantalla', 'pagina-de-inicio.html'],
-    ['Carrusel de portadas', 'Sección del inicio', 'portadas.html'],
-    ['Sedes', 'Pantalla', 'sedes.html'],
-    ['Sede San Martín de Porres', 'Sede', 'sede-editar.html'],
-    ['Sede San Isidro', 'Sede', 'sede-editar.html'],
-    ['Guía de clientes', 'Pantalla', 'guia-de-clientes.html'],
-    ['Cierre tributario', 'Aviso', 'guia-de-clientes.html#avisos'],
-    ['Cierre de planilla', 'Aviso', 'guia-de-clientes.html#avisos'],
-    ['PDT 621 (IGV y Renta)', 'Vencimiento', 'guia-de-clientes.html#vencimientos'],
-    ['PLAME', 'Vencimiento', 'guia-de-clientes.html#vencimientos'],
-    ['DAOT', 'Vencimiento', 'guia-de-clientes.html#vencimientos'],
-    ['Publicaciones', 'Pantalla', 'publicaciones.html'],
-    ['Imágenes', 'Pantalla', 'medios.html'],
-    ['Usuarios', 'Pantalla', 'usuarios.html'],
-    ['Mi cuenta', 'Pantalla', 'mi-cuenta.html'],
-  ]
-
+  // Compara textos sin mayúsculas ni tildes (filtros de los listados).
   const normalizar = (t) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
-
-  const iniciarBuscadorGlobal = (raiz) => {
-    const entrada = raiz.querySelector('input')
-    const lista = raiz.querySelector('.resultados')
-    let activo = -1
-    const pintar = () => {
-      const q = normalizar(entrada.value.trim())
-      if (!q) {
-        lista.hidden = true
-        entrada.setAttribute('aria-expanded', 'false')
-        return
-      }
-      const halla = INDICE.filter(([t, tipo]) => normalizar(t + ' ' + tipo).includes(q)).slice(0, 8)
-      activo = halla.length ? 0 : -1
-      lista.innerHTML = halla.length
-        ? halla.map(([t, tipo, url], i) => `<li role="option" id="resultado-${i}" aria-selected="${i === 0}"><a href="${url}" tabindex="-1">${icono('buscar', 'icono-sm')}<span>${t}</span><small>${tipo}</small></a></li>`).join('')
-        : `<li role="option" aria-disabled="true"><span>No hay resultados para «${entrada.value.trim().replace(/</g, '&lt;')}».</span></li>`
-      lista.hidden = false
-      entrada.setAttribute('aria-expanded', 'true')
-      entrada.setAttribute('aria-activedescendant', activo >= 0 ? 'resultado-0' : '')
-    }
-    const marcar = (i) => {
-      const opciones = [...lista.querySelectorAll('[role=option] a')]
-      if (!opciones.length) return
-      activo = (i + opciones.length) % opciones.length
-      lista.querySelectorAll('[role=option]').forEach((li, j) => li.setAttribute('aria-selected', String(j === activo)))
-      entrada.setAttribute('aria-activedescendant', 'resultado-' + activo)
-    }
-    entrada.addEventListener('input', pintar)
-    entrada.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowDown') { e.preventDefault(); marcar(activo + 1) }
-      if (e.key === 'ArrowUp') { e.preventDefault(); marcar(activo - 1) }
-      if (e.key === 'Enter' && activo >= 0) {
-        e.preventDefault()
-        const a = lista.querySelectorAll('[role=option] a')[activo]
-        if (a) navegar(a.getAttribute('href'))
-      }
-      if (e.key === 'Escape') { entrada.value = ''; pintar() }
-    })
-    entrada.addEventListener('blur', () => setTimeout(() => { lista.hidden = true; entrada.setAttribute('aria-expanded', 'false') }, 150))
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); entrada.focus() }
-    })
-  }
 
   // ---------------------------------------------------------------- Estructura de la página
   const montarEstructura = () => {
@@ -293,15 +224,6 @@
         <header class="barra">
           <button class="boton boton-fantasma boton-icono barra-menu" type="button" aria-label="Abrir el menú" aria-controls="menu-lateral" aria-expanded="false">${icono('menu')}</button>
           <nav class="ruta" aria-label="Ruta"><ol>${htmlMigas}</ol></nav>
-          <div class="buscador-global" role="search">
-            <div class="campo-con-icono">
-              ${icono('buscar', 'icono-sm')}
-              <label class="oculto-visual" for="buscar-en-el-panel">Buscar en el panel</label>
-              <input class="entrada" id="buscar-en-el-panel" type="search" placeholder="Buscar en el panel" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="resultados-globales" aria-autocomplete="list">
-              <span class="atajo" aria-hidden="true">Ctrl K</span>
-            </div>
-            <ul class="resultados" id="resultados-globales" role="listbox" aria-label="Resultados" hidden></ul>
-          </div>
         </header>
       </div>`
     contenido.id = 'contenido'
@@ -309,7 +231,6 @@
     contenido.tabIndex = -1
     document.body.prepend(panel)
     panel.querySelector('.principal').append(contenido)
-    iniciarBuscadorGlobal(panel.querySelector('.buscador-global'))
     iniciarCajon(panel)
   }
 

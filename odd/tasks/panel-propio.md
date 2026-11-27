@@ -22,7 +22,7 @@ Texto del encargo, literal (L1). Cada bloque es una especificación.
 - «Paleta tomada del logo del cliente: un color de marca para la acción principal, un neutro teñido del color dominante para superficies y bordes, y colores de estado con significado fijo (pendiente, en curso, listo, error).»
 - «Tema claro por defecto, salvo que el uso real indique otra cosa.»
 - «Una tipografía de interfaz legible para todo; la tipografía de la marca solo en el nombre y los títulos principales.»
-- «Menú lateral con la marca arriba, secciones agrupadas por tarea, contadores de pendientes y el usuario abajo. Barra superior con la ruta y un buscador.»
+- «Menú lateral con la marca arriba, secciones agrupadas por tarea, contadores de pendientes y el usuario abajo. Barra superior con la ruta» (sin buscador en la barra: ver L4). Los buscadores de cada listado (S3) se mantienen.
 
 **S3. Patrones de pantalla.**
 - «Inicio: saludo según la hora y la fecha; tarjetas de «Requiere atención» que toman color solo si hay algo pendiente; cifras del negocio con ícono; tabla de pendientes con acción «Ver»; lista de lo que falta completar con su avance.»
@@ -46,8 +46,8 @@ Supuestos, marcados como tales (no son parte del encargo):
 | ID | Specs | Tarea | Ruta | Estado | Commit |
 |---|---|---|---|---|---|
 | P1 | S2, S3, S4.1 | Maqueta HTML navegable de las pantallas principales, con datos reales | delegada (contexto largo de la sesión) | hecha: `mockup/panel/index.html` | ver L3 |
-| P2 | S4.1 | Aprobación de la maqueta por Gian | — | esperando a Gian | — |
-| P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | por definir | bloqueada por P2 | — |
+| P2 | S4.1 | Aprobación de la maqueta por Gian | — | aprobada (L4) | — |
+| P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | en curso | — |
 | P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario | por definir | bloqueada por P2 | — |
 | P5 | S1, S3, S4.2 | Fase 3: el catálogo principal | por definir | bloqueada por P2 | — |
 | P6 | S1, S3, S4.2 | Fase 4: el resto de secciones | por definir | bloqueada por P2 | — |
@@ -91,4 +91,14 @@ Supuestos, marcados como tales (no son parte del encargo):
   - e) hoy solo el administrador borra mensajes: ¿también los editores?;
   - f) avisos, vencimientos y cronograma SUNAT van en una sola pantalla «Guía de clientes».
 
-Siguiente paso: P2. No se programa nada del panel hasta que Gian apruebe la maqueta.
+**L4** (27/11/2026), Gian sobre la maqueta, literal: «aprobado pero el buscador está demás».
+- Se quitó el buscador de la barra superior (maqueta y S2). Interpretación del orquestador: se refiere al buscador global de la barra; los buscadores de los listados son parte de S3 y se mantienen.
+- Gian no respondió las preguntas de L3. Al aprobar la maqueta quedan como se muestran en ella, y se le informa:
+  - a) sin campos bilingües mientras el sitio tenga un solo idioma;
+  - b) la tarea de uso diario son los mensajes de contacto (P4);
+  - c) el catálogo principal son los planes (P5); las áreas de servicio van en P6;
+  - d) el interruptor «visible» de los planes se construye, con su cambio de esquema, en P5;
+  - e) solo el administrador borra mensajes, como hoy;
+  - f) una sola pantalla «Guía de clientes».
+
+Siguiente paso: P3.
