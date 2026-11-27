@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { ACCESO_DE_CONTENIDO } from '@/compartido/infraestructura/acceso'
 import { campoOrden } from '@/compartido/infraestructura/campos/campos-comunes'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 // Íconos disponibles en el sitio. Son símbolos SVG del código, por eso la lista es cerrada.
 const ICONOS = [
@@ -20,7 +21,10 @@ export const coleccionValores: CollectionConfig = {
   admin: {
     useAsTitle: 'nombre',
     defaultColumns: ['nombre', 'icono', 'orden'],
-    group: 'Inicio',
+    listSearchableFields: ['nombre'],
+    group: GRUPOS_DEL_PANEL.inicio,
+    description:
+      'Valores del estudio que aparecen, con su ícono, en la sección «¿Por qué elegirnos?» del inicio.',
   },
   defaultSort: 'orden',
   access: ACCESO_DE_CONTENIDO,

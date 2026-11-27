@@ -2,6 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 import { accesoPublico, soloEquipo } from '@/compartido/infraestructura/acceso'
 import { campoSeo } from '@/compartido/infraestructura/campos/campos-comunes'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 import { bloqueClientes } from '@/modulos/clientes/infraestructura/bloque-clientes'
 import { bloqueContacto } from '@/modulos/contacto/infraestructura/bloque-contacto'
 import { bloquePorQueElegirnos } from '@/modulos/nosotros/infraestructura/bloque-por-que-elegirnos'
@@ -20,13 +21,22 @@ export const globalPaginaDeInicio: GlobalConfig = {
   // Prefijo corto de las tablas: los bloques anidados superan el límite de 63 caracteres
   // de PostgreSQL con el nombre completo.
   dbName: 'inicio',
-  admin: { group: 'Inicio' },
+  admin: {
+    group: GRUPOS_DEL_PANEL.inicio,
+    description:
+      'Contenido de la página principal del sitio (/), sección por sección. Los planes, áreas, valores y clientes que muestran algunas secciones se editan en sus propias listas del grupo Inicio.',
+  },
   access: { read: accesoPublico, update: soloEquipo },
   fields: [
     {
       name: 'secciones',
       label: 'Secciones',
+      labels: { singular: 'Sección', plural: 'Secciones' },
       type: 'blocks',
+      admin: {
+        description:
+          'Se muestran en este orden. Arrastra una sección para moverla; si quitas una, deja de verse en el inicio.',
+      },
       blocks: [
         bloqueCarruselDePortadas,
         bloqueQuienesSomos,

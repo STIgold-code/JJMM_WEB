@@ -11,7 +11,10 @@ export const bloquePlanes: Block = {
   interfaceName: 'BloquePlanes',
   labels: { singular: 'Planes', plural: 'Planes' },
   fields: [
-    ...camposDeSeccion('planes'),
+    ...camposDeSeccion(
+      'planes',
+      'Sección «Nuestros planes» del inicio: la tabla comparativa. Los planes, sus características y lo que incluye cada uno se editan en el grupo Inicio. Nunca muestra precios: cada plan dice «Consultar».',
+    ),
     {
       name: 'encabezadoDeCaracteristicas',
       label: 'Encabezado de la columna de características',
@@ -31,6 +34,7 @@ export const bloquePlanes: Block = {
       label: 'Nota al pie de la tabla',
       type: 'text',
       validate: validarSinMontos,
+      admin: { description: 'Opcional. Sin montos ni precios.' },
     },
   ],
 }

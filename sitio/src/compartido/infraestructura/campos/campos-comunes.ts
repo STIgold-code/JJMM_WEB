@@ -16,17 +16,26 @@ export function campoOrden(): Field {
     defaultValue: 0,
     min: 0,
     index: true,
-    admin: { position: 'sidebar', description: 'Menor número, primero.' },
+    admin: {
+      position: 'sidebar',
+      description:
+        'Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.',
+    },
   }
 }
 
+// Ocultar sin borrar: lo desmarcado deja de verse en el sitio y conserva sus datos.
 export function campoActivo(etiqueta: string): Field {
   return {
     name: 'activo',
     label: etiqueta,
     type: 'checkbox',
     defaultValue: true,
-    admin: { position: 'sidebar' },
+    admin: {
+      position: 'sidebar',
+      description:
+        'Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.',
+    },
   }
 }
 
@@ -60,7 +69,10 @@ export function campoSeo(): Field {
     name: 'seo',
     label: 'SEO',
     type: 'group',
-    admin: { description: 'Opcional. Si lo dejas vacío, se usan los datos por defecto.' },
+    admin: {
+      description:
+        'Opcional. Es el título y el resumen que muestran Google y las redes sociales. Si lo dejas vacío, se usan los de «Configuración del sitio».',
+    },
     fields: [
       { name: 'titulo', label: 'Título', type: 'text' },
       { name: 'descripcion', label: 'Descripción', type: 'textarea', maxLength: 160 },
@@ -76,6 +88,10 @@ export function campoCelular(name: string, label: string): Field {
     type: 'text',
     required: true,
     validate: validarCelular,
-    admin: { description: 'Celular de 9 dígitos, por ejemplo 951 965 242.' },
+    admin: {
+      placeholder: '951 965 242',
+      description:
+        'Solo celulares peruanos: 9 dígitos que empiezan con 9, por ejemplo 951 965 242. Los teléfonos fijos no se aceptan.',
+    },
   }
 }

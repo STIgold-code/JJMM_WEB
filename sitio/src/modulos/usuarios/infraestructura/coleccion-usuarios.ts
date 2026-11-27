@@ -5,6 +5,7 @@ import {
   administradorOElMismoUsuario,
   soloAdministradores,
 } from '@/compartido/infraestructura/acceso'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 const SLUG = 'usuarios'
 
@@ -24,7 +25,10 @@ export const coleccionUsuarios: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'nombre', 'rol'],
-    group: 'Administración',
+    listSearchableFields: ['email', 'nombre'],
+    group: GRUPOS_DEL_PANEL.administracion,
+    description:
+      'Cuentas del panel. La primera cuenta que se crea es la del administrador. El administrador crea las cuentas y edita el menú y la configuración del sitio; un editor cambia el contenido y solo ve su propia cuenta.',
   },
   auth: true,
   access: {
@@ -51,7 +55,11 @@ export const coleccionUsuarios: CollectionConfig = {
       ],
       // Un editor no puede cambiarse el rol a sí mismo.
       access: { create: soloAdministradores, update: soloAdministradores },
-      admin: { position: 'sidebar' },
+      admin: {
+        position: 'sidebar',
+        description:
+          'Administrador: todo el panel, incluidas las cuentas, el menú principal y la configuración del sitio. Editor: textos, imágenes, planes, avisos, blog, sedes y mensajes; no puede crear cuentas, borrar mensajes ni cambiar su propio rol.',
+      },
     },
   ],
 }

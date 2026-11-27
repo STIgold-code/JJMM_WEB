@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
 import { ACCESO_DE_CONTENIDO } from '@/compartido/infraestructura/acceso'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 import { validarTextoDeLaCelda } from './validaciones-de-planes'
 
@@ -11,9 +12,10 @@ export const coleccionInclusionesDePlan: CollectionConfig = {
   labels: { singular: 'Inclusión de plan', plural: 'Inclusiones de plan' },
   admin: {
     defaultColumns: ['plan', 'caracteristica', 'tipo', 'texto'],
-    group: 'Inicio',
+    listSearchableFields: ['texto'],
+    group: GRUPOS_DEL_PANEL.inicio,
     description:
-      'Una fila por cada plan y característica. Lo que falte se muestra como no incluido.',
+      'Celdas de la tabla «Nuestros planes»: qué incluye cada plan en cada característica. Una sola por cada par plan y característica; lo que falte se muestra como no incluido.',
   },
   access: ACCESO_DE_CONTENIDO,
   indexes: [{ fields: ['plan', 'caracteristica'], unique: true }],
@@ -50,6 +52,11 @@ export const coleccionInclusionesDePlan: CollectionConfig = {
       label: 'Texto de la celda',
       type: 'text',
       validate: validarTextoDeLaCelda,
+      admin: {
+        placeholder: 'Consultar',
+        description:
+          'Solo si elegiste «Texto», por ejemplo «2 trabajadores» o «Consultar». No se aceptan montos.',
+      },
     },
   ],
 }

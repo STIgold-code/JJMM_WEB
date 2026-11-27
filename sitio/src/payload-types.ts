@@ -158,11 +158,16 @@ export interface UsuarioAuthOperations {
   };
 }
 /**
+ * Las nueve áreas del sistema SIGE Mype que aparecen en la rueda de «Nuestros servicios» del inicio, con lo que incluye cada una.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "areas-de-servicio".
  */
 export interface AreasDeServicio {
   id: number;
+  /**
+   * De P1 a P9, como en la rueda SIGE Mype.
+   */
   codigo: string;
   nombre: string;
   /**
@@ -181,37 +186,47 @@ export interface AreasDeServicio {
    */
   mensajeDeConsulta?: string | null;
   /**
-   * Puntos del polígono sobre la imagen de la rueda (coordenadas de 500 × 550).
+   * Marca el gajo de esta área en la rueda para que se pueda pulsar. Son puntos «x,y» separados por espacios, medidos sobre la imagen de la rueda de 500 × 550 píxeles. Solo cámbialo si cambia la imagen de la rueda; si lo dejas vacío, el área sigue en las pestañas pero no en la rueda.
    */
   poligonoEnLaRueda?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Columnas de la tabla «Nuestros planes» del inicio. Nunca se publican montos: en lugar del precio se muestra «Consultar», y el panel no acepta textos con montos.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "planes".
  */
 export interface Plane {
   id: number;
   nombre: string;
+  /**
+   * Opcional y sin montos. Por ahora el sitio no muestra esta descripción.
+   */
   descripcion?: string | null;
+  /**
+   * Por ahora el sitio no usa esta marca: la tabla muestra todos los planes igual.
+   */
   destacado?: boolean | null;
   /**
    * Por ejemplo «Hola, quiero información del plan Emprende.»
    */
   mensajeDeConsulta?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Filas de la tabla «Nuestros planes», por ejemplo «Libro Bancos mensual». Qué plan incluye cada una se marca en «Inclusiones de plan». Sin montos ni precios.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "caracteristicas-de-plan".
  */
@@ -219,14 +234,14 @@ export interface CaracteristicasDePlan {
   id: number;
   nombre: string;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Una fila por cada plan y característica. Lo que falte se muestra como no incluido.
+ * Celdas de la tabla «Nuestros planes»: qué incluye cada plan en cada característica. Una sola por cada par plan y característica; lo que falte se muestra como no incluido.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inclusiones-de-plan".
@@ -236,11 +251,16 @@ export interface InclusionesDePlan {
   plan: number | Plane;
   caracteristica: number | CaracteristicasDePlan;
   tipo: 'incluido' | 'no-incluido' | 'texto';
+  /**
+   * Solo si elegiste «Texto», por ejemplo «2 trabajadores» o «Consultar». No se aceptan montos.
+   */
   texto?: string | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Valores del estudio que aparecen, con su ícono, en la sección «¿Por qué elegirnos?» del inicio.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "valores".
  */
@@ -249,13 +269,15 @@ export interface Valore {
   nombre: string;
   icono: 'pulgar' | 'trofeo' | 'foco' | 'candado' | 'balanza' | 'equipo';
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Logotipos del carrusel «Nuestros clientes» del inicio. Publica solo clientes reales que aceptaron aparecer.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "clientes".
  */
@@ -268,21 +290,26 @@ export interface Cliente {
    */
   enlace?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
+  /**
+   * Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.
+   */
   activo?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Imágenes que usa el sitio: portadas, logotipos, fotos del blog. Sube aquí una imagen o hazlo directamente desde el campo donde la necesites.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "medios".
  */
 export interface Medio {
   id: number;
   /**
-   * Describe la imagen para quien no puede verla.
+   * Describe en una frase lo que muestra la imagen, para quien no puede verla y para Google. Por ejemplo «Rueda del sistema SIGE Mype con sus nueve áreas».
    */
   alt: string;
   updatedAt: string;
@@ -298,6 +325,8 @@ export interface Medio {
   focalY?: number | null;
 }
 /**
+ * Avisos de la página Guía de clientes (/guia), como el cierre tributario o de planilla: qué documentos enviar y hasta cuándo. Desmarca «Visible» para ocultar uno sin borrarlo.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "avisos-para-clientes".
  */
@@ -314,16 +343,24 @@ export interface AvisosParaCliente {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Opcional. Correo al que el cliente envía los documentos.
+   */
   correoDeContacto?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
+  /**
+   * Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.
+   */
   activo?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Obligaciones mensuales y anuales de la Guía de clientes (/guia), con cuándo vence cada una, explicado en palabras. Las fechas exactas van en «Cronogramas de SUNAT».
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "vencimientos".
  */
@@ -337,13 +374,15 @@ export interface Vencimiento {
   cuandoVence: string;
   nota?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Cronograma oficial de vencimientos de SUNAT que muestra la Guía de clientes (/guia): uno por periodo, con la fecha de cada último dígito del RUC. Cópialo tal como lo publica SUNAT.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cronogramas-sunat".
  */
@@ -370,6 +409,8 @@ export interface CronogramasSunat {
   createdAt: string;
 }
 /**
+ * Artículos del blog (/blog). «Guardar borrador» guarda tu trabajo sin mostrarlo al público; solo se ve en el sitio cuando pulsas «Publicar cambios». Para retirar uno ya publicado, usa «Despublicar».
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "publicaciones".
  */
@@ -384,6 +425,9 @@ export interface Publicacione {
    * Resumen que aparece en el listado. Máximo 300 caracteres.
    */
   extracto: string;
+  /**
+   * Opcional. Se ve en el listado del blog y al abrir el artículo.
+   */
   imagen?: (number | null) | Medio;
   contenido: {
     root: {
@@ -402,9 +446,12 @@ export interface Publicacione {
   };
   categoria: number | Categoria;
   etiquetas?: (number | Etiqueta)[] | null;
+  /**
+   * La fecha que ven los lectores; el blog ordena por ella, de la más reciente a la más antigua.
+   */
   fechaDePublicacion: string;
   /**
-   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   * Opcional. Es el título y el resumen que muestran Google y las redes sociales. Si lo dejas vacío, se usan los de «Configuración del sitio».
    */
   seo?: {
     titulo?: string | null;
@@ -415,6 +462,8 @@ export interface Publicacione {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Temas del blog, por ejemplo «Tributación». Cada publicación tiene una categoría y cada categoría tiene su página en /blog/categoria/….
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categorias".
  */
@@ -429,6 +478,8 @@ export interface Categoria {
   createdAt: string;
 }
 /**
+ * Palabras clave del blog, por ejemplo «IGV». Una publicación puede tener varias; cada etiqueta tiene su página en /blog/etiqueta/….
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "etiquetas".
  */
@@ -444,6 +495,8 @@ export interface Etiqueta {
   createdAt: string;
 }
 /**
+ * Mensajes que llegan desde el formulario «Contáctanos» del sitio, los más recientes primero. Cuando respondas uno, anota el celular o el correo de la persona y cámbialo a «Atendido».
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "mensajes-de-contacto".
  */
@@ -451,20 +504,28 @@ export interface MensajesDeContacto {
   id: number;
   nombre: string;
   /**
-   * Lo anota el equipo; el formulario del sitio no lo pide.
+   * Opcional. El formulario no lo pide: anótalo al responder, por ejemplo por WhatsApp. Solo celulares peruanos de 9 dígitos.
    */
   celular?: string | null;
   /**
-   * Lo anota el equipo; el formulario del sitio no lo pide.
+   * Opcional. El formulario no lo pide: anótalo si la persona te lo da.
    */
   correo?: string | null;
+  /**
+   * Lo que la persona eligió en «¿Qué necesitas?» del formulario.
+   */
   servicioDeInteres?: string | null;
   mensaje: string;
+  /**
+   * Todo mensaje llega como «Nuevo». Cámbialo a «Atendido» cuando ya lo respondiste; así el inicio del panel cuenta solo los pendientes.
+   */
   estado: 'nuevo' | 'atendido';
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Oficinas del estudio. Cada sede activa aparece en la cabecera, en el pie y como una pestaña de «Contáctanos». Desmarca «Activa» para ocultarla sin borrarla.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "sedes".
  */
@@ -477,33 +538,44 @@ export interface Sede {
   celulares?:
     | {
         /**
-         * Celular de 9 dígitos, por ejemplo 951 965 242.
+         * Solo celulares peruanos: 9 dígitos que empiezan con 9, por ejemplo 951 965 242. Los teléfonos fijos no se aceptan.
          */
         numero: string;
+        /**
+         * Márcalo si este celular responde mensajes de WhatsApp.
+         */
         tieneWhatsApp?: boolean | null;
         id?: string | null;
       }[]
     | null;
   correo?: string | null;
   /**
-   * En Google Maps: Compartir › Insertar un mapa, y copia la dirección de src (https://www.google.com/maps/embed?…). Se muestra al pulsar «Ver mapa». Si lo dejas vacío, el mapa se busca con la dirección de la sede.
+   * Opcional. Busca la sede en Google Maps, pulsa Compartir › Insertar un mapa y copia solo la dirección que está entre comillas después de src=; empieza con https://www.google.com/maps/embed. Un enlace normal de Google Maps no sirve. Se muestra al pulsar «Ver mapa»; si lo dejas vacío, el mapa se busca con la dirección de la sede.
    */
   enlaceDeMapa?: string | null;
   /**
-   * Menor número, primero.
+   * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
+  /**
+   * Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.
+   */
   activo?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
+ * Cuentas del panel. La primera cuenta que se crea es la del administrador. El administrador crea las cuentas y edita el menú y la configuración del sitio; un editor cambia el contenido y solo ve su propia cuenta.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "usuarios".
  */
 export interface Usuario {
   id: number;
   nombre?: string | null;
+  /**
+   * Administrador: todo el panel, incluidas las cuentas, el menú principal y la configuración del sitio. Editor: textos, imágenes, planes, avisos, blog, sedes y mensajes; no puede crear cuentas, borrar mensajes ni cambiar su propio rol.
+   */
   rol: 'administrador' | 'editor';
   updatedAt: string;
   createdAt: string;
@@ -951,11 +1023,16 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Contenido de la página principal del sitio (/), sección por sección. Los planes, áreas, valores y clientes que muestran algunas secciones se editan en sus propias listas del grupo Inicio.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pagina-de-inicio".
  */
 export interface PaginaDeInicio {
   id: number;
+  /**
+   * Se muestran en este orden. Arrastra una sección para moverla; si quitas una, deja de verse en el inicio.
+   */
   secciones?:
     | (
         | BloqueCarruselDePortadas
@@ -968,7 +1045,7 @@ export interface PaginaDeInicio {
       )[]
     | null;
   /**
-   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   * Opcional. Es el título y el resumen que muestran Google y las redes sociales. Si lo dejas vacío, se usan los de «Configuración del sitio».
    */
   seo?: {
     titulo?: string | null;
@@ -982,11 +1059,20 @@ export interface PaginaDeInicio {
  * via the `definition` "BloqueCarruselDePortadas".
  */
 export interface BloqueCarruselDePortadas {
+  /**
+   * Tiempo que se muestra cada portada antes de pasar a la siguiente.
+   */
   segundosPorPortada: number;
+  /**
+   * Carrusel con que abre el inicio. Las portadas rotan solas en este orden; arrástralas para cambiarlo. La primera lleva el título principal de la página.
+   */
   portadas?:
     | {
         imagen: number | Medio;
         imagenEsDecorativa?: boolean | null;
+        /**
+         * Si la dejas vacía, en el celular se usa la imagen principal.
+         */
         imagenParaCelular?: (number | null) | Medio;
         /**
          * Qué parte de la imagen se ve en pantallas angostas: 0 izquierda, 100 derecha.
@@ -995,7 +1081,7 @@ export interface BloqueCarruselDePortadas {
         disposicion: 'texto-izquierda' | 'texto-derecha' | 'imagen-completa';
         transicion: 'fundido' | 'izquierda' | 'bajar' | 'recorte';
         /**
-         * Marca la parte resaltada entre corchetes: «Contamos con [Sistema de Calidad] Genuino».
+         * Escribe entre corchetes la parte que quieres resaltar en color: «Contamos con [Sistema de Calidad] Genuino». Los corchetes no se ven en el sitio. Déjalo vacío si el texto ya está en la imagen.
          */
         titulo?: string | null;
         subtitulo?: string | null;
@@ -1035,13 +1121,19 @@ export interface BloqueCarruselDePortadas {
  */
 export interface BloqueQuienesSomos {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «Quiénes somos» del inicio: las cifras del estudio y su presentación.
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   /**
-   * Solo cifras reales del estudio.
+   * Solo cifras reales y comprobables del estudio, por ejemplo «Más de» 100 «clientes». No publiques cifras estimadas.
    */
   cifras?:
     | {
@@ -1077,13 +1169,19 @@ export interface BloqueQuienesSomos {
  */
 export interface BloqueServicios {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «Nuestros servicios» del inicio: la rueda SIGE Mype. Las áreas se editan en Inicio › Áreas de servicio.
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   /**
-   * Los gajos de cada área se dibujan sobre esta imagen (500 × 550).
+   * Los gajos de cada área se marcan sobre esta imagen. Si la reemplazas, usa una de 500 × 550 píxeles con la rueda en la misma posición.
    */
   imagenDeLaRueda: number | Medio;
   textoDelBoton: string;
@@ -1097,13 +1195,22 @@ export interface BloqueServicios {
  */
 export interface BloquePlanes {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «Nuestros planes» del inicio: la tabla comparativa. Los planes, sus características y lo que incluye cada uno se editan en el grupo Inicio. Nunca muestra precios: cada plan dice «Consultar».
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   encabezadoDeCaracteristicas: string;
   textoDelBoton: string;
+  /**
+   * Opcional. Sin montos ni precios.
+   */
   notaAlPie?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -1115,10 +1222,16 @@ export interface BloquePlanes {
  */
 export interface BloquePorQueElegirnos {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «¿Por qué elegirnos?» del inicio. Los valores que muestra se editan en Inicio › Valores.
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -1130,10 +1243,16 @@ export interface BloquePorQueElegirnos {
  */
 export interface BloqueClientes {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «Nuestros clientes» del inicio. Los logotipos se editan en Inicio › Clientes.
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -1145,10 +1264,16 @@ export interface BloqueClientes {
  */
 export interface BloqueContacto {
   /**
-   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   * Opcional. Nombre corto para que el menú lleve a esta sección, sin #. Si lo cambias, actualiza también el «Menú principal».
    */
   ancla?: string | null;
+  /**
+   * Sección «Contáctanos» del inicio: una pestaña por cada sede activa (Sitio › Sedes) y el formulario, cuyos mensajes llegan a Contacto › Mensajes de contacto.
+   */
   titulo: string;
+  /**
+   * Opcional. Texto corto que aparece debajo del título.
+   */
   bajada?: string | null;
   formulario: {
     titulo: string;
@@ -1174,6 +1299,8 @@ export interface BloqueContacto {
   blockType: 'contacto';
 }
 /**
+ * Títulos e introducción de la página Guía de clientes (/guia). Los avisos, vencimientos y cronogramas se editan en sus propias listas de este grupo.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "guia-de-clientes".
  */
@@ -1185,7 +1312,7 @@ export interface GuiaDeCliente {
   tituloDeVencimientos: string;
   tituloDelCronograma: string;
   /**
-   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   * Opcional. Es el título y el resumen que muestran Google y las redes sociales. Si lo dejas vacío, se usan los de «Configuración del sitio».
    */
   seo?: {
     titulo?: string | null;
@@ -1195,6 +1322,8 @@ export interface GuiaDeCliente {
   createdAt?: string | null;
 }
 /**
+ * Título, introducción y SEO del listado del blog (/blog). Los artículos se escriben en «Publicaciones».
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pagina-del-blog".
  */
@@ -1204,7 +1333,7 @@ export interface PaginaDelBlog {
   introduccion?: string | null;
   textoSinPublicaciones: string;
   /**
-   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   * Opcional. Es el título y el resumen que muestran Google y las redes sociales. Si lo dejas vacío, se usan los de «Configuración del sitio».
    */
   seo?: {
     titulo?: string | null;
@@ -1214,6 +1343,8 @@ export interface PaginaDelBlog {
   createdAt?: string | null;
 }
 /**
+ * Enlaces del menú de la cabecera y del menú del celular, en el orden en que se muestran. Solo el administrador puede cambiarlo.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "navegacion".
  */
@@ -1239,6 +1370,8 @@ export interface Navegacion {
   createdAt?: string | null;
 }
 /**
+ * Datos que usa todo el sitio: nombre y logotipo del estudio, celulares de WhatsApp y llamadas, correo, redes sociales y lo que muestra Google por defecto. Solo el administrador puede cambiarlos.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "configuracion-del-sitio".
  */
@@ -1255,7 +1388,7 @@ export interface ConfiguracionDelSitio {
   contacto: {
     correo: string;
     /**
-     * Celular de 9 dígitos, por ejemplo 951 965 242.
+     * Solo celulares peruanos: 9 dígitos que empiezan con 9, por ejemplo 951 965 242. Los teléfonos fijos no se aceptan.
      */
     celularWhatsApp: string;
     /**
@@ -1263,7 +1396,7 @@ export interface ConfiguracionDelSitio {
      */
     mensajeWhatsApp: string;
     /**
-     * Celular de 9 dígitos, por ejemplo 951 965 242.
+     * Solo celulares peruanos: 9 dígitos que empiezan con 9, por ejemplo 951 965 242. Los teléfonos fijos no se aceptan.
      */
     celularDeLlamadas: string;
     textoDelBotonFlotante: string;

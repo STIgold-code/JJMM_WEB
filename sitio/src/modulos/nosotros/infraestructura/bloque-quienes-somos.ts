@@ -8,13 +8,19 @@ export const bloqueQuienesSomos: Block = {
   interfaceName: 'BloqueQuienesSomos',
   labels: { singular: 'Quiénes somos', plural: 'Quiénes somos' },
   fields: [
-    ...camposDeSeccion('quienes-somos'),
+    ...camposDeSeccion(
+      'quienes-somos',
+      'Sección «Quiénes somos» del inicio: las cifras del estudio y su presentación.',
+    ),
     {
       name: 'cifras',
       label: 'Cifras',
       labels: { singular: 'Cifra', plural: 'Cifras' },
       type: 'array',
-      admin: { description: 'Solo cifras reales del estudio.' },
+      admin: {
+        description:
+          'Solo cifras reales y comprobables del estudio, por ejemplo «Más de» 100 «clientes». No publiques cifras estimadas.',
+      },
       fields: [
         {
           type: 'row',

@@ -1,0 +1,21 @@
+/* El logotipo tiene letras azul marino: sobre una placa blanca se lee igual en el tema claro y
+   en el oscuro del panel. */
+.logo {
+  display: inline-block;
+  padding: calc(var(--base) * 0.5) calc(var(--base) * 0.75);
+  border-radius: var(--style-radius-m);
+  background: #fff;
+  line-height: 0;
+}
+
+.logo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.icono {
+  display: block;
+  width: 100%;
+  max-width: 2rem;
+  height: auto;
+}

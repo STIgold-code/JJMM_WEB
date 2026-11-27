@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { ACCESO_DE_CONTENIDO } from '@/compartido/infraestructura/acceso'
 import { campoActivo, campoOrden } from '@/compartido/infraestructura/campos/campos-comunes'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 // Avisos de la guía de clientes (cierre tributario, cierre de planilla…), como texto y no
 // como imagen (S7).
@@ -11,7 +12,10 @@ export const coleccionAvisosParaClientes: CollectionConfig = {
   admin: {
     useAsTitle: 'titulo',
     defaultColumns: ['titulo', 'orden', 'activo'],
-    group: 'Guía de clientes',
+    listSearchableFields: ['titulo'],
+    group: GRUPOS_DEL_PANEL.guia,
+    description:
+      'Avisos de la página Guía de clientes (/guia), como el cierre tributario o de planilla: qué documentos enviar y hasta cuándo. Desmarca «Visible» para ocultar uno sin borrarlo.',
   },
   defaultSort: 'orden',
   access: ACCESO_DE_CONTENIDO,
@@ -31,7 +35,12 @@ export const coleccionAvisosParaClientes: CollectionConfig = {
       type: 'array',
       fields: [{ name: 'texto', label: 'Documento', type: 'text', required: true }],
     },
-    { name: 'correoDeContacto', label: 'Correo de contacto', type: 'email' },
+    {
+      name: 'correoDeContacto',
+      label: 'Correo de contacto',
+      type: 'email',
+      admin: { description: 'Opcional. Correo al que el cliente envía los documentos.' },
+    },
     campoOrden(),
     campoActivo('Visible'),
   ],

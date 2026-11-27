@@ -7,5 +7,8 @@ export const bloqueClientes: Block = {
   slug: 'clientes',
   interfaceName: 'BloqueClientes',
   labels: { singular: 'Clientes', plural: 'Clientes' },
-  fields: camposDeSeccion(''),
+  fields: camposDeSeccion(
+    '',
+    'Sección «Nuestros clientes» del inicio. Los logotipos se editan en Inicio › Clientes.',
+  ),
 }

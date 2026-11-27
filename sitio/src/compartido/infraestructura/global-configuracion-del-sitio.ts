@@ -3,6 +3,7 @@ import type { Field, GlobalConfig } from 'payload'
 import { accesoPublico, soloAdministradores } from './acceso'
 import { campoCelular } from './campos/campos-comunes'
 import { validarUrlHttps } from './campos/validaciones'
+import { GRUPOS_DEL_PANEL } from './panel/grupos-del-panel'
 
 const MEDIOS = 'medios'
 
@@ -77,7 +78,11 @@ const camposDeSeo: Field[] = [
 export const globalConfiguracionDelSitio: GlobalConfig = {
   slug: 'configuracion-del-sitio',
   label: 'Configuración del sitio',
-  admin: { group: 'Sitio' },
+  admin: {
+    group: GRUPOS_DEL_PANEL.sitio,
+    description:
+      'Datos que usa todo el sitio: nombre y logotipo del estudio, celulares de WhatsApp y llamadas, correo, redes sociales y lo que muestra Google por defecto. Solo el administrador puede cambiarlos.',
+  },
   access: { read: accesoPublico, update: soloAdministradores },
   fields: [
     { name: 'marca', label: 'Marca', type: 'group', fields: camposDeMarca },

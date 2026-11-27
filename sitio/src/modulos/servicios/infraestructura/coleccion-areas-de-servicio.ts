@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 import { ACCESO_DE_CONTENIDO } from '@/compartido/infraestructura/acceso'
 import { campoOrden } from '@/compartido/infraestructura/campos/campos-comunes'
 import { comoTexto } from '@/compartido/infraestructura/campos/validaciones'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 import { esCodigoDeAreaValido, esListaDePuntosValida } from '../dominio/area-de-servicio'
 
@@ -21,7 +22,10 @@ export const coleccionAreasDeServicio: CollectionConfig = {
   admin: {
     useAsTitle: 'nombre',
     defaultColumns: ['codigo', 'nombre', 'orden'],
-    group: 'Inicio',
+    listSearchableFields: ['nombre', 'codigo'],
+    group: GRUPOS_DEL_PANEL.inicio,
+    description:
+      'Las nueve áreas del sistema SIGE Mype que aparecen en la rueda de «Nuestros servicios» del inicio, con lo que incluye cada una.',
   },
   defaultSort: 'orden',
   access: ACCESO_DE_CONTENIDO,
@@ -33,6 +37,7 @@ export const coleccionAreasDeServicio: CollectionConfig = {
       required: true,
       unique: true,
       validate: validarCodigo,
+      admin: { placeholder: 'P1', description: 'De P1 a P9, como en la rueda SIGE Mype.' },
     },
     { name: 'nombre', label: 'Nombre', type: 'text', required: true },
     {
@@ -62,7 +67,8 @@ export const coleccionAreasDeServicio: CollectionConfig = {
       type: 'text',
       validate: validarPuntos,
       admin: {
-        description: 'Puntos del polígono sobre la imagen de la rueda (coordenadas de 500 × 550).',
+        description:
+          'Marca el gajo de esta área en la rueda para que se pueda pulsar. Son puntos «x,y» separados por espacios, medidos sobre la imagen de la rueda de 500 × 550 píxeles. Solo cámbialo si cambia la imagen de la rueda; si lo dejas vacío, el área sigue en las pestañas pero no en la rueda.',
       },
     },
     campoOrden(),

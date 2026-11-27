@@ -8,14 +8,20 @@ export const bloqueServicios: Block = {
   interfaceName: 'BloqueServicios',
   labels: { singular: 'Servicios', plural: 'Servicios' },
   fields: [
-    ...camposDeSeccion('servicios'),
+    ...camposDeSeccion(
+      'servicios',
+      'Sección «Nuestros servicios» del inicio: la rueda SIGE Mype. Las áreas se editan en Inicio › Áreas de servicio.',
+    ),
     {
       name: 'imagenDeLaRueda',
       label: 'Imagen de la rueda SIGE Mype',
       type: 'upload',
       relationTo: 'medios',
       required: true,
-      admin: { description: 'Los gajos de cada área se dibujan sobre esta imagen (500 × 550).' },
+      admin: {
+        description:
+          'Los gajos de cada área se marcan sobre esta imagen. Si la reemplazas, usa una de 500 × 550 píxeles con la rueda en la misma posición.',
+      },
     },
     {
       name: 'textoDelBoton',

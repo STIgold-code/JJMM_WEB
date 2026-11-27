@@ -2,12 +2,17 @@ import type { GlobalConfig } from 'payload'
 
 import { accesoPublico, soloEquipo } from '@/compartido/infraestructura/acceso'
 import { campoSeo } from '@/compartido/infraestructura/campos/campos-comunes'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 // Textos propios de la página /guia. Los avisos, vencimientos y cronogramas son colecciones.
 export const globalGuiaDeClientes: GlobalConfig = {
   slug: 'guia-de-clientes',
   label: 'Página de la guía',
-  admin: { group: 'Guía de clientes' },
+  admin: {
+    group: GRUPOS_DEL_PANEL.guia,
+    description:
+      'Títulos e introducción de la página Guía de clientes (/guia). Los avisos, vencimientos y cronogramas se editan en sus propias listas de este grupo.',
+  },
   access: { read: accesoPublico, update: soloEquipo },
   fields: [
     { name: 'titulo', label: 'Título', type: 'text', required: true },

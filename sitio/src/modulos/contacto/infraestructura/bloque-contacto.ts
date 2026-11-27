@@ -48,7 +48,10 @@ export const bloqueContacto: Block = {
   interfaceName: 'BloqueContacto',
   labels: { singular: 'Contacto', plural: 'Contacto' },
   fields: [
-    ...camposDeSeccion('contacto'),
+    ...camposDeSeccion(
+      'contacto',
+      'Sección «Contáctanos» del inicio: una pestaña por cada sede activa (Sitio › Sedes) y el formulario, cuyos mensajes llegan a Contacto › Mensajes de contacto.',
+    ),
     { name: 'formulario', label: 'Formulario', type: 'group', fields: camposDelFormulario },
     { name: 'canales', label: 'Botones de cada sede', type: 'group', fields: camposDeCanales },
   ],

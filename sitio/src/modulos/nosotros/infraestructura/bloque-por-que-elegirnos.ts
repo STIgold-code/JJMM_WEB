@@ -7,5 +7,8 @@ export const bloquePorQueElegirnos: Block = {
   slug: 'por-que-elegirnos',
   interfaceName: 'BloquePorQueElegirnos',
   labels: { singular: '¿Por qué elegirnos?', plural: '¿Por qué elegirnos?' },
-  fields: camposDeSeccion(''),
+  fields: camposDeSeccion(
+    '',
+    'Sección «¿Por qué elegirnos?» del inicio. Los valores que muestra se editan en Inicio › Valores.',
+  ),
 }

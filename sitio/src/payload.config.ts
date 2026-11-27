@@ -7,6 +7,10 @@ import { fileURLToPath } from 'url'
 
 import { crearAlmacenamientoWasabi } from './compartido/infraestructura/almacenamiento-wasabi'
 import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
+import {
+  ADMIN_DEL_PANEL,
+  I18N_DEL_PANEL,
+} from './compartido/infraestructura/panel/configuracion-del-panel'
 import { COLECCIONES, GLOBALES } from './contenido'
 import { migrations } from './migrations'
 import { coleccionUsuarios } from './modulos/usuarios/infraestructura/coleccion-usuarios'
@@ -16,11 +20,13 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    ...ADMIN_DEL_PANEL,
     user: coleccionUsuarios.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+  i18n: I18N_DEL_PANEL,
   collections: COLECCIONES,
   globals: GLOBALES,
   editor: lexicalEditor(),

@@ -2,13 +2,18 @@ import type { GlobalConfig } from 'payload'
 
 import { accesoPublico, soloAdministradores } from '@/compartido/infraestructura/acceso'
 import { camposDeEnlace } from '@/compartido/infraestructura/campos/campos-de-enlace'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 // Menú principal del sitio (cabecera y menú del celular), en el orden en que se muestra.
 // SIGEFact es un ítem externo con logo y pestaña nueva (S7).
 export const globalNavegacion: GlobalConfig = {
   slug: 'navegacion',
   label: 'Menú principal',
-  admin: { group: 'Sitio' },
+  admin: {
+    group: GRUPOS_DEL_PANEL.sitio,
+    description:
+      'Enlaces del menú de la cabecera y del menú del celular, en el orden en que se muestran. Solo el administrador puede cambiarlo.',
+  },
   access: { read: accesoPublico, update: soloAdministradores },
   fields: [
     {

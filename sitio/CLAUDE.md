@@ -78,6 +78,14 @@ Bloques de `pagina-de-inicio`: `carrusel-de-portadas`, `quienes-somos`, `servici
 
 **Acceso:** el contenido lo lee cualquiera y lo escribe el equipo (`ACCESO_DE_CONTENIDO`). `configuracion-del-sitio`, `navegacion` y la gestión de usuarios son solo del administrador; un editor solo ve y edita su propia cuenta y no puede cambiar su rol. El público solo lee publicaciones publicadas. `mensajes-de-contacto` lo crea cualquiera y lo lee solo el equipo. El primer usuario que se crea queda como administrador.
 
+**Panel (`compartido/infraestructura/panel/`):**
+
+- `configuracion-del-panel.ts` define idioma (solo español, `@payloadcms/translations`), formato de fecha, `meta` (título «· Panel JJMM», íconos) y los componentes propios; `payload.config.ts` lo une con el resto.
+- Logotipo de ingreso e ícono de la barra: `compartido/componentes/panel/` con imágenes estáticas de `public/panel/` (funcionan con la base vacía). El inicio del panel (`beforeDashboard`) es `infraestructura/panel/inicio-del-panel.tsx`: recibe `payload` para contar los mensajes nuevos, por eso no vive en `componentes/`.
+- Colores: `app/(payload)/custom.scss` reemplaza la escala `--color-base-*` de Payload por una azulada con la misma luminancia por paso, así los temas claro y oscuro conservan su contraste.
+- Grupos del menú: `GRUPOS_DEL_PANEL` (`grupos-del-panel.ts`). Payload los ordena por la primera aparición en `contenido.ts`. Toda colección y global lleva `admin.description` y grupo; las colecciones, `listSearchableFields`. Los bloques no admiten descripción: `camposDeSeccion(ancla, queMuestra)` la pone como ayuda del título. `configuracion-del-panel.test.ts` lo exige.
+- Tras agregar o mover un componente del panel: `pnpm generate:importmap`.
+
 **Validaciones:** las reglas de negocio viven en `dominio/` con pruebas, y `compartido/infraestructura/campos/validaciones.ts` las adapta a la firma `validate` de Payload. Un `validate` propio reemplaza al de `required`, así que cada adaptador resuelve el campo vacío. Celulares (nunca fijos), montos en planes (prohibidos), destinos de enlace por tipo, slugs, códigos P1–P9, gajos de la rueda y cronogramas con una fecha por dígito del RUC.
 
 **Orden:** las colecciones ordenables usan un campo numérico `orden` (menor primero), no `orderable` de Payload, que todavía es experimental.

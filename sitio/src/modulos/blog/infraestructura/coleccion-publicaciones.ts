@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { publicadoOEquipo, soloEquipo } from '@/compartido/infraestructura/acceso'
 import { campoSeo, campoSlug } from '@/compartido/infraestructura/campos/campos-comunes'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 // Artículos del blog. Usan borradores de Payload: el público solo lee lo publicado.
 // No hay comentarios (decisión L10).
@@ -10,8 +11,11 @@ export const coleccionPublicaciones: CollectionConfig = {
   labels: { singular: 'Publicación', plural: 'Publicaciones' },
   admin: {
     useAsTitle: 'titulo',
-    defaultColumns: ['titulo', 'categoria', 'fechaDePublicacion', '_status'],
-    group: 'Blog',
+    defaultColumns: ['titulo', '_status', 'fechaDePublicacion', 'categoria'],
+    listSearchableFields: ['titulo', 'extracto'],
+    group: GRUPOS_DEL_PANEL.blog,
+    description:
+      'Artículos del blog (/blog). «Guardar borrador» guarda tu trabajo sin mostrarlo al público; solo se ve en el sitio cuando pulsas «Publicar cambios». Para retirar uno ya publicado, usa «Despublicar».',
   },
   defaultSort: '-fechaDePublicacion',
   access: {
@@ -32,7 +36,13 @@ export const coleccionPublicaciones: CollectionConfig = {
       maxLength: 300,
       admin: { description: 'Resumen que aparece en el listado. Máximo 300 caracteres.' },
     },
-    { name: 'imagen', label: 'Imagen principal', type: 'upload', relationTo: 'medios' },
+    {
+      name: 'imagen',
+      label: 'Imagen principal',
+      type: 'upload',
+      relationTo: 'medios',
+      admin: { description: 'Opcional. Se ve en el listado del blog y al abrir el artículo.' },
+    },
     { name: 'contenido', label: 'Contenido', type: 'richText', required: true },
     {
       name: 'categoria',
@@ -58,7 +68,12 @@ export const coleccionPublicaciones: CollectionConfig = {
       required: true,
       index: true,
       defaultValue: () => new Date().toISOString(),
-      admin: { position: 'sidebar', date: { pickerAppearance: 'dayAndTime' } },
+      admin: {
+        position: 'sidebar',
+        date: { pickerAppearance: 'dayAndTime' },
+        description:
+          'La fecha que ven los lectores; el blog ordena por ella, de la más reciente a la más antigua.',
+      },
     },
     campoSeo(),
   ],

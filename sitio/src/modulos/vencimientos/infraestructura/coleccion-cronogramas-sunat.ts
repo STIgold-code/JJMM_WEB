@@ -2,6 +2,7 @@ import type { CollectionConfig, FieldHook } from 'payload'
 
 import { ACCESO_DE_CONTENIDO } from '@/compartido/infraestructura/acceso'
 import { comoTexto, leerCampo } from '@/compartido/infraestructura/campos/validaciones'
+import { GRUPOS_DEL_PANEL } from '@/compartido/infraestructura/panel/grupos-del-panel'
 
 import {
   type FechaPorDigito,
@@ -29,7 +30,10 @@ export const coleccionCronogramasSunat: CollectionConfig = {
   admin: {
     useAsTitle: 'periodo',
     defaultColumns: ['periodo', 'anio', 'mes'],
-    group: 'Guía de clientes',
+    listSearchableFields: ['periodo'],
+    group: GRUPOS_DEL_PANEL.guia,
+    description:
+      'Cronograma oficial de vencimientos de SUNAT que muestra la Guía de clientes (/guia): uno por periodo, con la fecha de cada último dígito del RUC. Cópialo tal como lo publica SUNAT.',
   },
   defaultSort: ['-anio', '-mes'],
   access: ACCESO_DE_CONTENIDO,

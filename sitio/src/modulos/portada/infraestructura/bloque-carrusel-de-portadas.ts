@@ -21,6 +21,7 @@ const camposDeImagen: Field[] = [
     label: 'Imagen para celular (opcional)',
     type: 'upload',
     relationTo: 'medios',
+    admin: { description: 'Si la dejas vacía, en el celular se usa la imagen principal.' },
   },
   {
     name: 'encuadreEnCelular',
@@ -69,8 +70,9 @@ const camposDeTexto: Field[] = [
     type: 'text',
     validate: validarTitulo,
     admin: {
+      placeholder: 'Contamos con [Sistema de Calidad] Genuino',
       description:
-        'Marca la parte resaltada entre corchetes: «Contamos con [Sistema de Calidad] Genuino».',
+        'Escribe entre corchetes la parte que quieres resaltar en color: «Contamos con [Sistema de Calidad] Genuino». Los corchetes no se ven en el sitio. Déjalo vacío si el texto ya está en la imagen.',
     },
   },
   { name: 'subtitulo', label: 'Subtítulo', type: 'textarea' },
@@ -102,6 +104,7 @@ export const bloqueCarruselDePortadas: Block = {
       defaultValue: 9,
       min: 3,
       max: 30,
+      admin: { description: 'Tiempo que se muestra cada portada antes de pasar a la siguiente.' },
     },
     {
       name: 'portadas',
@@ -109,6 +112,10 @@ export const bloqueCarruselDePortadas: Block = {
       labels: { singular: 'Portada', plural: 'Portadas' },
       type: 'array',
       minRows: 1,
+      admin: {
+        description:
+          'Carrusel con que abre el inicio. Las portadas rotan solas en este orden; arrástralas para cambiarlo. La primera lleva el título principal de la página.',
+      },
       fields: [...camposDeImagen, ...camposDePresentacion, ...camposDeTexto],
     },
   ],
