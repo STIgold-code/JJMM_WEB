@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresa al panel · Estudio Contable JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pantalla="ingreso" data-maqueta="ingreso">
+  <div class="ingreso">
+    <main class="ingreso-formulario">
+      <div class="ingreso-caja">
+        <img src="img/logo-jjmm.png" alt="JJMM, Mariñas &amp; Asociados, Estudio Contable" width="216" height="128">
+        <div class="pila-sm">
+          <h1 class="titulo-pagina">Ingresa al panel</h1>
+          <p class="texto-suave">Administra el sitio web del estudio: mensajes, planes, sedes y publicaciones.</p>
+        </div>
+
+        <div class="alerta" id="alerta-ingreso" role="alert" tabindex="-1" hidden>
+          <span data-icono="alerta"></span>
+          <p>El correo o la contraseña no son correctos. Revísalos e inténtalo de nuevo.</p>
+        </div>
+
+        <form class="pila-sm" id="form-ingreso" novalidate>
+          <div class="campo">
+            <label for="correo">Correo</label>
+            <input class="entrada" id="correo" type="email" autocomplete="username" placeholder="tu@correo.com" aria-describedby="alerta-ingreso">
+          </div>
+          <div class="campo">
+            <label for="clave">Contraseña</label>
+            <div class="contrasena">
+              <input class="entrada" id="clave" type="password" autocomplete="current-password">
+              <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-ver-contrasena aria-pressed="false" aria-label="Mostrar la contraseña"><span data-icono="ojo"></span></button>
+            </div>
+          </div>
+          <button class="boton boton-principal boton-bloque" type="submit">Ingresar</button>
+          <p class="ayuda">¿Olvidaste tu contraseña? Pídele al administrador del panel que te asigne una nueva.</p>
+        </form>
+      </div>
+    </main>
+    <div class="ingreso-imagen" aria-hidden="true">
+      <p>Cada empresa guiada por nuestro sistema, llega a ser líder.</p>
+    </div>
+  </div>
+</body>
+</html>

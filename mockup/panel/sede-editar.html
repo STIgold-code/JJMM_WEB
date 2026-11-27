@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sede San Martín de Porres · Sedes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="sedes" data-pantalla="sede" data-migas="Inicio|inicio.html>Sedes|sedes.html>Sede San Martín de Porres">
+  <main>
+    <form data-edicion data-aviso-guardado="La cabecera, el pie y «Contáctanos» ya muestran los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="sedes.html"><span data-icono="volver" class="icono-sm"></span>Sedes</a>
+          <h1 class="titulo-pagina">Sede San Martín de Porres</h1>
+          <p>Lo que cambies aquí se ve en la cabecera, en el pie y en la pestaña de esta sede en «Contáctanos».</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-direccion">
+            <div class="tarjeta-cabecera"><h2 id="titulo-direccion">Nombre y dirección</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo ancho-completo">
+                <label for="sede-nombre">Nombre</label>
+                <input class="entrada" id="sede-nombre" value="Sede San Martín de Porres" required>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="sede-direccion">Dirección</label>
+                <input class="entrada" id="sede-direccion" value="Jr. Iquitos 593" required>
+              </div>
+              <div class="campo">
+                <label for="sede-distrito">Distrito</label>
+                <input class="entrada" id="sede-distrito" value="San Martín de Porres" required>
+              </div>
+              <div class="campo">
+                <label for="sede-ciudad">Ciudad</label>
+                <input class="entrada" id="sede-ciudad" value="Lima" required>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-contacto">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2 id="titulo-contacto">Celulares y correo</h2>
+                <p>Solo celulares de 9 dígitos; el sitio no publica teléfonos fijos.</p>
+              </div>
+            </div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="nota nota-pendiente"><span data-icono="alerta"></span><p>Por confirmar con el estudio: qué celular corresponde a esta sede y cuáles atienden por WhatsApp. Hoy ambas sedes muestran los dos.</p></div>
+              <ul class="ordenable" id="lista-celulares" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+                <li>
+                  <div class="campo" style="flex: 1">
+                    <label for="cel-1">Celular</label>
+                    <input class="entrada" id="cel-1" value="951 965 242" inputmode="numeric" required>
+                    <p class="error-campo" hidden><span data-icono="alerta" class="icono-sm"></span>Escribe un celular de 9 dígitos que empiece con 9.</p>
+                  </div>
+                  <div class="ordenable-acciones">
+                    <button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="951 965 242 atiende por WhatsApp"></button><span class="texto-sm">Atiende por WhatsApp</span>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-celular aria-label="Quitar este celular"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+                <li>
+                  <div class="campo" style="flex: 1">
+                    <label for="cel-2">Celular</label>
+                    <input class="entrada" id="cel-2" value="952 249 102" inputmode="numeric" required>
+                    <p class="error-campo" hidden><span data-icono="alerta" class="icono-sm"></span>Escribe un celular de 9 dígitos que empiece con 9.</p>
+                  </div>
+                  <div class="ordenable-acciones">
+                    <button class="interruptor" type="button" role="switch" aria-checked="false" aria-label="952 249 102 atiende por WhatsApp"></button><span class="texto-sm">Atiende por WhatsApp</span>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-celular aria-label="Quitar este celular"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </ul>
+              <template id="plantilla-celular">
+                <li>
+                  <div class="campo" style="flex: 1">
+                    <label>Celular</label>
+                    <input class="entrada" value="" inputmode="numeric" placeholder="9XX XXX XXX" required>
+                    <p class="error-campo" hidden><svg class="icono icono-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>Escribe un celular de 9 dígitos que empiece con 9.</p>
+                  </div>
+                  <div class="ordenable-acciones">
+                    <button class="interruptor" type="button" role="switch" aria-checked="false" aria-label="El nuevo celular atiende por WhatsApp"></button><span class="texto-sm">Atiende por WhatsApp</span>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-celular aria-label="Quitar este celular"><svg class="icono icono-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+                  </div>
+                </li>
+              </template>
+              <div><button class="boton boton-secundario boton-sm" type="button" id="agregar-celular"><span data-icono="mas" class="icono-sm"></span>Agregar celular</button></div>
+              <div class="campo">
+                <label for="sede-correo">Correo</label>
+                <input class="entrada" id="sede-correo" type="email" value="contabilidad@jjmm.com.pe">
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-mapa">
+            <div class="tarjeta-cabecera"><h2 id="titulo-mapa">Mapa</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="sede-mapa">Mapa insertado de Google Maps</label>
+                <input class="entrada" id="sede-mapa" value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15608.707509981834!2d-77.08950189118585!3d-12.03134101480463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ceb0a5b6860b%3A0xb62bd9617941db!2sESTUDIO+CONTABLE+JJMM+SAC!5e0!3m2!1ses!2spe!4v1520698936292" placeholder="https://www.google.com/maps/embed?pb=…" aria-describedby="error-mapa ayuda-mapa">
+                <p class="error-campo" id="error-mapa" hidden><span data-icono="alerta" class="icono-sm"></span>Ese no es un mapa insertado. Debe empezar con https://www.google.com/maps/embed.</p>
+                <p class="ayuda" id="ayuda-mapa">Opcional. Si lo dejas vacío, «Ver mapa» busca la dirección de la sede.</p>
+              </div>
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Cómo obtener el mapa insertado</summary>
+                <ol style="margin: 0.5rem 0 0; padding-left: 1.2rem">
+                  <li>Busca la sede en Google Maps.</li>
+                  <li>Pulsa «Compartir» y luego «Insertar un mapa».</li>
+                  <li>En el código que aparece, copia solo lo que está entre comillas después de <code>src=</code>.</li>
+                  <li>Pégalo aquí. Un enlace normal de Google Maps no sirve.</li>
+                </ol>
+              </details>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-publicacion">
+            <div class="tarjeta-cabecera"><h2 id="titulo-publicacion">Publicación</h2></div>
+            <div class="tarjeta-cuerpo fila-interruptor">
+              <button class="interruptor" type="button" role="switch" aria-checked="true" aria-labelledby="sede-visible-etq" aria-describedby="sede-visible-ayuda"></button>
+              <div><p class="etiqueta" id="sede-visible-etq">Visible en el sitio</p><p class="ayuda" id="sede-visible-ayuda">Apágala para ocultar la sede sin borrarla, por ejemplo durante una mudanza.</p></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Contáctanos» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica publica-contacto">
+              <p class="publica-titulo">Contáctanos</p>
+              <div class="publica-pestanas" aria-hidden="true"><span class="activa" data-reflejo="sede">San Martín de Porres</span><span>San Isidro</span></div>
+              <div class="publica-sede">
+                <h3>Sede <span data-reflejo="sede">San Martín de Porres</span></h3>
+                <p data-reflejo="direccion">Jr. Iquitos 593, San Martín de Porres, Lima</p>
+                <div class="publica-botones" id="vista-botones"></div>
+                <p class="error-campo" id="vista-sin-whatsapp" hidden><span data-icono="alerta" class="icono-sm"></span>Ningún celular de esta sede atiende por WhatsApp.</p>
+                <div class="publica-mapa">Ver mapa</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

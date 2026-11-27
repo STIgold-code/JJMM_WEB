@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-migas="Inicio|inicio.html>Página de inicio">
+  <main>
+    <form data-edicion data-aviso-guardado="El inicio del sitio ya muestra las secciones en este orden." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <h1 class="titulo-pagina">Página de inicio</h1>
+          <p>Las secciones del inicio del sitio, de arriba hacia abajo. Cámbialas de orden o abre una para editar sus textos e imágenes.</p>
+        </div>
+      </div>
+
+      <div class="edicion edicion-una-columna">
+        <section class="tarjeta" aria-labelledby="titulo-secciones">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2 id="titulo-secciones">Secciones</h2>
+              <p>Las listas (áreas, planes, valores, clientes y sedes) se editan en su propia pantalla; aquí van los títulos y textos de cada sección.</p>
+            </div>
+          </div>
+          <ol class="ordenable" data-ordenable>
+              <li data-id="carrusel" data-nombre="Carrusel de portadas">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">1</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="diseno" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Carrusel de portadas</strong><span>4 portadas, 9 segundos cada una</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Carrusel de portadas»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Carrusel de portadas»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" href="portadas.html">Editar</a>
+                </div>
+              </li>
+              <li data-id="quienes-somos" data-nombre="Quiénes somos">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">2</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="edificio" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Quiénes somos</strong><span>Presentación del estudio y 4 cifras</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Quiénes somos»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Quiénes somos»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+              <li data-id="servicios" data-nombre="Nuestros servicios empresariales integrales">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">3</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="maletin" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Nuestros servicios empresariales integrales</strong><span>Rueda SIGE Mype con las 9 áreas de servicio</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Nuestros servicios empresariales integrales»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Nuestros servicios empresariales integrales»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+              <li data-id="planes" data-nombre="Nuestros planes">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">4</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="capas" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Nuestros planes</strong><span>Tabla de 4 planes; los planes se editan en Planes</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Nuestros planes»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Nuestros planes»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-fantasma boton-sm" href="planes.html">Ir a Planes</a><a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+              <li data-id="por-que-elegirnos" data-nombre="¿Por qué elegirnos?">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">5</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="estrella" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>¿Por qué elegirnos?</strong><span>6 valores con su ícono</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «¿Por qué elegirnos?»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «¿Por qué elegirnos?»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+              <li data-id="clientes" data-nombre="Nuestros clientes">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">6</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="edificio" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Nuestros clientes</strong><span>11 logotipos de clientes</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Nuestros clientes»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Nuestros clientes»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+              <li data-id="contacto" data-nombre="Contáctanos">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">7</span>
+                <div class="celda-principal">
+                  <span class="icono-caja icono-caja-marca"><span data-icono="pin" class="icono-sm"></span></span>
+                  <div class="celda-principal-texto"><strong>Contáctanos</strong><span>Una pestaña por sede visible y el formulario</span></div>
+                </div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Contáctanos»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Contáctanos»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-fantasma boton-sm" href="sedes.html">Ir a Sedes</a><a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="Esta sección no forma parte de la maqueta">Editar</a>
+                </div>
+              </li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi cuenta · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="cuenta" data-pantalla="cuenta" data-migas="Inicio|inicio.html>Mi cuenta">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Mi cuenta</h1>
+        <p>Tus datos para entrar al panel.</p>
+      </div>
+    </div>
+
+    <div class="edicion edicion-una-columna">
+      <form class="tarjeta" data-edicion data-aviso-guardado="Tu nombre ya aparece en el menú." novalidate>
+        <div class="tarjeta-cabecera"><h2>Datos</h2><span class="ejemplo">Ejemplo</span></div>
+        <div class="tarjeta-cuerpo rejilla-campos">
+          <div class="campo"><label for="mi-nombre">Nombre</label><input class="entrada" id="mi-nombre" value="Cuenta del estudio"></div>
+          <div class="campo"><label for="mi-correo">Correo</label><input class="entrada" id="mi-correo" type="email" value="contabilidad@jjmm.com.pe" disabled aria-describedby="mi-correo-ayuda"><p class="ayuda" id="mi-correo-ayuda">Para cambiarlo, pídelo al administrador.</p></div>
+          <div class="campo"><span class="etiqueta">Rol</span><p><span class="insignia insignia-sin-punto" data-solo-admin>Administrador</span><span class="insignia insignia-sin-punto" data-solo-editor>Editor</span></p></div>
+        </div>
+        <div class="barra-guardado barra-guardado-tarjeta">
+          <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+          <span class="guardado" data-guardado></span>
+          <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+        </div>
+      </form>
+
+      <form class="tarjeta" id="form-contrasena" novalidate>
+        <div class="tarjeta-cabecera"><div><h2>Cambiar contraseña</h2><p>Usa una que no uses en otros sitios.</p></div></div>
+        <div class="tarjeta-cuerpo pila-sm">
+          <div class="campo">
+            <label for="clave-actual">Contraseña actual</label>
+            <div class="contrasena">
+              <input class="entrada" id="clave-actual" type="password" autocomplete="current-password" aria-describedby="error-actual">
+              <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-ver-contrasena aria-pressed="false" aria-label="Mostrar la contraseña"><span data-icono="ojo"></span></button>
+            </div>
+            <p class="error-campo" id="error-actual" hidden><span data-icono="alerta" class="icono-sm"></span>Escribe tu contraseña actual.</p>
+          </div>
+          <div class="campo">
+            <label for="clave-nueva">Contraseña nueva</label>
+            <div class="contrasena">
+              <input class="entrada" id="clave-nueva" type="password" autocomplete="new-password" aria-describedby="requisito-largo error-largo">
+              <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-ver-contrasena aria-pressed="false" aria-label="Mostrar la contraseña"><span data-icono="ojo"></span></button>
+            </div>
+            <p class="ayuda" id="requisito-largo" data-cumple="false"><span>Al menos 10 caracteres</span></p>
+            <p class="error-campo" id="error-largo" hidden><span data-icono="alerta" class="icono-sm"></span>La contraseña nueva necesita al menos 10 caracteres.</p>
+          </div>
+          <div class="campo">
+            <label for="clave-repetir">Repite la contraseña nueva</label>
+            <div class="contrasena">
+              <input class="entrada" id="clave-repetir" type="password" autocomplete="new-password" aria-describedby="error-igual">
+              <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-ver-contrasena aria-pressed="false" aria-label="Mostrar la contraseña"><span data-icono="ojo"></span></button>
+            </div>
+            <p class="error-campo" id="error-igual" hidden><span data-icono="alerta" class="icono-sm"></span>Las dos contraseñas no coinciden.</p>
+          </div>
+          <div><button class="boton boton-principal" type="submit">Cambiar contraseña</button></div>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

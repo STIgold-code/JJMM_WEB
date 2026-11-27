@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imágenes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="medios" data-pantalla="medios" data-migas="Inicio|inicio.html>Imágenes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Imágenes</h1>
+        <p>Todas las imágenes del sitio. Ábrelas para revisar su texto alternativo, que es lo que leen los lectores de pantalla y Google.</p>
+      </div>
+      <div class="cabecera-acciones">
+        <label class="boton boton-principal" for="subir-medio"><span data-icono="subir"></span>Subir imágenes</label>
+        <input class="oculto-visual" id="subir-medio" type="file" accept="image/*" multiple>
+      </div>
+    </div>
+
+    <section class="tarjeta" data-listado aria-label="Biblioteca de imágenes">
+      <div class="herramientas">
+        <div class="segmentado" data-filtros role="group" aria-label="Filtrar por uso">
+          <button type="button" data-filtro="todos" aria-pressed="true" data-vacio="No hay imágenes.">Todas <span class="conteo">0</span></button>
+          <button type="button" data-filtro="inicio" aria-pressed="false" data-vacio="No hay imágenes del inicio.">Inicio <span class="conteo">0</span></button>
+          <button type="button" data-filtro="clientes" aria-pressed="false" data-vacio="No hay logotipos de clientes.">Clientes <span class="conteo">0</span></button>
+          <button type="button" data-filtro="marca" aria-pressed="false" data-vacio="No hay imágenes de marca.">Marca <span class="conteo">0</span></button>
+        </div>
+        <div class="campo-con-icono">
+          <span data-icono="buscar" class="icono-sm"></span>
+          <label class="oculto-visual" for="buscar-medios">Buscar imágenes</label>
+          <input class="entrada" id="buscar-medios" type="search" placeholder="Buscar por nombre o uso" data-buscar>
+        </div>
+      </div>
+      <ul class="galeria">
+          <li data-fila data-estado="marca" class="logo"><button type="button" data-medio data-alt="JJMM, Mariñas &amp; Asociados, Estudio Contable" data-uso="Logotipo de la cabecera y del pie"><img src="img/logo-jjmm.png" alt="" loading="lazy"><span class="galeria-texto"><strong>logo-jjmm.png</strong><span>Logotipo de la cabecera y del pie</span></span></button></li>
+          <li data-fila data-estado="marca" class="logo"><button type="button" data-medio data-alt="Sello SIGE Mype del Grupo JJMM" data-uso="Sello del pie"><img src="img/logo-grupo-lenin.png" alt="" loading="lazy"><span class="galeria-texto"><strong>logo-grupo-lenin.png</strong><span>Sello del pie</span></span></button></li>
+          <li data-fila data-estado="marca" class="logo"><button type="button" data-medio data-alt="Sello SIGE Mype del Grupo JJMM" data-uso="Portada 3 del carrusel"><img src="img/sige-312.png" alt="" loading="lazy"><span class="galeria-texto"><strong>sige-312.png</strong><span>Portada 3 del carrusel</span></span></button></li>
+          <li data-fila data-estado="marca" class="logo"><button type="button" data-medio data-alt="SIGEFact, facturación electrónica" data-uso="Menú del sitio (SIGEFact)"><img src="img/sigefact.png" alt="" loading="lazy"><span class="galeria-texto"><strong>sigefact.png</strong><span>Menú del sitio (SIGEFact)</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Profesional con camisa del Grupo JJMM toca una pantalla digital con un mapamundi de fondo." data-uso="Portada 1 del carrusel"><img src="img/hero-plan.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>hero-plan.webp</strong><span>Portada 1 del carrusel</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Contamos con Sistema de Gestión Empresarial SIGE Mype. Somos más que un estudio contable. Asesoría gratuita." data-uso="Portada 2 del carrusel"><img src="img/banner-sige-mype.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>banner-sige-mype.webp</strong><span>Portada 2 del carrusel</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Contamos con Sistema de Gestión Empresarial SIGE Mype. Somos más que un estudio contable. Asesoría gratuita." data-uso="Portada 2 del carrusel, en celular"><img src="img/hero-sige-movil.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>hero-sige-movil.webp</strong><span>Portada 2 del carrusel, en celular</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Manos que señalan gráficos de barras en un informe, junto a una taza del Grupo JJMM." data-uso="Portada 3 del carrusel"><img src="img/hero-taza.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>hero-taza.webp</strong><span>Portada 3 del carrusel</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Equipo de trabajo que revisa gráficos financieros sobre una mesa con computadoras portátiles." data-uso="Portada 4 del carrusel y foto del mapa de «Contáctanos»"><img src="img/hero-equipo.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>hero-equipo.webp</strong><span>Portada 4 del carrusel y foto del mapa de «Contáctanos»</span></span></button></li>
+          <li data-fila data-estado="inicio"><button type="button" data-medio data-alt="Rueda SIGE Mype: la contabilidad al centro, rodeada por nueve áreas de servicio en un ciclo de mejora continua." data-uso="Sección «Nuestros servicios»"><img src="img/rueda-sige-mype.webp" alt="" loading="lazy"><span class="galeria-texto"><strong>rueda-sige-mype.webp</strong><span>Sección «Nuestros servicios»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Cadex" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo1.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo1.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Cliente del estudio (nombre por confirmar)" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo2.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo2.png</strong><span class="insignia" data-estado="pendiente" style="justify-self:start;margin-top:0.25rem">Nombre por confirmar</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Insutec" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo3.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo3.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Interfreeze" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo4.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo4.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Líneas Perú Travel" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo5.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo5.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Cliente del estudio (nombre por confirmar)" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo6.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo6.png</strong><span class="insignia" data-estado="pendiente" style="justify-self:start;margin-top:0.25rem">Nombre por confirmar</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Lineaz Tour Operador" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo7.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo7.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Empresa Pesquera Yabafish S.A.C." data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo8.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo8.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Faser Rent a Car" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo9.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo9.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="Samari S.A.C." data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo10.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo10.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+          <li data-fila data-estado="clientes" class="logo"><button type="button" data-medio data-alt="STI Gold" data-uso="Sección «Nuestros clientes»"><img src="img/clientes/client-logo11.png" alt="" loading="lazy"><span class="galeria-texto"><strong>client-logo11.png</strong><span>Sección «Nuestros clientes»</span></span></button></li>
+      </ul>
+      <p class="vacio" data-sin-resultados hidden><span data-texto-vacio></span></p>
+      <div class="pie-tabla"><span>Mostrando <span data-total></span></span><span>Dos logotipos de clientes esperan su nombre</span></div>
+    </section>
+  </main>
+
+  <div class="capa" id="hoja-medio" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="medio-titulo" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="medio-titulo"></h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <img id="medio-imagen" src="img/hero-plan.webp" alt="" style="width:100%;max-height:16rem;object-fit:contain;background:var(--muted);border-radius:var(--radius-md)">
+        <dl class="datos-definidos"><dt>Se usa en</dt><dd id="medio-uso"></dd></dl>
+        <div class="campo">
+          <label for="medio-alt">Texto alternativo</label>
+          <textarea class="area-texto" id="medio-alt" rows="3" aria-describedby="medio-alt-ayuda"></textarea>
+          <p class="ayuda" id="medio-alt-ayuda">Describe lo que se ve, en una frase. Si es un logotipo, escribe el nombre de la empresa.</p>
+        </div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar texto</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

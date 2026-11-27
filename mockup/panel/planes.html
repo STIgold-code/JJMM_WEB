@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="planes" data-migas="Inicio|inicio.html>Planes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Planes</h1>
+        <p>Las columnas de la tabla «Nuestros planes» del inicio, en este orden. Nunca se publican montos: el sitio muestra «Consultar».</p>
+      </div>
+      <div class="cabecera-acciones">
+        <button class="boton boton-principal" type="button" data-abre="dialogo-nuevo-plan"><span data-icono="mas"></span>Nuevo plan</button>
+      </div>
+    </div>
+
+    <section class="tarjeta" aria-label="Lista de planes">
+      <div class="tabla-envoltura">
+        <table class="tabla tabla-apilable">
+          <thead>
+            <tr>
+              <th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th>
+              <th scope="col">Plan</th>
+              <th scope="col">En el sitio</th>
+              <th scope="col">Visible</th>
+              <th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody data-ordenable data-guardar-al-mover>
+            <tr data-nombre="Emprende" data-id="emprende">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">1</span></div></td>
+              <td class="principal-movil"><div class="celda-principal-texto"><a class="enlace-fila" href="plan-editar.html">Emprende</a><span>Incluye 10 de 18 servicios · planilla hasta 2 trabajadores</span></div></td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="Emprende visible en el sitio" data-rapido data-nombre="El plan Emprende"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir Emprende"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar Emprende"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="plan-editar.html">Editar</a>
+              </div></td>
+            </tr>
+            <tr data-nombre="SIGEMype I" data-id="sigemype-1">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">2</span></div></td>
+              <td class="principal-movil"><div class="celda-principal-texto"><a class="enlace-fila" href="plan-editar.html">SIGEMype I</a><span>Incluye 12 de 18 servicios · planilla hasta 4 trabajadores</span></div></td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="SIGEMype I visible en el sitio" data-rapido data-nombre="El plan SIGEMype I"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir SIGEMype I"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar SIGEMype I"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="plan-editar.html">Editar</a>
+              </div></td>
+            </tr>
+            <tr data-nombre="SIGEMype II" data-id="sigemype-2">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">3</span></div></td>
+              <td class="principal-movil"><div class="celda-principal-texto"><a class="enlace-fila" href="plan-editar.html">SIGEMype II</a><span>Incluye 14 de 18 servicios · planilla hasta 6 trabajadores</span></div></td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="SIGEMype II visible en el sitio" data-rapido data-nombre="El plan SIGEMype II"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir SIGEMype II"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar SIGEMype II"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="plan-editar.html">Editar</a>
+              </div></td>
+            </tr>
+            <tr data-nombre="SIGEMype Business" data-id="sigemype-business">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">4</span></div></td>
+              <td class="principal-movil"><div class="celda-principal-texto"><a class="enlace-fila" href="plan-editar.html">SIGEMype Business</a><span>Incluye 17 de 18 servicios · planilla hasta 12 trabajadores</span></div></td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="SIGEMype Business visible en el sitio" data-rapido data-nombre="El plan SIGEMype Business"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir SIGEMype Business"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar SIGEMype Business"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="plan-editar.html">Editar</a>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pie-tabla"><span>4 planes · 22 filas de características</span><span>Arrastra o usa las flechas para ordenar; el cambio se guarda solo.</span></div>
+    </section>
+  </main>
+
+  <div class="capa" id="dialogo-nuevo-plan" hidden>
+    <div class="capa-fondo"></div>
+    <form class="dialogo" role="dialog" aria-modal="true" aria-labelledby="nuevo-plan-titulo" onsubmit="event.preventDefault(); location.href = 'plan-editar.html'">
+      <h2 id="nuevo-plan-titulo">Nuevo plan</h2>
+      <div class="campo">
+        <label for="nuevo-plan-nombre">Nombre del plan</label>
+        <input class="entrada" id="nuevo-plan-nombre" required placeholder="Por ejemplo, SIGEMype III" data-foco-inicial>
+        <p class="ayuda">Después eliges qué incluye. Se agrega al final de la tabla y queda oculto hasta que lo marques como visible.</p>
+      </div>
+      <div class="dialogo-acciones">
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <button class="boton boton-principal" type="submit">Crear y elegir qué incluye</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

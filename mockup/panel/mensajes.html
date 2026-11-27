@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mensajes de contacto · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="mensajes" data-pantalla="mensajes" data-migas="Inicio|inicio.html>Mensajes de contacto" data-maqueta="mensajes,pendientes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Mensajes de contacto</h1>
+        <p>Lo que la gente escribe en «Contáctanos» del sitio. Respóndele por WhatsApp o por llamada y marca el mensaje como atendido.</p>
+      </div>
+    </div>
+
+    <div id="mensajes-con" class="pila">
+      <div class="aviso-ejemplo"><span class="ejemplo">Ejemplo</span><p>Todavía no llegan mensajes reales al sitio nuevo. Los de esta lista son de ejemplo para ver cómo se trabajan.</p></div>
+
+      <section class="tarjeta" data-listado data-listado-manual aria-label="Lista de mensajes">
+        <div class="herramientas">
+          <div class="segmentado" data-filtros role="group" aria-label="Filtrar por estado">
+            <button type="button" data-filtro="nuevo" aria-pressed="true" data-vacio="No hay mensajes nuevos. Cuando alguien escriba desde el sitio, aparecerá aquí.">Nuevos <span class="conteo">0</span></button>
+            <button type="button" data-filtro="atendido" aria-pressed="false" data-vacio="Aún no marcas ningún mensaje como atendido.">Atendidos <span class="conteo">0</span></button>
+            <button type="button" data-filtro="todos" aria-pressed="false" data-vacio="No hay mensajes.">Todos <span class="conteo">0</span></button>
+          </div>
+          <div class="campo-con-icono">
+            <span data-icono="buscar" class="icono-sm"></span>
+            <label class="oculto-visual" for="buscar-mensajes">Buscar mensajes</label>
+            <input class="entrada" id="buscar-mensajes" type="search" placeholder="Buscar por nombre, servicio o texto" data-buscar>
+          </div>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable" id="tabla-mensajes">
+            <thead>
+              <tr><th scope="col">Persona y mensaje</th><th scope="col">Servicio de interés</th><th scope="col">Estado</th><th scope="col">Recibido</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fila-vacia" data-sin-resultados hidden><td colspan="4"><span data-texto-vacio></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pie-tabla"><span>Mostrando <span data-total></span></span><span>Los más recientes primero</span></div>
+      </section>
+    </div>
+
+    <section class="tarjeta" id="mensajes-sin" hidden>
+      <div class="vacio">
+        <span class="vacio-icono"><span data-icono="bandeja" class="icono-lg"></span></span>
+        <h2>Aún no llegan mensajes</h2>
+        <p>Cuando alguien complete el formulario «Contáctanos» del sitio, su nombre, el servicio que le interesa y su mensaje aparecerán aquí, y el inicio del panel te avisará.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Panel lateral con el mensaje (Sheet) -->
+  <div class="capa" id="hoja-mensaje" hidden>
+    <div class="capa-fondo"></div>
+    <section class="hoja" role="dialog" aria-modal="true" aria-labelledby="hoja-titulo" aria-describedby="hoja-fecha">
+      <div class="hoja-cabecera">
+        <div class="pila-sm" style="gap: 0.3rem">
+          <h2 id="hoja-titulo"></h2>
+          <p class="texto-suave texto-sm" id="hoja-fecha"></p>
+          <div class="acciones-respuesta"><span id="hoja-estado"></span><span class="ejemplo">Ejemplo</span></div>
+        </div>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar el mensaje"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <dl class="datos-definidos">
+          <dt>Servicio de interés</dt><dd id="hoja-servicio"></dd>
+        </dl>
+        <div class="pila-sm">
+          <h3>Mensaje</h3>
+          <p class="mensaje-cita" id="hoja-mensaje-texto"></p>
+        </div>
+
+        <div class="pila-sm">
+          <h3>Responder</h3>
+          <div id="responder-con" class="acciones-respuesta">
+            <button class="boton boton-secundario" type="button" data-simular="Se abriría WhatsApp con este número"><span data-icono="whatsapp"></span>WhatsApp <span data-celular-texto></span></button>
+            <button class="boton boton-secundario" type="button" data-simular="Se abriría la llamada a este número"><span data-icono="telefono"></span>Llamar</button>
+          </div>
+          <div id="responder-sin" class="nota">
+            <span data-icono="info"></span>
+            <p>El formulario no pide celular: la persona sigue la conversación por WhatsApp al 951 965 242. Cuando le respondas, anota aquí su celular para tenerlo a mano.</p>
+          </div>
+        </div>
+
+        <form class="pila-sm" id="form-nota" novalidate>
+          <h3>Datos de contacto</h3>
+          <p class="ayuda">Solo los ve el equipo. Anótalos al responder.</p>
+          <div class="rejilla-campos">
+            <div class="campo">
+              <label for="nota-celular">Celular</label>
+              <input class="entrada" id="nota-celular" inputmode="numeric" placeholder="9XX XXX XXX" aria-describedby="error-celular">
+              <p class="error-campo" id="error-celular" hidden><span data-icono="alerta" class="icono-sm"></span>Escribe un celular de 9 dígitos que empiece con 9.</p>
+            </div>
+            <div class="campo">
+              <label for="nota-correo">Correo</label>
+              <input class="entrada" id="nota-correo" type="email" placeholder="nombre@correo.com">
+            </div>
+          </div>
+          <div><button class="boton boton-secundario boton-sm" type="submit">Guardar datos de contacto</button></div>
+        </form>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="button" id="marcar-estado">Marcar como atendido</button>
+        <span class="separador"></span>
+        <button class="boton boton-destructivo-linea" type="button" id="eliminar-mensaje"><span data-icono="basura" class="icono-sm"></span>Eliminar</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

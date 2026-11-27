@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrusel de portadas · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="portadas" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Carrusel de portadas">
+  <main>
+    <form data-edicion data-aviso-guardado="El carrusel del inicio ya muestra los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+          <h1 class="titulo-pagina">Carrusel de portadas</h1>
+          <p>Las imágenes grandes que abren el sitio. Pasan solas, una tras otra, en este orden.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-portadas">
+            <div class="tarjeta-cabecera">
+              <h2 id="titulo-portadas">Portadas</h2>
+              <div class="campo" style="grid-auto-flow: column; align-items: center; gap: 0.5rem">
+                <label for="segundos" class="texto-sm">Segundos por portada</label>
+                <input class="entrada" id="segundos" type="number" min="4" max="20" value="9" style="width: 5rem; min-height: 2rem">
+              </div>
+            </div>
+            <ol class="ordenable" data-ordenable>
+              <li data-id="p1" data-nombre="Contamos con Sistema de Calidad Genuino" class="portada-abierta">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">1</span>
+                <div class="celda-principal"><img class="miniatura" src="img/hero-plan.webp" alt=""><div class="celda-principal-texto"><strong>Contamos con Sistema de Calidad Genuino</strong><span>Texto a la derecha · editando abajo</span></div></div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir la portada «Contamos con Sistema de Calidad Genuino»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar la portada «Contamos con Sistema de Calidad Genuino»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" href="#editor">Editar</a>
+                </div>
+              </li>
+              <li data-id="p2" data-nombre="Banner SIGE Mype">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">2</span>
+                <div class="celda-principal"><img class="miniatura" src="img/banner-sige-mype.webp" alt=""><div class="celda-principal-texto"><strong>Banner SIGE Mype</strong><span>Imagen completa, con versión para celular</span></div></div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir la portada «Banner SIGE Mype»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar la portada «Banner SIGE Mype»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="En la maqueta solo se edita la primera portada">Editar</a>
+                </div>
+              </li>
+              <li data-id="p3" data-nombre="Nuestro plan de trabajo">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">3</span>
+                <div class="celda-principal"><img class="miniatura" src="img/hero-taza.webp" alt=""><div class="celda-principal-texto"><strong>Nuestro plan de trabajo</strong><span>Texto a la derecha · lista de 4 puntos</span></div></div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir la portada «Nuestro plan de trabajo»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar la portada «Nuestro plan de trabajo»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="En la maqueta solo se edita la primera portada">Editar</a>
+                </div>
+              </li>
+              <li data-id="p4" data-nombre="Somos más que un estudio contable">
+                <span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span>
+                <span class="posicion">4</span>
+                <div class="celda-principal"><img class="miniatura" src="img/hero-equipo.webp" alt=""><div class="celda-principal-texto"><strong>Somos más que un estudio contable</strong><span>Texto a la izquierda</span></div></div>
+                <div class="ordenable-acciones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir la portada «Somos más que un estudio contable»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar la portada «Somos más que un estudio contable»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="En la maqueta solo se edita la primera portada">Editar</a>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="tarjeta seccion-edicion" id="editor" aria-labelledby="titulo-editor">
+            <div class="tarjeta-cabecera"><h2 id="titulo-editor">Portada 1: imagen</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="zona-imagen" data-valor="hero-plan.webp">
+                <img id="imagen-actual" src="img/hero-plan.webp" alt="Imagen actual de la portada">
+                <div class="zona-imagen-texto">
+                  <strong id="imagen-nombre">hero-plan.webp</strong>
+                  <p class="ayuda">Arrastra una imagen aquí o elige una. Mejor horizontal, de 1920 px de ancho o más.</p>
+                  <div class="zona-imagen-acciones">
+                    <label class="boton boton-secundario boton-sm" for="subir-imagen"><span data-icono="subir" class="icono-sm"></span>Subir imagen</label>
+                    <input class="oculto-visual" id="subir-imagen" type="file" accept="image/*">
+                    <button class="boton boton-secundario boton-sm" type="button" data-abre="dialogo-biblioteca"><span data-icono="imagen" class="icono-sm"></span>Elegir de Imágenes</button>
+                  </div>
+                </div>
+              </div>
+              <div class="fila-interruptor">
+                <button class="interruptor" type="button" role="switch" aria-checked="true" aria-labelledby="decorativa-etq" aria-describedby="decorativa-ayuda"></button>
+                <div><p class="etiqueta" id="decorativa-etq">La imagen es decorativa</p><p class="ayuda" id="decorativa-ayuda">Actívalo si la imagen no tiene texto propio; así los lectores de pantalla la saltan.</p></div>
+              </div>
+              <div class="campo">
+                <label for="encuadre">Encuadre en celular <span class="texto-suave" id="encuadre-valor">22 %</span></label>
+                <input id="encuadre" type="range" min="0" max="100" value="22" aria-describedby="encuadre-ayuda" style="accent-color: var(--primary)">
+                <p class="ayuda" id="encuadre-ayuda">En pantallas angostas la imagen se recorta. Mueve el control para elegir qué parte queda a la vista.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-textos">
+            <div class="tarjeta-cabecera"><h2 id="titulo-textos">Portada 1: textos y botones</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo ancho-completo">
+                <span class="etiqueta" id="disposicion-etq">Dónde va el texto</span>
+                <div class="segmentado" role="group" aria-labelledby="disposicion-etq" data-grupo-unico id="disposicion" data-valor="texto-derecha">
+                  <button type="button" data-valor="texto-derecha" aria-pressed="true">A la derecha</button>
+                  <button type="button" data-valor="texto-izquierda" aria-pressed="false">A la izquierda</button>
+                  <button type="button" data-valor="imagen-completa" aria-pressed="false">Sin texto</button>
+                </div>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="portada-titulo">Título</label>
+                <input class="entrada" id="portada-titulo" value="Contamos con [Sistema de Calidad] Genuino" aria-describedby="titulo-ayuda">
+                <p class="ayuda" id="titulo-ayuda">Lo que escribas entre corchetes se pinta en amarillo. Ejemplo: Somos más que un [estudio contable].</p>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="portada-subtitulo">Subtítulo</label>
+                <input class="entrada" id="portada-subtitulo" value="Cada empresa guiada por nuestro sistema, llega a ser líder.">
+              </div>
+              <div class="campo">
+                <label for="transicion">Cómo entra</label>
+                <select class="selector" id="transicion">
+                  <option selected>Fundido</option>
+                  <option>Desde la izquierda</option>
+                  <option>Bajando</option>
+                  <option>Recorte</option>
+                </select>
+              </div>
+              <div class="campo ancho-completo">
+                <span class="etiqueta">Botones</span>
+                <ul class="ordenable" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+                  <li><div class="celda-principal"><span class="icono-caja icono-caja-marca"><span data-icono="whatsapp" class="icono-sm"></span></span><div class="celda-principal-texto"><strong>Asesoría gratuita</strong><span>Principal · abre WhatsApp con «Hola, quiero una asesoría gratuita para mi empresa.»</span></div></div></li>
+                  <li><div class="celda-principal"><span class="icono-caja icono-caja-marca"><span data-icono="capas" class="icono-sm"></span></span><div class="celda-principal-texto"><strong>Ver nuestros planes</strong><span>Secundario · lleva a la sección «Nuestros planes»</span></div></div></li>
+                </ul>
+                <p class="ayuda">La vigencia de la «asesoría gratuita» está por confirmar con el estudio.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: portada 1 en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica-portada" id="vista-portada" data-disposicion="texto-derecha" style="background-image: url('img/hero-plan.webp'); background-position: 22% center">
+              <div class="publica-portada-texto">
+                <p class="publica-portada-titulo" id="vista-titulo"></p>
+                <p id="vista-subtitulo" style="font-size: 0.8125rem"></p>
+                <p class="publica-botones" aria-hidden="true"><span class="publica-boton">Asesoría gratuita</span><span class="publica-linea" style="border-color:#fff;color:#fff">Ver nuestros planes</span></p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+
+  <div class="capa" id="dialogo-biblioteca" hidden>
+    <div class="capa-fondo"></div>
+    <section class="dialogo dialogo-ancho" role="dialog" aria-modal="true" aria-labelledby="biblioteca-titulo">
+      <div class="fila-interruptor" style="justify-content: space-between">
+        <div><h2 id="biblioteca-titulo">Elegir de Imágenes</h2><p class="ayuda">Imágenes que ya están en el sitio.</p></div>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <ul class="biblioteca">
+        <li><button type="button" aria-pressed="false"><img src="img/hero-plan.webp" alt=""><span>hero-plan.webp</span></button></li>
+        <li><button type="button" aria-pressed="false"><img src="img/banner-sige-mype.webp" alt=""><span>banner-sige-mype.webp</span></button></li>
+        <li><button type="button" aria-pressed="false"><img src="img/hero-taza.webp" alt=""><span>hero-taza.webp</span></button></li>
+        <li><button type="button" aria-pressed="false"><img src="img/hero-equipo.webp" alt=""><span>hero-equipo.webp</span></button></li>
+        <li><button type="button" aria-pressed="false"><img src="img/hero-sige-movil.webp" alt=""><span>hero-sige-movil.webp</span></button></li>
+        <li><button type="button" aria-pressed="false"><img src="img/rueda-sige-mype.webp" alt=""><span>rueda-sige-mype.webp</span></button></li>
+      </ul>
+      <div class="dialogo-acciones">
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <button class="boton boton-principal" type="button" id="usar-elegida" disabled>Usar esta imagen</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

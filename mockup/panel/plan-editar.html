@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SIGEMype II · Planes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="planes" data-pantalla="plan" data-migas="Inicio|inicio.html>Planes|planes.html>SIGEMype II">
+  <main>
+    <form data-edicion data-aviso-guardado="La tabla «Nuestros planes» ya muestra los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="planes.html"><span data-icono="volver" class="icono-sm"></span>Planes</a>
+          <h1 class="titulo-pagina" data-reflejo="nombre">SIGEMype II</h1>
+          <p>Edita el plan y mira a la derecha cómo queda la tabla del sitio antes de guardar.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" id="datos" aria-labelledby="titulo-datos">
+            <div class="tarjeta-cabecera"><h2 id="titulo-datos">Datos del plan</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo ancho-completo">
+                <label for="plan-nombre">Nombre</label>
+                <input class="entrada" id="plan-nombre" value="SIGEMype II" required aria-describedby="ayuda-nombre error-nombre">
+                <p class="ayuda" id="ayuda-nombre">Encabeza la columna en la tabla del sitio.</p>
+                <p class="error-campo" id="error-nombre" hidden><span data-icono="alerta" class="icono-sm"></span>No se publican montos. Quita el precio; el sitio muestra «Consultar».</p>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="plan-mensaje">Mensaje de WhatsApp al pulsar «Solicitar»</label>
+                <input class="entrada" id="plan-mensaje" value="Hola, quiero información del plan SIGEMype II." aria-describedby="ayuda-mensaje">
+                <p class="ayuda" id="ayuda-mensaje">Es el texto que aparece listo para enviar al 951 965 242.</p>
+              </div>
+              <div class="fila-interruptor ancho-completo">
+                <button class="interruptor" type="button" role="switch" aria-checked="true" aria-labelledby="plan-visible-etq" aria-describedby="plan-visible-ayuda"></button>
+                <div><p class="etiqueta" id="plan-visible-etq">Visible en el sitio</p><p class="ayuda" id="plan-visible-ayuda">Si lo apagas, la columna deja de mostrarse sin borrar el plan.</p></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" id="incluye" aria-labelledby="titulo-incluye">
+            <div class="tarjeta-cabecera">
+              <div>
+                <h2 id="titulo-incluye">Qué incluye</h2>
+                <p>Una fila por característica, en el orden de la tabla. «Texto» sirve para valores como «6 trabajadores» o «Consultar».</p>
+              </div>
+            </div>
+            <p class="error-campo" id="error-matriz" style="padding: 0.75rem 1.25rem 0" hidden><span data-icono="alerta" class="icono-sm"></span>No se publican montos en la tabla. Usa «Consultar».</p>
+            <ul class="matriz">
+            <li>
+              <span class="matriz-nombre" id="car-0">Para empresas con ventas anuales hasta de</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-0" data-grupo-unico data-inclusion="0" data-valor="texto"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="true">Texto</button></div>
+                <label class="oculto-visual" for="texto-0">Texto para «Para empresas con ventas anuales hasta de»</label>
+                <input class="entrada" id="texto-0" value="Consultar" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz">
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-1">Gestión integral de planilla hasta</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-1" data-grupo-unico data-inclusion="1" data-valor="texto"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="true">Texto</button></div>
+                <label class="oculto-visual" for="texto-1">Texto para «Gestión integral de planilla hasta»</label>
+                <input class="entrada" id="texto-1" value="6 trabajadores" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz">
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-2">Registro contable mensual de compras y ventas</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-2" data-grupo-unico data-inclusion="2" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-2">Texto para «Registro contable mensual de compras y ventas»</label>
+                <input class="entrada" id="texto-2" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-3">Cálculo mensual del Impuesto a la Renta</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-3" data-grupo-unico data-inclusion="3" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-3">Texto para «Cálculo mensual del Impuesto a la Renta»</label>
+                <input class="entrada" id="texto-3" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-4">Cálculo mensual del IGV</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-4" data-grupo-unico data-inclusion="4" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-4">Texto para «Cálculo mensual del IGV»</label>
+                <input class="entrada" id="texto-4" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-5">Cálculo y declaración mensual de la planilla electrónica</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-5" data-grupo-unico data-inclusion="5" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-5">Texto para «Cálculo y declaración mensual de la planilla electrónica»</label>
+                <input class="entrada" id="texto-5" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-6">Declaración del PDT 621 (IGV y Renta)</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-6" data-grupo-unico data-inclusion="6" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-6">Texto para «Declaración del PDT 621 (IGV y Renta)»</label>
+                <input class="entrada" id="texto-6" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-7">Registro de Compras y Ventas en formato SUNAT</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-7" data-grupo-unico data-inclusion="7" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-7">Texto para «Registro de Compras y Ventas en formato SUNAT»</label>
+                <input class="entrada" id="texto-7" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-8">Libro Diario Simplificado mensual</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-8" data-grupo-unico data-inclusion="8" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-8">Texto para «Libro Diario Simplificado mensual»</label>
+                <input class="entrada" id="texto-8" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-9">Libro Diario y Libro Mayor mensual</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-9" data-grupo-unico data-inclusion="9" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-9">Texto para «Libro Diario y Libro Mayor mensual»</label>
+                <input class="entrada" id="texto-9" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-10">Libro Bancos mensual</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-10" data-grupo-unico data-inclusion="10" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-10">Texto para «Libro Bancos mensual»</label>
+                <input class="entrada" id="texto-10" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-11">Otros libros obligatorios</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-11" data-grupo-unico data-inclusion="11" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-11">Texto para «Otros libros obligatorios»</label>
+                <input class="entrada" id="texto-11" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-12">Manejo de Kardex</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-12" data-grupo-unico data-inclusion="12" data-valor="no-incluido"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="true">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-12">Texto para «Manejo de Kardex»</label>
+                <input class="entrada" id="texto-12" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-13">Asesoría tributaria según tu régimen y sector</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-13" data-grupo-unico data-inclusion="13" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-13">Texto para «Asesoría tributaria según tu régimen y sector»</label>
+                <input class="entrada" id="texto-13" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-14">Asesoría tributaria y financiera en tu empresa</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-14" data-grupo-unico data-inclusion="14" data-valor="no-incluido"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="true">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-14">Texto para «Asesoría tributaria y financiera en tu empresa»</label>
+                <input class="entrada" id="texto-14" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-15">Elaboración y presentación de la DAOT</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-15" data-grupo-unico data-inclusion="15" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-15">Texto para «Elaboración y presentación de la DAOT»</label>
+                <input class="entrada" id="texto-15" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-16">Impuesto a la Renta anual</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-16" data-grupo-unico data-inclusion="16" data-valor="no-incluido"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="true">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-16">Texto para «Impuesto a la Renta anual»</label>
+                <input class="entrada" id="texto-16" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-17">Estados financieros intermedios</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-17" data-grupo-unico data-inclusion="17" data-valor="no-incluido"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="true">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-17">Texto para «Estados financieros intermedios»</label>
+                <input class="entrada" id="texto-17" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-18">Una visita al mes para recoger y enviar documentación</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-18" data-grupo-unico data-inclusion="18" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-18">Texto para «Una visita al mes para recoger y enviar documentación»</label>
+                <input class="entrada" id="texto-18" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-19">Costo por trabajador adicional en planilla</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-19" data-grupo-unico data-inclusion="19" data-valor="texto"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="true">Texto</button></div>
+                <label class="oculto-visual" for="texto-19">Texto para «Costo por trabajador adicional en planilla»</label>
+                <input class="entrada" id="texto-19" value="Consultar" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz">
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-20">Límite de registro de comprobantes de pago</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-20" data-grupo-unico data-inclusion="20" data-valor="texto"><button type="button" data-valor="incluido" aria-pressed="false">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="true">Texto</button></div>
+                <label class="oculto-visual" for="texto-20">Texto para «Límite de registro de comprobantes de pago»</label>
+                <input class="entrada" id="texto-20" value="Consultar" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz">
+              </div>
+            </li>
+            <li>
+              <span class="matriz-nombre" id="car-21">Libros electrónicos</span>
+              <div class="matriz-control">
+                <div class="segmentado segmentado-sm" role="group" aria-labelledby="car-21" data-grupo-unico data-inclusion="21" data-valor="incluido"><button type="button" data-valor="incluido" aria-pressed="true">Incluido</button><button type="button" data-valor="no-incluido" aria-pressed="false">No incluido</button><button type="button" data-valor="texto" aria-pressed="false">Texto</button></div>
+                <label class="oculto-visual" for="texto-21">Texto para «Libros electrónicos»</label>
+                <input class="entrada" id="texto-21" value="" placeholder="Por ejemplo, Consultar" data-sin-montos="#error-matriz" hidden>
+              </div>
+            </li>
+            </ul>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-eliminar">
+            <div class="tarjeta-cuerpo fila-interruptor" style="justify-content: space-between; flex-wrap: wrap">
+              <div><h2 id="titulo-eliminar">Eliminar el plan</h2><p class="ayuda">Se quita la columna y todo lo que incluye. Si solo quieres dejar de mostrarlo, apaga «Visible en el sitio».</p></div>
+              <button class="boton boton-destructivo-linea" type="button" data-eliminar data-titulo="¿Eliminar el plan SIGEMype II?" data-texto="Se borran el plan y sus 22 filas de «Qué incluye». No se puede deshacer." data-accion="Eliminar plan" data-hecho="Plan eliminado" data-ir="planes.html"><span data-icono="basura" class="icono-sm"></span>Eliminar plan</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Nuestros planes» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica vista-previa-scroll">
+              <p class="publica-titulo">Nuestros planes</p>
+              <p class="publica-bajada">Outsourcing contable para pymes. Compara lo que incluye cada plan y consúltanos por el que necesitas.</p>
+              <table class="publica-tabla">
+                <caption class="oculto-visual">Vista previa de la tabla de planes</caption>
+                <thead><tr><th scope="col">Qué incluye</th><th scope="col">Emprende</th><th scope="col">SIGEMype I</th><th scope="col" class="resaltada" data-reflejo="nombre">SIGEMype II</th><th scope="col">SIGEMype Business</th></tr></thead>
+                <tbody><tr><td>Para empresas con ventas anuales hasta de</td><td>Consultar</td><td>Consultar</td><td class="resaltada" data-vista-celda="0">Consultar</td><td>Consultar</td></tr><tr><td>Gestión integral de planilla hasta</td><td>2 trabajadores</td><td>4 trabajadores</td><td class="resaltada" data-vista-celda="1">6 trabajadores</td><td>12 trabajadores</td></tr><tr><td>Registro contable mensual de compras y ventas</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="2"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Cálculo mensual del Impuesto a la Renta</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="3"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Cálculo mensual del IGV</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="4"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Cálculo y declaración mensual de la planilla electrónica</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="5"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Declaración del PDT 621 (IGV y Renta)</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="6"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Registro de Compras y Ventas en formato SUNAT</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="7"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Libro Diario Simplificado mensual</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="8"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Libro Diario y Libro Mayor mensual</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="9"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Libro Bancos mensual</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="10"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Otros libros obligatorios</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="11"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Manejo de Kardex</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="12"><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Asesoría tributaria según tu régimen y sector</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="13"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Asesoría tributaria y financiera en tu empresa</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="14"><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Elaboración y presentación de la DAOT</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="15"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Impuesto a la Renta anual</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="16"><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Estados financieros intermedios</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="17"><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td></tr><tr><td>Una visita al mes para recoger y enviar documentación</td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td><span class="publica-no" role="img" aria-label="No incluido">—</span></td><td class="resaltada" data-vista-celda="18"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr><tr><td>Costo por trabajador adicional en planilla</td><td>Consultar</td><td>Consultar</td><td class="resaltada" data-vista-celda="19">Consultar</td><td>Consultar</td></tr><tr><td>Límite de registro de comprobantes de pago</td><td>Consultar</td><td>Consultar</td><td class="resaltada" data-vista-celda="20">Consultar</td><td>Consultar</td></tr><tr><td>Libros electrónicos</td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td class="resaltada" data-vista-celda="21"><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td><td><span class="publica-si" role="img" aria-label="Incluido"><span data-icono="check"></span></span></td></tr></tbody>
+              </table>
+              <p class="publica-pie">Precio de cada plan: consultar. <span class="publica-boton">Solicitar</span></p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

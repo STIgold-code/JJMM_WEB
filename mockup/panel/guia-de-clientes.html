@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía de clientes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="guia" data-pantalla="guia" data-migas="Inicio|inicio.html>Guía de clientes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Guía de clientes</h1>
+        <p>Todo lo que muestra la página /guia del sitio: los avisos de cierre, los vencimientos y el cronograma de SUNAT.</p>
+      </div>
+    </div>
+
+    <div class="pila">
+      <section class="tarjeta seccion-edicion" id="avisos" aria-labelledby="titulo-avisos">
+        <div class="tarjeta-cabecera">
+          <div><h2 id="titulo-avisos">Avisos para clientes</h2><p>Qué documentos enviar y cuándo. Se muestran en este orden.</p></div>
+          <button class="boton boton-secundario boton-sm" type="button" data-editar-aviso="nuevo"><span data-icono="mas" class="icono-sm"></span>Nuevo aviso</button>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable">
+            <thead><tr><th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th><th scope="col">Aviso</th><th scope="col">En la guía</th><th scope="col">Visible</th><th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th></tr></thead>
+            <tbody data-ordenable data-guardar-al-mover>
+              <tr data-nombre="Cierre tributario" data-id="a1">
+                <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">1</span></div></td>
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-aviso="a1">Cierre tributario</button><span>Inicia del 1.º al 5.º día útil de cada mes. · 8 documentos</span></div></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+                <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="«Cierre tributario» visible en la guía" data-rapido data-nombre="El aviso «Cierre tributario»"></button></td>
+                <td class="derecha debajo-movil"><div class="orden-botones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Cierre tributario»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Cierre tributario»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <button class="boton boton-secundario boton-sm" type="button" data-editar-aviso="a1">Editar</button>
+                </div></td>
+              </tr>
+              <tr data-nombre="Cierre tributario: documentos para análisis" data-id="a2">
+                <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">2</span></div></td>
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-aviso="a2">Cierre tributario: documentos para análisis</button><span>Inicia del 1.º al 5.º día útil de cada mes. · 12 documentos</span></div></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+                <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="«Cierre tributario: documentos para análisis» visible en la guía" data-rapido data-nombre="El aviso «Cierre tributario: documentos para análisis»"></button></td>
+                <td class="derecha debajo-movil"><div class="orden-botones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Cierre tributario: documentos para análisis»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Cierre tributario: documentos para análisis»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <button class="boton boton-secundario boton-sm" type="button" data-editar-aviso="a2">Editar</button>
+                </div></td>
+              </tr>
+              <tr data-nombre="Cierre de planilla" data-id="a3">
+                <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">3</span></div></td>
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-aviso="a3">Cierre de planilla</button><span>Inicia el 20 de cada mes. · 16 documentos · correo por confirmar</span></div></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible data-no="Oculto">Visible</span></td>
+                <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="«Cierre de planilla» visible en la guía" data-rapido data-nombre="El aviso «Cierre de planilla»"></button></td>
+                <td class="derecha debajo-movil"><div class="orden-botones">
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir «Cierre de planilla»"><span data-icono="arriba" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar «Cierre de planilla»"><span data-icono="abajo" class="icono-sm"></span></button>
+                  <button class="boton boton-secundario boton-sm" type="button" data-editar-aviso="a3">Editar</button>
+                </div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="tarjeta seccion-edicion" id="vencimientos" data-listado aria-labelledby="titulo-vencimientos">
+        <div class="tarjeta-cabecera">
+          <div><h2 id="titulo-vencimientos">Vencimientos</h2><p>Las obligaciones que la guía recuerda a los clientes.</p></div>
+          <button class="boton boton-secundario boton-sm" type="button" data-editar-vencimiento data-obligacion="" data-periodo="mensual" data-cuando=""><span data-icono="mas" class="icono-sm"></span>Nuevo vencimiento</button>
+        </div>
+        <div class="herramientas">
+          <div class="segmentado" data-filtros role="group" aria-label="Filtrar por periodicidad">
+            <button type="button" data-filtro="todos" aria-pressed="true" data-vacio="No hay vencimientos.">Todos <span class="conteo">0</span></button>
+            <button type="button" data-filtro="mensual" aria-pressed="false" data-vacio="No hay vencimientos mensuales.">Mensuales <span class="conteo">0</span></button>
+            <button type="button" data-filtro="anual" aria-pressed="false" data-vacio="No hay vencimientos anuales.">Anuales <span class="conteo">0</span></button>
+          </div>
+          <div class="campo-con-icono">
+            <span data-icono="buscar" class="icono-sm"></span>
+            <label class="oculto-visual" for="buscar-vencimientos">Buscar vencimientos</label>
+            <input class="entrada" id="buscar-vencimientos" type="search" placeholder="Buscar obligación" data-buscar>
+          </div>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable">
+            <thead><tr><th scope="col">Obligación y cuándo vence</th><th scope="col">Periodicidad</th><th scope="col"><span class="oculto-visual">Estado</span></th></tr></thead>
+            <tbody>
+              <tr data-fila data-estado="mensual" data-id="v0">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="PDT 621 (IGV y Renta)" data-periodo="mensual" data-cuando="Los 07 de cada mes.">PDT 621 (IGV y Renta)</button><span>Los 07 de cada mes.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v1">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="PLAME" data-periodo="mensual" data-cuando="Inicio de las declaraciones mensuales, los 01 de cada mes.">PLAME</button><span>Inicio de las declaraciones mensuales, los 01 de cada mes.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v2">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="Vencimientos de AFP" data-periodo="mensual" data-cuando="Inicio de las declaraciones mensuales, los 03 de cada mes.">Vencimientos de AFP</button><span>Inicio de las declaraciones mensuales, los 03 de cada mes.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v3">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="Libros electrónicos" data-periodo="mensual" data-cuando="Inicio de las declaraciones mensuales, los 10 de cada mes.">Libros electrónicos</button><span>Inicio de las declaraciones mensuales, los 10 de cada mes.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v4">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="Depósito de detracciones" data-periodo="mensual" data-cuando="Hasta el 5.º día útil de cada mes.">Depósito de detracciones</button><span>Hasta el 5.º día útil de cada mes.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v5">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="CONAFOVICER" data-periodo="mensual" data-cuando="Consulta la fecha con el estudio.">CONAFOVICER</button><span>Consulta la fecha con el estudio.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="pendiente">Fecha por confirmar</span></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v6">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="SENCICO" data-periodo="mensual" data-cuando="Consulta la fecha con el estudio.">SENCICO</button><span>Consulta la fecha con el estudio.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="pendiente">Fecha por confirmar</span></td>
+              </tr>
+              <tr data-fila data-estado="mensual" data-id="v7">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="OSCE" data-periodo="mensual" data-cuando="Consulta la fecha con el estudio.">OSCE</button><span>Consulta la fecha con el estudio.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Mensual</span></td>
+                <td class="debajo-movil"><span class="insignia" data-estado="pendiente">Fecha por confirmar</span></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v8">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="Declaración jurada anual" data-periodo="anual" data-cuando="Inicia la declaración el 01 de marzo.">Declaración jurada anual</button><span>Inicia la declaración el 01 de marzo.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v9">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="DAOT" data-periodo="anual" data-cuando="Inicia la declaración el 01 de marzo.">DAOT</button><span>Inicia la declaración el 01 de marzo.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v10">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="ITAN" data-periodo="anual" data-cuando="Inicia la declaración el 01 de abril.">ITAN</button><span>Inicia la declaración el 01 de abril.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v11">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="SENCICO" data-periodo="anual" data-cuando="Inicia la declaración el 01 de marzo.">SENCICO</button><span>Inicia la declaración el 01 de marzo.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v12">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="Precio de transferencia" data-periodo="anual" data-cuando="Inicia la declaración el 01 de abril.">Precio de transferencia</button><span>Inicia la declaración el 01 de abril.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr data-fila data-estado="anual" data-id="v13">
+                <td class="principal-movil"><div class="celda-principal-texto"><button class="enlace-fila" type="button" data-editar-vencimiento data-obligacion="INEI" data-periodo="anual" data-cuando="Inicia la declaración según solicitud del INEI.">INEI</button><span>Inicia la declaración según solicitud del INEI.</span></div></td>
+                <td class="lado-movil"><span class="insignia insignia-sin-punto">Anual</span></td>
+                <td class="debajo-movil"></td>
+              </tr>
+              <tr class="fila-vacia" data-sin-resultados hidden><td colspan="3"><span data-texto-vacio></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pie-tabla"><span>Mostrando <span data-total></span></span><span>3 obligaciones sin fecha publicada</span></div>
+      </section>
+
+      <section class="tarjeta seccion-edicion" id="cronograma" aria-labelledby="titulo-cronograma">
+        <div class="tarjeta-cabecera"><h2 id="titulo-cronograma">Cronograma de SUNAT por dígito del RUC</h2></div>
+        <div class="vacio">
+          <span class="vacio-icono"><span data-icono="calendario" class="icono-lg"></span></span>
+          <h3>Todavía no hay cronograma</h3>
+          <p>Aquí va el cronograma oficial de SUNAT: para cada mes, la fecha de vencimiento según el último dígito del RUC, del 0 al 9. Cuando lo cargues, la guía lo muestra como una tabla que el cliente consulta con su RUC.</p>
+          <a class="boton boton-secundario" role="link" aria-disabled="true" title="Se habilita cuando el estudio tenga el cronograma oficial">Cargar cronograma</a>
+          <p class="ayuda">Pendiente: falta el cronograma oficial.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="capa" id="hoja-aviso" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="aviso-hoja-titulo" id="form-aviso" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="aviso-hoja-titulo">Editar aviso</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo"><label for="aviso-titulo">Título</label><input class="entrada" id="aviso-titulo" required></div>
+        <div class="campo"><label for="aviso-cuando">Cuándo aplica</label><textarea class="area-texto" id="aviso-cuando" rows="4"></textarea></div>
+        <div class="campo"><label for="aviso-documentos">Documentos que debe enviar el cliente</label><textarea class="area-texto" id="aviso-documentos" rows="8" aria-describedby="aviso-documentos-ayuda"></textarea><p class="ayuda" id="aviso-documentos-ayuda">Uno por línea. En la guía se muestran como una lista.</p></div>
+        <div class="campo"><label for="aviso-correo">Correo para enviarlos</label><input class="entrada" id="aviso-correo" type="email"></div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar aviso</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="capa" id="hoja-vencimiento" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="venc-hoja-titulo" id="form-vencimiento" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="venc-hoja-titulo">Editar vencimiento</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo"><label for="venc-obligacion">Obligación</label><input class="entrada" id="venc-obligacion" required></div>
+        <div class="campo">
+          <span class="etiqueta" id="venc-periodo-etq">Periodicidad</span>
+          <div class="segmentado" role="group" aria-labelledby="venc-periodo-etq" data-grupo-unico id="venc-periodo">
+            <button type="button" data-valor="mensual" aria-pressed="true">Mensual</button>
+            <button type="button" data-valor="anual" aria-pressed="false">Anual</button>
+          </div>
+        </div>
+        <div class="campo"><label for="venc-cuando">Cuándo vence</label><input class="entrada" id="venc-cuando" required aria-describedby="venc-cuando-ayuda"><p class="ayuda" id="venc-cuando-ayuda">Por ejemplo, «Los 07 de cada mes.» Si no hay fecha, escribe «Consulta la fecha con el estudio.»</p></div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar vencimiento</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="application/json" id="datos-avisos">[{"id": "a1", "titulo": "Cierre tributario", "cuando": "Inicia del 1.º al 5.º día útil de cada mes.\n\nA la recepción de la documentación se tomará 03 días hábiles, para una liquidación preliminar. Si hay alguna observación en la documentación recibida se informará con tiempo para que pueda subsanar a la declaración.", "documentos": ["Comprobantes de compras", "Comprobantes de ventas", "Estados de cuenta bancarios", "Liquidaciones de caja chica", "Entregas a rendir", "Recibos de pago", "Contratos", "Préstamos bancarios"], "correo": "contabilidad@jjmm.com.pe"}, {"id": "a2", "titulo": "Cierre tributario: documentos para análisis", "cuando": "Inicia del 1.º al 5.º día útil de cada mes.", "documentos": ["Reporte de caja", "Estados de cuenta corriente (cheques, depósitos y transferencias)", "Cuentas por cobrar", "Cuentas por pagar", "Seguros", "Trabajos en curso", "Préstamos bancarios (cronogramas de pago)", "Préstamos de accionistas", "Rendiciones de cuentas", "Inventario de mercadería", "Pagos AFP", "Planilla (descuentos, tardanzas, vacaciones, CTS, etc.)"], "correo": "contabilidad@jjmm.com.pe"}, {"id": "a3", "titulo": "Cierre de planilla", "cuando": "Inicia el 20 de cada mes.", "documentos": ["Reporte de ingresos, salidas y refrigerios", "Cálculo de horas mensual", "Cálculo de horas extras", "Descansos médicos emitidos por EsSalud y privados", "Permisos", "Vacaciones", "Descuentos", "Alta de nuevos colaboradores, alta de derechohabientes", "Afiliación a entidades privadas AFP - ONP", "Pagos SCTR", "Pagos EPS", "Pagos EsSalud Vida", "Liquidación de beneficios sociales", "Actualización de pendientes referente a planillas", "Cronograma de vacaciones de los colaboradores", "Cuentas de CTS, si fuese el caso"], "correo": "recursoshumanos@jjmm.com.pe"}]</script>
+</body>
+</html>

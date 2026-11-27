@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sedes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="sedes" data-migas="Inicio|inicio.html>Sedes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Sedes</h1>
+        <p>Cada sede visible aparece en la cabecera, en el pie y como una pestaña de «Contáctanos». Apágala para ocultarla sin borrarla.</p>
+      </div>
+      <div class="cabecera-acciones">
+        <a class="boton boton-principal" href="sede-editar.html"><span data-icono="mas"></span>Nueva sede</a>
+      </div>
+    </div>
+
+    <section class="tarjeta" aria-label="Lista de sedes">
+      <div class="tabla-envoltura">
+        <table class="tabla tabla-apilable">
+          <thead>
+            <tr>
+              <th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th>
+              <th scope="col">Sede</th>
+              <th scope="col">Celulares</th>
+              <th scope="col">En el sitio</th>
+              <th scope="col">Visible</th>
+              <th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody data-ordenable data-guardar-al-mover>
+            <tr data-nombre="Sede San Martín de Porres" data-id="smp">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">1</span></div></td>
+              <td class="principal-movil"><div class="celda-principal"><span class="icono-caja icono-caja-marca"><span data-icono="pin" class="icono-sm"></span></span><div class="celda-principal-texto"><a class="enlace-fila" href="sede-editar.html">Sede San Martín de Porres</a><span>Jr. Iquitos 593, San Martín de Porres, Lima</span></div></div></td>
+              <td class="debajo-movil texto-sm">951 965 242 <span class="texto-suave">(WhatsApp)</span> · 952 249 102</td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible>Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="Sede San Martín de Porres visible en el sitio" data-rapido data-nombre="Sede San Martín de Porres" data-texto-si="La sede San Martín de Porres ya se ve en el sitio" data-texto-no="La sede San Martín de Porres quedó oculta en el sitio"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir Sede San Martín de Porres"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar Sede San Martín de Porres"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="sede-editar.html">Editar</a>
+              </div></td>
+            </tr>
+            <tr data-nombre="Sede San Isidro" data-id="si">
+              <td class="estrecha ocultar-movil"><div class="orden-botones"><span class="asa" title="Arrastra para cambiar el orden"><span data-icono="asa" class="icono-sm"></span></span><span class="posicion">2</span></div></td>
+              <td class="principal-movil"><div class="celda-principal"><span class="icono-caja icono-caja-marca"><span data-icono="pin" class="icono-sm"></span></span><div class="celda-principal-texto"><a class="enlace-fila" href="sede-editar.html">Sede San Isidro</a><span>Calle Gorriones 151, San Isidro, Lima · sin mapa insertado</span></div></div></td>
+              <td class="debajo-movil texto-sm">951 965 242 <span class="texto-suave">(WhatsApp)</span> · 952 249 102</td>
+              <td class="debajo-movil"><span class="insignia" data-estado="listo" data-insignia-visible>Visible</span></td>
+              <td class="lado-movil"><button class="interruptor" type="button" role="switch" aria-checked="true" aria-label="Sede San Isidro visible en el sitio" data-rapido data-nombre="Sede San Isidro" data-texto-si="La sede San Isidro ya se ve en el sitio" data-texto-no="La sede San Isidro quedó oculta en el sitio"></button></td>
+              <td class="derecha debajo-movil"><div class="orden-botones">
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir Sede San Isidro"><span data-icono="arriba" class="icono-sm"></span></button>
+                <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar Sede San Isidro"><span data-icono="abajo" class="icono-sm"></span></button>
+                <a class="boton boton-secundario boton-sm" href="sede-editar.html">Editar</a>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pie-tabla"><span>2 sedes · el orden es el de las pestañas de «Contáctanos»</span><span>Qué celular atiende en cada sede está por confirmar con el estudio.</span></div>
+    </section>
+  </main>
+</body>
+</html>

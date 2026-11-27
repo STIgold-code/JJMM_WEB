@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="inicio" data-pantalla="inicio" data-migas="Inicio" data-maqueta="pendientes,publicaciones">
+  <main>
+    <div class="saludo">
+      <h1 class="titulo-pagina"><span id="saludo">Hola</span></h1>
+      <time id="fecha"></time>
+    </div>
+
+    <section class="pila" aria-labelledby="titulo-atencion">
+      <div>
+        <h2 id="titulo-atencion">Requiere atención</h2>
+        <div class="atencion">
+          <a class="atencion-tarjeta" href="mensajes.html" data-atencion="mensajes"
+             data-con-pendiente="Respóndelos y márcalos como atendidos" data-sin-pendiente="Todos los mensajes están atendidos">
+            <span class="icono-caja"><span data-icono="bandeja"></span></span>
+            <strong>0</strong>
+            <span>Mensajes sin atender</span>
+            <em></em>
+          </a>
+          <a class="atencion-tarjeta" href="publicaciones.html" data-atencion="borradores"
+             data-con-pendiente="Revísalos y publícalos cuando estén listos" data-sin-pendiente="No hay borradores pendientes">
+            <span class="icono-caja"><span data-icono="periodico"></span></span>
+            <strong>0</strong>
+            <span>Borradores sin publicar</span>
+            <em></em>
+          </a>
+          <a class="atencion-tarjeta" href="#lo-que-falta" data-atencion="datos"
+             data-con-pendiente="Datos del sitio por completar o confirmar" data-sin-pendiente="El contenido del sitio está completo">
+            <span class="icono-caja"><span data-icono="tareas"></span></span>
+            <strong>0</strong>
+            <span>Datos por completar</span>
+            <em></em>
+          </a>
+        </div>
+      </div>
+
+      <section class="tarjeta" aria-labelledby="titulo-cifras">
+        <div class="tarjeta-cabecera">
+          <h2 id="titulo-cifras">Lo que publica hoy el sitio</h2>
+        </div>
+        <ul class="cifras">
+          <li><span class="icono-caja"><span data-icono="capas"></span></span><a href="planes.html"><strong>4</strong><span>Planes</span></a></li>
+          <li><span class="icono-caja"><span data-icono="maletin"></span></span><a href="pagina-de-inicio.html"><strong>9</strong><span>Áreas de servicio</span></a></li>
+          <li><span class="icono-caja"><span data-icono="pin"></span></span><a href="sedes.html"><strong>2</strong><span>Sedes activas</span></a></li>
+          <li><span class="icono-caja"><span data-icono="edificio"></span></span><a href="medios.html"><strong>11</strong><span>Clientes en el inicio</span></a></li>
+          <li><span class="icono-caja"><span data-icono="libro"></span></span><a href="guia-de-clientes.html#avisos"><strong>3</strong><span>Avisos para clientes</span></a></li>
+          <li><span class="icono-caja"><span data-icono="calendario"></span></span><a href="guia-de-clientes.html#vencimientos"><strong>14</strong><span>Vencimientos</span></a></li>
+        </ul>
+      </section>
+
+      <div class="inicio-columnas">
+        <section class="tarjeta" aria-labelledby="titulo-pendientes">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2 id="titulo-pendientes">Pendientes</h2>
+              <p>Lo que espera una respuesta o una revisión, lo más reciente primero.</p>
+            </div>
+            <a class="boton boton-fantasma boton-sm" href="mensajes.html">Ver todos los mensajes<span data-icono="derecha" class="icono-sm"></span></a>
+          </div>
+          <div class="tabla-envoltura">
+            <table class="tabla tabla-apilable" id="tabla-pendientes">
+              <thead>
+                <tr><th scope="col">Qué</th><th scope="col">Tipo</th><th scope="col">Recibido</th><th scope="col" class="derecha"><span class="oculto-visual">Acción</span></th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="vacio" id="pendientes-vacio" hidden>
+            <span class="vacio-icono"><span data-icono="check-circulo" class="icono-lg"></span></span>
+            <h3>Todo al día</h3>
+            <p>Aquí aparecen los mensajes nuevos del formulario «Contáctanos» y los borradores del blog que esperan publicarse.</p>
+          </div>
+        </section>
+
+        <section class="tarjeta" id="lo-que-falta" aria-labelledby="titulo-falta">
+          <div class="tarjeta-cabecera">
+            <div>
+              <h2 id="titulo-falta">Lo que falta completar</h2>
+              <p>Datos que el sitio necesita o que el estudio debe confirmar.</p>
+            </div>
+          </div>
+          <ul class="faltantes">
+            <li>
+              <div class="faltante-fila"><a href="guia-de-clientes.html#cronograma">Cargar el cronograma de SUNAT por dígito del RUC</a><span>0 de 10 dígitos</span></div>
+              <div class="progreso" role="progressbar" aria-label="Cronograma de SUNAT" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span style="width: 0%"></span></div>
+            </li>
+            <li>
+              <div class="faltante-fila"><a href="guia-de-clientes.html#vencimientos">Confirmar las fechas de CONAFOVICER, SENCICO y OSCE</a><span>11 de 14 con fecha</span></div>
+              <div class="progreso" role="progressbar" aria-label="Vencimientos con fecha" aria-valuemin="0" aria-valuemax="14" aria-valuenow="11"><span style="width: 78.6%"></span></div>
+            </li>
+            <li>
+              <div class="faltante-fila"><a href="medios.html">Confirmar el nombre de dos logotipos de clientes</a><span>9 de 11 con nombre</span></div>
+              <div class="progreso" role="progressbar" aria-label="Clientes con nombre" aria-valuemin="0" aria-valuemax="11" aria-valuenow="9"><span style="width: 81.8%"></span></div>
+            </li>
+            <li>
+              <div class="faltante-fila"><a href="sede-editar.html">Confirmar qué celular atiende en cada sede</a><span>0 de 2 sedes</span></div>
+              <div class="progreso" role="progressbar" aria-label="Celulares por sede" aria-valuemin="0" aria-valuemax="2" aria-valuenow="0"><span style="width: 0%"></span></div>
+            </li>
+            <li>
+              <div class="faltante-fila"><a href="publicaciones.html">Publicar la primera entrada del blog</a><span>0 publicadas</span></div>
+              <div class="progreso" role="progressbar" aria-label="Publicaciones" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><span style="width: 0%"></span></div>
+            </li>
+            <li data-solo-admin>
+              <div class="faltante-fila"><a href="mi-cuenta.html">Cambiar la contraseña inicial del administrador</a><span>Pendiente</span></div>
+              <div class="progreso" role="progressbar" aria-label="Contraseña del administrador" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><span style="width: 0%"></span></div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usuarios · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="usuarios" data-pantalla="usuarios" data-migas="Inicio|inicio.html>Usuarios">
+  <main>
+    <section class="tarjeta" data-solo-editor>
+      <div class="vacio">
+        <span class="vacio-icono"><span data-icono="candado" class="icono-lg"></span></span>
+        <h1 class="titulo-pagina">Solo para el administrador</h1>
+        <p>Las cuentas del panel las crea y administra el administrador del estudio. Para cambiar tu nombre o tu contraseña, entra a Mi cuenta.</p>
+        <a class="boton boton-secundario" href="mi-cuenta.html">Ir a Mi cuenta</a>
+      </div>
+    </section>
+
+    <div data-solo-admin>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <h1 class="titulo-pagina">Usuarios</h1>
+          <p>Las personas que entran al panel. El administrador ve todo; un editor cambia el contenido, pero no crea cuentas, no borra mensajes ni toca el menú ni los datos del estudio.</p>
+        </div>
+        <div class="cabecera-acciones">
+          <button class="boton boton-principal" type="button" data-abre="dialogo-usuario"><span data-icono="mas"></span>Nueva cuenta</button>
+        </div>
+      </div>
+
+      <div class="pila">
+        <div class="aviso-ejemplo"><span class="ejemplo">Ejemplo</span><p>Los nombres y correos de esta lista son de ejemplo; el estudio indicará quiénes tendrán cuenta.</p></div>
+        <section class="tarjeta" data-listado aria-label="Lista de cuentas">
+          <div class="herramientas">
+            <div class="segmentado" data-filtros role="group" aria-label="Filtrar por rol">
+              <button type="button" data-filtro="todos" aria-pressed="true" data-vacio="No hay cuentas.">Todas <span class="conteo">0</span></button>
+              <button type="button" data-filtro="administrador" aria-pressed="false" data-vacio="No hay administradores.">Administradores <span class="conteo">0</span></button>
+              <button type="button" data-filtro="editor" aria-pressed="false" data-vacio="No hay editores.">Editores <span class="conteo">0</span></button>
+            </div>
+            <div class="campo-con-icono">
+              <span data-icono="buscar" class="icono-sm"></span>
+              <label class="oculto-visual" for="buscar-usuarios">Buscar cuentas</label>
+              <input class="entrada" id="buscar-usuarios" type="search" placeholder="Buscar por nombre o correo" data-buscar>
+            </div>
+          </div>
+          <div class="tabla-envoltura">
+            <table class="tabla tabla-apilable" id="tabla-usuarios">
+              <thead><tr><th scope="col">Persona</th><th scope="col">Rol</th><th scope="col">Último ingreso</th><th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th></tr></thead>
+              <tbody>
+                <tr data-fila data-estado="administrador">
+                  <td class="principal-movil"><div class="celda-principal"><span class="avatar avatar-sm" aria-hidden="true">CE</span><div class="celda-principal-texto"><strong>Cuenta del estudio <span class="ejemplo">Ejemplo</span></strong><span>contabilidad@jjmm.com.pe · tú</span></div></div></td>
+                  <td class="lado-movil"><span class="insignia insignia-sin-punto">Administrador</span></td>
+                  <td class="debajo-movil texto-suave">Hoy</td>
+                  <td class="derecha ocultar-movil"><span class="texto-suave texto-sm">Tu cuenta</span></td>
+                </tr>
+                <tr data-fila data-estado="editor">
+                  <td class="principal-movil"><div class="celda-principal"><span class="avatar avatar-sm" aria-hidden="true">AS</span><div class="celda-principal-texto"><strong>Asistente contable <span class="ejemplo">Ejemplo</span></strong><span>asistente@ejemplo.pe</span></div></div></td>
+                  <td class="lado-movil"><span class="insignia insignia-sin-punto">Editor</span></td>
+                  <td class="debajo-movil texto-suave">Hace 3 días</td>
+                  <td class="derecha debajo-movil"><button class="boton boton-fantasma boton-icono boton-sm" type="button" aria-label="Eliminar la cuenta de Asistente contable" data-eliminar data-titulo="¿Eliminar la cuenta de Asistente contable?" data-texto="La persona ya no podrá entrar al panel. Lo que publicó se conserva." data-accion="Eliminar cuenta" data-hecho="Cuenta eliminada"><span data-icono="basura" class="icono-sm"></span></button></td>
+                </tr>
+                <tr class="fila-vacia" data-sin-resultados hidden><td colspan="4"><span data-texto-vacio></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pie-tabla"><span>Mostrando <span data-total></span></span><span>No puedes eliminar tu propia cuenta</span></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="capa" id="dialogo-usuario" hidden>
+    <div class="capa-fondo"></div>
+    <form class="dialogo" role="dialog" aria-modal="true" aria-labelledby="usuario-titulo" id="form-usuario">
+      <h2 id="usuario-titulo">Nueva cuenta</h2>
+      <div class="campo"><label for="u-nombre">Nombre</label><input class="entrada" id="u-nombre" required data-foco-inicial></div>
+      <div class="campo"><label for="u-correo">Correo</label><input class="entrada" id="u-correo" type="email" required placeholder="nombre@jjmm.com.pe"></div>
+      <div class="campo">
+        <label for="u-rol">Rol</label>
+        <select class="selector" id="u-rol" aria-describedby="u-rol-ayuda"><option value="editor" selected>Editor</option><option value="administrador">Administrador</option></select>
+        <p class="ayuda" id="u-rol-ayuda">Editor: textos, imágenes, planes, avisos, blog, sedes y mensajes. Administrador: además, cuentas, menú y datos del estudio.</p>
+      </div>
+      <div class="campo">
+        <label for="u-clave">Contraseña temporal</label>
+        <div class="contrasena">
+          <input class="entrada" id="u-clave" type="password" required minlength="10" autocomplete="new-password" aria-describedby="u-clave-ayuda">
+          <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-ver-contrasena aria-pressed="false" aria-label="Mostrar la contraseña"><span data-icono="ojo"></span></button>
+        </div>
+        <p class="ayuda" id="u-clave-ayuda">Al menos 10 caracteres. Pídele que la cambie en Mi cuenta al entrar.</p>
+      </div>
+      <div class="dialogo-acciones">
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <button class="boton boton-principal" type="submit">Crear cuenta</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
