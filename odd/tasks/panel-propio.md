@@ -47,8 +47,8 @@ Supuestos, marcados como tales (no son parte del encargo):
 |---|---|---|---|---|---|
 | P1 | S2, S3, S4.1 | Maqueta HTML navegable de las pantallas principales, con datos reales | delegada (contexto largo de la sesión) | hecha: `mockup/panel/index.html` | ver L3 |
 | P2 | S4.1 | Aprobación de la maqueta por Gian | — | aprobada (L4) | — |
-| P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | en curso | — |
-| P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario | por definir | bloqueada por P2 | — |
+| P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | hecha y verificada en producción (L5) | `45d9675`, `2d828a6`, `563c0b5`, `7ca09f6` |
+| P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario (mensajes de contacto) | delegada (respaldo de contexto) + verificador (riesgo 2: primeras escrituras del panel) | en curso | — |
 | P5 | S1, S3, S4.2 | Fase 3: el catálogo principal | por definir | bloqueada por P2 | — |
 | P6 | S1, S3, S4.2 | Fase 4: el resto de secciones | por definir | bloqueada por P2 | — |
 | P7 | S0, S1 | Ocultar el `/admin` de Payload y dejarlo solo para el desarrollador | por definir | bloqueada por P3 | — |
@@ -101,4 +101,14 @@ Supuestos, marcados como tales (no son parte del encargo):
   - e) solo el administrador borra mensajes, como hoy;
   - f) una sola pantalla «Guía de clientes».
 
-Siguiente paso: P3.
+**L5** (27/11/2026), P3 terminada:
+- Panel en `/panel`: ingreso propio (misma cookie que `/admin`, mismo bloqueo por intentos), guardia `exigirSesion()` en el layout y en cada página, menú por rol, barra con la ruta e inicio con cifras reales. Código en `sitio/src/panel/` y `sitio/src/app/(panel)/`. Tailwind v4 y shadcn/ui solo en el panel.
+- Verificador independiente: sin bloqueos. `cn@0.5.2` es el paquete oficial de shadcn (comprobado en el registro de npm); queda con versión fija.
+- Avisos anotados, anteriores a este cambio: el login de Payload delata por tiempo si un correo existe; no hay límite de intentos por IP; `auth.cookies.secure` sin definir.
+- Dos fallos encontrados al desplegar y corregidos: la compilación generaba `/panel/ingreso` y necesitaba la base (`563c0b5`, `force-dynamic`); el logotipo daba 400 en `next/image` y el menú recortaba «Próximamente» (`7ca09f6`).
+- Verificado en producción con capturas a 1440×900 y 390×844: sin sesión redirige al ingreso; contraseña incorrecta muestra el mensaje único; ingreso y salida funcionan; inicio y cajón del celular sin desborde ni errores; el sitio público y `/admin` responden 200.
+- Diferencias con la maqueta: los «Ver» abren `/admin` hasta P4–P6; «Lo que falta completar» solo muestra lo calculable (cronograma SUNAT, celular por sede, publicaciones); la tabla de pendientes en celular oculta una columna en vez de apilar tarjetas.
+- Sin verificar: la vista de un editor (no existe la cuenta) y las pruebas de Playwright nuevas, que corren en CI.
+- P7 no puede entrar antes de que P4–P6 reemplacen los enlaces a `/admin`.
+
+Siguiente paso: P4.
