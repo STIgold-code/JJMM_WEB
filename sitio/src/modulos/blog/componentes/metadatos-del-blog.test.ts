@@ -53,6 +53,7 @@ describe('metadatosDePublicacion', () => {
     categoria: null,
     etiquetas: [],
     fechaDePublicacion: '2026-11-27T15:00:00.000Z',
+    fechaDeActualizacion: '2026-11-28T10:00:00.000Z',
     contenido: null,
     seo: { titulo: null, descripcion: null },
   }
@@ -68,6 +69,7 @@ describe('metadatosDePublicacion', () => {
         description: 'Te explicamos el IGV.',
         url: '/blog/que-es-el-igv',
         publishedTime: '2026-11-27T15:00:00.000Z',
+        modifiedTime: '2026-11-28T10:00:00.000Z',
         images: [
           { url: '/api/medios/file/igv.webp', width: 1200, height: 630, alt: 'Calculadora' },
         ],

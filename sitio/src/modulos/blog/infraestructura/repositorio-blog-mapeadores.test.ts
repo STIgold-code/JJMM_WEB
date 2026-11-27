@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { Medio, Publicacione } from '@/payload-types'
 
-import { mapearPaginaDelBlog, mapearResumen } from './repositorio-blog-mapeadores'
+import { mapearDetalle, mapearPaginaDelBlog, mapearResumen } from './repositorio-blog-mapeadores'
 
 const IMAGEN: Medio = {
   id: 7,
@@ -29,7 +29,7 @@ const PUBLICACION: Publicacione = {
     4,
   ],
   fechaDePublicacion: '2026-11-27T15:00:00.000Z',
-  updatedAt: '',
+  updatedAt: '2026-11-28T10:00:00.000Z',
   createdAt: '',
   _status: 'published',
 }
@@ -56,6 +56,16 @@ describe('mapearResumen', () => {
     const resumen = mapearResumen({ ...PUBLICACION, imagen: 7, categoria: 2, etiquetas: null })
 
     expect(resumen).toMatchObject({ imagen: null, categoria: null, etiquetas: [] })
+  })
+})
+
+describe('mapearDetalle', () => {
+  it('agrega el contenido, el SEO y la fecha de la última actualización', () => {
+    expect(mapearDetalle(PUBLICACION)).toMatchObject({
+      contenido: PUBLICACION.contenido,
+      seo: { titulo: null, descripcion: null },
+      fechaDeActualizacion: '2026-11-28T10:00:00.000Z',
+    })
   })
 })
 

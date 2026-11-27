@@ -100,7 +100,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | delegada (junto con T7) | hecha salvo el aviso por correo (falta proveedor y casilla, L6) | ver L19 |
 | T9 | S7 | Guía de clientes: avisos y vencimientos | delegada (paralela con T7+T8 y T10) | hecha; consulta por RUC sin datos hasta cargar el cronograma oficial | ver L18 |
 | T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
-| T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | en línea | pendiente | — |
+| T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | delegada (contexto largo) | hecha; falta verificar en navegador (CI detenida) | ver L20 |
 | T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | en línea | pendiente | — |
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
 | T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | pendiente | — |
@@ -274,3 +274,19 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
   - aviso por correo con un puerto `NotificadorDeMensajes` sin implementar.
 - Verificación de unión de las tres unidades paralelas: `test` (448 pruebas), `format:check`, `lint`, `typecheck` y `build` pasan con el árbol completo.
 - Riesgo: punto 6. El comportamiento en navegador solo lo cubre Playwright en CI.
+
+**L20** (27/11/2026), CI detenida y T11 terminada:
+- GitHub Actions no inicia ningún job: «recent account payments have failed or your spending limit needs to be increased». Playwright y Lighthouse CI nunca corrieron. Lo resuelve Gian en la facturación de la cuenta.
+- Limitador del formulario endurecido tras la revisión automática de seguridad (`7c71054`, `d56a520`, `069742b`):
+  - tope estricto de claves que falla cerrado (decisión: los canales directos siguen disponibles);
+  - IP validada con `node:net`;
+  - IPv6 agrupada por /64.
+- T11, URL antiguas verificadas en producción con GET de solo lectura: `/blog/posts/:slug`, `/blog/category/:slug`, `/blog/tag/:slug`, `?page=N`, `/guia_clientes.html` (enlazada, da 404) y `/login`. Las 301 están en `src/app/redirecciones-heredadas.ts`, sin bucles.
+- `NEXT_PUBLIC_SITE_URL` es obligatoria y se valida en producción. `metadataBase`, canonical y Open Graph están en todas las páginas.
+- JSON-LD: `AccountingService` en el inicio y `BlogPosting` + `BreadcrumbList` en cada artículo, solo con datos del panel.
+- `sitemap.xml` es dinámico y solo incluye lo publicado. `robots.txt` bloquea `/admin` y `/api`, salvo los archivos de medios.
+- Lighthouse CI suma `/guia` y `/blog`.
+- Verificado: `typecheck`, `lint`, `format:check`, `test` (496 pruebas, RED observado antes) y `build`.
+- Riesgo:
+  - punto 3: cambió la forma de `metadatosPorDefecto` y `DetalleDePublicacion`; todos los usos están actualizados;
+  - punto 6: las 301 y las respuestas de sitemap y robots solo las cubre Playwright.

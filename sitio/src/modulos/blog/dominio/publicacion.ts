@@ -33,6 +33,8 @@ export interface SeoDePublicacion {
 
 // El contenido enriquecido es opaco para el dominio: solo la capa de interfaz lo dibuja.
 export interface DetalleDePublicacion<Contenido> extends ResumenDePublicacion {
+  // Última vez que se guardó en el panel (ISO 8601): `dateModified` y Open Graph.
+  fechaDeActualizacion: string
   contenido: Contenido
   seo: SeoDePublicacion
 }

@@ -18,6 +18,7 @@ export const resumen = (slug: string, categoria = 'tributacion'): ResumenDePubli
 
 export const detalle = (slug: string): DetalleDePublicacion<string> => ({
   ...resumen(slug),
+  fechaDeActualizacion: '2026-11-28T10:00:00.000Z',
   contenido: 'contenido',
   seo: { titulo: null, descripcion: null },
 })

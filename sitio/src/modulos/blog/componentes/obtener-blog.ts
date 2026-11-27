@@ -2,8 +2,10 @@ import { cache } from 'react'
 
 import { crearListarPorCategoria, crearListarPorEtiqueta } from '../aplicacion/listar-por-taxonomia'
 import { crearListarPublicaciones } from '../aplicacion/listar-publicaciones'
+import { crearListarRutasDelMapa } from '../aplicacion/listar-rutas-del-mapa'
 import { crearObtenerPaginaDelBlog } from '../aplicacion/obtener-pagina-del-blog'
 import { crearObtenerPublicacion } from '../aplicacion/obtener-publicacion'
+import { repositorioMapaDelBlogPayload } from '../infraestructura/repositorio-mapa-del-blog-payload'
 import { repositorioPaginaDelBlogPayload } from '../infraestructura/repositorio-pagina-del-blog-payload'
 import { repositorioPublicacionesPayload } from '../infraestructura/repositorio-publicaciones-payload'
 import { repositorioTaxonomiasPayload } from '../infraestructura/repositorio-taxonomias-payload'
@@ -21,6 +23,8 @@ export const obtenerPublicacion = cache(crearObtenerPublicacion(repositorioPubli
 export const listarPorCategoria = cache(
   crearListarPorCategoria(repositorioPublicacionesPayload, repositorioTaxonomiasPayload),
 )
+
+export const listarRutasDelMapa = cache(crearListarRutasDelMapa(repositorioMapaDelBlogPayload))
 
 export const listarPorEtiqueta = cache(
   crearListarPorEtiqueta(repositorioPublicacionesPayload, repositorioTaxonomiasPayload),

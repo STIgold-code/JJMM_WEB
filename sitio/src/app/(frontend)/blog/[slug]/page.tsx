@@ -8,6 +8,7 @@ import { PublicacionesSimilares } from '@/modulos/blog/componentes/publicaciones
 
 import type { PropsConSlug } from '../parametros-de-ruta'
 import { ContenidoEnriquecido } from './contenido-enriquecido'
+import { DatosEstructuradosDePublicacion } from './datos-estructurados-de-publicacion'
 
 export async function generateMetadata({ params }: PropsConSlug): Promise<Metadata> {
   const resultado = await obtenerPublicacion((await params).slug)
@@ -21,6 +22,7 @@ export default async function PaginaDePublicacion({ params }: PropsConSlug) {
   const { publicacion, similares } = resultado
   return (
     <>
+      <DatosEstructuradosDePublicacion publicacion={publicacion} />
       <ArticuloDePublicacion
         titulo={publicacion.titulo}
         extracto={publicacion.extracto}

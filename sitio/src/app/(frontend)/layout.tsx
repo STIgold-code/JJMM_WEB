@@ -12,6 +12,7 @@ import { metadatosPorDefecto } from '@/compartido/componentes/estructura/metadat
 import { PieContenedor } from '@/compartido/componentes/estructura/pie/pie-contenedor'
 import { SpriteDeIconos } from '@/compartido/componentes/iconos/sprite-de-iconos'
 import { ObservadorDeRevelado } from '@/compartido/componentes/revelado/observador-de-revelado'
+import { urlDelSitio } from '@/compartido/infraestructura/url-del-sitio-configurada'
 
 import { openSans, oswald } from './fuentes/fuentes'
 
@@ -20,7 +21,7 @@ import { openSans, oswald } from './fuentes/fuentes'
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {
-  return metadatosPorDefecto(await obtenerDatosDelSitio())
+  return metadatosPorDefecto(urlDelSitio(), await obtenerDatosDelSitio())
 }
 
 // Marca <html> antes de pintar para que `.revelar` oculte solo cuando hay JavaScript.

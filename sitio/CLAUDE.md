@@ -111,7 +111,7 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - Pruebas primero en reglas de dominio: escribe la prueba que falla antes de implementar.
 - La configuración del panel es código (colecciones y globales en TypeScript), nunca cambios manuales.
 
-**Rendimiento (S3)**, verificado por Lighthouse CI en móvil: rendimiento ≥ 0,9, LCP ≤ 2500 ms, CLS ≤ 0,1 y como máximo 170 KB de JavaScript transferido en el inicio.
+**Rendimiento (S3)**, verificado por Lighthouse CI en móvil sobre `/`, `/guia` y `/blog`: rendimiento ≥ 0,9, LCP ≤ 2500 ms, CLS ≤ 0,1 y como máximo 170 KB de JavaScript transferido por página. El detalle de una publicación no se mide en CI porque la semilla no carga publicaciones.
 
 ### Carga inicial
 
@@ -134,6 +134,14 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - **Aparición al hacer scroll (S6):** usa `propsDeRevelado({ desde: 'izquierda' | 'derecha', retraso: 0.2, clase })` y esparce el resultado en el elemento (`<li {...propsDeRevelado({ retraso: 0.1 })}>`). El `ObservadorDeRevelado` del layout agrega `visible`; sin JavaScript o con `prefers-reduced-motion` todo se ve de inmediato.
 - **Menú:** las secciones se enlazan como `/#ancla` para que funcionen desde cualquier página; una sección del inicio se marca como actual cuando su elemento con ese `id` cruza el centro de la pantalla.
 - **Imágenes de Payload:** `next/image` con `localPatterns` en `/api/medios/file/**` (en disco o en Wasabi la ruta es la misma).
+
+### SEO
+
+- **URL del sitio:** `NEXT_PUBLIC_SITE_URL` (solo el origen). `next.config.ts` la valida con `leerUrlDelSitio` (`src/compartido/dominio/url-del-sitio.ts`) al compilar y al arrancar en producción; si falta o está mal escrita, falla ahí con un mensaje claro. En desarrollo y pruebas, si falta, se usa `http://localhost:3000`. El código la lee con `urlDelSitio()` (`compartido/infraestructura/url-del-sitio-configurada.ts`).
+- **Metadatos:** el layout define `metadataBase`, la plantilla del título y el Open Graph del sitio (`metadatos-por-defecto.ts`). Cada página pone su canonical con una ruta relativa. Un `openGraph` de página reemplaza entero al del layout (Next no los combina): repite lo que necesites.
+- **Sitemap y robots:** `src/app/sitemap.ts` (dinámico: inicio, guía, blog, publicaciones publicadas y las categorías y etiquetas que tienen publicaciones, con la fecha de su publicación más reciente) y `src/app/robots.ts` (bloquea `/admin` y `/api`, salvo `/api/medios/file/`). La lógica pura está en `src/app/mapa-y-robots.ts`.
+- **Datos estructurados (JSON-LD):** se arman con funciones puras y probadas (`compartido/dominio/datos-estructurados-del-estudio.ts`, `json-ld.ts` y `modulos/blog/dominio/datos-estructurados-de-publicacion.ts`) y se dibujan con `DatosEstructurados`, que escapa `<`. El inicio publica `AccountingService` con la configuración y las sedes; cada publicación, `BlogPosting` y `BreadcrumbList`. Solo datos del panel: un campo vacío no se publica.
+- **Redirecciones 301:** `src/app/redirecciones-heredadas.ts` lista las URL del sitio Laravel (verificadas en producción): `/blog/posts/:slug`, `/blog/category/:slug`, `/blog/tag/:slug`, `?page=N` → `?pagina=N`, `/guia_clientes.html` y `/login` → `/admin`. `next.config.ts` la importa, así que ese archivo no usa alias ni importa código.
 
 ## Reglas de contenido
 

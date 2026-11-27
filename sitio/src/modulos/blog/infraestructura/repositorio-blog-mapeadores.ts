@@ -68,6 +68,7 @@ export function mapearDetalle(
 ): DetalleDePublicacion<ContenidoDePublicacion> {
   return {
     ...mapearResumen(publicacion),
+    fechaDeActualizacion: publicacion.updatedAt,
     contenido: publicacion.contenido,
     seo: mapearSeo(publicacion.seo),
   }

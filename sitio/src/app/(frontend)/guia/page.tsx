@@ -16,11 +16,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const guia = await obtenerGuiaDeClientes()
   if (!guia) return {}
   const { titulo, descripcion } = guia.seo
+  // Sin descripción propia se hereda la del sitio (layout).
+  const conDescripcion = descripcion ? { description: descripcion } : {}
   return {
     title: titulo,
-    // Sin descripción propia se hereda la del sitio (layout).
-    ...(descripcion ? { description: descripcion } : {}),
+    ...conDescripcion,
     alternates: { canonical: RUTA },
+    openGraph: { type: 'website', title: titulo, url: RUTA, ...conDescripcion },
   }
 }
 

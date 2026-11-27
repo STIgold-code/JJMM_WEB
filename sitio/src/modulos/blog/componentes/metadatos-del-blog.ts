@@ -6,7 +6,8 @@ import type { DetalleDePublicacion, PaginaDelBlog } from '../dominio/publicacion
 import { RUTA_DEL_BLOG, rutaDePagina, rutaDePublicacion } from '../dominio/rutas-del-blog'
 
 // Metadatos de las páginas del blog. Las URL son relativas: el layout define la base
-// (metadataBase) para volverlas absolutas. Lo que queda sin definir se hereda del layout.
+// (metadataBase) para volverlas absolutas. Lo que queda sin definir se hereda del layout,
+// salvo `openGraph`, que Next reemplaza entero cuando la página define el suyo.
 
 const tituloDePagina = (titulo: string, pagina: number): string =>
   pagina > 1 ? `${titulo} (página ${pagina})` : titulo
@@ -62,6 +63,7 @@ export function metadatosDePublicacion(publicacion: DetalleDePublicacion<unknown
       description: descripcion,
       url,
       publishedTime: publicacion.fechaDePublicacion,
+      modifiedTime: publicacion.fechaDeActualizacion,
       images: imagenesDe(publicacion.imagen),
     },
   }
