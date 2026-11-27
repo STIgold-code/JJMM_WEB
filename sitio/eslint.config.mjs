@@ -32,18 +32,24 @@ const capasExternas = (capas) => ({
 })
 const restringir = (...patterns) => ({ 'no-restricted-imports': ['error', { patterns }] })
 
+// `acciones/` (server actions del panel propio, `src/panel/`) es una capa externa, como
+// `infraestructura/`: puede usar Payload y Next, y el dominio y la aplicación no la importan.
 const LIMITES_DE_CAPAS = [
   {
     files: ['src/**/dominio/**/*.{ts,tsx}'],
     rules: restringir(
       PAYLOAD,
       REACT_Y_NEXT,
-      capasExternas(['aplicacion', 'infraestructura', 'componentes']),
+      capasExternas(['aplicacion', 'infraestructura', 'componentes', 'acciones']),
     ),
   },
   {
     files: ['src/**/aplicacion/**/*.{ts,tsx}'],
-    rules: restringir(PAYLOAD, REACT_Y_NEXT, capasExternas(['infraestructura', 'componentes'])),
+    rules: restringir(
+      PAYLOAD,
+      REACT_Y_NEXT,
+      capasExternas(['infraestructura', 'componentes', 'acciones']),
+    ),
   },
   {
     files: ['src/**/componentes/**/*.{ts,tsx}'],
@@ -66,8 +72,9 @@ const eslintConfig = defineConfig([
   {
     // Límites contra los God Components (reglas de ingeniería, S8).
     files: ['src/**/*.{ts,tsx}'],
-    // Las rutas de Payload en (payload)/ las genera y reescribe Payload.
-    ignores: ['src/app/(payload)/**'],
+    // Las rutas de Payload en (payload)/ las genera y reescribe Payload. Las primitivas de
+    // shadcn/ui (`src/panel/componentes/ui/`) las genera su CLI y se actualizan con ella.
+    ignores: ['src/app/(payload)/**', 'src/panel/componentes/ui/**'],
     rules: {
       'max-lines': ['error', { max: 150, skipBlankLines: true, skipComments: true }],
       'max-lines-per-function': [

@@ -1,0 +1,165 @@
+/* Panel propio del estudio. Esta hoja solo la carga el layout raíz de (panel): Tailwind y su
+   preflight no llegan al sitio público (CSS Modules) ni al /admin de Payload.
+   `source(none)`: Tailwind solo busca clases en el código del panel, no en todo el proyecto. */
+@import 'tailwindcss' source(none);
+@import 'tw-animate-css';
+
+@source "../../panel";
+@source "./";
+
+/* Tokens de la maqueta aprobada (`mockup/panel/panel.css`), con los nombres del tema de
+   shadcn/ui. Tema claro por defecto. */
+:root {
+  /* Superficies: neutro teñido del azul del logo. */
+  --background: #f5f7fa;
+  --foreground: #13233a;
+  --card: #ffffff;
+  --card-foreground: #13233a;
+  --popover: #ffffff;
+  --popover-foreground: #13233a;
+  --muted: #edf1f6;
+  --muted-foreground: #4d5d73;
+  --accent: #e6eef7;
+  --accent-foreground: #0d3a66;
+  --border: #d5dee9;
+  --input: #8695a9;
+  --placeholder: #66768c;
+
+  /* Marca: el azul del logo (#004c8c, centro de su degradado #003c70 → #005498). */
+  --primary: #004c8c;
+  --primary-hover: #003c70;
+  --primary-foreground: #ffffff;
+  --ring: #004c8c;
+  --secondary: #edf1f6;
+  --secondary-foreground: #13233a;
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+
+  /* Estados con significado fijo. */
+  --estado-pendiente: #8a4b00;
+  --estado-pendiente-fondo: #fdf1dc;
+  --estado-pendiente-borde: #efcf95;
+  --estado-pendiente-solido: #b45309;
+  --estado-en-curso: #5b3596;
+  --estado-en-curso-fondo: #efe9fb;
+  --estado-en-curso-borde: #d3c4f0;
+  --estado-listo: #17663a;
+  --estado-listo-fondo: #e3f4ea;
+  --estado-listo-borde: #a9dcbd;
+  --estado-error: #a8231a;
+  --estado-error-fondo: #fde8e6;
+  --estado-error-borde: #f3b8b2;
+
+  /* Menú lateral: segunda capa neutra, un paso más fría que el lienzo. */
+  --sidebar: #eef2f7;
+  --sidebar-foreground: #13233a;
+  --sidebar-muted: #4d5d73;
+  --sidebar-accent: #dbe6f2;
+  --sidebar-accent-foreground: #003c70;
+  --sidebar-border: #d5dee9;
+  --sidebar-ring: #004c8c;
+
+  --radius: 0.5rem;
+  --sombra-sm: 0 1px 2px rgb(19 35 58 / 0.06);
+  --sombra-md: 0 4px 12px -2px rgb(19 35 58 / 0.1), 0 2px 4px -2px rgb(19 35 58 / 0.06);
+  --sombra-lg: 0 16px 40px -8px rgb(19 35 58 / 0.22), 0 4px 10px -4px rgb(19 35 58 / 0.1);
+  --ancho-menu: 16rem;
+  --alto-barra: 3.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-placeholder: var(--placeholder);
+  --color-ring: var(--ring);
+  --color-pendiente: var(--estado-pendiente);
+  --color-pendiente-fondo: var(--estado-pendiente-fondo);
+  --color-pendiente-borde: var(--estado-pendiente-borde);
+  --color-pendiente-solido: var(--estado-pendiente-solido);
+  --color-listo: var(--estado-listo);
+  --color-listo-fondo: var(--estado-listo-fondo);
+  --color-listo-borde: var(--estado-listo-borde);
+  --color-error: var(--estado-error);
+  --color-error-fondo: var(--estado-error-fondo);
+  --color-error-borde: var(--estado-error-borde);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --shadow-sm: var(--sombra-sm);
+  --shadow-md: var(--sombra-md);
+  --shadow-lg: var(--sombra-lg);
+  --font-sans: var(--fuente-open-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-marca: var(--fuente-oswald), 'Arial Narrow', sans-serif;
+  --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cortes de la maqueta: el menú pasa a cajón por debajo de 900 px; las columnas del inicio se
+   apilan por debajo de 1180 px y las cifras usan seis columnas desde 1280 px. */
+@theme {
+  --breakpoint-escritorio: 56.3125rem;
+  --breakpoint-amplio: 73.8125rem;
+  --breakpoint-ancho: 80.0625rem;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+
+  * {
+    border-color: var(--border);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::placeholder {
+    color: var(--placeholder);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
