@@ -136,6 +136,8 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: reportes-sitio
+          # `.lighthouseci` es una carpeta oculta: sin esto, la acción la excluye.
+          include-hidden-files: true
           path: |
             sitio/playwright-report/
             sitio/.lighthouseci/
