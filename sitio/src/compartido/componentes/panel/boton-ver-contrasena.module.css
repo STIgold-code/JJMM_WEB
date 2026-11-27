@@ -1,0 +1,42 @@
+/* El contenedor que lo ubica dentro del campo es global (`_formularios.scss`): lo crea
+   `VerContrasenas` fuera de React. */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--style-radius-m);
+  background: transparent;
+  color: var(--theme-elevation-650);
+  cursor: pointer;
+  transition:
+    background-color 0.15s var(--jjmm-salida),
+    color 0.15s var(--jjmm-salida);
+}
+
+.boton:hover {
+  background: var(--theme-elevation-100);
+  color: var(--theme-text);
+}
+
+.boton:focus-visible {
+  outline: 2px solid var(--jjmm-foco);
+  outline-offset: 1px;
+}
+
+.boton[aria-pressed='true'] {
+  color: var(--jjmm-enlace);
+}
+
+.boton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.boton svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}

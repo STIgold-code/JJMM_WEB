@@ -33,6 +33,8 @@ export function campoActivo(etiqueta: string): Field {
     defaultValue: true,
     admin: {
       position: 'sidebar',
+      // En las listas se lee «Se muestra» u «Oculto» en lugar de «verdadero».
+      components: { Cell: '/compartido/componentes/panel/insignia-de-estado#CeldaDeActivo' },
       description:
         'Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.',
     },

@@ -1,0 +1,36 @@
+.vacio {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 44rem;
+  margin-top: calc(var(--base) * 1.25);
+  padding: 1.5rem;
+  border: 1px dashed var(--theme-elevation-250);
+  border-radius: 0.75rem;
+}
+
+.marco {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--jjmm-tenue);
+  color: var(--jjmm-sobre-tenue);
+}
+
+.titulo {
+  margin: 0;
+  font-family: var(--jjmm-titulo);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.detalle {
+  margin-top: 0.35rem;
+  color: var(--theme-elevation-650);
+  font-size: 1.05rem;
+}

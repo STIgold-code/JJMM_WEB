@@ -1,0 +1,42 @@
+// Colores, tipografías y medidas del panel, tomados de los tokens del sitio público
+// (`app/(frontend)/estilos-globales.css`). Es la única fuente de los colores del panel:
+// `colores-del-panel.test.ts` lee este archivo y comprueba el contraste WCAG de cada par en los
+// dos temas. Los bloques no llevan llaves anidadas para que la prueba los lea.
+
+:root {
+  --jjmm-noche: #0f3354;
+  --jjmm-noche-hover: #154771;
+  --jjmm-azul: #1d629c;
+  --jjmm-amarillo: #feee00;
+  --jjmm-amarillo-hondo: #e6d600;
+  --jjmm-sobre-noche: #dbe8f5;
+  --jjmm-sobre-noche-suave: #9fbcd8;
+  --jjmm-fondo: #ffffff;
+  --jjmm-fondo-elevado: #f4f5f7;
+  --jjmm-acento: #1d629c;
+  --jjmm-acento-hover: #154771;
+  --jjmm-sobre-acento: #ffffff;
+  --jjmm-enlace: #1d629c;
+  --jjmm-foco: #1d629c;
+  --jjmm-tenue: #eaf1f8;
+  --jjmm-sobre-tenue: #154771;
+  --jjmm-anillo: rgb(29 98 156 / 0.22);
+  --jjmm-titulo: 'Oswald JJMM', 'Arial Narrow', sans-serif;
+  --jjmm-texto: 'Open Sans JJMM', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --jjmm-salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --jjmm-ancho-de-marca: min(42vw, 40rem);
+}
+
+// Tema oscuro de Payload: el acento se aclara para que el texto y el foco se lean sobre el
+// fondo oscuro. El menú lateral y el panel de marca siguen azul noche en los dos temas.
+html[data-theme='dark'] {
+  --jjmm-fondo: #111418;
+  --jjmm-fondo-elevado: #1c2228;
+  --jjmm-acento: #2e78b8;
+  --jjmm-acento-hover: #1d629c;
+  --jjmm-enlace: #8cc0ec;
+  --jjmm-foco: #8cc0ec;
+  --jjmm-tenue: #1b3550;
+  --jjmm-sobre-tenue: #dbe8f5;
+  --jjmm-anillo: rgb(140 192 236 / 0.28);
+}

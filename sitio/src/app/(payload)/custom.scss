@@ -1,30 +1,32 @@
-// Marca del Estudio JJMM en el panel. Solo se reemplaza la escala de grises de Payload
-// (`--color-base-*`) por una con el tono azul de la marca (#1d629c) y la MISMA luminancia en
-// cada paso: así los temas claro y oscuro de Payload conservan sus pares de contraste (texto
-// 13,3:1 en claro y 18,3:1 en oscuro, frente a 13,4:1 y 18,4:1 de los grises originales).
-// Payload arma ambos temas con esta escala, por eso basta con definirla una vez.
-@layer payload {
-  :root {
-    --color-base-0: rgb(255, 255, 255);
-    --color-base-50: rgb(244, 245, 247);
-    --color-base-100: rgb(233, 236, 238);
-    --color-base-150: rgb(217, 221, 225);
-    --color-base-200: rgb(202, 209, 214);
-    --color-base-250: rgb(189, 196, 203);
-    --color-base-300: rgb(173, 183, 190);
-    --color-base-350: rgb(153, 171, 184);
-    --color-base-400: rgb(137, 156, 173);
-    --color-base-450: rgb(122, 144, 162);
-    --color-base-500: rgb(107, 131, 152);
-    --color-base-550: rgb(94, 116, 135);
-    --color-base-600: rgb(83, 104, 120);
-    --color-base-650: rgb(72, 90, 104);
-    --color-base-700: rgb(61, 76, 88);
-    --color-base-750: rgb(50, 62, 71);
-    --color-base-800: rgb(39, 48, 56);
-    --color-base-850: rgb(28, 34, 40);
-    --color-base-900: rgb(17, 20, 24);
-    --color-base-950: rgb(6, 7, 9);
-    --color-base-1000: rgb(0, 0, 0);
-  }
+// Marca del Estudio JJMM en el panel de Payload. Orden de la cascada:
+// - Payload declara sus estilos en `@layer payload-default`; lo de aquí va en `@layer payload`,
+//   que se declara después y gana sin `!important` ni selectores más largos.
+// - Los CSS Modules de los componentes propios no llevan capa y ganan a ambos.
+// Se prefieren las variables de Payload (`--theme-*`, `--font-body`, las de `.btn`) a pisar sus
+// clases. Las clases de Payload que sí se tocan se verificaron en
+// `node_modules/@payloadcms/next/dist/prod/styles.css` (3.94) y se listan en cada archivo.
+@use 'estilos/tokens';
+@use 'estilos/base';
+@use 'estilos/formularios';
+@use 'estilos/menu';
+@use 'estilos/acceso';
+@use 'estilos/contenido';
+
+// Fuentes del sitio público (Oswald para títulos, Open Sans para texto), servidas desde la
+// propia aplicación: sin peticiones a Google Fonts. Se declaran aquí y no en un parcial porque
+// la ruta relativa parte de este archivo.
+@font-face {
+  font-family: 'Oswald JJMM';
+  src: url('../(frontend)/fuentes/oswald-latin.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Open Sans JJMM';
+  src: url('../(frontend)/fuentes/open-sans-latin.woff2') format('woff2');
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
 }

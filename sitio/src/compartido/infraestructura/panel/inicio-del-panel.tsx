@@ -1,29 +1,44 @@
-import type { Payload, TypedUser } from 'payload'
+import type { Payload, SanitizedPermissions, TypedUser } from 'payload'
 
-import { BienvenidaDelPanel } from '../../componentes/panel/bienvenida-del-panel'
+import { InicioDelPanelVista } from '../../componentes/panel/inicio-del-panel-vista'
+import { fechaLarga } from '../../componentes/panel/textos-del-inicio'
+import { armarCifras } from './cifras-del-panel'
+import { contarCifras, contarColecciones } from './conteos-del-panel'
 import { armarEnlacesRapidos } from './enlaces-rapidos'
+import { armarSecciones, entidadesDelPanel, puedeEditar } from './secciones-del-panel'
 
 interface Props {
   payload: Payload
-  user?: TypedUser
+  permissions: SanitizedPermissions
+  user?: TypedUser | null
 }
 
-// Contenedor de `admin.components.beforeDashboard`. Vive en infraestructura porque recibe la
-// instancia de Payload (prop por defecto de los componentes de servidor del panel), algo que
-// la capa `componentes/` no puede importar. Cuenta los mensajes pendientes con el acceso del
-// usuario, sin saltarse los permisos.
-export async function InicioDelPanel({ payload, user }: Props) {
-  const { totalDocs } = await payload.count({
-    collection: 'mensajes-de-contacto',
-    where: { estado: { equals: 'nuevo' } },
-    overrideAccess: false,
-    user,
-  })
+// Inicio del panel (`admin.components.views.dashboard`): reemplaza la cuadrícula de Payload.
+// Contenedor de servidor: cuenta con los permisos de quien entra, arma los datos y se los pasa
+// a la presentación. Vive en infraestructura porque recibe la instancia de Payload.
+export async function InicioDelPanel({ payload, permissions, user }: Props) {
+  const rutaDelPanel = payload.config.routes.admin
+  const entidades = entidadesDelPanel(payload.config.collections, payload.config.globals)
+  const coleccionesVisibles = entidades
+    .filter((entidad) => entidad.tipo === 'coleccion' && puedeEditar(entidad, permissions))
+    .map(({ slug }) => slug)
+  const contexto = { payload, permisos: permissions, user }
+  const [conteos, cantidades] = await Promise.all([
+    contarCifras(contexto),
+    contarColecciones(contexto, coleccionesVisibles),
+  ])
   return (
-    <BienvenidaDelPanel
+    <InicioDelPanelVista
       nombre={user?.nombre}
-      enlaces={armarEnlacesRapidos(payload.config.routes.admin)}
-      mensajesNuevos={totalDocs}
+      fecha={fechaLarga(new Date())}
+      cifras={armarCifras(conteos, rutaDelPanel)}
+      accesos={armarEnlacesRapidos(rutaDelPanel, permissions)}
+      secciones={armarSecciones({
+        entidades,
+        permisos: permissions,
+        rutaDelPanel,
+        conteos: cantidades,
+      })}
     />
   )
 }

@@ -1,0 +1,71 @@
+// Pantallas de acceso (ingreso, primer usuario, contraseña, salida). Payload las dibuja con su
+// plantilla mínima (`.template-minimal`, formulario centrado); `ProveedorDelPanel` agrega el
+// panel de marca (`[data-panel-de-marca]`). En escritorio el panel es una columna fija a la
+// izquierda y el formulario ocupa el resto; en pantallas de hasta 1024 px, el panel es una
+// franja arriba y el formulario va debajo.
+// Clases de Payload: `.template-minimal`, `.template-minimal__wrap`, `.login__brand`,
+// `.btn--style-primary`, `.form-submit`.
+@layer payload {
+  .template-minimal {
+    align-items: flex-start;
+    padding-block: clamp(2rem, 8vh, 6rem);
+  }
+
+  .template-minimal--width-normal .template-minimal__wrap {
+    max-width: 26rem;
+  }
+
+  // Botón principal del acceso: el amarillo de los botones del sitio con texto azul noche
+  // (10,8:1). La sombra lo despega del fondo blanco, donde el amarillo tiene poco contraste.
+  .template-minimal .btn--style-primary:not(.btn--disabled) {
+    --bg-color: var(--jjmm-amarillo);
+    --color: var(--jjmm-noche);
+    --hover-bg: var(--jjmm-amarillo-hondo);
+    --hover-color: var(--jjmm-noche);
+    box-shadow:
+      0 0 0 1px rgb(15 51 84 / 0.12),
+      0 6px 16px rgb(10 25 45 / 0.16);
+    font-weight: 700;
+  }
+
+  .template-minimal .form-submit .btn {
+    width: 100%;
+  }
+
+  .template-minimal h1 {
+    font-size: 2.1rem;
+    line-height: 1.15;
+  }
+
+  // «¿Olvidaste tu contraseña?» y «Volver al ingreso».
+  .template-minimal a:not(.btn) {
+    color: var(--jjmm-enlace);
+    text-underline-offset: 3px;
+  }
+
+  // El logotipo completo solo en escritorio: en celulares la franja de marca ya lo muestra.
+  .login__brand {
+    justify-content: flex-start;
+    margin-bottom: calc(var(--base) * 1.5);
+  }
+
+  @media (max-width: 1024px) {
+    body:has([data-panel-de-marca]) .login__brand {
+      display: none;
+    }
+
+    // La franja ya ocupa la parte de arriba: el formulario no necesita llenar otra pantalla.
+    body:has([data-panel-de-marca]) .template-minimal {
+      min-height: 0;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    body:has([data-panel-de-marca]) .template-minimal {
+      width: auto;
+      min-height: 100vh;
+      margin-inline-start: var(--jjmm-ancho-de-marca);
+      align-items: center;
+    }
+  }
+}

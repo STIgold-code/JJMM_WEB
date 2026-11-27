@@ -1,8 +1,11 @@
+import type { NombreDeTrazo } from './trazos-del-panel'
+
 // Acceso directo del inicio del panel.
 export interface EnlaceRapido {
   clave: string
   etiqueta: string
   href: string
+  icono: NombreDeTrazo
 }
 
 // «1 mensaje nuevo», «3 mensajes nuevos» o nada cuando no hay pendientes.

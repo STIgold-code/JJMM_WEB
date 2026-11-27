@@ -1,0 +1,31 @@
+/* Dentro del menú lateral, siempre azul noche. */
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid rgb(219 232 245 / 0.28);
+  border-radius: var(--style-radius-m);
+  color: var(--jjmm-sobre-noche);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.15s var(--jjmm-salida),
+    border-color 0.15s var(--jjmm-salida);
+}
+
+.enlace:hover {
+  border-color: var(--jjmm-amarillo);
+  background: var(--jjmm-noche-hover);
+}
+
+.enlace:focus-visible {
+  outline: 2px solid var(--jjmm-amarillo);
+  outline-offset: 2px;
+}
+
+.icono {
+  width: 1.1rem;
+  height: 1.1rem;
+}

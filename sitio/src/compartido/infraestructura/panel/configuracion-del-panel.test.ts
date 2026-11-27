@@ -12,6 +12,7 @@ import { globalPaginaDeInicio } from '@/modulos/portada/infraestructura/global-p
 
 import { ADMIN_DEL_PANEL, I18N_DEL_PANEL } from './configuracion-del-panel'
 import { ORDEN_DE_GRUPOS } from './grupos-del-panel'
+import { TRADUCCIONES_DEL_PANEL } from './traducciones-del-panel'
 
 // `importMap.baseDir` es `src/`: las rutas de los componentes del panel parten de ahí.
 const RAIZ_DE_COMPONENTES = fileURLToPath(new URL('../../..', import.meta.url))
@@ -99,13 +100,63 @@ describe('panel: idioma y marca', () => {
     expect(ADMIN_DEL_PANEL.meta?.titleSuffix).toMatch(/JJMM/)
   })
 
-  it.each([
-    ['Logo', ADMIN_DEL_PANEL.components?.graphics?.Logo],
-    ['Icon', ADMIN_DEL_PANEL.components?.graphics?.Icon],
-    ['beforeDashboard', ADMIN_DEL_PANEL.components?.beforeDashboard?.[0]],
-  ])('el componente %s apunta a un archivo existente', (_nombre, componente) => {
-    expect(typeof componente).toBe('string')
-    const [ruta = ''] = String(componente).split('#')
-    expect(existsSync(path.join(RAIZ_DE_COMPONENTES, `${ruta}.tsx`))).toBe(true)
+  it('traduce lo que Payload dice de forma rara en el panel', () => {
+    expect(I18N_DEL_PANEL.translations?.es).toBe(TRADUCCIONES_DEL_PANEL)
+    expect(TRADUCCIONES_DEL_PANEL.general.dashboard).toBe('Inicio')
+    expect(TRADUCCIONES_DEL_PANEL.general.noResultsDescription).not.toMatch(/O bien ninguno/)
+  })
+
+  it.each([...componentesDelPanel(), ...componentesDeLasColecciones()])(
+    'el componente %s apunta a un archivo existente',
+    (_nombre, componente) => {
+      expect(typeof componente).toBe('string')
+      const [ruta = '', exportacion = ''] = String(componente).split('#')
+      expect(existsSync(path.join(RAIZ_DE_COMPONENTES, `${ruta}.tsx`))).toBe(true)
+      expect(exportacion).toMatch(/^[A-Z]/)
+    },
+  )
+})
+
+describe('panel: lo que no necesita el equipo', () => {
+  it.each([...COLECCIONES, ...GLOBALES].map((entidad) => [entidad.slug, entidad] as const))(
+    '%s no muestra la pestaña API',
+    (_slug, entidad) => {
+      expect(entidad.admin?.hideAPIURL).toBe(true)
+    },
+  )
+
+  it('los mensajes de contacto no se duplican desde el panel', () => {
+    const mensajes = COLECCIONES.find(({ slug }) => slug === 'mensajes-de-contacto')
+    expect(mensajes?.disableDuplicate).toBe(true)
   })
 })
+
+// Componentes propios del panel: marca, inicio, proveedor, menú e ingreso.
+function componentesDelPanel(): [string, unknown][] {
+  const componentes = ADMIN_DEL_PANEL.components ?? {}
+  const { graphics = {}, views = {} } = componentes
+  return [
+    ['Logo', graphics.Logo],
+    ['Icon', graphics.Icon],
+    ['views.dashboard', views.dashboard?.Component],
+    ['providers', componentes.providers?.[0]],
+    ['beforeNavLinks', componentes.beforeNavLinks?.[0]],
+    ['afterNavLinks', componentes.afterNavLinks?.[0]],
+    ['beforeLogin', componentes.beforeLogin?.[0]],
+  ]
+}
+
+// Componentes propios declarados en colecciones y campos (listas y celdas).
+function componentesDeLasColecciones(): [string, unknown][] {
+  return COLECCIONES.flatMap((coleccion) => {
+    const lista = coleccion.admin?.components?.beforeListTable ?? []
+    const celdas = camposConNombre(coleccion.fields).flatMap((campo) => {
+      const admin = campo.admin
+      const celda = admin && 'components' in admin ? admin.components : undefined
+      return celda && 'Cell' in celda && celda.Cell
+        ? [[`${coleccion.slug}.${campo.name}`, celda.Cell] as [string, unknown]]
+        : []
+    })
+    return [...lista.map((c): [string, unknown] => [`${coleccion.slug}.lista`, c]), ...celdas]
+  })
+}

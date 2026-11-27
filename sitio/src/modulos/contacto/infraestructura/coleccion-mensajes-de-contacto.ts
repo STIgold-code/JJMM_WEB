@@ -20,7 +20,16 @@ export const coleccionMensajesDeContacto: CollectionConfig = {
     group: GRUPOS_DEL_PANEL.contacto,
     description:
       'Mensajes que llegan desde el formulario «Contáctanos» del sitio, los más recientes primero. Cuando respondas uno, anota el celular o el correo de la persona y cámbialo a «Atendido».',
+    // Los mensajes solo llegan del formulario. `create` sigue abierto al público (lo usa el
+    // formulario sin sesión), así que el panel oculta sus botones «Crear» con estilos
+    // (`app/(payload)/estilos/_contenido.scss`) y muestra su propio estado vacío.
+    components: {
+      beforeListTable: [
+        '/modulos/contacto/infraestructura/lista-vacia-de-mensajes#ListaVaciaDeMensajes',
+      ],
+    },
   },
+  disableDuplicate: true,
   defaultSort: '-createdAt',
   access: {
     create: accesoPublico,
@@ -73,6 +82,7 @@ export const coleccionMensajesDeContacto: CollectionConfig = {
       ],
       admin: {
         position: 'sidebar',
+        components: { Cell: '/compartido/componentes/panel/insignia-de-estado#CeldaDeMensaje' },
         description:
           'Todo mensaje llega como «Nuevo». Cámbialo a «Atendido» cuando ya lo respondiste; así el inicio del panel cuenta solo los pendientes.',
       },

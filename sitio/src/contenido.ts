@@ -2,6 +2,7 @@ import type { CollectionConfig, GlobalConfig } from 'payload'
 
 import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
 import { globalConfiguracionDelSitio } from './compartido/infraestructura/global-configuracion-del-sitio'
+import { sinUrlDeApi } from './compartido/infraestructura/panel/sin-url-de-api'
 import {
   conRevalidacion,
   globalConRevalidacion,
@@ -36,7 +37,8 @@ export const COLECCIONES_SIN_REVALIDACION = [
 
 // Raíz de composición del modelo de datos: todas las colecciones y globales del panel.
 // El orden define el orden dentro de cada grupo del menú del panel. Todo lo que el sitio
-// público lee pasa por `conRevalidacion`, que invalida su caché al guardar en el panel.
+// público lee pasa por `conRevalidacion`, que invalida su caché al guardar en el panel. Todo
+// pasa por `sinUrlDeApi`: el equipo no usa la pestaña «API».
 export const COLECCIONES: CollectionConfig[] = [
   conRevalidacion(coleccionAreasDeServicio),
   conRevalidacion(coleccionPlanes),
@@ -54,7 +56,7 @@ export const COLECCIONES: CollectionConfig[] = [
   conRevalidacion(coleccionSedes),
   conRevalidacion(coleccionMedios),
   coleccionUsuarios,
-]
+].map(sinUrlDeApi)
 
 export const GLOBALES: GlobalConfig[] = [
   globalPaginaDeInicio,
@@ -62,4 +64,6 @@ export const GLOBALES: GlobalConfig[] = [
   globalPaginaDelBlog,
   globalNavegacion,
   globalConfiguracionDelSitio,
-].map(globalConRevalidacion)
+]
+  .map(globalConRevalidacion)
+  .map(sinUrlDeApi)

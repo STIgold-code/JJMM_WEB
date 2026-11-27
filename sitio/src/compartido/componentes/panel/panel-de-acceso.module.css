@@ -1,0 +1,130 @@
+/* Panel de marca de las pantallas de acceso. En celulares y tabletas (hasta 1024 px, el corte
+   «m» de Payload) es una franja compacta sobre el formulario; en escritorio, una columna fija a
+   la izquierda de ancho `--jjmm-ancho-de-marca`. `_acceso.scss` corre el formulario a la
+   derecha cuando este panel existe. Sobre el azul noche el texto supera 9:1 y el amarillo, 10:1. */
+.panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem var(--gutter-h);
+  background: var(--jjmm-noche);
+  color: var(--jjmm-sobre-noche);
+}
+
+.foto,
+.lema,
+.pie {
+  display: none;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.ovalo {
+  width: 4.25rem;
+  height: auto;
+}
+
+.nombre {
+  margin: 0;
+  color: #fff;
+  font-family: var(--jjmm-titulo);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.firma {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--jjmm-sobre-noche-suave);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@media (min-width: 1025px) {
+  .panel {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 1;
+    width: var(--jjmm-ancho-de-marca);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 0;
+    padding: clamp(2.5rem, 5vw, 4.5rem);
+    overflow: hidden;
+  }
+
+  /* Foto del sitio (la taza del estudio) bajo una capa azul noche: es textura, no tema. */
+  .foto {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .foto img {
+    object-fit: cover;
+    object-position: 45% 40%;
+  }
+
+  .foto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(15 51 84 / 0.8) 0%,
+      rgb(15 51 84 / 0.9) 45%,
+      rgb(15 51 84 / 0.97) 100%
+    );
+  }
+
+  .marca {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .ovalo {
+    width: 8.5rem;
+  }
+
+  .nombre {
+    font-size: clamp(2.25rem, 3.2vw, 3.25rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  .firma {
+    margin-top: 0.6rem;
+    font-size: 1.15rem;
+  }
+
+  .lema {
+    display: block;
+    max-width: 34ch;
+    margin: 1.75rem 0 0;
+    color: var(--jjmm-sobre-noche);
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  .pie {
+    display: block;
+    margin: 3.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgb(219 232 245 / 0.2);
+    color: var(--jjmm-sobre-noche-suave);
+    font-size: 0.95rem;
+  }
+}

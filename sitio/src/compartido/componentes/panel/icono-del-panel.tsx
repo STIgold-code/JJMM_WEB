@@ -1,18 +1,12 @@
-import Image from 'next/image'
-
 import estilos from './graficos-del-panel.module.css'
 
-// Ícono de la barra del panel: el sello SIGE Mype del estudio, el mismo del favicon del sitio.
+// Ícono de la barra superior del panel (enlace al inicio, junto a la ruta de navegación). Es el
+// óvalo «JJMM» del logotipo en versión mínima: el sello completo no se lee a 18 px.
 // Decorativo: Payload ya rotula el enlace que lo contiene.
 export function IconoDelPanel() {
   return (
-    <Image
-      className={estilos.icono}
-      src="/panel/sello-jjmm.png"
-      alt=""
-      width={32}
-      height={32}
-      unoptimized
-    />
+    <span className={estilos.icono} aria-hidden="true">
+      JJMM
+    </span>
   )
 }

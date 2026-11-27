@@ -1,0 +1,119 @@
+// Menú lateral siempre azul noche, en los dos temas, con el amarillo como marca de lo actual.
+// Texto #dbe8f5 sobre #0f3354: 10,4:1; títulos de grupo #9fbcd8: 6,6:1; amarillo: 10,8:1.
+// Clases de Payload: `.nav`, `.nav__link`, `.nav__link-label`, `.nav__link-indicator`,
+// `.nav-group__toggle`, `.nav-group__label`, `.nav-group__indicator`, `.nav__controls`,
+// `.nav__mobile-close`, `.hamburger`, `.template-default--nav-open`,
+// `.template-default__nav-toggler-wrapper`.
+@layer payload {
+  .nav {
+    border-inline-end: 0;
+    background: var(--jjmm-noche);
+    color: var(--jjmm-sobre-noche);
+  }
+
+  // Cada enlace es una fila con espacio a la izquierda para el punto amarillo de lo actual.
+  .nav__link {
+    width: 100%;
+    margin-block: 1px;
+    padding-block: 0.45rem;
+    padding-inline: 1.6rem 0.6rem;
+    border-radius: var(--style-radius-m);
+    color: var(--jjmm-sobre-noche);
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: background-color 0.15s var(--jjmm-salida);
+  }
+
+  .nav a.nav__link:hover,
+  .nav a.nav__link:focus-visible {
+    background: var(--jjmm-noche-hover);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav a.nav__link:focus-visible {
+    outline: 2px solid var(--jjmm-amarillo);
+    outline-offset: -2px;
+  }
+
+  // Lo actual: fondo más claro, texto blanco y punto amarillo.
+  .nav__link:has(.nav__link-indicator) {
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .nav__link-indicator {
+    inset-inline-start: 0.6rem;
+    top: 50%;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: var(--jjmm-amarillo);
+    translate: 0 -50%;
+  }
+
+  .nav-group {
+    margin-bottom: 0.9rem;
+  }
+
+  .nav-group__toggle {
+    margin-bottom: 0.35rem;
+    padding-inline: 0.6rem;
+    color: var(--jjmm-sobre-noche-suave);
+  }
+
+  .nav-group__toggle:hover,
+  .nav-group__toggle:focus-visible {
+    color: #fff;
+  }
+
+  .nav-group__toggle:focus-visible {
+    outline: 2px solid var(--jjmm-amarillo);
+    outline-offset: 2px;
+    border-radius: var(--style-radius-s);
+  }
+
+  .nav-group__label {
+    font-family: var(--jjmm-titulo);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .nav-group__indicator svg .stroke,
+  .nav-group__toggle:hover .stroke,
+  .nav-group__toggle:focus-visible .stroke {
+    stroke: currentColor;
+  }
+
+  // Configuración y «Cerrar sesión», al pie del menú.
+  .nav__controls {
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(219 232 245 / 0.14);
+    color: var(--jjmm-sobre-noche);
+  }
+
+  .nav__controls .stroke {
+    stroke: currentColor;
+  }
+
+  .nav__controls .fill {
+    fill: currentColor;
+  }
+
+  // Botón de menú sobre el azul: el de celulares (dentro del menú) y el de escritorio, que queda
+  // encima del menú cuando está abierto.
+  .nav__mobile-close .hamburger,
+  body:has(.template-default--nav-open) .template-default__nav-toggler-wrapper .hamburger {
+    background: transparent;
+    color: var(--jjmm-sobre-noche);
+    box-shadow: 0 0 0 1px rgb(219 232 245 / 0.3);
+  }
+
+  body:has(.template-default--nav-open) .template-default__nav-toggler-wrapper .hamburger:hover {
+    background: var(--jjmm-noche-hover);
+  }
+}

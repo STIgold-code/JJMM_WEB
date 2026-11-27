@@ -1,0 +1,20 @@
+// Listas y documentos.
+// Clases de Payload: `.collection-list--<slug>`, `.list-header__title-actions`, `.no-results`,
+// `.collection-edit--<slug>`, `#action-create` (opción «Crear nuevo» del menú «⋯» del
+// documento, que Payload dibuja en un portal fuera de la vista; por eso se busca desde `body`).
+@layer payload {
+  // Mensajes de contacto: solo llegan del formulario del sitio. Su acceso `create` sigue abierto
+  // al público (el formulario crea sin sesión), así que Payload ofrece «Crear» al equipo; se
+  // ocultan esos botones y el estado vacío de Payload, que tiene el suyo
+  // (`ListaVaciaDeMensajes`). «Duplicar» se apaga con `disableDuplicate` en la colección.
+  .collection-list--mensajes-de-contacto .list-header__title-actions,
+  .collection-list--mensajes-de-contacto .no-results,
+  body:has(.collection-edit--mensajes-de-contacto) #action-create {
+    display: none;
+  }
+}
+
+// `.no-results` de Payload no tiene capa: esta regla tampoco, para poder ganarle.
+.collection-list--mensajes-de-contacto .no-results {
+  display: none;
+}

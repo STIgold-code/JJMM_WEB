@@ -1,0 +1,125 @@
+.titulo {
+  margin: 0 0 calc(var(--base) * 0.75);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Columnas que se reparten las secciones según su largo; una sola en pantallas angostas. */
+.secciones {
+  columns: 2 26rem;
+  column-gap: calc(var(--base) * 1.25);
+}
+
+.seccion {
+  break-inside: avoid;
+  margin-bottom: calc(var(--base) * 1.25);
+}
+
+.grupo {
+  margin: 0 0 0.6rem;
+  color: var(--theme-elevation-650);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Una lista con separadores, no una tarjeta por fila. */
+.filas {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 0.75rem;
+  background: var(--theme-elevation-0);
+  list-style: none;
+}
+
+.filas li + li {
+  border-top: 1px solid var(--theme-elevation-100);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 0.9rem 0.8rem 0.85rem;
+  color: var(--theme-text);
+  text-decoration: none;
+  transition: background-color 0.15s var(--jjmm-salida);
+}
+
+.fila:hover {
+  background: var(--theme-elevation-50);
+}
+
+.fila:hover .flecha {
+  color: var(--jjmm-enlace);
+  translate: 2px 0;
+}
+
+.fila:focus-visible {
+  outline: var(--accessibility-outline);
+  outline-offset: -2px;
+}
+
+.marco {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  background: var(--jjmm-tenue);
+  color: var(--jjmm-sobre-tenue);
+}
+
+.marco svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nombre {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.descripcion {
+  overflow: hidden;
+  color: var(--theme-elevation-650);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cantidad {
+  min-width: 2rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-800);
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.flecha {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--theme-elevation-400);
+  transition:
+    translate 0.15s var(--jjmm-salida),
+    color 0.15s var(--jjmm-salida);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila:hover .flecha {
+    translate: none;
+  }
+}

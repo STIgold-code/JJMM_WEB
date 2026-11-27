@@ -1,0 +1,8 @@
+/* Contenedor del inicio. Mismo margen lateral que el resto del panel (`--gutter-h`). */
+.inicio {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--base) * 2.25);
+  max-width: 82rem;
+  padding: calc(var(--base) * 0.75) var(--gutter-h) var(--spacing-view-bottom);
+}

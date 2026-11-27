@@ -1,0 +1,58 @@
+.titulo {
+  margin: 0 0 calc(var(--base) * 0.75);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.accesos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--base) * 0.6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.acceso {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3rem;
+  padding: 0.4rem 1.1rem 0.4rem 0.45rem;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 999px;
+  background: var(--theme-elevation-0);
+  color: var(--theme-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color 0.18s var(--jjmm-salida),
+    background-color 0.18s var(--jjmm-salida);
+}
+
+.acceso:hover {
+  border-color: var(--jjmm-acento);
+  background: var(--jjmm-tenue);
+}
+
+.acceso:focus-visible {
+  outline: var(--accessibility-outline);
+  outline-offset: var(--accessibility-outline-offset);
+}
+
+.marco {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--jjmm-acento);
+  color: var(--jjmm-sobre-acento);
+}
+
+.marco svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}

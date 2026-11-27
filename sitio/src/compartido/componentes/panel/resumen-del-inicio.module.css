@@ -1,0 +1,89 @@
+.titulo {
+  margin: 0 0 calc(var(--base) * 0.75);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: calc(var(--base) * 0.75);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cifra {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'valor icono'
+    'etiqueta etiqueta'
+    'detalle detalle';
+  grid-template-columns: 1fr auto;
+  row-gap: 0.15rem;
+  height: 100%;
+  padding: 1.1rem 1.25rem 1.2rem;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 0.75rem;
+  background: var(--theme-elevation-0);
+  color: var(--theme-text);
+  text-decoration: none;
+  transition:
+    border-color 0.18s var(--jjmm-salida),
+    box-shadow 0.18s var(--jjmm-salida);
+}
+
+.cifra:hover {
+  border-color: var(--jjmm-acento);
+  box-shadow: 0 6px 18px rgb(15 51 84 / 0.1);
+}
+
+.cifra:focus-visible {
+  outline: var(--accessibility-outline);
+  outline-offset: var(--accessibility-outline-offset);
+}
+
+.icono {
+  grid-area: icono;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--jjmm-enlace);
+}
+
+.valor {
+  grid-area: valor;
+  font-family: var(--jjmm-titulo);
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.etiqueta {
+  grid-area: etiqueta;
+  margin-top: 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.detalle {
+  grid-area: detalle;
+  color: var(--theme-elevation-650);
+}
+
+/* Mensajes por responder: el amarillo de la marca con texto azul noche (10,7:1). */
+.destacada {
+  border-color: var(--jjmm-amarillo-hondo);
+  background: var(--jjmm-amarillo);
+  color: var(--jjmm-noche);
+}
+
+.destacada .icono,
+.destacada .detalle {
+  color: var(--jjmm-noche);
+}
+
+.destacada:hover {
+  border-color: var(--jjmm-noche);
+}

@@ -1,27 +1,81 @@
-import { expect, test } from '@playwright/test'
+import { expect, type Page, test } from '@playwright/test'
 
 // En CI la base tiene la carga inicial pero ninguna cuenta (la semilla no crea usuarios sin
 // SEMILLA_ADMIN_*), así que /admin lleva a la creación del primer usuario. Si ya existiera una
-// cuenta, llevaría al ingreso: la prueba acepta las dos pantallas.
-test.describe('Panel administrativo', () => {
-  test('muestra el logotipo del estudio, en español y con el título de la marca', async ({
+// cuenta, llevaría al ingreso: las pruebas aceptan las dos pantallas.
+const TITULO_DE_ACCESO = /^(Te damos la bienvenida|Ingresa al panel)$/
+
+function campoDeContrasena(page: Page) {
+  const campo = page.locator('#field-password')
+  const contenedor = page.locator('.field-type.password', { has: campo })
+  return { campo, boton: contenedor.getByRole('button') }
+}
+
+test.describe('Panel administrativo: pantalla de acceso', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/admin')
+    await expect(page.getByRole('heading', { level: 1, name: TITULO_DE_ACCESO })).toBeVisible()
+  })
+
+  test('muestra el panel de marca del estudio, en español y con el título de la marca', async ({
     page,
   }) => {
-    await page.goto('/admin')
+    const marca = page.getByRole('complementary', { name: 'Estudio Contable JJMM' })
 
-    await expect(page.getByRole('img', { name: /Estudio Contable JJMM/ })).toBeVisible()
+    await expect(marca).toBeVisible()
+    await expect(marca).toContainText('Estudio Contable JJMM')
+    await expect(marca).toContainText('Mariñas & Asociados')
     await expect(
       page.getByRole('button', { name: /^(Crear|Iniciar sesión)/ }).first(),
     ).toBeVisible()
     await expect(page).toHaveTitle(/Panel JJMM/)
   })
 
-  test('el logotipo es un archivo estático, no depende de la base de datos', async ({
-    request,
-  }) => {
-    const respuesta = await request.get('/panel/logo-jjmm.png')
+  test('el botón «ojo» muestra y oculta la contraseña', async ({ page }) => {
+    const { campo, boton } = campoDeContrasena(page)
+    await campo.fill('una-clave-de-prueba')
 
-    expect(respuesta.status()).toBe(200)
-    expect(respuesta.headers()['content-type']).toBe('image/png')
+    await expect(campo).toHaveAttribute('type', 'password')
+    await expect(boton).toHaveAccessibleName('Mostrar contraseña')
+    await expect(boton).toHaveAttribute('aria-pressed', 'false')
+
+    await boton.click()
+    await expect(campo).toHaveAttribute('type', 'text')
+    await expect(boton).toHaveAccessibleName('Ocultar contraseña')
+    await expect(boton).toHaveAttribute('aria-pressed', 'true')
+    await expect(campo).toHaveValue('una-clave-de-prueba')
+
+    await boton.click()
+    await expect(campo).toHaveAttribute('type', 'password')
+    await expect(boton).toHaveAttribute('aria-pressed', 'false')
   })
+
+  test('el botón «ojo» funciona con el teclado y no envía el formulario', async ({ page }) => {
+    const { campo, boton } = campoDeContrasena(page)
+    const direccion = page.url()
+
+    await boton.focus()
+    await page.keyboard.press('Enter')
+    await expect(campo).toHaveAttribute('type', 'text')
+    await page.keyboard.press('Space')
+    await expect(campo).toHaveAttribute('type', 'password')
+    expect(page.url()).toBe(direccion)
+  })
+})
+
+const ARCHIVOS_ESTATICOS = [
+  ['/panel/logo-jjmm.png', 'image/png'],
+  ['/panel/marca-jjmm.png', 'image/png'],
+  ['/panel/acceso-jjmm.webp', 'image/webp'],
+] as const
+
+test.describe('Panel administrativo: archivos estáticos', () => {
+  for (const [ruta, tipo] of ARCHIVOS_ESTATICOS) {
+    test(`${ruta} no depende de la base de datos`, async ({ request }) => {
+      const respuesta = await request.get(ruta)
+
+      expect(respuesta.status()).toBe(200)
+      expect(respuesta.headers()['content-type']).toBe(tipo)
+    })
+  }
 })

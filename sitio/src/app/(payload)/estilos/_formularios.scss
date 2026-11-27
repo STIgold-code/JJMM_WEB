@@ -1,0 +1,52 @@
+// Botones, campos y casillas con los colores de la marca.
+// Clases de Payload: `.btn--style-primary` (y `.btn--disabled`), `.field-type`, `.react-select`,
+// `.rs__control--is-focused`, `.checkbox-input--checked`, `.checkbox-input__input`.
+@layer payload {
+  // Botón principal: azul de la marca con texto blanco (6,4:1 en claro; 4,7:1 en oscuro).
+  .btn--style-primary {
+    --bg-color: var(--jjmm-acento);
+    --color: var(--jjmm-sobre-acento);
+    --hover-bg: var(--jjmm-acento-hover);
+    --hover-color: var(--jjmm-sobre-acento);
+  }
+
+  // Se repite el deshabilitado de Payload: la regla de arriba también le gana a la suya.
+  .btn--style-primary.btn--disabled {
+    --bg-color: var(--theme-elevation-200);
+    --color: var(--theme-elevation-800);
+    --hover-bg: var(--bg-color);
+    --hover-color: var(--color);
+  }
+
+  // Foco de los campos: borde y anillo del acento en lugar del gris de Payload.
+  .field-type input:not([type='checkbox']):not([type='radio']):focus,
+  .field-type textarea:focus,
+  .react-select .rs__control--is-focused {
+    border-color: var(--jjmm-acento);
+    box-shadow: 0 0 0 3px var(--jjmm-anillo);
+  }
+
+  .checkbox-input--checked:not(.checkbox-input--read-only) .checkbox-input__input {
+    border-color: var(--jjmm-acento);
+    background: var(--jjmm-acento);
+    color: var(--jjmm-sobre-acento);
+  }
+
+  // Botón «ojo» de las contraseñas. `VerContrasenas` agrega estas dos clases fuera de React: al
+  // contenedor del campo y al lugar del botón, que queda dentro del campo, a la derecha.
+  .jjmm-campo-con-ojo {
+    position: relative;
+  }
+
+  .jjmm-campo-con-ojo > input {
+    padding-inline-end: 3rem;
+  }
+
+  .jjmm-ver-contrasena {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0.3rem;
+    display: flex;
+    align-items: center;
+  }
+}

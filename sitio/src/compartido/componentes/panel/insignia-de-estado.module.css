@@ -1,0 +1,35 @@
+/* Insignia de estado. Los colores salen de `_tokens.scss` y siguen el tema del panel. */
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.92em;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.insignia::before {
+  content: '';
+  width: 0.45em;
+  height: 0.45em;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.atencion {
+  background: var(--jjmm-amarillo);
+  color: var(--jjmm-noche);
+}
+
+.positivo {
+  background: var(--jjmm-tenue);
+  color: var(--jjmm-sobre-tenue);
+}
+
+.neutro {
+  background: var(--theme-elevation-100);
+  color: var(--theme-elevation-800);
+}
