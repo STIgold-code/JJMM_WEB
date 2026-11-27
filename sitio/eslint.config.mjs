@@ -8,6 +8,8 @@ const ARCHIVOS_GENERADOS = [
   'src/payload-types.ts',
   'src/payload-generated-schema.ts',
   'src/app/(payload)/admin/importMap.js',
+  // Migraciones que escribe `payload migrate:create`.
+  'src/migrations/**',
 ]
 
 // Límites entre capas (docs/adr/0001-arquitectura.md): las dependencias apuntan hacia adentro.

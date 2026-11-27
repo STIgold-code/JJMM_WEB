@@ -67,8 +67,22 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    usuarios: Usuario;
+    'areas-de-servicio': AreasDeServicio;
+    planes: Plane;
+    'caracteristicas-de-plan': CaracteristicasDePlan;
+    'inclusiones-de-plan': InclusionesDePlan;
+    valores: Valore;
+    clientes: Cliente;
+    'avisos-para-clientes': AvisosParaCliente;
+    vencimientos: Vencimiento;
+    'cronogramas-sunat': CronogramasSunat;
+    publicaciones: Publicacione;
+    categorias: Categoria;
+    etiquetas: Etiqueta;
+    'mensajes-de-contacto': MensajesDeContacto;
+    sedes: Sede;
     medios: Medio;
+    usuarios: Usuario;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +90,22 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    usuarios: UsuariosSelect<false> | UsuariosSelect<true>;
+    'areas-de-servicio': AreasDeServicioSelect<false> | AreasDeServicioSelect<true>;
+    planes: PlanesSelect<false> | PlanesSelect<true>;
+    'caracteristicas-de-plan': CaracteristicasDePlanSelect<false> | CaracteristicasDePlanSelect<true>;
+    'inclusiones-de-plan': InclusionesDePlanSelect<false> | InclusionesDePlanSelect<true>;
+    valores: ValoresSelect<false> | ValoresSelect<true>;
+    clientes: ClientesSelect<false> | ClientesSelect<true>;
+    'avisos-para-clientes': AvisosParaClientesSelect<false> | AvisosParaClientesSelect<true>;
+    vencimientos: VencimientosSelect<false> | VencimientosSelect<true>;
+    'cronogramas-sunat': CronogramasSunatSelect<false> | CronogramasSunatSelect<true>;
+    publicaciones: PublicacionesSelect<false> | PublicacionesSelect<true>;
+    categorias: CategoriasSelect<false> | CategoriasSelect<true>;
+    etiquetas: EtiquetasSelect<false> | EtiquetasSelect<true>;
+    'mensajes-de-contacto': MensajesDeContactoSelect<false> | MensajesDeContactoSelect<true>;
+    sedes: SedesSelect<false> | SedesSelect<true>;
     medios: MediosSelect<false> | MediosSelect<true>;
+    usuarios: UsuariosSelect<false> | UsuariosSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +115,20 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'pagina-de-inicio': PaginaDeInicio;
+    'guia-de-clientes': GuiaDeCliente;
+    'pagina-del-blog': PaginaDelBlog;
+    navegacion: Navegacion;
+    'configuracion-del-sitio': ConfiguracionDelSitio;
+  };
+  globalsSelect: {
+    'pagina-de-inicio': PaginaDeInicioSelect<false> | PaginaDeInicioSelect<true>;
+    'guia-de-clientes': GuiaDeClientesSelect<false> | GuiaDeClientesSelect<true>;
+    'pagina-del-blog': PaginaDelBlogSelect<false> | PaginaDelBlogSelect<true>;
+    navegacion: NavegacionSelect<false> | NavegacionSelect<true>;
+    'configuracion-del-sitio': ConfiguracionDelSitioSelect<false> | ConfiguracionDelSitioSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -119,10 +159,346 @@ export interface UsuarioAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "areas-de-servicio".
+ */
+export interface AreasDeServicio {
+  id: number;
+  codigo: string;
+  nombre: string;
+  /**
+   * Se usa en las pestañas, por ejemplo «Calidad».
+   */
+  nombreCorto: string;
+  descripcion: string;
+  puntos?:
+    | {
+        texto: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Por ejemplo «Hola, quiero información del servicio Legal.»
+   */
+  mensajeDeConsulta?: string | null;
+  /**
+   * Puntos del polígono sobre la imagen de la rueda (coordenadas de 500 × 550).
+   */
+  poligonoEnLaRueda?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "planes".
+ */
+export interface Plane {
+  id: number;
+  nombre: string;
+  descripcion?: string | null;
+  destacado?: boolean | null;
+  /**
+   * Por ejemplo «Hola, quiero información del plan Emprende.»
+   */
+  mensajeDeConsulta?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "caracteristicas-de-plan".
+ */
+export interface CaracteristicasDePlan {
+  id: number;
+  nombre: string;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Una fila por cada plan y característica. Lo que falte se muestra como no incluido.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inclusiones-de-plan".
+ */
+export interface InclusionesDePlan {
+  id: number;
+  plan: number | Plane;
+  caracteristica: number | CaracteristicasDePlan;
+  tipo: 'incluido' | 'no-incluido' | 'texto';
+  texto?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "valores".
+ */
+export interface Valore {
+  id: number;
+  nombre: string;
+  icono: 'pulgar' | 'trofeo' | 'foco' | 'candado' | 'balanza' | 'equipo';
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clientes".
+ */
+export interface Cliente {
+  id: number;
+  nombre: string;
+  logo: number | Medio;
+  /**
+   * Opcional. Dirección https:// del cliente.
+   */
+  enlace?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  activo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "medios".
+ */
+export interface Medio {
+  id: number;
+  /**
+   * Describe la imagen para quien no puede verla.
+   */
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avisos-para-clientes".
+ */
+export interface AvisosParaCliente {
+  id: number;
+  titulo: string;
+  /**
+   * Por ejemplo «Hasta el 5 de cada mes».
+   */
+  cuandoAplica: string;
+  documentos?:
+    | {
+        texto: string;
+        id?: string | null;
+      }[]
+    | null;
+  correoDeContacto?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  activo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vencimientos".
+ */
+export interface Vencimiento {
+  id: number;
+  obligacion: string;
+  periodicidad: 'mensual' | 'anual';
+  /**
+   * Por ejemplo «Según el último dígito del RUC».
+   */
+  cuandoVence: string;
+  nota?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cronogramas-sunat".
+ */
+export interface CronogramasSunat {
+  id: number;
+  anio: number;
+  /**
+   * Mes que se declara, de 1 (enero) a 12 (diciembre).
+   */
+  mes: number;
+  /**
+   * Se calcula: Enero 2026, por ejemplo.
+   */
+  periodo?: string | null;
+  fechasPorDigito?:
+    | {
+        digito: number;
+        fecha: string;
+        id?: string | null;
+      }[]
+    | null;
+  fechaBuenosContribuyentes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publicaciones".
+ */
+export interface Publicacione {
+  id: number;
+  titulo: string;
+  /**
+   * Déjalo vacío para generarlo a partir del nombre. Minúsculas, números y guiones.
+   */
+  slug: string;
+  /**
+   * Resumen que aparece en el listado. Máximo 300 caracteres.
+   */
+  extracto: string;
+  imagen?: (number | null) | Medio;
+  contenido: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  categoria: number | Categoria;
+  etiquetas?: (number | Etiqueta)[] | null;
+  fechaDePublicacion: string;
+  /**
+   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   */
+  seo?: {
+    titulo?: string | null;
+    descripcion?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categorias".
+ */
+export interface Categoria {
+  id: number;
+  nombre: string;
+  /**
+   * Déjalo vacío para generarlo a partir del nombre. Minúsculas, números y guiones.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "etiquetas".
+ */
+export interface Etiqueta {
+  id: number;
+  nombre: string;
+  /**
+   * Déjalo vacío para generarlo a partir del nombre. Minúsculas, números y guiones.
+   */
+  slug: string;
+  color: 'azul' | 'verde' | 'rojo' | 'amarillo' | 'morado' | 'gris';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mensajes-de-contacto".
+ */
+export interface MensajesDeContacto {
+  id: number;
+  nombre: string;
+  celular?: string | null;
+  correo?: string | null;
+  servicioDeInteres?: string | null;
+  mensaje: string;
+  estado: 'nuevo' | 'atendido';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sedes".
+ */
+export interface Sede {
+  id: number;
+  nombre: string;
+  direccion: string;
+  distrito: string;
+  ciudad: string;
+  celulares?:
+    | {
+        /**
+         * Celular de 9 dígitos, por ejemplo 951 965 242.
+         */
+        numero: string;
+        tieneWhatsApp?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  correo?: string | null;
+  /**
+   * Dirección https:// de Google Maps u otro servicio de mapas.
+   */
+  enlaceDeMapa?: string | null;
+  /**
+   * Menor número, primero.
+   */
+  orden: number;
+  activo?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "usuarios".
  */
 export interface Usuario {
   id: number;
+  nombre?: string | null;
+  rol: 'administrador' | 'editor';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -142,25 +518,6 @@ export interface Usuario {
     | null;
   password?: string | null;
   collection: 'usuarios';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "medios".
- */
-export interface Medio {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -187,12 +544,68 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'usuarios';
-        value: number | Usuario;
+        relationTo: 'areas-de-servicio';
+        value: number | AreasDeServicio;
+      } | null)
+    | ({
+        relationTo: 'planes';
+        value: number | Plane;
+      } | null)
+    | ({
+        relationTo: 'caracteristicas-de-plan';
+        value: number | CaracteristicasDePlan;
+      } | null)
+    | ({
+        relationTo: 'inclusiones-de-plan';
+        value: number | InclusionesDePlan;
+      } | null)
+    | ({
+        relationTo: 'valores';
+        value: number | Valore;
+      } | null)
+    | ({
+        relationTo: 'clientes';
+        value: number | Cliente;
+      } | null)
+    | ({
+        relationTo: 'avisos-para-clientes';
+        value: number | AvisosParaCliente;
+      } | null)
+    | ({
+        relationTo: 'vencimientos';
+        value: number | Vencimiento;
+      } | null)
+    | ({
+        relationTo: 'cronogramas-sunat';
+        value: number | CronogramasSunat;
+      } | null)
+    | ({
+        relationTo: 'publicaciones';
+        value: number | Publicacione;
+      } | null)
+    | ({
+        relationTo: 'categorias';
+        value: number | Categoria;
+      } | null)
+    | ({
+        relationTo: 'etiquetas';
+        value: number | Etiqueta;
+      } | null)
+    | ({
+        relationTo: 'mensajes-de-contacto';
+        value: number | MensajesDeContacto;
+      } | null)
+    | ({
+        relationTo: 'sedes';
+        value: number | Sede;
       } | null)
     | ({
         relationTo: 'medios';
         value: number | Medio;
+      } | null)
+    | ({
+        relationTo: 'usuarios';
+        value: number | Usuario;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -238,26 +651,215 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "usuarios_select".
+ * via the `definition` "areas-de-servicio_select".
  */
-export interface UsuariosSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+export interface AreasDeServicioSelect<T extends boolean = true> {
+  codigo?: T;
+  nombre?: T;
+  nombreCorto?: T;
+  descripcion?: T;
+  puntos?:
     | T
     | {
+        texto?: T;
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  mensajeDeConsulta?: T;
+  poligonoEnLaRueda?: T;
+  orden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "planes_select".
+ */
+export interface PlanesSelect<T extends boolean = true> {
+  nombre?: T;
+  descripcion?: T;
+  destacado?: T;
+  mensajeDeConsulta?: T;
+  orden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "caracteristicas-de-plan_select".
+ */
+export interface CaracteristicasDePlanSelect<T extends boolean = true> {
+  nombre?: T;
+  orden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inclusiones-de-plan_select".
+ */
+export interface InclusionesDePlanSelect<T extends boolean = true> {
+  plan?: T;
+  caracteristica?: T;
+  tipo?: T;
+  texto?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "valores_select".
+ */
+export interface ValoresSelect<T extends boolean = true> {
+  nombre?: T;
+  icono?: T;
+  orden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clientes_select".
+ */
+export interface ClientesSelect<T extends boolean = true> {
+  nombre?: T;
+  logo?: T;
+  enlace?: T;
+  orden?: T;
+  activo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "avisos-para-clientes_select".
+ */
+export interface AvisosParaClientesSelect<T extends boolean = true> {
+  titulo?: T;
+  cuandoAplica?: T;
+  documentos?:
+    | T
+    | {
+        texto?: T;
+        id?: T;
+      };
+  correoDeContacto?: T;
+  orden?: T;
+  activo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vencimientos_select".
+ */
+export interface VencimientosSelect<T extends boolean = true> {
+  obligacion?: T;
+  periodicidad?: T;
+  cuandoVence?: T;
+  nota?: T;
+  orden?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cronogramas-sunat_select".
+ */
+export interface CronogramasSunatSelect<T extends boolean = true> {
+  anio?: T;
+  mes?: T;
+  periodo?: T;
+  fechasPorDigito?:
+    | T
+    | {
+        digito?: T;
+        fecha?: T;
+        id?: T;
+      };
+  fechaBuenosContribuyentes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "publicaciones_select".
+ */
+export interface PublicacionesSelect<T extends boolean = true> {
+  titulo?: T;
+  slug?: T;
+  extracto?: T;
+  imagen?: T;
+  contenido?: T;
+  categoria?: T;
+  etiquetas?: T;
+  fechaDePublicacion?: T;
+  seo?:
+    | T
+    | {
+        titulo?: T;
+        descripcion?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categorias_select".
+ */
+export interface CategoriasSelect<T extends boolean = true> {
+  nombre?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "etiquetas_select".
+ */
+export interface EtiquetasSelect<T extends boolean = true> {
+  nombre?: T;
+  slug?: T;
+  color?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mensajes-de-contacto_select".
+ */
+export interface MensajesDeContactoSelect<T extends boolean = true> {
+  nombre?: T;
+  celular?: T;
+  correo?: T;
+  servicioDeInteres?: T;
+  mensaje?: T;
+  estado?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sedes_select".
+ */
+export interface SedesSelect<T extends boolean = true> {
+  nombre?: T;
+  direccion?: T;
+  distrito?: T;
+  ciudad?: T;
+  celulares?:
+    | T
+    | {
+        numero?: T;
+        tieneWhatsApp?: T;
+        id?: T;
+      };
+  correo?: T;
+  enlaceDeMapa?: T;
+  orden?: T;
+  activo?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -276,6 +878,31 @@ export interface MediosSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "usuarios_select".
+ */
+export interface UsuariosSelect<T extends boolean = true> {
+  nombre?: T;
+  rol?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  resetPasswordRequestedAt?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -316,6 +943,608 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina-de-inicio".
+ */
+export interface PaginaDeInicio {
+  id: number;
+  secciones?:
+    | (
+        | BloqueCarruselDePortadas
+        | BloqueQuienesSomos
+        | BloqueServicios
+        | BloquePlanes
+        | BloquePorQueElegirnos
+        | BloqueClientes
+        | BloqueContacto
+      )[]
+    | null;
+  /**
+   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   */
+  seo?: {
+    titulo?: string | null;
+    descripcion?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueCarruselDePortadas".
+ */
+export interface BloqueCarruselDePortadas {
+  segundosPorPortada: number;
+  portadas?:
+    | {
+        imagen: number | Medio;
+        imagenEsDecorativa?: boolean | null;
+        imagenParaCelular?: (number | null) | Medio;
+        /**
+         * Qué parte de la imagen se ve en pantallas angostas: 0 izquierda, 100 derecha.
+         */
+        encuadreEnCelular?: number | null;
+        disposicion: 'texto-izquierda' | 'texto-derecha' | 'imagen-completa';
+        transicion: 'fundido' | 'izquierda' | 'bajar' | 'recorte';
+        /**
+         * Marca la parte resaltada entre corchetes: «Contamos con [Sistema de Calidad] Genuino».
+         */
+        titulo?: string | null;
+        subtitulo?: string | null;
+        sello?: (number | null) | Medio;
+        lista?:
+          | {
+              texto: string;
+              id?: string | null;
+            }[]
+          | null;
+        acciones?:
+          | {
+              etiqueta: string;
+              tipo: 'whatsapp' | 'llamada' | 'seccion' | 'interna' | 'externa';
+              /**
+               * Si lo dejas vacío, se usa el mensaje por defecto de la configuración.
+               */
+              mensaje?: string | null;
+              /**
+               * Por ejemplo #planes, /guia o https://sigefact.pse.pe/.
+               */
+              destino?: string | null;
+              estilo: 'principal' | 'secundario';
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carrusel-de-portadas';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueQuienesSomos".
+ */
+export interface BloqueQuienesSomos {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  /**
+   * Solo cifras reales del estudio.
+   */
+  cifras?:
+    | {
+        prefijo?: string | null;
+        valor: number;
+        sufijo?: string | null;
+        descripcion: string;
+        id?: string | null;
+      }[]
+    | null;
+  presentacion: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quienes-somos';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueServicios".
+ */
+export interface BloqueServicios {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  /**
+   * Los gajos de cada área se dibujan sobre esta imagen (500 × 550).
+   */
+  imagenDeLaRueda: number | Medio;
+  textoDelBoton: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'servicios';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloquePlanes".
+ */
+export interface BloquePlanes {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  encabezadoDeCaracteristicas: string;
+  textoDelBoton: string;
+  notaAlPie?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'planes';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloquePorQueElegirnos".
+ */
+export interface BloquePorQueElegirnos {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'por-que-elegirnos';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueClientes".
+ */
+export interface BloqueClientes {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'clientes';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueContacto".
+ */
+export interface BloqueContacto {
+  /**
+   * Identificador para enlazar la sección desde el menú, sin #. Opcional.
+   */
+  ancla?: string | null;
+  titulo: string;
+  bajada?: string | null;
+  formulario: {
+    titulo: string;
+    texto?: string | null;
+    textoDelBoton: string;
+    opcionesDeServicio?:
+      | {
+          texto: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  canales?: {
+    whatsapp?: string | null;
+    llamada?: string | null;
+    correo?: string | null;
+    botonDelMapa?: string | null;
+  };
+  sedeDelMapa?: (number | null) | Sede;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contacto';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guia-de-clientes".
+ */
+export interface GuiaDeCliente {
+  id: number;
+  titulo: string;
+  introduccion?: string | null;
+  tituloDeAvisos: string;
+  tituloDeVencimientos: string;
+  tituloDelCronograma: string;
+  /**
+   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   */
+  seo?: {
+    titulo?: string | null;
+    descripcion?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina-del-blog".
+ */
+export interface PaginaDelBlog {
+  id: number;
+  titulo: string;
+  introduccion?: string | null;
+  textoSinPublicaciones: string;
+  /**
+   * Opcional. Si lo dejas vacío, se usan los datos por defecto.
+   */
+  seo?: {
+    titulo?: string | null;
+    descripcion?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navegacion".
+ */
+export interface Navegacion {
+  id: number;
+  items?:
+    | {
+        etiqueta: string;
+        tipo: 'seccion' | 'interna' | 'externa';
+        /**
+         * Por ejemplo #planes, /guia o https://sigefact.pse.pe/.
+         */
+        destino?: string | null;
+        abrirEnNuevaPestana?: boolean | null;
+        /**
+         * Se muestra en lugar de la etiqueta en la cabecera, como el de SIGEFact.
+         */
+        imagen?: (number | null) | Medio;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "configuracion-del-sitio".
+ */
+export interface ConfiguracionDelSitio {
+  id: number;
+  marca: {
+    nombreComercial: string;
+    razonSocial: string;
+    grupo?: string | null;
+    lema?: string | null;
+    logo: number | Medio;
+    sello?: (number | null) | Medio;
+  };
+  contacto: {
+    correo: string;
+    /**
+     * Celular de 9 dígitos, por ejemplo 951 965 242.
+     */
+    celularWhatsApp: string;
+    /**
+     * Texto con el que se abre el chat si el botón no indica otro.
+     */
+    mensajeWhatsApp: string;
+    /**
+     * Celular de 9 dígitos, por ejemplo 951 965 242.
+     */
+    celularDeLlamadas: string;
+    textoDelBotonFlotante: string;
+  };
+  redesSociales?:
+    | {
+        red: 'facebook' | 'x' | 'youtube' | 'instagram' | 'tiktok' | 'linkedin';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo: {
+    titulo: string;
+    /**
+     * Aparece en los resultados de Google. Máximo 160 caracteres.
+     */
+    descripcion: string;
+    imagen?: (number | null) | Medio;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina-de-inicio_select".
+ */
+export interface PaginaDeInicioSelect<T extends boolean = true> {
+  secciones?:
+    | T
+    | {
+        'carrusel-de-portadas'?: T | BloqueCarruselDePortadasSelect<T>;
+        'quienes-somos'?: T | BloqueQuienesSomosSelect<T>;
+        servicios?: T | BloqueServiciosSelect<T>;
+        planes?: T | BloquePlanesSelect<T>;
+        'por-que-elegirnos'?: T | BloquePorQueElegirnosSelect<T>;
+        clientes?: T | BloqueClientesSelect<T>;
+        contacto?: T | BloqueContactoSelect<T>;
+      };
+  seo?:
+    | T
+    | {
+        titulo?: T;
+        descripcion?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueCarruselDePortadas_select".
+ */
+export interface BloqueCarruselDePortadasSelect<T extends boolean = true> {
+  segundosPorPortada?: T;
+  portadas?:
+    | T
+    | {
+        imagen?: T;
+        imagenEsDecorativa?: T;
+        imagenParaCelular?: T;
+        encuadreEnCelular?: T;
+        disposicion?: T;
+        transicion?: T;
+        titulo?: T;
+        subtitulo?: T;
+        sello?: T;
+        lista?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+        acciones?:
+          | T
+          | {
+              etiqueta?: T;
+              tipo?: T;
+              mensaje?: T;
+              destino?: T;
+              estilo?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueQuienesSomos_select".
+ */
+export interface BloqueQuienesSomosSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  cifras?:
+    | T
+    | {
+        prefijo?: T;
+        valor?: T;
+        sufijo?: T;
+        descripcion?: T;
+        id?: T;
+      };
+  presentacion?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueServicios_select".
+ */
+export interface BloqueServiciosSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  imagenDeLaRueda?: T;
+  textoDelBoton?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloquePlanes_select".
+ */
+export interface BloquePlanesSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  encabezadoDeCaracteristicas?: T;
+  textoDelBoton?: T;
+  notaAlPie?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloquePorQueElegirnos_select".
+ */
+export interface BloquePorQueElegirnosSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueClientes_select".
+ */
+export interface BloqueClientesSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BloqueContacto_select".
+ */
+export interface BloqueContactoSelect<T extends boolean = true> {
+  ancla?: T;
+  titulo?: T;
+  bajada?: T;
+  formulario?:
+    | T
+    | {
+        titulo?: T;
+        texto?: T;
+        textoDelBoton?: T;
+        opcionesDeServicio?:
+          | T
+          | {
+              texto?: T;
+              id?: T;
+            };
+      };
+  canales?:
+    | T
+    | {
+        whatsapp?: T;
+        llamada?: T;
+        correo?: T;
+        botonDelMapa?: T;
+      };
+  sedeDelMapa?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guia-de-clientes_select".
+ */
+export interface GuiaDeClientesSelect<T extends boolean = true> {
+  titulo?: T;
+  introduccion?: T;
+  tituloDeAvisos?: T;
+  tituloDeVencimientos?: T;
+  tituloDelCronograma?: T;
+  seo?:
+    | T
+    | {
+        titulo?: T;
+        descripcion?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pagina-del-blog_select".
+ */
+export interface PaginaDelBlogSelect<T extends boolean = true> {
+  titulo?: T;
+  introduccion?: T;
+  textoSinPublicaciones?: T;
+  seo?:
+    | T
+    | {
+        titulo?: T;
+        descripcion?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navegacion_select".
+ */
+export interface NavegacionSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        etiqueta?: T;
+        tipo?: T;
+        destino?: T;
+        abrirEnNuevaPestana?: T;
+        imagen?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "configuracion-del-sitio_select".
+ */
+export interface ConfiguracionDelSitioSelect<T extends boolean = true> {
+  marca?:
+    | T
+    | {
+        nombreComercial?: T;
+        razonSocial?: T;
+        grupo?: T;
+        lema?: T;
+        logo?: T;
+        sello?: T;
+      };
+  contacto?:
+    | T
+    | {
+        correo?: T;
+        celularWhatsApp?: T;
+        mensajeWhatsApp?: T;
+        celularDeLlamadas?: T;
+        textoDelBotonFlotante?: T;
+      };
+  redesSociales?:
+    | T
+    | {
+        red?: T;
+        url?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        titulo?: T;
+        descripcion?: T;
+        imagen?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

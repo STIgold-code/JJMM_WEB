@@ -112,6 +112,10 @@ jobs:
       - name: Compilar
         run: pnpm build
 
+      - name: Aplicar migraciones de la base de datos
+        # Fuera de desarrollo el esquema no se sincroniza solo (push desactivado en payload.config.ts).
+        run: pnpm payload migrate
+
       - name: Instalar navegador de Playwright
         run: pnpm exec playwright install --with-deps chromium
 

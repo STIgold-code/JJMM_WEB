@@ -44,14 +44,38 @@ Las dependencias apuntan hacia adentro. `no-restricted-imports` en `eslint.confi
 
 Estado actual:
 
-| Ruta                                                         | Qué es                                                       |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `src/modulos/usuarios/infraestructura/coleccion-usuarios.ts` | Colección `usuarios` (acceso al panel)                       |
-| `src/compartido/infraestructura/coleccion-medios.ts`         | Colección `medios` (archivos, en Wasabi si está configurado) |
-| `src/compartido/componentes/bloques/`                        | `RegistroDeBloques`, `RenderizadorDeBloques` y su error      |
-| `src/compartido/dominio/`                                    | Reglas transversales (por ejemplo, `celular.ts`)             |
+| Ruta                                   | Qué es                                                                                |
+| -------------------------------------- | ------------------------------------------------------------------------------------- |
+| `src/contenido.ts`                     | Raíz de composición: lista de colecciones y globales que registra `payload.config.ts` |
+| `src/compartido/infraestructura/`      | `medios`, `configuracion-del-sitio`, control de acceso (`acceso.ts`) y campos comunes |
+| `src/compartido/componentes/bloques/`  | `RegistroDeBloques`, `RenderizadorDeBloques` y su error                               |
+| `src/compartido/dominio/`              | Reglas transversales: celular, slug, destino de enlace, roles                         |
+| `src/modulos/<modulo>/infraestructura` | Colecciones, globales y bloques de cada módulo (ver «Modelo de datos»)                |
+| `src/migrations/`                      | Migraciones de PostgreSQL que genera Payload                                          |
 
-Colecciones: archivo `coleccion-<nombre>.ts`, exportación `coleccion<Nombre>`, slug en español y en plural.
+Colecciones: archivo `coleccion-<nombre>.ts`, exportación `coleccion<Nombre>`, slug en español y en plural. Globales: `global-<nombre>.ts`, exportación `global<Nombre>`. Bloques: `bloque-<nombre>.ts`, exportación `bloque<Nombre>` e `interfaceName` `Bloque<Nombre>`.
+
+### Modelo de datos
+
+| Panel            | Slug                                                                                         | Módulo                              |
+| ---------------- | -------------------------------------------------------------------------------------------- | ----------------------------------- |
+| Inicio           | global `pagina-de-inicio` (bloques de secciones)                                             | `portada`                           |
+| Inicio           | `areas-de-servicio`                                                                          | `servicios`                         |
+| Inicio           | `planes`, `caracteristicas-de-plan`, `inclusiones-de-plan` (único por plan + característica) | `planes`                            |
+| Inicio           | `valores`, `clientes`                                                                        | `nosotros`, `clientes`              |
+| Guía de clientes | global `guia-de-clientes`, `avisos-para-clientes`, `vencimientos`, `cronogramas-sunat`       | `avisos`, `vencimientos`            |
+| Blog             | global `pagina-del-blog`, `publicaciones` (con borradores), `categorias`, `etiquetas`        | `blog`                              |
+| Contacto         | `mensajes-de-contacto`                                                                       | `contacto`                          |
+| Sitio            | global `navegacion`, global `configuracion-del-sitio`, `sedes`, `medios`                     | `navegacion`, `sedes`, `compartido` |
+| Administración   | `usuarios` (rol `administrador` o `editor`)                                                  | `usuarios`                          |
+
+Bloques de `pagina-de-inicio`: `carrusel-de-portadas`, `quienes-somos`, `servicios`, `planes`, `por-que-elegirnos`, `clientes`, `contacto`. Las listas (áreas, planes, valores, clientes) salen de sus colecciones; el bloque solo guarda los textos de la sección.
+
+**Acceso:** el contenido lo lee cualquiera y lo escribe el equipo (`ACCESO_DE_CONTENIDO`). `configuracion-del-sitio`, `navegacion` y la gestión de usuarios son solo del administrador; un editor solo ve y edita su propia cuenta y no puede cambiar su rol. El público solo lee publicaciones publicadas. `mensajes-de-contacto` lo crea cualquiera y lo lee solo el equipo. El primer usuario que se crea queda como administrador.
+
+**Validaciones:** las reglas de negocio viven en `dominio/` con pruebas, y `compartido/infraestructura/campos/validaciones.ts` las adapta a la firma `validate` de Payload. Un `validate` propio reemplaza al de `required`, así que cada adaptador resuelve el campo vacío. Celulares (nunca fijos), montos en planes (prohibidos), destinos de enlace por tipo, slugs, códigos P1–P9, gajos de la rueda y cronogramas con una fecha por dígito del RUC.
+
+**Orden:** las colecciones ordenables usan un campo numérico `orden` (menor primero), no `orderable` de Payload, que todavía es experimental.
 
 **Componentes**
 
@@ -97,7 +121,8 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 
 - **Wasabi:** `src/compartido/infraestructura/almacenamiento-wasabi.ts` registra `@payloadcms/storage-s3` solo si existen las cinco variables `WASABI_*`. Sin ellas, Payload guarda los archivos de la colección `medios` en `media/` (`staticDir`, solo para desarrollo).
 - **Mapa de componentes del panel:** el adaptador de Wasabi agrega `S3ClientUploadHandler` al `importMap.js`. Por eso `pnpm generate:importmap` define variables `WASABI_*` ficticias: así el mapa siempre incluye el componente, esté Wasabi activo o no. No lo generes con `pnpm payload generate:importmap` directo.
-- **Base de datos:** el adaptador de PostgreSQL sincroniza el esquema automáticamente solo en desarrollo. Producción y CI necesitan migraciones (`pnpm payload migrate:create` y `pnpm payload migrate`).
+- **Base de datos y migraciones:** `push` solo está activo con `NODE_ENV=development`; en CI y producción el esquema cambia únicamente con migraciones de `src/migrations/`. Tras cambiar colecciones, globales o bloques: `pnpm payload migrate:create <nombre>` (no necesita base de datos; para no tocar la local, pásale un `DATABASE_URI` inalcanzable con `cross-env`), luego `pnpm format`, y versiona el `.ts`, el `.json` y `index.ts`. El CI aplica `pnpm payload migrate` antes de Playwright. ESLint ignora `src/migrations/`.
+- **Nombres de 63 caracteres:** PostgreSQL limita los identificadores y Payload deriva el nombre de tablas y enums del slug y de los campos anidados. Si `migrate:create` falla con «Exceeded max identifier length», usa `dbName` en el bloque o la colección (por ejemplo, `inicio_blocks_carrusel`). Payload usa el `dbName` de un bloque tal cual, sin el prefijo de la global.
 - `src/app/(payload)/` lo genera Payload; no lo edites salvo que la documentación de Payload lo indique.
 - Node: Payload 3.94 exige Node `^22.23.5 || ^24.22.3 || >=26.13.1`.
 - El CI está en `../.github/workflows/sitio.yml`: tipos, lint, formato, pruebas y compilación; luego Playwright y Lighthouse CI con PostgreSQL de servicio.

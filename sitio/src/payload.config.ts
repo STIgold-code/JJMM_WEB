@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url'
 
 import { crearAlmacenamientoWasabi } from './compartido/infraestructura/almacenamiento-wasabi'
 import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
+import { COLECCIONES, GLOBALES } from './contenido'
 import { coleccionUsuarios } from './modulos/usuarios/infraestructura/coleccion-usuarios'
 
 const filename = fileURLToPath(import.meta.url)
@@ -19,7 +20,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [coleccionUsuarios, coleccionMedios],
+  collections: COLECCIONES,
+  globals: GLOBALES,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: {
@@ -29,6 +31,10 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI ?? '',
     },
+    // El esquema se sincroniza solo en desarrollo. En CI y producción se aplica con
+    // migraciones versionadas (`pnpm payload migrate`), así nada cambia la base sin revisión.
+    push: process.env.NODE_ENV === 'development',
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
   plugins: [...crearAlmacenamientoWasabi(process.env, [coleccionMedios.slug])],
