@@ -30,10 +30,10 @@ describe('leerConfiguracionWasabi', () => {
 
 describe('crearAlmacenamientoWasabi', () => {
   it('no registra el adaptador sin configuración, para trabajar en local sin Wasabi', () => {
-    expect(crearAlmacenamientoWasabi({}, ['media'])).toEqual([])
+    expect(crearAlmacenamientoWasabi({}, ['medios'])).toEqual([])
   })
 
   it('registra un adaptador cuando la configuración está completa', () => {
-    expect(crearAlmacenamientoWasabi(ENTORNO_COMPLETO, ['media'])).toHaveLength(1)
+    expect(crearAlmacenamientoWasabi(ENTORNO_COMPLETO, ['medios'])).toHaveLength(1)
   })
 })

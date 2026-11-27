@@ -19,7 +19,7 @@ Se usa **pnpm**. Desde la raíz del repositorio, antepón `-C sitio` (por ejempl
 | `pnpm typecheck`                                   | `tsc --noEmit`                                                                            |
 | `pnpm lint`                                        | ESLint sin advertencias permitidas                                                        |
 | `pnpm format` / `pnpm format:check`                | Prettier                                                                                  |
-| `pnpm test`                                        | Vitest (`src/**/*.test.ts`)                                                               |
+| `pnpm test`                                        | Vitest (`src/**/*.test.{ts,tsx}`)                                                         |
 | `pnpm test src/compartido/dominio/celular.test.ts` | Un solo archivo de prueba                                                                 |
 | `pnpm test -t "rechaza teléfonos fijos"`           | Una sola prueba por nombre                                                                |
 | `pnpm test:e2e`                                    | Playwright (`e2e/`). En local reutiliza o levanta `pnpm dev`; en CI levanta `pnpm start`. |
@@ -31,14 +31,27 @@ Variables de entorno: copia `.env.example` a `.env`. `.env` no se versiona.
 
 ## Reglas de ingeniería
 
-**Estructura por módulos de negocio** en `src/modulos/{portada,nosotros,servicios,planes,sedes,clientes,avisos,vencimientos,blog,contacto,navegacion}`. Lo transversal va en `src/compartido/`. Cada módulo tiene tres capas:
+La arquitectura y sus motivos están en [`docs/adr/0001-arquitectura.md`](docs/adr/0001-arquitectura.md). Léela antes de crear un módulo o un bloque.
 
-- `dominio/`: tipos y reglas puras. Sin Payload, sin React, sin Next.
-- `aplicacion/`: casos de uso que reciben sus repositorios por parámetro (interfaces).
-- `infraestructura/`: adaptadores de Payload que implementan esas interfaces.
-- `componentes/`: interfaz del módulo. Las rutas viven en `src/app`.
+**Estructura por módulos de negocio** en `src/modulos/<modulo>/` (portada, nosotros, servicios, planes, sedes, clientes, avisos, vencimientos, blog, contacto, navegacion, usuarios). Lo transversal va en `src/compartido/`. Las rutas viven en `src/app/` y solo componen módulos. Cada módulo crea solo las capas que necesita:
 
-Las dependencias apuntan hacia adentro: la interfaz y los casos de uso nunca importan Payload directamente.
+- `dominio/`: tipos y reglas puras. Sin Payload, sin `payload-types`, sin React, sin Next.
+- `aplicacion/`: casos de uso que reciben sus repositorios por parámetro (interfaces). Mismas prohibiciones que `dominio/`.
+- `infraestructura/`: colecciones, bloques y adaptadores de Payload que implementan esas interfaces.
+- `componentes/`: contenedores y presentación. Sin `payload`, `@payloadcms/*` ni `@payload-config`.
+
+Las dependencias apuntan hacia adentro. `no-restricted-imports` en `eslint.config.mjs` lo hace cumplir por carpeta y `src/limites-de-capas.test.ts` lo prueba.
+
+Estado actual:
+
+| Ruta                                                         | Qué es                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `src/modulos/usuarios/infraestructura/coleccion-usuarios.ts` | Colección `usuarios` (acceso al panel)                       |
+| `src/compartido/infraestructura/coleccion-medios.ts`         | Colección `medios` (archivos, en Wasabi si está configurado) |
+| `src/compartido/componentes/bloques/`                        | `RegistroDeBloques`, `RenderizadorDeBloques` y su error      |
+| `src/compartido/dominio/`                                    | Reglas transversales (por ejemplo, `celular.ts`)             |
+
+Colecciones: archivo `coleccion-<nombre>.ts`, exportación `coleccion<Nombre>`, slug en español y en plural.
 
 **Componentes**
 
@@ -49,7 +62,7 @@ Las dependencias apuntan hacia adentro: la interfaz y los casos de uso nunca imp
 
 **SOLID aplicado**
 
-- Las secciones de página son bloques de Payload con un registro `tipo → componente`. Un bloque nuevo se agrega sin tocar los existentes, y todos cumplen la misma interfaz de props base.
+- Las secciones de página son bloques de Payload con un registro `tipo → componente` (`RegistroDeBloques<B>`, donde `B` es la unión de bloques de `payload-types.ts`). Un bloque nuevo se agrega con una entrada más, sin tocar los existentes, y todos reciben solo `{ bloque }` (`PropsDeBloque`). Un tipo sin registrar lanza `TipoDeBloqueDesconocidoError`; quitar un bloque exige migrar sus datos.
 - Los casos de uso reciben repositorios por parámetro para probarlos con dobles, sin base de datos.
 
 **Límites que ESLint hace cumplir** en `src/**/*.{ts,tsx}`, como error:
@@ -82,7 +95,7 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 
 ## Detalles no evidentes
 
-- **Wasabi:** `src/compartido/infraestructura/almacenamiento-wasabi.ts` registra `@payloadcms/storage-s3` solo si existen las cinco variables `WASABI_*`. Sin ellas, Payload guarda los archivos en `media/` (solo para desarrollo).
+- **Wasabi:** `src/compartido/infraestructura/almacenamiento-wasabi.ts` registra `@payloadcms/storage-s3` solo si existen las cinco variables `WASABI_*`. Sin ellas, Payload guarda los archivos de la colección `medios` en `media/` (`staticDir`, solo para desarrollo).
 - **Mapa de componentes del panel:** el adaptador de Wasabi agrega `S3ClientUploadHandler` al `importMap.js`. Por eso `pnpm generate:importmap` define variables `WASABI_*` ficticias: así el mapa siempre incluye el componente, esté Wasabi activo o no. No lo generes con `pnpm payload generate:importmap` directo.
 - **Base de datos:** el adaptador de PostgreSQL sincroniza el esquema automáticamente solo en desarrollo. Producción y CI necesitan migraciones (`pnpm payload migrate:create` y `pnpm payload migrate`).
 - `src/app/(payload)/` lo genera Payload; no lo edites salvo que la documentación de Payload lo indique.

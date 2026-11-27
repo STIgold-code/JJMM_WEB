@@ -92,7 +92,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 |---|---|---|---|---|---|
 | T1 | S1, S4 | Resolver las decisiones abiertas (ver L6, L10 y L11) | en línea | hecha; dominio y Cloudflare pasan a T14 | — |
 | T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | delegada (contexto largo) | hecha; Playwright y Lighthouse CI solo corren en CI | `24a8c91` |
-| T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | en línea | pendiente | — |
+| T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | delegada (contexto largo) | hecha | ver L13 |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | en línea | pendiente | — |
 | T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | en línea | pendiente | — |
 | T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | en línea | pendiente | — |
@@ -190,4 +190,11 @@ Para las tareas siguientes:
 - Presupuesto de JavaScript del inicio: 170 KB transferidos.
 - Sin Tailwind: estilos con CSS Modules, como dice la sección de reglas.
 
-Siguiente paso: T3 (módulos, capas, registro de bloques y ADR).
+**L13** (27/11/2026), T3 terminada:
+- Colecciones movidas: `usuarios` (`src/modulos/usuarios/infraestructura/`) y `medios` (`src/compartido/infraestructura/`, con `staticDir: 'media'`).
+- Registro de bloques tipado y `RenderizadorDeBloques`; un tipo de bloque desconocido lanza `TipoDeBloqueDesconocidoError` en lugar de omitirse en silencio.
+- Límites de capas en ESLint (`no-restricted-imports`) con 22 pruebas que lo demuestran.
+- ADR `sitio/docs/adr/0001-arquitectura.md`; el patrón de repositorio queda como ejemplo en el ADR hasta el primer caso de uso real en T4.
+- Verificado: `typecheck`, `lint`, `format:check`, `test` (36 pruebas, RED observado antes), `generate:types`, `build`.
+
+Siguiente paso: T4 (modelo de datos y migraciones).

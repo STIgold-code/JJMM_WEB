@@ -1,11 +1,12 @@
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { defineConfig } from 'vitest/config'
 
-// Pruebas de unidad de dominio y aplicación: sin base de datos ni navegador.
+// Pruebas de unidad: sin base de datos ni navegador. Los componentes de servidor se
+// prueban dibujándolos a HTML con react-dom/server.
 export default defineConfig({
   plugins: [tsconfigPaths()],
   test: {
     environment: 'node',
-    include: ['src/**/*.test.ts'],
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 })

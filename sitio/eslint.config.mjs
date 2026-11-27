@@ -10,6 +10,45 @@ const ARCHIVOS_GENERADOS = [
   'src/app/(payload)/admin/importMap.js',
 ]
 
+// Límites entre capas (docs/adr/0001-arquitectura.md): las dependencias apuntan hacia adentro.
+const PAYLOAD = {
+  regex: '^(payload|@payloadcms/.+|@payload-config)(/.*)?$|(^|/)payload-types$',
+  message: 'Esta capa no depende de Payload: usa una interfaz de repositorio.',
+}
+const PAYLOAD_EN_INTERFAZ = {
+  regex: '^(payload|@payloadcms/.+|@payload-config)(/.*)?$',
+  message:
+    'La interfaz no usa Payload directo: obtén los datos con un adaptador de infraestructura.',
+}
+const REACT_Y_NEXT = {
+  regex: '^(react|react-dom|next)(/.*)?$',
+  message: 'Esta capa es TypeScript puro: sin React ni Next.',
+}
+const capasExternas = (capas) => ({
+  regex: `(^|/)(${capas.join('|')})(/|$)`,
+  message: 'Las dependencias apuntan hacia adentro: esta capa no importa capas externas.',
+})
+const restringir = (...patterns) => ({ 'no-restricted-imports': ['error', { patterns }] })
+
+const LIMITES_DE_CAPAS = [
+  {
+    files: ['src/**/dominio/**/*.{ts,tsx}'],
+    rules: restringir(
+      PAYLOAD,
+      REACT_Y_NEXT,
+      capasExternas(['aplicacion', 'infraestructura', 'componentes']),
+    ),
+  },
+  {
+    files: ['src/**/aplicacion/**/*.{ts,tsx}'],
+    rules: restringir(PAYLOAD, REACT_Y_NEXT, capasExternas(['infraestructura', 'componentes'])),
+  },
+  {
+    files: ['src/**/componentes/**/*.{ts,tsx}'],
+    rules: restringir(PAYLOAD_EN_INTERFAZ),
+  },
+]
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -44,6 +83,7 @@ const eslintConfig = defineConfig([
       'max-lines-per-function': 'off',
     },
   },
+  ...LIMITES_DE_CAPAS,
   prettier,
   globalIgnores([
     '.next/**',

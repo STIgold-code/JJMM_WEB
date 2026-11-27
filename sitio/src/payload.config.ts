@@ -5,21 +5,21 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Media } from './collections/Media'
-import { Users } from './collections/Users'
 import { crearAlmacenamientoWasabi } from './compartido/infraestructura/almacenamiento-wasabi'
+import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
+import { coleccionUsuarios } from './modulos/usuarios/infraestructura/coleccion-usuarios'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: coleccionUsuarios.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [coleccionUsuarios, coleccionMedios],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: {
@@ -31,5 +31,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [...crearAlmacenamientoWasabi(process.env, [Media.slug])],
+  plugins: [...crearAlmacenamientoWasabi(process.env, [coleccionMedios.slug])],
 })
