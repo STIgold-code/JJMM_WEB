@@ -98,7 +98,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | delegada (contexto largo) | hecha; falta revisión visual en navegador | ver L16 |
 | T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | en línea | pendiente | — |
 | T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | en línea | pendiente | — |
-| T9 | S7 | Guía de clientes: avisos y vencimientos | en línea | pendiente | — |
+| T9 | S7 | Guía de clientes: avisos y vencimientos | delegada (paralela con T7+T8 y T10) | hecha; consulta por RUC sin datos hasta cargar el cronograma oficial | ver L18 |
 | T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | en línea | pendiente | — |
 | T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | en línea | pendiente | — |
@@ -247,3 +247,14 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
   - redirecciones 301 de las URL antiguas (supuestas: `/posts/:slug`, `/category/:slug`, `/tag/:slug`, `?page=`), a confirmar contra producción porque `routes/web.php` no está en el repositorio;
   - `metadataBase` en el layout;
   - `/blog` y un artículo en Lighthouse CI.
+
+**L18** (27/11/2026), T9 terminada:
+- `/guia` muestra:
+  - un encabezado con datos del panel;
+  - los avisos como tarjetas con su correo en `mailto:`;
+  - los vencimientos agrupados en mensuales y anuales;
+  - el cronograma SUNAT con consulta por RUC, que es la única isla de cliente. La tabla de los 10 dígitos funciona sin JavaScript.
+- Sin cronograma cargado, muestra «Todavía no publicamos el cronograma de SUNAT de {año}. Consulta tu fecha de vencimiento con el estudio.».
+- No se cambió el modelo. Si se quiere agrupar «Documentos para análisis» dentro de «Cierre tributario», hace falta un arreglo de grupos en `avisos-para-clientes` y una migración.
+- Verificado: `typecheck`, `lint`, `test` (RED observado antes) y `build`.
+- La CI ahora corre `pnpm semilla` después de las migraciones. Sin eso, `/guia` y el inicio daban 404 en las pruebas de extremo a extremo con la base vacía.

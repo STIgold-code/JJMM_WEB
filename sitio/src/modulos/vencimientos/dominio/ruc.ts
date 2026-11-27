@@ -23,6 +23,16 @@ export function esRucValido(valor: string): boolean {
   return digitoVerificador(ruc.slice(0, 10)) === Number(ruc[10])
 }
 
+// Por qué un RUC no sirve, para orientar a quien lo escribe; null si es válido.
+export type MotivoDeRucInvalido = 'vacio' | 'formato' | 'invalido'
+
+export function motivoDeRucInvalido(valor: string): MotivoDeRucInvalido | null {
+  const ruc = valor.replace(/\s+/g, '')
+  if (ruc.length === 0) return 'vacio'
+  if (!PATRON_RUC.test(ruc)) return 'formato'
+  return esRucValido(ruc) ? null : 'invalido'
+}
+
 export function ultimoDigitoDelRuc(valor: string): number {
   if (!esRucValido(valor)) throw new RucInvalidoError(valor)
   return Number(valor.trim().slice(-1))

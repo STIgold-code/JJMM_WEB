@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { esRucValido, RucInvalidoError, ultimoDigitoDelRuc } from './ruc'
+import { esRucValido, motivoDeRucInvalido, RucInvalidoError, ultimoDigitoDelRuc } from './ruc'
 
 describe('esRucValido', () => {
   it('acepta RUC de empresas y de personas con dígito verificador correcto', () => {
@@ -32,5 +32,27 @@ describe('ultimoDigitoDelRuc', () => {
 
   it('lanza RucInvalidoError con un RUC inválido', () => {
     expect(() => ultimoDigitoDelRuc('20131312954')).toThrow(RucInvalidoError)
+  })
+})
+
+describe('motivoDeRucInvalido', () => {
+  it('no devuelve motivo con un RUC válido, aunque tenga espacios', () => {
+    expect(motivoDeRucInvalido('20131 312955')).toBeNull()
+  })
+
+  it.each(['', '   '])('distingue el campo vacío («%s»)', (valor) => {
+    expect(motivoDeRucInvalido(valor)).toBe('vacio')
+  })
+
+  it.each(['2013131295', '201313129550', '2013131295A'])(
+    'distingue un RUC sin 11 dígitos («%s»)',
+    (valor) => {
+      expect(motivoDeRucInvalido(valor)).toBe('formato')
+    },
+  )
+
+  it('distingue 11 dígitos que no forman un RUC válido', () => {
+    expect(motivoDeRucInvalido('20131312954')).toBe('invalido')
+    expect(motivoDeRucInvalido('30131312951')).toBe('invalido')
   })
 })
