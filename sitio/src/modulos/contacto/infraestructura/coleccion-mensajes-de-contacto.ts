@@ -27,13 +27,21 @@ export const coleccionMensajesDeContacto: CollectionConfig = {
   hooks: { beforeChange: [marcarComoNuevoSiEsPublico] },
   fields: [
     { name: 'nombre', label: 'Nombre', type: 'text', required: true, maxLength: 120 },
+    // El formulario no los pide (v5): los anota el equipo al responder por WhatsApp. Se
+    // conservan los de mensajes anteriores.
     {
       name: 'celular',
       label: 'Celular',
       type: 'text',
       validate: validarCelularOpcional,
+      admin: { description: 'Lo anota el equipo; el formulario del sitio no lo pide.' },
     },
-    { name: 'correo', label: 'Correo', type: 'email' },
+    {
+      name: 'correo',
+      label: 'Correo',
+      type: 'email',
+      admin: { description: 'Lo anota el equipo; el formulario del sitio no lo pide.' },
+    },
     { name: 'servicioDeInteres', label: 'Servicio de interés', type: 'text', maxLength: 120 },
     { name: 'mensaje', label: 'Mensaje', type: 'textarea', required: true, maxLength: 2000 },
     {

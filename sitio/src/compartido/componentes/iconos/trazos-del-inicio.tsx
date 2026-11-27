@@ -2,7 +2,8 @@ import type { ReactNode } from 'react'
 
 import type { IconoDelInicio } from './icono'
 
-// Íconos de trazo de las secciones del inicio, copiados de la v4 (Lucide, ISC). Los de valores
+// Íconos de trazo de las secciones del inicio, copiados de la v4 y de «Contáctanos» de la v5
+// (Lucide, ISC). Los de valores
 // (pulgar, trofeo, foco, candado, balanza, equipo) coinciden con las opciones de `valores`.
 export const TRAZOS_DEL_INICIO: Record<IconoDelInicio, ReactNode> = {
   pin: (
@@ -11,6 +12,7 @@ export const TRAZOS_DEL_INICIO: Record<IconoDelInicio, ReactNode> = {
       <circle cx="12" cy="10" r="3" />
     </>
   ),
+  ruta: <polygon points="3 11 22 2 13 21 11 13 3 11" />,
   anterior: <path d="m15 18-6-6 6-6" />,
   siguiente: <path d="m9 18 6-6-6-6" />,
   pausa: (

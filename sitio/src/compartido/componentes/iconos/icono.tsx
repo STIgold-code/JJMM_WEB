@@ -14,6 +14,7 @@ export const ICONOS_DE_ESTRUCTURA = [
 // Íconos de las secciones del inicio (T7).
 export const ICONOS_DEL_INICIO = [
   'pin',
+  'ruta',
   'anterior',
   'siguiente',
   'pausa',

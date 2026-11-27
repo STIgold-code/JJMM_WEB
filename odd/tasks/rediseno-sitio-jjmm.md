@@ -344,3 +344,18 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
 - Antes de borrar, las 17 imágenes que los mockups tomaban de `public/web/images/` se copiaron a `mockup/img/` y se ajustaron sus rutas, para que la v4 aprobada siga abriéndose.
 - `README.md` y `CLAUDE.md` de la raíz se reescribieron para describir el repositorio actual.
 - Se conservan `sitio/`, `mockup/`, `reports/`, `odd/`, `PRODUCT.md` y `CRITICA.md`.
+- Se creó el primer usuario del panel en producción (rol `administrador`, verificado con inicio de sesión). Se recomendó a Gian cambiar la contraseña.
+
+**L25** (27/11/2026): «me gusta más este contacto» (captura de la sección de contacto)
+- La captura corresponde a la sección de contacto de `mockup/inicio-v5.html`, no de la v4. Cambia S5 solo para esa sección: «Contáctanos» sigue la v5; el resto del inicio sigue la v4.
+- Contacto rehecho:
+  - una pestaña por sede activa, con WhatsApp, llamada y «Cómo llegar»;
+  - mapa con foto de fondo que solo carga Google Maps al pulsar «Ver mapa»;
+  - formulario de tres campos (nombre, qué necesitas, tu caso). Se quitan el celular y el correo agregados en T8; se mantienen el guardado del mensaje, el anti-spam y el límite por IP.
+- Modelo: el bloque de contacto pierde los títulos de las tres tarjetas y la sede del mapa, y gana «Cómo llegar» y la foto del mapa. `enlaceDeMapa` de cada sede solo acepta direcciones `https://www.google.com/maps/embed`.
+- Migraciones `20261127_164725_contacto_quitar_canales_y_sede_del_mapa` y `20261127_164736_contacto_sedes_v5`. La primera elimina columnas que solo tenían textos de la carga inicial.
+- Verificado en local: `typecheck`, `lint`, `format:check` y `test` (580 pruebas, RED observado antes). El comportamiento en navegador lo prueba la CI.
+- Riesgo:
+  - punto 1: se eliminan columnas, con datos reconstruibles desde la semilla;
+  - punto 3: cambia la forma del bloque de contacto;
+  - punto 6: el comportamiento en navegador solo lo cubre Playwright.

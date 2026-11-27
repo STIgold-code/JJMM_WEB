@@ -4,6 +4,7 @@ import { CampoDeFormulario } from './campo-de-formulario'
 interface PropsDeCampos {
   prefijo: string
   errores: ErroresDelMensaje
+  opcionesDeServicio: readonly string[]
   // Valores que vuelven del servidor cuando el envío no se guardó.
   valores: DatosDelFormulario | null
 }
@@ -14,9 +15,11 @@ const comunes = ({ prefijo, errores }: PropsDeCampos, campo: keyof DatosDelFormu
   error: errores[campo],
 })
 
-// Quién escribe: nombre, celular (obligatorio, para responderle) y correo opcional.
-function CamposDePersona(props: PropsDeCampos) {
-  const { valores } = props
+// Campos del formulario «Escríbenos», los tres de la v5: nombre, servicio (opciones del panel)
+// y caso. La validación la hace el dominio, por eso no se usa la del navegador (noValidate en
+// el formulario) y los mensajes son siempre los mismos.
+export function CamposDelMensaje(props: PropsDeCampos) {
+  const { valores, opcionesDeServicio } = props
   return (
     <>
       <CampoDeFormulario {...comunes(props, 'nombre')} etiqueta="Nombre y apellido">
@@ -30,32 +33,6 @@ function CamposDePersona(props: PropsDeCampos) {
           />
         )}
       </CampoDeFormulario>
-      <CampoDeFormulario {...comunes(props, 'celular')} etiqueta="Celular">
-        {(control) => (
-          <input
-            {...control}
-            type="tel"
-            inputMode="tel"
-            autoComplete="tel-national"
-            required
-            defaultValue={valores?.celular}
-          />
-        )}
-      </CampoDeFormulario>
-      <CampoDeFormulario {...comunes(props, 'correo')} etiqueta="Correo (opcional)">
-        {(control) => (
-          <input {...control} type="email" autoComplete="email" defaultValue={valores?.correo} />
-        )}
-      </CampoDeFormulario>
-    </>
-  )
-}
-
-// Qué necesita: el servicio (opciones del panel) y su caso.
-function CamposDelCaso(props: PropsDeCampos & { opcionesDeServicio: readonly string[] }) {
-  const { valores, opcionesDeServicio } = props
-  return (
-    <>
       {opcionesDeServicio.length > 0 ? (
         <CampoDeFormulario {...comunes(props, 'servicio')} etiqueta="¿Qué necesitas?">
           {(control) => (
@@ -70,17 +47,6 @@ function CamposDelCaso(props: PropsDeCampos & { opcionesDeServicio: readonly str
       <CampoDeFormulario {...comunes(props, 'mensaje')} etiqueta="Cuéntanos tu caso">
         {(control) => <textarea {...control} required defaultValue={valores?.mensaje} />}
       </CampoDeFormulario>
-    </>
-  )
-}
-
-// Campos del formulario «Escríbenos». La validación la hace el dominio, por eso no se usa la
-// del navegador (noValidate en el formulario) y los mensajes son siempre los mismos.
-export function CamposDelMensaje(props: PropsDeCampos & { opcionesDeServicio: readonly string[] }) {
-  return (
-    <>
-      <CamposDePersona {...props} />
-      <CamposDelCaso {...props} />
     </>
   )
 }

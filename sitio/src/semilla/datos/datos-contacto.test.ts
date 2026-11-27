@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 
 import { esCelularPeruano, normalizarCelular } from '@/compartido/dominio/celular'
 import { validarDestino } from '@/compartido/dominio/destino-de-enlace'
+import { esMapaIncrustadoDeGoogle } from '@/modulos/sedes/dominio/mapa-de-sede'
 
 import { SEMILLA } from '.'
 import { recorrerTextos, type TextoEncontrado } from './recorrer-textos'
@@ -57,6 +58,13 @@ describe('semilla: contacto (S9)', () => {
       expect(sede.direccion).not.toBe('')
       expect(sede.celulares?.length ?? 0).toBeGreaterThan(0)
     }
+  })
+
+  it('el mapa de cada sede, si lo tiene, es un mapa insertado de Google Maps', () => {
+    const mapas = SEMILLA.sedes.flatMap((sede) => (sede.enlaceDeMapa ? [sede.enlaceDeMapa] : []))
+
+    expect(mapas.length).toBeGreaterThan(0)
+    for (const mapa of mapas) expect(esMapaIncrustadoDeGoogle(mapa), mapa).toBe(true)
   })
 
   it('el correo general es el publicado en PRODUCT.md', () => {

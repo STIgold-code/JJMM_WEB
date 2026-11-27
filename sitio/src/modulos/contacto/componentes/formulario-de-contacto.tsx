@@ -20,7 +20,7 @@ interface PropsFormularioDeContacto {
 }
 
 // Isla de cliente del formulario «Escríbenos» (T8): guarda el mensaje en el panel y abre
-// WhatsApp con el mensaje listo, como la v4.
+// WhatsApp con el mensaje listo, como la v5. Entra 0,1 s después de las sedes.
 export function FormularioDeContacto(props: PropsFormularioDeContacto) {
   const { titulo, texto, textoDelBoton, opcionesDeServicio, celularWhatsApp } = props
   const prefijo = useId()
@@ -29,7 +29,7 @@ export function FormularioDeContacto(props: PropsFormularioDeContacto) {
   return (
     <form
       ref={formulario}
-      {...propsDeRevelado({ clase: estilos.formulario })}
+      {...propsDeRevelado({ retraso: 0.1, clase: estilos.formulario })}
       action={accion}
       onSubmit={alEnviar}
       noValidate

@@ -8,17 +8,13 @@ const formulario = (campos: Record<string, string>) => {
   return datos
 }
 
-const VALORES = { nombre: 'Ana', celular: '987654321', correo: '', servicio: '', mensaje: 'Hola' }
+const VALORES = { nombre: 'Ana', servicio: '', mensaje: 'Hola' }
 
 describe('estado del formulario', () => {
-  it('lee los campos del mensaje y deja vacío lo que no llegó', () => {
-    expect(leerDatos(formulario({ nombre: 'Ana', mensaje: 'Hola' }))).toEqual({
-      nombre: 'Ana',
-      celular: '',
-      correo: '',
-      servicio: '',
-      mensaje: 'Hola',
-    })
+  it('lee solo los campos del mensaje y deja vacío lo que no llegó', () => {
+    const datos = formulario({ nombre: 'Ana', mensaje: 'Hola', celular: '987654321' })
+
+    expect(leerDatos(datos)).toEqual({ nombre: 'Ana', servicio: '', mensaje: 'Hola' })
   })
 
   it('lee el campo trampa y la hora de inicio, que debe ser un número positivo', () => {

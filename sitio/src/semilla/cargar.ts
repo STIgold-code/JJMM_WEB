@@ -31,7 +31,7 @@ export async function cargarSemilla(
   opciones: OpcionesDeCarga,
 ): Promise<ResultadoDeCarga> {
   const medios = await cargarMedios(puerto, datos.medios, opciones.resolverRuta)
-  const sedes = await cargarSedes(puerto, datos.sedes)
+  await cargarSedes(puerto, datos.sedes)
 
   await cargarAreas(puerto, datos.areas)
   await cargarPlanes(puerto, datos.planes, datos.caracteristicas)
@@ -42,7 +42,7 @@ export async function cargarSemilla(
 
   await cargarConfiguracion(puerto, datos.configuracion, medios)
   await cargarNavegacion(puerto, datos.navegacion, medios)
-  await cargarPaginaDeInicio(puerto, datos.paginaDeInicio, medios, sedes)
+  await cargarPaginaDeInicio(puerto, datos.paginaDeInicio, medios)
   await puerto.actualizarGlobal('guia-de-clientes', datos.guia)
   await puerto.actualizarGlobal('pagina-del-blog', datos.blog)
 

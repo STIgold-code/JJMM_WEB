@@ -11,7 +11,7 @@ const definidas = (claves: readonly (ClaveDeMedio | undefined)[]): ClaveDeMedio[
 // Todos los medios que la semilla usa en algún campo de imagen.
 export function clavesDeMedioReferenciadas(datos: DatosDeSemilla): ClaveDeMedio[] {
   const { marca, seo } = datos.configuracion
-  const { carrusel, servicios } = datos.paginaDeInicio
+  const { carrusel, servicios, contacto } = datos.paginaDeInicio
   return definidas([
     marca.logo,
     marca.sello,
@@ -19,6 +19,7 @@ export function clavesDeMedioReferenciadas(datos: DatosDeSemilla): ClaveDeMedio[
     ...datos.navegacion.map((item) => item.imagen),
     ...carrusel.portadas.flatMap((p) => [p.imagen, p.imagenParaCelular, p.sello]),
     servicios.imagenDeLaRueda,
+    contacto.canales.fotoDelMapa,
     ...datos.clientes.map((cliente) => cliente.logo),
   ])
 }

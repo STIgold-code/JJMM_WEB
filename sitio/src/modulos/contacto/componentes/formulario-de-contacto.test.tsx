@@ -26,10 +26,18 @@ describe('FormularioDeContacto', () => {
     expect(html).toMatch(
       /<label for="([^"]+-nombre)">Nombre y apellido<\/label><input id="\1"[^>]*name="nombre"/,
     )
-    expect(html).toMatch(/<label for="[^"]+-celular">Celular<\/label><input [^>]*type="tel"/)
-    expect(html).toMatch(/<label for="[^"]+-correo">Correo \(opcional\)<\/label>/)
+    expect(html).toMatch(/<label for="[^"]+-servicio">¿Qué necesitas\?<\/label><select/)
     expect(html).toMatch(/<label for="[^"]+-mensaje">Cuéntanos tu caso<\/label><textarea/)
     expect(html).toContain('<option>Asesoría tributaria</option>')
+  })
+
+  it('pide solo los tres campos de la v5, sin celular ni correo', () => {
+    const campos = Array.from(
+      dibujar().matchAll(/<label for="[^"]+-(\w+)">/g),
+      ([, campo]) => campo,
+    )
+
+    expect(campos).toEqual(['nombre', 'servicio', 'mensaje'])
   })
 
   it('no marca errores al empezar', () => {

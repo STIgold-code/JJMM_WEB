@@ -24,8 +24,6 @@ const texto = (formulario: FormData, nombre: string): string => {
 export function leerDatos(formulario: FormData): DatosDelFormulario {
   return {
     nombre: texto(formulario, 'nombre'),
-    celular: texto(formulario, 'celular'),
-    correo: texto(formulario, 'correo'),
     servicio: texto(formulario, 'servicio'),
     mensaje: texto(formulario, 'mensaje'),
   }

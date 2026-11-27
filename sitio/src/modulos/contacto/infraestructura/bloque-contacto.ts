@@ -16,20 +16,33 @@ const camposDelFormulario: Field[] = [
   },
 ]
 
-// Los números y el correo salen de la configuración del sitio; aquí solo sus títulos.
+// WhatsApp, llamada, dirección y mapa salen de cada sede; aquí van los textos y la foto comunes.
 const camposDeCanales: Field[] = [
-  { name: 'whatsapp', label: 'Título de WhatsApp', type: 'text', defaultValue: 'WhatsApp' },
-  { name: 'llamada', label: 'Título de la llamada', type: 'text', defaultValue: 'Llámanos' },
-  { name: 'correo', label: 'Título del correo', type: 'text', defaultValue: 'Correo' },
+  {
+    name: 'comoLlegar',
+    label: 'Texto del botón «Cómo llegar»',
+    type: 'text',
+    defaultValue: 'Cómo llegar',
+  },
   {
     name: 'botonDelMapa',
     label: 'Texto del botón del mapa',
     type: 'text',
     defaultValue: 'Ver mapa',
   },
+  {
+    name: 'fotoDelMapa',
+    label: 'Foto de fondo del mapa',
+    type: 'upload',
+    relationTo: 'medios',
+    admin: {
+      description:
+        'Se ve detrás del botón del mapa hasta que la persona lo pulsa; recién entonces se carga Google Maps.',
+    },
+  },
 ]
 
-// «Contáctanos»: formulario, canales (de la configuración del sitio) y mapa de una sede.
+// «Contáctanos» (v5): una pestaña por sede activa (colección `sedes`) y el formulario.
 export const bloqueContacto: Block = {
   slug: 'contacto',
   interfaceName: 'BloqueContacto',
@@ -37,12 +50,6 @@ export const bloqueContacto: Block = {
   fields: [
     ...camposDeSeccion('contacto'),
     { name: 'formulario', label: 'Formulario', type: 'group', fields: camposDelFormulario },
-    { name: 'canales', label: 'Canales', type: 'group', fields: camposDeCanales },
-    {
-      name: 'sedeDelMapa',
-      label: 'Sede que se muestra en el mapa',
-      type: 'relationship',
-      relationTo: 'sedes',
-    },
+    { name: 'canales', label: 'Botones de cada sede', type: 'group', fields: camposDeCanales },
   ],
 }

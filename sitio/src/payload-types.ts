@@ -450,7 +450,13 @@ export interface Etiqueta {
 export interface MensajesDeContacto {
   id: number;
   nombre: string;
+  /**
+   * Lo anota el equipo; el formulario del sitio no lo pide.
+   */
   celular?: string | null;
+  /**
+   * Lo anota el equipo; el formulario del sitio no lo pide.
+   */
   correo?: string | null;
   servicioDeInteres?: string | null;
   mensaje: string;
@@ -480,7 +486,7 @@ export interface Sede {
     | null;
   correo?: string | null;
   /**
-   * Dirección https:// de Google Maps u otro servicio de mapas.
+   * En Google Maps: Compartir › Insertar un mapa, y copia la dirección de src (https://www.google.com/maps/embed?…). Se muestra al pulsar «Ver mapa». Si lo dejas vacío, el mapa se busca con la dirección de la sede.
    */
   enlaceDeMapa?: string | null;
   /**
@@ -1156,12 +1162,13 @@ export interface BloqueContacto {
       | null;
   };
   canales?: {
-    whatsapp?: string | null;
-    llamada?: string | null;
-    correo?: string | null;
+    comoLlegar?: string | null;
     botonDelMapa?: string | null;
+    /**
+     * Se ve detrás del botón del mapa hasta que la persona lo pulsa; recién entonces se carga Google Maps.
+     */
+    fotoDelMapa?: (number | null) | Medio;
   };
-  sedeDelMapa?: (number | null) | Sede;
   id?: string | null;
   blockName?: string | null;
   blockType: 'contacto';
@@ -1438,12 +1445,10 @@ export interface BloqueContactoSelect<T extends boolean = true> {
   canales?:
     | T
     | {
-        whatsapp?: T;
-        llamada?: T;
-        correo?: T;
+        comoLlegar?: T;
         botonDelMapa?: T;
+        fotoDelMapa?: T;
       };
-  sedeDelMapa?: T;
   id?: T;
   blockName?: T;
 }

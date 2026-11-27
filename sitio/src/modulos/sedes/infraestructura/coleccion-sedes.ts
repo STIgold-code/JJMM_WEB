@@ -6,7 +6,8 @@ import {
   campoCelular,
   campoOrden,
 } from '@/compartido/infraestructura/campos/campos-comunes'
-import { validarUrlHttpsOpcional } from '@/compartido/infraestructura/campos/validaciones'
+
+import { validarMapaIncrustadoOpcional } from './validar-mapa-incrustado'
 
 // Sedes del estudio (cabecera, contacto y pie). Solo se publican celulares (S9).
 export const coleccionSedes: CollectionConfig = {
@@ -37,11 +38,15 @@ export const coleccionSedes: CollectionConfig = {
     },
     { name: 'correo', label: 'Correo', type: 'email' },
     {
+      // El nombre del campo se conserva para no migrar datos; guarda el mapa insertado.
       name: 'enlaceDeMapa',
-      label: 'Enlace del mapa',
+      label: 'Mapa insertado de Google Maps',
       type: 'text',
-      validate: validarUrlHttpsOpcional,
-      admin: { description: 'Dirección https:// de Google Maps u otro servicio de mapas.' },
+      validate: validarMapaIncrustadoOpcional,
+      admin: {
+        description:
+          'En Google Maps: Compartir › Insertar un mapa, y copia la dirección de src (https://www.google.com/maps/embed?…). Se muestra al pulsar «Ver mapa». Si lo dejas vacío, el mapa se busca con la dirección de la sede.',
+      },
     },
     campoOrden(),
     campoActivo('Activa'),

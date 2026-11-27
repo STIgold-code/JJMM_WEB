@@ -52,9 +52,11 @@ export const PAGINA_DE_INICIO: PaginaDeInicioSemilla = {
     bajada: 'Aquí tienes algunas de las razones para escoger nuestros servicios.',
   },
   clientes: { ancla: '', titulo: 'Nuestros clientes' },
+  // «Contáctanos» de la v5 (elegida por el estudio): pestañas por sede y formulario.
   contacto: {
     ancla: 'contacto',
     titulo: 'Contáctanos',
+    bajada: 'Visítanos en cualquiera de nuestras sedes o escríbenos por WhatsApp.',
     formulario: {
       titulo: 'Escríbenos',
       texto: 'Completa tus datos y te llevamos a WhatsApp con el mensaje listo para enviar.',
@@ -69,11 +71,9 @@ export const PAGINA_DE_INICIO: PaginaDeInicioSemilla = {
       ],
     },
     canales: {
-      whatsapp: 'WhatsApp',
-      llamada: 'Llámanos',
-      correo: 'Correo',
+      comoLlegar: 'Cómo llegar',
       botonDelMapa: 'Ver mapa',
+      fotoDelMapa: 'hero-equipo.webp',
     },
-    sedeDelMapa: 'Sede San Martín de Porres',
   },
 }

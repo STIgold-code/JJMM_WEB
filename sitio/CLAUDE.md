@@ -4,7 +4,7 @@ Guía para Claude Code al trabajar en `sitio/`.
 
 ## Qué es
 
-Sitio público y panel administrativo del Estudio Contable JJMM, en una sola aplicación: Next.js (App Router) + Payload CMS 3, PostgreSQL, medios en un volumen de Railway (o en Wasabi si se definen sus variables). Reemplaza al sitio Laravel anterior, cuyo código ya no está en el repositorio. La referencia de diseño es el mockup aprobado `../mockup/inicio-v4.html`.
+Sitio público y panel administrativo del Estudio Contable JJMM, en una sola aplicación: Next.js (App Router) + Payload CMS 3, PostgreSQL, medios en un volumen de Railway (o en Wasabi si se definen sus variables). Reemplaza al sitio Laravel anterior, cuyo código ya no está en el repositorio. La referencia de diseño es el mockup aprobado `../mockup/inicio-v4.html`, salvo «Contáctanos», que sigue la de `../mockup/inicio-v5.html` (elegida por el estudio): una pestaña por sede activa, con WhatsApp, llamada, «Cómo llegar» y un mapa que solo carga Google Maps al pulsar «Ver mapa», y el formulario de tres campos.
 
 El plan de trabajo y las especificaciones (S1–S9) están en `../odd/tasks/rediseno-sitio-jjmm.md`. El contexto de negocio y los datos que se pueden publicar, en `../PRODUCT.md`.
 

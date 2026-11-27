@@ -36,16 +36,26 @@ describe('cargarSemilla: globales', () => {
     ])
   })
 
-  it('cambia los nombres de archivo y de sede por sus id', async () => {
+  it('cambia los nombres de archivo por sus id', async () => {
     const puerto = await cargar()
     const [carrusel, , servicios, , , , contacto] = seccionesDelInicio(puerto)
-    const sedeDelMapa = puerto
-      .documentos('sedes')
-      .find((d) => d.datos.nombre === 'Sede San Martín de Porres')?.id
+    const fotoDelMapa = idDeMedio(puerto, 'hero-equipo.webp')
 
     expect(lista(carrusel?.portadas)[0]?.imagen).toBe(idDeMedio(puerto, 'hero-plan.webp'))
     expect(servicios?.imagenDeLaRueda).toBe(idDeMedio(puerto, 'rueda-sige-mype.webp'))
-    expect(contacto?.sedeDelMapa).toBe(sedeDelMapa)
+    expect(fotoDelMapa).toBeDefined()
+    expect(contacto).toMatchObject({ canales: { fotoDelMapa } })
+  })
+
+  it('arma «Contáctanos» con los textos de la v5', async () => {
+    const [, , , , , , contacto] = seccionesDelInicio(await cargar())
+
+    expect(contacto).toMatchObject({
+      titulo: 'Contáctanos',
+      bajada: 'Visítanos en cualquiera de nuestras sedes o escríbenos por WhatsApp.',
+      canales: { comoLlegar: 'Cómo llegar', botonDelMapa: 'Ver mapa' },
+    })
+    expect(contacto).not.toHaveProperty('sedeDelMapa')
   })
 
   it('convierte la presentación a texto enriquecido con negritas', async () => {

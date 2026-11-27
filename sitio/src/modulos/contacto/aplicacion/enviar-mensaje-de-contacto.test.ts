@@ -10,8 +10,6 @@ import type { LimitadorDeEnvios } from './limitador-de-envios'
 
 const DATOS: DatosDelFormulario = {
   nombre: 'Ana',
-  celular: '987654321',
-  correo: '',
   servicio: 'Asesoría legal',
   mensaje: 'Necesito constituir una empresa.',
 }
@@ -47,8 +45,6 @@ describe('crearEnviarMensajeDeContacto', () => {
     expect(guardados).toEqual([
       {
         nombre: 'Ana',
-        celular: '987654321',
-        correo: null,
         servicio: 'Asesoría legal',
         mensaje: 'Necesito constituir una empresa.',
       },

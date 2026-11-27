@@ -5,6 +5,16 @@ import { expect, test } from '@playwright/test'
 const TIEMPO_DE_UNA_PERSONA_MS = 3_200
 
 test.describe('Formulario de contacto', () => {
+  test('pide solo nombre, servicio y caso', async ({ page }) => {
+    await page.goto('/#contacto')
+    const formulario = page.getByRole('form', { name: 'Escríbenos' })
+
+    await expect(formulario.getByRole('textbox')).toHaveCount(2)
+    await expect(formulario.getByLabel('¿Qué necesitas?')).toBeVisible()
+    await expect(formulario.getByLabel('Celular')).toHaveCount(0)
+    await expect(formulario.getByLabel('Correo')).toHaveCount(0)
+  })
+
   test('marca los errores en línea y enfoca el primer campo inválido', async ({ page }) => {
     await page.goto('/#contacto')
     const formulario = page.getByRole('form', { name: 'Escríbenos' })
@@ -17,20 +27,8 @@ test.describe('Formulario de contacto', () => {
     await expect(nombre).toHaveAccessibleDescription(
       'Escribe tu nombre para saber cómo dirigirnos a ti.',
     )
-    await expect(formulario.getByLabel('Celular')).toHaveAttribute('aria-invalid', 'true')
-  })
-
-  test('rechaza un teléfono fijo', async ({ page }) => {
-    await page.goto('/#contacto')
-    const formulario = page.getByRole('form', { name: 'Escríbenos' })
-
-    await formulario.getByLabel('Nombre y apellido').fill('Ana Torres')
-    await formulario.getByLabel('Celular').fill('01 456 7890')
-    await formulario.getByLabel('Cuéntanos tu caso').fill('Necesito declarar mi renta.')
-    await formulario.getByRole('button', { name: /Enviar por WhatsApp/ }).click()
-
-    await expect(formulario.getByLabel('Celular')).toHaveAccessibleDescription(
-      'Escribe un celular de 9 dígitos que empiece con 9.',
+    await expect(formulario.getByLabel('Cuéntanos tu caso')).toHaveAccessibleDescription(
+      'Cuéntanos en una línea qué necesitas.',
     )
   })
 
@@ -41,7 +39,6 @@ test.describe('Formulario de contacto', () => {
     const formulario = page.getByRole('form', { name: 'Escríbenos' })
 
     await formulario.getByLabel('Nombre y apellido').fill('Ana Torres')
-    await formulario.getByLabel('Celular').fill('987 654 321')
     await formulario.getByLabel('¿Qué necesitas?').selectOption('Asesoría tributaria')
     await formulario.getByLabel('Cuéntanos tu caso').fill('Necesito declarar mi renta.')
     await page.waitForTimeout(TIEMPO_DE_UNA_PERSONA_MS)
@@ -56,5 +53,49 @@ test.describe('Formulario de contacto', () => {
       'Hola, soy Ana Torres. Necesito: Asesoría tributaria. Necesito declarar mi renta.',
     )
     await expect(formulario.getByRole('status')).toContainText('Recibimos tus datos.')
+  })
+})
+
+test.describe('Sedes de contacto', () => {
+  test('una pestaña por sede, operable con las flechas', async ({ page }) => {
+    await page.goto('/#contacto')
+    const pestanas = page.getByRole('tablist', { name: 'Sedes' })
+    const primera = pestanas.getByRole('tab', { name: 'San Martín de Porres' })
+    const segunda = pestanas.getByRole('tab', { name: 'San Isidro' })
+
+    await expect(primera).toHaveAttribute('aria-selected', 'true')
+    await expect(page.getByRole('tabpanel', { name: 'San Martín de Porres' })).toBeVisible()
+    await expect(page.getByRole('tabpanel', { name: 'San Isidro' })).toBeHidden()
+
+    await primera.focus()
+    await page.keyboard.press('ArrowRight')
+
+    await expect(segunda).toBeFocused()
+    await expect(segunda).toHaveAttribute('aria-selected', 'true')
+    await expect(page.getByRole('tabpanel', { name: 'San Isidro' })).toContainText(
+      'Calle Gorriones 151, San Isidro, Lima',
+    )
+  })
+
+  test('el mapa no carga Google Maps hasta pulsar «Ver mapa»', async ({ page }) => {
+    const pedidosAGoogle: string[] = []
+    page.on('request', (pedido) => {
+      if (pedido.url().startsWith('https://www.google.com/maps')) pedidosAGoogle.push(pedido.url())
+    })
+    await page.route('https://www.google.com/maps**', (ruta) => ruta.fulfill({ body: 'Mapa' }))
+    await page.goto('/#contacto')
+    const panel = page.getByRole('tabpanel', { name: 'San Martín de Porres' })
+
+    await expect(panel.getByRole('link', { name: /Cómo llegar/ })).toHaveAttribute(
+      'href',
+      /^https:\/\/www\.google\.com\/maps\/search\//,
+    )
+    expect(pedidosAGoogle).toEqual([])
+
+    await panel.getByRole('button', { name: /Ver mapa/ }).click()
+
+    const mapa = panel.locator('iframe[title="Mapa de la Sede San Martín de Porres"]')
+    await expect(mapa).toBeFocused()
+    await expect(mapa).toHaveAttribute('src', /^https:\/\/www\.google\.com\/maps\/embed\?/)
   })
 })

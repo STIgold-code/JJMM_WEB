@@ -55,9 +55,13 @@ export interface PaginaDeInicioSemilla {
   planes: SinTipoDeBloque<BloquePlanes>
   porQueElegirnos: SinTipoDeBloque<BloquePorQueElegirnos>
   clientes: SinTipoDeBloque<BloqueClientes>
-  // `sedeDelMapa` es el nombre de la sede.
-  contacto: Omit<SinTipoDeBloque<BloqueContacto>, 'sedeDelMapa'> & { sedeDelMapa: string }
+  // Las sedes salen de su colección; aquí solo la foto del mapa, por su archivo.
+  contacto: Omit<SinTipoDeBloque<BloqueContacto>, 'canales'> & {
+    canales: Omit<CanalesDeContacto, 'fotoDelMapa'> & { fotoDelMapa: ClaveDeMedio }
+  }
 }
+
+type CanalesDeContacto = NonNullable<BloqueContacto['canales']>
 
 type Marca = ConfiguracionDelSitio['marca']
 type SeoDelSitio = ConfiguracionDelSitio['seo']

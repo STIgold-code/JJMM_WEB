@@ -8,16 +8,12 @@ import type { RepositorioPaginaDeInicio } from '../aplicacion/repositorio-pagina
 export type SeccionDeInicio = NonNullable<PaginaDeInicio['secciones']>[number]
 
 // Lee la global con los permisos del público. Profundidad 1 para poblar las imágenes de las
-// portadas y de la rueda, y la sede del mapa: por eso depende también de `medios` y `sedes`.
+// portadas, de la rueda y del mapa: por eso depende también de `medios`.
 // Una global que nunca se guardó no tiene secciones.
 export const repositorioPaginaDeInicioPayload: RepositorioPaginaDeInicio<SeccionDeInicio> = {
   obtenerSecciones: leerEnCache(
     'pagina-de-inicio.obtenerSecciones',
-    [
-      etiquetaDeGlobal('pagina-de-inicio'),
-      etiquetaDeColeccion('medios'),
-      etiquetaDeColeccion('sedes'),
-    ],
+    [etiquetaDeGlobal('pagina-de-inicio'), etiquetaDeColeccion('medios')],
     async () => {
       const payload = await obtenerPayload()
       const pagina = await payload.findGlobal({
