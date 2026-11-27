@@ -4,7 +4,6 @@
     "builder": "RAILPACK"
   },
   "deploy": {
-    "preDeployCommand": ["pnpm payload migrate"],
     "startCommand": "pnpm start",
     "healthcheckPath": "/robots.txt",
     "healthcheckTimeout": 300,

@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url'
 import { crearAlmacenamientoWasabi } from './compartido/infraestructura/almacenamiento-wasabi'
 import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
 import { COLECCIONES, GLOBALES } from './contenido'
+import { migrations } from './migrations'
 import { coleccionUsuarios } from './modulos/usuarios/infraestructura/coleccion-usuarios'
 
 const filename = fileURLToPath(import.meta.url)
@@ -32,9 +33,11 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI ?? '',
     },
     // El esquema se sincroniza solo en desarrollo. En CI y producción se aplica con
-    // migraciones versionadas (`pnpm payload migrate`), así nada cambia la base sin revisión.
+    // migraciones versionadas, así nada cambia la base sin revisión. `prodMigrations` aplica
+    // las pendientes al iniciar el servidor en producción (contenedor de larga vida en Railway).
     push: process.env.NODE_ENV === 'development',
     migrationDir: path.resolve(dirname, 'migrations'),
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [...crearAlmacenamientoWasabi(process.env, [coleccionMedios.slug])],
