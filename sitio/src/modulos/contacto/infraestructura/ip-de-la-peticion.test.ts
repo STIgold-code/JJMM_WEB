@@ -28,6 +28,26 @@ describe('ipDeLaPeticion', () => {
     expect(ipDeLaPeticion(otra, 'x-real-ip')).toBe('2001:db8:abcd:12::/64')
   })
 
+  it('trata una IPv4 escrita como IPv6 igual que la IPv4', () => {
+    const encabezados = new Headers({ 'x-real-ip': '::ffff:200.1.1.1' })
+
+    expect(ipDeLaPeticion(encabezados, 'x-real-ip')).toBe('200.1.1.1')
+  })
+
+  it('descarta el puerto de la dirección', () => {
+    const ipv4 = new Headers({ 'x-real-ip': '200.1.1.1:5678' })
+    const ipv6 = new Headers({ 'x-real-ip': '[2001:db8:abcd:12::9]:443' })
+
+    expect(ipDeLaPeticion(ipv4, 'x-real-ip')).toBe('200.1.1.1')
+    expect(ipDeLaPeticion(ipv6, 'x-real-ip')).toBe('2001:db8:abcd:12::/64')
+  })
+
+  it('agrupa como «desconocida» un valor que no es una dirección IP', () => {
+    const encabezados = new Headers({ 'x-real-ip': 'no:es:una:ip' })
+
+    expect(ipDeLaPeticion(encabezados, 'x-real-ip')).toBe('desconocida')
+  })
+
   it('expande la forma abreviada de IPv6 antes de tomar el prefijo', () => {
     const encabezados = new Headers({ 'x-real-ip': '2001:db8::1' })
 
