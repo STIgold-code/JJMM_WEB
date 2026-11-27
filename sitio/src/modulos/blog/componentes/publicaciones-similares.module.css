@@ -1,0 +1,54 @@
+.similares {
+  padding-block: 3rem 4.5rem;
+  border-top: 1px solid var(--linea);
+}
+
+.similares h2 {
+  margin-bottom: 1.75rem;
+  font-size: 1.8rem;
+  color: var(--azul-noche);
+}
+
+.lista {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.item {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0.6rem;
+}
+
+.item h3 {
+  font-size: 1.2rem;
+}
+
+.item h3 a {
+  color: var(--azul-noche);
+  text-decoration: none;
+}
+
+.item h3 a:hover {
+  color: var(--azul);
+  text-decoration: underline;
+}
+
+.fecha {
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+}
+
+@media (min-width: 46rem) {
+  .lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

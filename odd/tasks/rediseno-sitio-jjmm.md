@@ -99,7 +99,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | en línea | pendiente | — |
 | T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | en línea | pendiente | — |
 | T9 | S7 | Guía de clientes: avisos y vencimientos | en línea | pendiente | — |
-| T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | en línea | pendiente | — |
+| T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | en línea | pendiente | — |
 | T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | en línea | pendiente | — |
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
@@ -235,4 +235,15 @@ Para las tareas siguientes:
 - Sin revisar todavía: el resultado visual en un navegador y los hooks de cliente. Los cubre Playwright con datos cargados.
 - Abierto: etiquetas para lectores de pantalla, nombres de redes y el sufijo «por WhatsApp» quedaron en código. Si se quieren editables, se agrega un campo en la configuración.
 
-Siguiente paso: T7 (secciones del inicio con sus animaciones).
+Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edición disjuntas (disparador de escritores paralelos).
+
+**L17** (27/11/2026), T10 terminada:
+- Rutas: `/blog` (9 por página con `?pagina=`), `/blog/[slug]`, `/blog/categoria/[slug]` y `/blog/etiqueta/[slug]`, con 404 para borradores, slugs inválidos y páginas fuera de rango.
+- Solo publicaciones publicadas: `overrideAccess: false`, `draft: false` y `_status: published` explícito, con una prueba que lo exige.
+- El contenido enriquecido se dibuja en `src/app/(frontend)/blog/[slug]/contenido-enriquecido.tsx`, porque `componentes/` no puede importar `@payloadcms/*`.
+- Verificado: `typecheck`, `lint`, `test` (396 pruebas en total, 66 del blog, RED observado antes) y `build`.
+- Riesgo: punto 6. Los filtros por relación y la exclusión de borradores solo tienen pruebas unitarias hasta que Playwright corra en CI.
+- Para T11:
+  - redirecciones 301 de las URL antiguas (supuestas: `/posts/:slug`, `/category/:slug`, `/tag/:slug`, `?page=`), a confirmar contra producción porque `routes/web.php` no está en el repositorio;
+  - `metadataBase` en el layout;
+  - `/blog` y un artículo en Lighthouse CI.

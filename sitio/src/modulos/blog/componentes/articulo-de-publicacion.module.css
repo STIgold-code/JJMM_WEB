@@ -1,0 +1,103 @@
+.articulo {
+  max-width: calc(48rem + 2 * var(--borde));
+  padding-block: 3rem 3.5rem;
+}
+
+.encabezado {
+  display: grid;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.encabezado h1 {
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  color: var(--azul-noche);
+}
+
+.datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+.datos a {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.extracto {
+  font-size: 1.15rem;
+  color: var(--tinta-suave);
+}
+
+.imagen {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2.25rem;
+  border-radius: 0.9rem;
+}
+
+/* Contenido enriquecido del panel: solo etiquetas HTML, sin clases propias. */
+.contenido {
+  font-size: 1.075rem;
+  line-height: 1.8;
+}
+
+.contenido > * + * {
+  margin-top: 1.1rem;
+}
+
+.contenido :global(:is(h2, h3, h4)) {
+  margin-top: 2.25rem;
+  color: var(--azul-noche);
+}
+
+.contenido :global(h2) {
+  font-size: 1.75rem;
+}
+
+.contenido :global(h3) {
+  font-size: 1.4rem;
+}
+
+.contenido :global(:is(ul, ol)) {
+  padding-left: 1.5rem;
+}
+
+.contenido :global(ul) {
+  list-style: disc;
+}
+
+.contenido :global(ol) {
+  list-style: decimal;
+}
+
+.contenido :global(li + li) {
+  margin-top: 0.4rem;
+}
+
+.contenido :global(blockquote) {
+  margin-inline: 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 4px solid var(--amarillo);
+  background: var(--cielo);
+}
+
+.contenido :global(img) {
+  height: auto;
+  border-radius: 0.6rem;
+}
+
+.contenido :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contenido :global(:is(th, td)) {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--linea);
+  text-align: left;
+}
