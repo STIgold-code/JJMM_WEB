@@ -74,7 +74,8 @@ test.describe('Servicios', () => {
     const cuarta = page.getByRole('tab', { name: /P4/ })
     await expect(cuarta).toBeFocused()
     await expect(cuarta).toHaveAttribute('aria-selected', 'true')
-    await expect(page.getByRole('tabpanel')).toContainText('P4:')
+    // Acotado a la sección: el contacto también tiene pestañas (una por sede).
+    await expect(page.locator('#servicios').getByRole('tabpanel')).toContainText('P4:')
   })
 })
 
