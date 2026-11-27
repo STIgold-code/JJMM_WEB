@@ -46,6 +46,24 @@ test.describe('Hero', () => {
     )
   })
 
+  // La portada ocupa casi toda la primera pantalla: si el mouse la pausara, quien deja el
+  // cursor quieto ahí nunca vería cambiar la portada.
+  test('sigue avanzando sola con el mouse encima y después de usar una flecha', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    const hero = page.locator('#inicio')
+    const visible = (posicion: number) =>
+      hero.getByRole('group', { name: `${posicion} de 4`, includeHidden: true })
+
+    await hero.hover()
+    await expect(visible(2)).toHaveAttribute('aria-hidden', 'false', { timeout: 15_000 })
+
+    await hero.getByRole('button', { name: 'Portada siguiente' }).click()
+    await expect(visible(3)).toHaveAttribute('aria-hidden', 'false')
+    await expect(visible(4)).toHaveAttribute('aria-hidden', 'false', { timeout: 15_000 })
+  })
+
   test('se pausa con el botón y con movimiento reducido arranca en pausa', async ({ page }) => {
     await page.goto('/')
     const pausa = page.getByRole('button', { name: 'Pausar las portadas' })
