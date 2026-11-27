@@ -1,53 +1,34 @@
 # JJMM_WEB
 
-Frontend del sitio web del Estudio Contable JJMM S.A.C.
-
-Este repositorio contiene **solo el frontend**: vistas, estilos, scripts e imágenes. El backend (Laravel 8, base de datos, rutas, controladores, panel de administración) vive en otro proyecto y no se modifica desde aquí.
-
-## Estado actual
-
-La página de inicio (`resources/views/web/index.blade.php`) ya tiene el rediseño aprobado. El resto (guía de clientes, blog, autenticación y panel) sigue siendo la copia del frontend en producción.
-
-Para conocer qué producto es, a quién se dirige y qué restricciones tiene, lee [`PRODUCT.md`](PRODUCT.md). La crítica de diseño del sitio actual (inicio, guía y blog) está en [`CRITICA.md`](CRITICA.md); el archivo de cada corrida queda en [`.impeccable/critique/`](.impeccable/critique/).
+Sitio web del Estudio Contable JJMM S.A.C.: sitio público y panel administrativo en una sola aplicación (Next.js + Payload CMS 3, PostgreSQL).
 
 ## Estructura
 
-Se conserva la estructura de carpetas de Laravel para que cualquier archivo pueda volver al backend en la misma ruta.
-
 | Ruta | Contenido |
 |---|---|
-| `resources/views/web/` | Página de inicio (`index.blade.php`) y guía de clientes (`guia.blade.php`) |
-| `resources/views/posts/` | Blog público: listado, detalle, categoría y etiqueta |
-| `resources/views/layouts/`, `components/`, `livewire/` | Layouts, componentes y vistas Livewire |
-| `resources/views/admin/` | Panel de administración (AdminLTE) |
-| `resources/views/auth/`, `profile/`, `api/`, `vendor/` | Vistas de autenticación y perfil (Jetstream) |
-| `resources/css/`, `resources/js/` | Fuentes de Tailwind y Alpine que compila Laravel Mix |
-| `resources/lang/`, `resources/markdown/` | Textos de la interfaz, términos y política |
-| `public/web/` | CSS, JS e imágenes del sitio público. El inicio usa `css/inicio.css`, `js/inicio.js`, `images/inicio/` y `fonts/` |
-| `mockup/` | Propuestas de rediseño. `inicio-v4.html` es la versión aprobada que hoy implementa `web/index.blade.php` |
-| `public/css/`, `public/js/` | Salida compilada de Laravel Mix |
-| `public/vendor/` | Recursos publicados de AdminLTE |
+| `sitio/` | La aplicación. Es lo único que se despliega. Su guía está en [`sitio/CLAUDE.md`](sitio/CLAUDE.md) |
+| `odd/tasks/` | Plan de trabajo del rediseño, con especificaciones, tareas y bitácora |
+| `mockup/` | Propuestas de diseño. `inicio-v4.html` es la versión aprobada |
+| `reports/` | Comparativo con la competencia |
+| `PRODUCT.md` | Producto, público y reglas de contenido |
+| `CRITICA.md` | Crítica de diseño del sitio anterior (Laravel), que motivó el rediseño |
 
-No se incluyen `public/index.php`, `public/.htaccess`, `public/web.config` ni `public/storage`, porque pertenecen al servidor y al backend.
+El código del sitio anterior (vistas Blade de Laravel) ya no está en este repositorio; queda en el historial de git.
 
-## Cómo ver el sitio
-
-Las vistas son plantillas Blade: necesitan el backend Laravel para renderizarse. Con el backend corriendo en local, el sitio público está en:
-
-- `/` — página de inicio
-- `/guia` — guía de clientes
-- `/blog` — blog
-
-## Compilar estilos
-
-Las vistas del blog, la autenticación y el perfil usan Tailwind 2 compilado con Laravel Mix.
+## Cómo trabajar
 
 ```bash
-pnpm install
-pnpm dev
+pnpm -C sitio install
+pnpm -C sitio dev        # requiere PostgreSQL; sitio en / y panel en /admin
+pnpm -C sitio test
+pnpm -C sitio lint
 ```
 
-El sitio público (`public/web/`) no pasa por ningún proceso de compilación.
+Los comandos completos, la arquitectura y las reglas de ingeniería están en [`sitio/CLAUDE.md`](sitio/CLAUDE.md).
+
+## Despliegue
+
+Railway despliega `sitio/` automáticamente con cada push a `main`. La CI de GitHub Actions corre tipos, lint, pruebas de unidad, Playwright y Lighthouse CI.
 
 ## Convenciones
 

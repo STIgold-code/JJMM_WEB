@@ -4,7 +4,7 @@ Guía para Claude Code al trabajar en `sitio/`.
 
 ## Qué es
 
-Sitio público y panel administrativo del Estudio Contable JJMM, en una sola aplicación: Next.js (App Router) + Payload CMS 3, PostgreSQL, medios en Wasabi. Reemplaza al sitio Laravel que vive fuera de esta carpeta. Ese sitio anterior es **solo referencia** (diseño v4 en `../mockup/inicio-v4.html` y `../resources/views/web/`); no se modifica desde aquí.
+Sitio público y panel administrativo del Estudio Contable JJMM, en una sola aplicación: Next.js (App Router) + Payload CMS 3, PostgreSQL, medios en un volumen de Railway (o en Wasabi si se definen sus variables). Reemplaza al sitio Laravel anterior, cuyo código ya no está en el repositorio. La referencia de diseño es el mockup aprobado `../mockup/inicio-v4.html`.
 
 El plan de trabajo y las especificaciones (S1–S9) están en `../odd/tasks/rediseno-sitio-jjmm.md`. El contexto de negocio y los datos que se pueden publicar, en `../PRODUCT.md`.
 
@@ -120,7 +120,7 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - `datos/`: datos puros y tipados con `payload-types.ts`, así un cambio del modelo que rompa la semilla falla en `pnpm typecheck`. Los medios se nombran por su archivo y las relaciones por su clave natural; el `orden` sale de la posición en cada lista. Las pruebas de `datos/*.test.ts` aplican las reglas de dominio y de contenido (S9) a toda la semilla.
 - `carga/` y `cargar.ts`: el cargador depende de `PuertoDeCarga` (`puerto-de-carga.ts`), no de Payload, y se prueba con `prueba/puerto-en-memoria.ts`. `adaptador-payload.ts` lo implementa con la Local API e `index.ts` es la entrada de `pnpm semilla` (`payload run`, que lee el `.env`).
 - Idempotente: cada documento se busca por su clave natural (código del área, nombre del plan, `filename` del medio, logotipo del cliente, plan + característica, obligación + periodicidad) y se crea o se actualiza; las globales se reemplazan. Un archivo solo se sube al crear su medio.
-- Las imágenes se suben desde `../public/web/images/`, sin copiarlas a `sitio/`. Antes de borrar el sitio anterior (T16), mueve esas imágenes o ejecuta la carga.
+- Las imágenes se suben desde `semilla/imagenes/`, dentro del proyecto, así la carga funciona también en el contenedor de Railway (`railway ssh --service web -- pnpm semilla`).
 - Si `media/` conserva archivos de una base borrada, Payload sube el medio con otro nombre (`-1`) y la siguiente carga lo duplica: vacía `media/` al recrear la base local.
 - El administrador se crea solo con `SEMILLA_ADMIN_CORREO` y `SEMILLA_ADMIN_CLAVE`; una cuenta existente no se toca.
 - No se cargan `cronogramas-sunat` (falta el cronograma oficial), publicaciones, categorías ni etiquetas (viven en la base de producción, no en el repositorio).

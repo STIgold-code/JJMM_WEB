@@ -105,7 +105,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | parcial: axe pasa en inicio, guía y blog en CI; falta el recorrido completo con teclado | ver L22 |
 | T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | en curso: Railway en marcha; faltan Wasabi, Cloudflare, dominio y respaldos | ver L22 |
 | T15 | S1 | Salida a producción: cambio de DNS con aprobación de Gian y verificación | en línea | pendiente | — |
-| T16 | S1 | Borrar el sitio anterior del repositorio y dejar solo el proyecto nuevo, con confirmación explícita de Gian antes de borrar | en línea | pendiente | — |
+| T16 | S1 | Borrar el sitio anterior del repositorio y dejar solo el proyecto nuevo, con confirmación explícita de Gian antes de borrar | en línea | hecha | ver L24 |
 
 Ruta: todas en línea por defecto. Se delega solo si se cumple un disparador (unidades paralelas independientes o contexto largo), y queda registrado aquí.
 
@@ -338,3 +338,9 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
   - `/blog`: rendimiento 1,00, LCP 1,07 s.
 - S3 queda cumplida con medición: rendimiento ≥ 0,9, LCP < 2,5 s, CLS < 0,1 y JavaScript ≤ 170 KB.
 - Railway desplegó `1ec2420` desde GitHub con estado `SUCCESS`.
+
+**L24** (27/11/2026): «eliminalo.»
+- T16: se quitaron del repositorio `public/`, `resources/`, `package.json`, `package-lock.json`, `tailwind.config.js` y `webpack.mix.js` (el frontend Laravel). Quedan en el historial de git.
+- Antes de borrar, las 17 imágenes que los mockups tomaban de `public/web/images/` se copiaron a `mockup/img/` y se ajustaron sus rutas, para que la v4 aprobada siga abriéndose.
+- `README.md` y `CLAUDE.md` de la raíz se reescribieron para describir el repositorio actual.
+- Se conservan `sitio/`, `mockup/`, `reports/`, `odd/`, `PRODUCT.md` y `CRITICA.md`.
