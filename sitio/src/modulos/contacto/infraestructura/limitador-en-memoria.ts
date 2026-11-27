@@ -3,7 +3,8 @@ import type { LimitadorDeEnvios } from '../aplicacion/limitador-de-envios'
 interface OpcionesDelLimitador {
   maximo: number
   ventanaMs: number
-  // Tope estricto de claves recordadas; al alcanzarlo se olvida la usada hace más tiempo.
+  // Tope estricto de claves recordadas. Al alcanzarlo se olvidan las vencidas y, si sigue
+  // lleno, se rechazan las claves nuevas: nunca se borra la cuenta de una clave vigente.
   maximoDeClaves?: number
 }
 
@@ -12,6 +13,9 @@ export interface LimitadorEnMemoria extends LimitadorDeEnvios {
 }
 
 const MAXIMO_DE_CLAVES = 5000
+// Con el tope lleno, la limpieza recorre todas las claves; se hace como mucho una vez por
+// este intervalo para que una inundación de claves nuevas no la repita en cada petición.
+const INTERVALO_DE_LIMPIEZA_MS = 1000
 
 // Ventana deslizante en la memoria del proceso. Limitación: cada instancia lleva su propia
 // cuenta y se reinicia al desplegar; con una sola instancia en Railway alcanza. Con varias
@@ -22,25 +26,33 @@ export function crearLimitadorEnMemoria(opciones: OpcionesDelLimitador): Limitad
   const vigentes = (clave: string, ahora: number) =>
     (envios.get(clave) ?? []).filter((momento) => ahora - momento < ventanaMs)
 
-  // El Map conserva el orden de inserción: volver a insertar una clave la deja al final,
-  // así la primera clave es siempre la usada hace más tiempo (LRU) y se olvida sin recorrer todo.
-  function recordar(clave: string, momentos: number[]) {
-    envios.delete(clave)
-    if (envios.size >= maximoDeClaves) {
-      const masAntigua = envios.keys().next()
-      if (!masAntigua.done) envios.delete(masAntigua.value)
+  let ultimaLimpieza = Number.NEGATIVE_INFINITY
+
+  function olvidarVencidas(ahora: number) {
+    if (ahora - ultimaLimpieza < INTERVALO_DE_LIMPIEZA_MS) return
+    ultimaLimpieza = ahora
+    for (const clave of envios.keys()) {
+      if (vigentes(clave, ahora).length === 0) envios.delete(clave)
     }
-    envios.set(clave, momentos)
+  }
+
+  // Falla cerrado: sin lugar para una clave nueva, el envío se rechaza. Los canales directos
+  // (WhatsApp y llamada) siguen disponibles aunque el formulario quede bloqueado.
+  function hayLugarPara(clave: string, ahora: number) {
+    if (envios.has(clave) || envios.size < maximoDeClaves) return true
+    olvidarVencidas(ahora)
+    return envios.size < maximoDeClaves
   }
 
   return {
     permitir(clave, ahora) {
+      if (!hayLugarPara(clave, ahora)) return false
       const recientes = vigentes(clave, ahora)
       if (recientes.length >= maximo) {
-        recordar(clave, recientes)
+        envios.set(clave, recientes)
         return false
       }
-      recordar(clave, [...recientes, ahora])
+      envios.set(clave, [...recientes, ahora])
       return true
     },
     cantidadDeClaves: () => envios.size,

@@ -41,26 +41,25 @@ describe('crearLimitadorEnMemoria', () => {
     expect(limitador.permitir('a', VENTANA)).toBe(true)
   })
 
-  it('no supera el tope de claves aunque todas sigan vigentes', () => {
+  it('con el tope lleno de claves vigentes rechaza claves nuevas sin crecer', () => {
     const limitador = crearLimitadorEnMemoria({ maximo: 1, ventanaMs: VENTANA, maximoDeClaves: 2 })
 
     limitador.permitir('a', 0)
     limitador.permitir('b', 0)
-    limitador.permitir('c', 0)
-    limitador.permitir('d', 0)
 
+    expect(limitador.permitir('c', 0)).toBe(false)
+    expect(limitador.permitir('d', 0)).toBe(false)
     expect(limitador.cantidadDeClaves()).toBe(2)
   })
 
-  it('al llegar al tope olvida la clave usada hace más tiempo', () => {
+  it('una inundación de claves nuevas no borra la cuenta de las existentes', () => {
     const limitador = crearLimitadorEnMemoria({ maximo: 1, ventanaMs: VENTANA, maximoDeClaves: 2 })
 
     limitador.permitir('a', 0)
     limitador.permitir('b', 0)
-    limitador.permitir('a', 1)
-    limitador.permitir('c', 2)
+    for (let i = 0; i < 10; i++) limitador.permitir(`inundacion-${i}`, 1)
 
-    expect(limitador.permitir('a', 3)).toBe(false)
-    expect(limitador.permitir('b', 3)).toBe(true)
+    expect(limitador.permitir('a', 2)).toBe(false)
+    expect(limitador.permitir('b', 2)).toBe(false)
   })
 })
