@@ -111,7 +111,7 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - Pruebas primero en reglas de dominio: escribe la prueba que falla antes de implementar.
 - La configuración del panel es código (colecciones y globales en TypeScript), nunca cambios manuales.
 
-**Rendimiento (S3)**, verificado por Lighthouse CI en móvil sobre `/`, `/guia` y `/blog`: rendimiento ≥ 0,9, LCP ≤ 2500 ms, CLS ≤ 0,1 y como máximo 170 KB de JavaScript transferido por página. El detalle de una publicación no se mide en CI porque la semilla no carga publicaciones.
+**Rendimiento (S3)**, verificado por Lighthouse CI en móvil sobre `/`, `/guia` y `/blog`: rendimiento ≥ 0,9, LCP ≤ 2500 ms, CLS ≤ 0,1 y como máximo 170 KB de JavaScript transferido por página. El detalle de una publicación no se mide en CI porque la semilla no carga publicaciones. La limitación de red y procesador es aplicada (`throttlingMethod: "devtools"`), no simulada: contra `localhost` todo llega al instante, y el modelo simulado contaba los scripts como si bloquearan la imagen principal (daba 3,2 s de LCP con 0,2 a 0,9 s observados).
 
 ### Carga inicial
 

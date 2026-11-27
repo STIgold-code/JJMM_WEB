@@ -14,7 +14,7 @@
           "height": 823,
           "deviceScaleFactor": 1.75
         },
-        "throttlingMethod": "simulate",
+        "throttlingMethod": "devtools",
         "chromeFlags": "--no-sandbox --headless=new"
       }
     },
