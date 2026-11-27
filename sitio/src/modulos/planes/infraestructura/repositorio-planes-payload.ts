@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 
 import type { RepositorioPlanes } from '../aplicacion/obtener-matriz-de-planes'
 
@@ -13,7 +15,7 @@ const idDe = (valor: number | { id: number }): number =>
   typeof valor === 'number' ? valor : valor.id
 
 export const repositorioPlanesPayload: RepositorioPlanes = {
-  async listarPlanes() {
+  listarPlanes: leerEnCache('planes.listar', [etiquetaDeColeccion('planes')], async () => {
     const payload = await obtenerPayload()
     const { docs } = await payload.find({
       collection: 'planes',
@@ -26,29 +28,37 @@ export const repositorioPlanesPayload: RepositorioPlanes = {
       nombre,
       mensajeDeConsulta: mensajeDeConsulta || null,
     }))
-  },
-  async listarCaracteristicas() {
-    const payload = await obtenerPayload()
-    const { docs } = await payload.find({
-      collection: 'caracteristicas-de-plan',
-      sort: 'orden',
-      limit: MAXIMO_DE_CARACTERISTICAS,
-      ...LECTURA_PUBLICA,
-    })
-    return docs.map(({ id, nombre }) => ({ id, nombre }))
-  },
-  async listarInclusiones() {
-    const payload = await obtenerPayload()
-    const { docs } = await payload.find({
-      collection: 'inclusiones-de-plan',
-      limit: MAXIMO_DE_PLANES * MAXIMO_DE_CARACTERISTICAS,
-      ...LECTURA_PUBLICA,
-    })
-    return docs.map((inclusion) => ({
-      plan: idDe(inclusion.plan),
-      caracteristica: idDe(inclusion.caracteristica),
-      tipo: inclusion.tipo,
-      texto: inclusion.texto ?? null,
-    }))
-  },
+  }),
+  listarCaracteristicas: leerEnCache(
+    'caracteristicas-de-plan.listar',
+    [etiquetaDeColeccion('caracteristicas-de-plan')],
+    async () => {
+      const payload = await obtenerPayload()
+      const { docs } = await payload.find({
+        collection: 'caracteristicas-de-plan',
+        sort: 'orden',
+        limit: MAXIMO_DE_CARACTERISTICAS,
+        ...LECTURA_PUBLICA,
+      })
+      return docs.map(({ id, nombre }) => ({ id, nombre }))
+    },
+  ),
+  listarInclusiones: leerEnCache(
+    'inclusiones-de-plan.listar',
+    [etiquetaDeColeccion('inclusiones-de-plan')],
+    async () => {
+      const payload = await obtenerPayload()
+      const { docs } = await payload.find({
+        collection: 'inclusiones-de-plan',
+        limit: MAXIMO_DE_PLANES * MAXIMO_DE_CARACTERISTICAS,
+        ...LECTURA_PUBLICA,
+      })
+      return docs.map((inclusion) => ({
+        plan: idDe(inclusion.plan),
+        caracteristica: idDe(inclusion.caracteristica),
+        tipo: inclusion.tipo,
+        texto: inclusion.texto ?? null,
+      }))
+    },
+  ),
 }

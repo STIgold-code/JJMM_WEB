@@ -101,7 +101,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T9 | S7 | Guía de clientes: avisos y vencimientos | delegada (paralela con T7+T8 y T10) | hecha; consulta por RUC sin datos hasta cargar el cronograma oficial | ver L18 |
 | T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | delegada (contexto largo) | hecha; falta verificar en navegador (CI detenida) | ver L20 |
-| T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | en línea | pendiente | — |
+| T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | delegada (contexto largo) + verificación independiente | hecha; límites de Lighthouse sin medir (CI detenida) | ver L21 |
 | T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
 | T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | pendiente | — |
 | T15 | S1 | Salida a producción: cambio de DNS con aprobación de Gian y verificación | en línea | pendiente | — |
@@ -290,3 +290,17 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
 - Riesgo:
   - punto 3: cambió la forma de `metadatosPorDefecto` y `DetalleDePublicacion`; todos los usos están actualizados;
   - punto 6: las 301 y las respuestas de sitemap y robots solo las cubre Playwright.
+
+**L21** (27/11/2026), T12 terminada:
+- El HTML sigue dinámico, así el build no necesita base de datos. Cada lectura de Payload se guarda con `unstable_cache` y etiquetas (`coleccion:`, `global:`, `documento:publicaciones:`), con renovación de respaldo cada 10 minutos.
+- Ganchos de revalidación asignados en un solo lugar (`src/contenido.ts`):
+  - publicar, despublicar y borrar revalidan;
+  - un borrador de algo nunca publicado no revalida;
+  - la semilla los desactiva por contexto.
+- Medios con `max-age=3600, stale-while-revalidate=86400`; imágenes en AVIF/WebP. Decisión documentada en ADR `docs/adr/0002-cache-y-revalidacion.md`.
+- Riesgo: punto 4 (caché y concurrencia). Verificación independiente con un bloqueo: el detalle de una publicación no se invalidaba al renombrar o despublicar otra publicación que enlaza en su contenido. Corregido en `etiquetas-del-blog.ts`, con prueba (RED observado antes).
+- Advertencias sin corregir:
+  - una ventana de milisegundos entre la invalidación y el commit;
+  - la caché es por instancia, así que con varias réplicas en Railway hace falta un `cacheHandler` compartido;
+  - guardar un borrador sobre algo publicado revalida de más.
+- Verificado: `typecheck`, `lint`, `format:check`, `test` (545 pruebas) y `build` del escritor.

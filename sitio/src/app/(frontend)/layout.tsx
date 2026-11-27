@@ -16,8 +16,9 @@ import { urlDelSitio } from '@/compartido/infraestructura/url-del-sitio-configur
 
 import { openSans, oswald } from './fuentes/fuentes'
 
-// El contenido sale de Payload en cada petición: la compilación no necesita base de datos.
-// La revalidación al publicar (ISR) llega en T12.
+// El HTML se arma en cada petición, así la compilación no necesita base de datos. Las lecturas
+// de Payload no: cada adaptador las guarda en la caché de datos de Next (`leerEnCache`) y el
+// panel las invalida por etiqueta al guardar (`conRevalidacion` en `contenido.ts`).
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(): Promise<Metadata> {

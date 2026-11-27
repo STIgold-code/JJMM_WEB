@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 import type { AvisosParaCliente } from '@/payload-types'
 
 import type { RepositorioAvisos } from '../aplicacion/repositorio-avisos'
@@ -18,17 +20,21 @@ export function mapearAviso(aviso: AvisosParaCliente): AvisoGuardado {
 
 // Solo avisos visibles, en el orden del panel y con los permisos del público.
 export const repositorioAvisosPayload: RepositorioAvisos = {
-  async listarActivos() {
-    const payload = await obtenerPayload()
-    const { docs } = await payload.find({
-      collection: 'avisos-para-clientes',
-      where: { activo: { equals: true } },
-      sort: 'orden',
-      depth: 0,
-      limit: MAXIMO_DE_AVISOS,
-      pagination: false,
-      overrideAccess: false,
-    })
-    return docs.map(mapearAviso)
-  },
+  listarActivos: leerEnCache(
+    'avisos-para-clientes.listarActivos',
+    [etiquetaDeColeccion('avisos-para-clientes')],
+    async () => {
+      const payload = await obtenerPayload()
+      const { docs } = await payload.find({
+        collection: 'avisos-para-clientes',
+        where: { activo: { equals: true } },
+        sort: 'orden',
+        depth: 0,
+        limit: MAXIMO_DE_AVISOS,
+        pagination: false,
+        overrideAccess: false,
+      })
+      return docs.map(mapearAviso)
+    },
+  ),
 }

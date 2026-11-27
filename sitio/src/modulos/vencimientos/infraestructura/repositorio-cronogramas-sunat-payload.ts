@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 import type { CronogramasSunat } from '@/payload-types'
 
 import type { RepositorioCronogramasSunat } from '../aplicacion/repositorio-cronogramas-sunat'
@@ -26,19 +28,25 @@ export function mapearCronograma(cronograma: CronogramasSunat): CronogramaDelPer
   }
 }
 
+// La caché guarda la lista por año; qué periodo está vigente lo decide el caso de uso con la
+// fecha de cada petición, así que el cambio de mes no depende de invalidar nada.
 export const repositorioCronogramasSunatPayload: RepositorioCronogramasSunat = {
-  async listarDesde(anio) {
-    const payload = await obtenerPayload()
-    const { docs } = await payload.find({
-      collection: 'cronogramas-sunat',
-      where: { anio: { greater_than_equal: anio } },
-      // Del más antiguo al más reciente: si hubiera más del límite, se cortan los futuros.
-      sort: ['anio', 'mes'],
-      depth: 0,
-      limit: MAXIMO_DE_CRONOGRAMAS,
-      pagination: false,
-      overrideAccess: false,
-    })
-    return docs.map(mapearCronograma)
-  },
+  listarDesde: leerEnCache(
+    'cronogramas-sunat.listarDesde',
+    [etiquetaDeColeccion('cronogramas-sunat')],
+    async (anio: number) => {
+      const payload = await obtenerPayload()
+      const { docs } = await payload.find({
+        collection: 'cronogramas-sunat',
+        where: { anio: { greater_than_equal: anio } },
+        // Del más antiguo al más reciente: si hubiera más del límite, se cortan los futuros.
+        sort: ['anio', 'mes'],
+        depth: 0,
+        limit: MAXIMO_DE_CRONOGRAMAS,
+        pagination: false,
+        overrideAccess: false,
+      })
+      return docs.map(mapearCronograma)
+    },
+  ),
 }

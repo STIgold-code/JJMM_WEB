@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 
 import type { RepositorioValores } from '../aplicacion/listar-valores'
 
@@ -6,7 +8,7 @@ import type { RepositorioValores } from '../aplicacion/listar-valores'
 const MAXIMO_DE_VALORES = 24
 
 export const repositorioValoresPayload: RepositorioValores = {
-  async listar() {
+  listar: leerEnCache('valores.listar', [etiquetaDeColeccion('valores')], async () => {
     const payload = await obtenerPayload()
     const { docs } = await payload.find({
       collection: 'valores',
@@ -17,5 +19,5 @@ export const repositorioValoresPayload: RepositorioValores = {
       overrideAccess: false,
     })
     return docs.map(({ nombre, icono }) => ({ nombre, icono }))
-  },
+  }),
 }

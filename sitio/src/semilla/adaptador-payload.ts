@@ -1,14 +1,20 @@
 import type { Payload, TypedCollectionSelect, TypedGlobalSelect, Where } from 'payload'
 
+import { CONTEXTO_SIN_REVALIDACION } from '@/compartido/infraestructura/revalidacion/hooks-de-revalidacion'
+
 import type { Criterio, PuertoDeCarga } from './puerto-de-carga'
 
 const aWhere = (criterio: Criterio): Where => ({
   and: Object.entries(criterio).map(([campo, valor]) => ({ [campo]: { equals: valor } })),
 })
 
-// Implementa el puerto de carga con la Local API de Payload. La carga es una tarea del
-// equipo, no de un visitante: por eso usa `overrideAccess` (es el valor por defecto de la
-// Local API, aquí queda explícito).
+// La carga es una tarea del equipo, no de un visitante: por eso usa `overrideAccess` (es el
+// valor por defecto de la Local API, aquí queda explícito). Corre con `payload run`, fuera de
+// Next, donde `revalidateTag` fallaría: el contexto apaga los hooks de revalidación. Si el
+// sitio ya estaba sirviendo, su caché se renueva sola en 10 minutos como máximo.
+const OPCIONES = { depth: 0, overrideAccess: true, context: CONTEXTO_SIN_REVALIDACION } as const
+
+// Implementa el puerto de carga con la Local API de Payload.
 export function crearPuertoPayload(payload: Payload): PuertoDeCarga {
   return {
     async buscar(coleccion, criterio) {
@@ -16,8 +22,7 @@ export function crearPuertoPayload(payload: Payload): PuertoDeCarga {
         collection: coleccion,
         where: aWhere(criterio),
         limit: 1,
-        depth: 0,
-        overrideAccess: true,
+        ...OPCIONES,
       })
       return docs[0]?.id ?? null
     },
@@ -26,8 +31,7 @@ export function crearPuertoPayload(payload: Payload): PuertoDeCarga {
         collection: coleccion,
         data: datos,
         filePath: rutaDeArchivo,
-        depth: 0,
-        overrideAccess: true,
+        ...OPCIONES,
       })
       return documento.id
     },
@@ -38,18 +42,12 @@ export function crearPuertoPayload(payload: Payload): PuertoDeCarga {
       type S = typeof coleccion
       // `update` tiene dos firmas; `Parameters` toma la última, la de actualizar por id.
       type Datos = Parameters<typeof payload.update<S, TypedCollectionSelect[S]>>[0]['data']
-      await payload.update({
-        collection: coleccion,
-        id,
-        data: datos as Datos,
-        depth: 0,
-        overrideAccess: true,
-      })
+      await payload.update({ collection: coleccion, id, data: datos as Datos, ...OPCIONES })
     },
     async actualizarGlobal(slug, datos) {
       type S = typeof slug
       type Datos = Parameters<typeof payload.updateGlobal<S, TypedGlobalSelect[S]>>[0]['data']
-      await payload.updateGlobal({ slug, data: datos as Datos, depth: 0, overrideAccess: true })
+      await payload.updateGlobal({ slug, data: datos as Datos, ...OPCIONES })
     },
   }
 }

@@ -1,6 +1,8 @@
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 
 import type { RepositorioPublicaciones } from '../aplicacion/repositorio-publicaciones'
+import { etiquetasDelDetalle, etiquetasDelListado } from './etiquetas-del-blog'
 import { condicionDelFiltro, condicionPorSlug } from './repositorio-blog-condiciones'
 import {
   CAMPOS_DEL_RESUMEN,
@@ -18,22 +20,26 @@ const ORDEN = ['-fechaDePublicacion', '-id']
 const LECTURA_PUBLICA = { overrideAccess: false, draft: false } as const
 
 export const repositorioPublicacionesPayload: RepositorioPublicaciones<ContenidoDePublicacion> = {
-  async listar(filtro, { pagina, porPagina }) {
-    const payload = await obtenerPayload()
-    const { docs, totalDocs } = await payload.find({
-      collection: 'publicaciones',
-      where: condicionDelFiltro(filtro),
-      select: CAMPOS_DEL_RESUMEN,
-      sort: ORDEN,
-      page: pagina,
-      limit: porPagina,
-      depth: 1,
-      ...LECTURA_PUBLICA,
-    })
-    return { publicaciones: docs.map(mapearResumen), total: totalDocs }
-  },
+  listar: leerEnCache(
+    'publicaciones.listar',
+    etiquetasDelListado(),
+    async (filtro, { pagina, porPagina }) => {
+      const payload = await obtenerPayload()
+      const { docs, totalDocs } = await payload.find({
+        collection: 'publicaciones',
+        where: condicionDelFiltro(filtro),
+        select: CAMPOS_DEL_RESUMEN,
+        sort: ORDEN,
+        page: pagina,
+        limit: porPagina,
+        depth: 1,
+        ...LECTURA_PUBLICA,
+      })
+      return { publicaciones: docs.map(mapearResumen), total: totalDocs }
+    },
+  ),
 
-  async buscarPorSlug(slug) {
+  buscarPorSlug: leerEnCache('publicaciones.buscarPorSlug', etiquetasDelDetalle, async (slug) => {
     const payload = await obtenerPayload()
     const { docs } = await payload.find({
       collection: 'publicaciones',
@@ -45,5 +51,5 @@ export const repositorioPublicacionesPayload: RepositorioPublicaciones<Contenido
     })
     const [publicacion] = docs
     return publicacion ? mapearDetalle(publicacion) : null
-  },
+  }),
 }

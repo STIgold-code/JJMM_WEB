@@ -2,6 +2,10 @@ import type { CollectionConfig, GlobalConfig } from 'payload'
 
 import { coleccionMedios } from './compartido/infraestructura/coleccion-medios'
 import { globalConfiguracionDelSitio } from './compartido/infraestructura/global-configuracion-del-sitio'
+import {
+  conRevalidacion,
+  globalConRevalidacion,
+} from './compartido/infraestructura/revalidacion/revalidacion-de-contenido'
 import { coleccionAvisosParaClientes } from './modulos/avisos/infraestructura/coleccion-avisos-para-clientes'
 import { globalGuiaDeClientes } from './modulos/avisos/infraestructura/global-guia-de-clientes'
 import { coleccionCategorias } from './modulos/blog/infraestructura/coleccion-categorias'
@@ -22,24 +26,33 @@ import { coleccionUsuarios } from './modulos/usuarios/infraestructura/coleccion-
 import { coleccionCronogramasSunat } from './modulos/vencimientos/infraestructura/coleccion-cronogramas-sunat'
 import { coleccionVencimientos } from './modulos/vencimientos/infraestructura/coleccion-vencimientos'
 
+// Colecciones que el sitio público nunca lee: cambiarlas no invalida la caché. Los mensajes
+// los crea el formulario de contacto (invalidar desde esa Server Action refrescaría la página
+// del visitante) y los usuarios solo existen en el panel.
+export const COLECCIONES_SIN_REVALIDACION = [
+  coleccionMensajesDeContacto.slug,
+  coleccionUsuarios.slug,
+] as const
+
 // Raíz de composición del modelo de datos: todas las colecciones y globales del panel.
-// El orden define el orden dentro de cada grupo del menú del panel.
+// El orden define el orden dentro de cada grupo del menú del panel. Todo lo que el sitio
+// público lee pasa por `conRevalidacion`, que invalida su caché al guardar en el panel.
 export const COLECCIONES: CollectionConfig[] = [
-  coleccionAreasDeServicio,
-  coleccionPlanes,
-  coleccionCaracteristicasDePlan,
-  coleccionInclusionesDePlan,
-  coleccionValores,
-  coleccionClientes,
-  coleccionAvisosParaClientes,
-  coleccionVencimientos,
-  coleccionCronogramasSunat,
-  coleccionPublicaciones,
-  coleccionCategorias,
-  coleccionEtiquetas,
+  conRevalidacion(coleccionAreasDeServicio),
+  conRevalidacion(coleccionPlanes),
+  conRevalidacion(coleccionCaracteristicasDePlan),
+  conRevalidacion(coleccionInclusionesDePlan),
+  conRevalidacion(coleccionValores),
+  conRevalidacion(coleccionClientes),
+  conRevalidacion(coleccionAvisosParaClientes),
+  conRevalidacion(coleccionVencimientos),
+  conRevalidacion(coleccionCronogramasSunat),
+  conRevalidacion(coleccionPublicaciones),
+  conRevalidacion(coleccionCategorias),
+  conRevalidacion(coleccionEtiquetas),
   coleccionMensajesDeContacto,
-  coleccionSedes,
-  coleccionMedios,
+  conRevalidacion(coleccionSedes),
+  conRevalidacion(coleccionMedios),
   coleccionUsuarios,
 ]
 
@@ -49,4 +62,4 @@ export const GLOBALES: GlobalConfig[] = [
   globalPaginaDelBlog,
   globalNavegacion,
   globalConfiguracionDelSitio,
-]
+].map(globalConRevalidacion)

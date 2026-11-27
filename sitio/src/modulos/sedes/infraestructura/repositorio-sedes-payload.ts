@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 import type { Sede } from '@/payload-types'
 
 import type { RepositorioSedes } from '../aplicacion/repositorio-sedes'
@@ -20,7 +22,7 @@ export function mapearSede(sede: Sede): SedeGuardada {
 
 // Solo sedes activas, en el orden del panel y con los permisos del público.
 export const repositorioSedesPayload: RepositorioSedes = {
-  async listarActivas() {
+  listarActivas: leerEnCache('sedes.listarActivas', [etiquetaDeColeccion('sedes')], async () => {
     const payload = await obtenerPayload()
     const { docs } = await payload.find({
       collection: 'sedes',
@@ -32,5 +34,5 @@ export const repositorioSedesPayload: RepositorioSedes = {
       overrideAccess: false,
     })
     return docs.map(mapearSede)
-  },
+  }),
 }

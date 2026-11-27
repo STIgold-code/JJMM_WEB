@@ -129,11 +129,17 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 
 - **Lectura de datos:** cada contenedor (Server Component) llama a una función de `componentes/obtener-*.ts` o `estructura/datos-del-sitio.ts`, que une el caso de uso con su adaptador de Payload y la envuelve en `cache` de React (una lectura por petición). Los adaptadores usan la Local API con `overrideAccess: false` y sin usuario, así que solo leen lo público.
 - **Datos ausentes:** si una global nunca se guardó, su mapeador devuelve `null` y la pieza no se dibuja. Los errores reales (base caída, celular que no es celular) se propagan.
-- **Renderizado:** el layout de `(frontend)` exporta `dynamic = 'force-dynamic'`, así la compilación no necesita base de datos. La revalidación al publicar llega en T12.
+- **Renderizado y caché** ([ADR 0002](docs/adr/0002-cache-y-revalidacion.md)): el layout de `(frontend)` y `sitemap.ts` exportan `dynamic = 'force-dynamic'`, así la compilación no necesita base de datos y el HTML se arma en cada petición. Las lecturas de Payload, en cambio, se guardan en la caché de datos de Next:
+  - Cada método de un adaptador `repositorio-*-payload.ts` se envuelve con `leerEnCache(clave, etiquetas, leer)` (`compartido/infraestructura/lectura-en-cache.ts`). La clave es única por lectura (`'<slug>.<metodo>'`) y las etiquetas nombran todo lo que la lectura trae, también lo poblado con `depth: 1` (por ejemplo `medios`). Lo que devuelve se guarda como JSON: sin `Date` ni `Map`.
+  - Las etiquetas salen de `compartido/dominio/etiquetas-de-cache.ts`: `coleccion:<slug>`, `global:<slug>` y `documento:publicaciones:<slug>` para el detalle de una publicación.
+  - `contenido.ts` envuelve cada colección y global que el sitio lee con `conRevalidacion` / `globalConRevalidacion`, que agregan los hooks de `compartido/infraestructura/revalidacion/` y llaman a `revalidateTag(etiqueta, { expire: 0 })`. Quedan fuera `mensajes-de-contacto` y `usuarios` (`COLECCIONES_SIN_REVALIDACION`); `src/contenido.test.ts` lo exige. Una colección o global nueva que el sitio lea debe pasar por el envoltorio.
+  - Borradores: guardar un borrador de una publicación que nunca fue pública no invalida nada; publicar, despublicar o guardar un borrador sobre una publicada sí.
+  - Red de seguridad: cada entrada se renueva como máximo cada 10 minutos aunque nada la invalide.
+  - Fuera de Next (`pnpm semilla`) los hooks se apagan con `CONTEXTO_SIN_REVALIDACION`; toda escritura con la Local API fuera de una petición de Next debe pasarlo.
 - **Tokens y estilos:** `estilos-globales.css` define los tokens de la v4 (`--azul`, `--titulo`, `--salida`…) y las clases compartidas (`contenedor`, `oculto`, `boton`, `boton-contacto`, `boton-linea`, `boton-azul`, `icono`, `marca-icono`, `oscuro`). Lo propio de cada componente va en su CSS Module.
 - **Aparición al hacer scroll (S6):** usa `propsDeRevelado({ desde: 'izquierda' | 'derecha', retraso: 0.2, clase })` y esparce el resultado en el elemento (`<li {...propsDeRevelado({ retraso: 0.1 })}>`). El `ObservadorDeRevelado` del layout agrega `visible`; sin JavaScript o con `prefers-reduced-motion` todo se ve de inmediato.
 - **Menú:** las secciones se enlazan como `/#ancla` para que funcionen desde cualquier página; una sección del inicio se marca como actual cuando su elemento con ese `id` cruza el centro de la pantalla.
-- **Imágenes de Payload:** `next/image` con `localPatterns` en `/api/medios/file/**` (en disco o en Wasabi la ruta es la misma).
+- **Imágenes de Payload:** `next/image` con `localPatterns` en `/api/medios/file/**` (en disco o en Wasabi la ruta es la misma), formatos AVIF y WebP, y `deviceSizes` hasta 1920 px. Esos archivos salen con `Cache-Control: public, max-age=3600, stale-while-revalidate=86400` (`headers()` en `next.config.ts`): no son `immutable` porque su nombre no lleva hash. Fuentes y JavaScript van en `/_next/static`, con hash e `immutable` por defecto.
 
 ### SEO
 

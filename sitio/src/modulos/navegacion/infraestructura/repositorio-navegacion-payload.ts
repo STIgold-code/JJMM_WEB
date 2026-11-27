@@ -1,5 +1,7 @@
+import { etiquetaDeColeccion, etiquetaDeGlobal } from '@/compartido/dominio/etiquetas-de-cache'
 import { aImagen } from '@/compartido/infraestructura/imagen-de-medio'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 import type { Navegacion } from '@/payload-types'
 
 import type { RepositorioNavegacion } from '../aplicacion/repositorio-navegacion'
@@ -19,13 +21,17 @@ export function mapearItemDeMenu(item: ItemPayload): ItemDeMenuGuardado {
 
 // Lee el menú con los permisos del público; profundidad 1 para poblar los logos.
 export const repositorioNavegacionPayload: RepositorioNavegacion = {
-  async obtenerItems() {
-    const payload = await obtenerPayload()
-    const navegacion = await payload.findGlobal({
-      slug: 'navegacion',
-      depth: 1,
-      overrideAccess: false,
-    })
-    return (navegacion.items ?? []).map(mapearItemDeMenu)
-  },
+  obtenerItems: leerEnCache(
+    'navegacion.obtenerItems',
+    [etiquetaDeGlobal('navegacion'), etiquetaDeColeccion('medios')],
+    async () => {
+      const payload = await obtenerPayload()
+      const navegacion = await payload.findGlobal({
+        slug: 'navegacion',
+        depth: 1,
+        overrideAccess: false,
+      })
+      return (navegacion.items ?? []).map(mapearItemDeMenu)
+    },
+  ),
 }

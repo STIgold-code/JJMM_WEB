@@ -1,4 +1,6 @@
+import { etiquetaDeColeccion } from '@/compartido/dominio/etiquetas-de-cache'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
+import { leerEnCache } from '@/compartido/infraestructura/lectura-en-cache'
 import type { Vencimiento as VencimientoPayload } from '@/payload-types'
 
 import type { RepositorioVencimientos } from '../aplicacion/repositorio-vencimientos'
@@ -18,7 +20,7 @@ export function mapearVencimiento(vencimiento: VencimientoPayload): Vencimiento 
 
 // Todos los vencimientos en el orden del panel, con los permisos del público.
 export const repositorioVencimientosPayload: RepositorioVencimientos = {
-  async listar() {
+  listar: leerEnCache('vencimientos.listar', [etiquetaDeColeccion('vencimientos')], async () => {
     const payload = await obtenerPayload()
     const { docs } = await payload.find({
       collection: 'vencimientos',
@@ -29,5 +31,5 @@ export const repositorioVencimientosPayload: RepositorioVencimientos = {
       overrideAccess: false,
     })
     return docs.map(mapearVencimiento)
-  },
+  }),
 }
