@@ -13,6 +13,21 @@ test.describe('SEO', () => {
     expect(texto).toMatch(/Sitemap: https?:\/\/.+\/sitemap\.xml/)
   })
 
+  test('el sitio tiene favicon y los archivos de ícono responden', async ({ page, request }) => {
+    await page.goto('/')
+
+    const icono = page.locator('link[rel="icon"]').first()
+    await expect(icono).toHaveAttribute('href', /.+/)
+    await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveCount(1)
+
+    const href = (await icono.getAttribute('href')) ?? ''
+    for (const ruta of [href, '/favicon.ico']) {
+      const respuesta = await request.get(ruta)
+      expect(respuesta.status(), ruta).toBe(200)
+      expect(respuesta.headers()['content-type'], ruta).toMatch(/^image\//)
+    }
+  })
+
   test('sitemap.xml lista el inicio, la guía y el blog con URL absolutas', async ({ request }) => {
     const respuesta = await request.get('/sitemap.xml')
 
