@@ -12,7 +12,6 @@ const PLANES: PlanDeLaTabla[] = [
 const dibujar = (planes = PLANES) =>
   renderToStaticMarkup(
     <TablaDePlanes
-      etiqueta="Nuestros planes"
       encabezado="Qué incluye"
       textoDelBoton="Solicitar"
       planes={planes}
@@ -33,7 +32,10 @@ describe('TablaDePlanes', () => {
   it('compara los planes en una tabla con encabezados de columna y de fila', () => {
     const html = dibujar()
 
-    expect(html).toContain('role="region" aria-label="Nuestros planes"')
+    // El nombre de la tabla no repite el de la sección: dos regiones con el mismo nombre
+    // se confunden en un lector de pantalla.
+    expect(html).toContain('role="region" aria-label="Tabla comparativa de planes"')
+    expect(html).not.toContain('aria-label="Nuestros planes"')
     expect(html).toContain('<th scope="col">Qué incluye</th>')
     expect(html).toMatch(/<th scope="col"[^>]*>SIGEMype I<\/th>/)
     expect(html).toContain('<th scope="row">Gestión de planilla hasta</th>')

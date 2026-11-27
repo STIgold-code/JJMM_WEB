@@ -27,7 +27,6 @@ export async function PlanesContenedor({ bloque }: PropsDeBloque<BloquePlanes>) 
       <div className="contenedor">
         <EncabezadoDeSeccion id={id} titulo={bloque.titulo} bajada={bloque.bajada} />
         <TablaDePlanes
-          etiqueta={bloque.titulo}
           encabezado={bloque.encabezadoDeCaracteristicas}
           textoDelBoton={bloque.textoDelBoton}
           planes={planes}

@@ -1,5 +1,6 @@
-import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+
+import { infraccionesDeAccesibilidad } from './accesibilidad'
 
 // Requiere la carga inicial (`pnpm semilla`): sin la global `guia-de-clientes`, /guia da 404.
 test.describe('Guía de clientes', () => {
@@ -40,12 +41,6 @@ test.describe('Guía de clientes', () => {
   })
 
   test('no tiene infracciones de accesibilidad WCAG 2.1 AA', async ({ page }) => {
-    await page.goto('/guia')
-
-    const resultado = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze()
-
-    expect(resultado.violations).toEqual([])
+    expect(await infraccionesDeAccesibilidad(page, '/guia')).toEqual([])
   })
 })

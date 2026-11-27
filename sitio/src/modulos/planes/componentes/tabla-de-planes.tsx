@@ -13,8 +13,11 @@ import {
 } from './partes-de-la-tabla'
 import estilos from './planes.module.css'
 
+// Nombre propio del contenedor desplazable de la tabla: no repite el título de la sección,
+// porque dos regiones con el mismo nombre se confunden en un lector de pantalla.
+const NOMBRE_DE_LA_TABLA = 'Tabla comparativa de planes'
+
 interface PropsTablaDePlanes {
-  etiqueta: string
   encabezado: string
   textoDelBoton: string
   planes: readonly PlanDeLaTabla[]
@@ -60,7 +63,7 @@ function SelectorDePlan({ planes, elegido, alElegir }: PropsSelectorDePlan) {
 // Isla de cliente de «Planes»: selector de plan en el celular y columna resaltada al pasar
 // el cursor, como la v4.
 export function TablaDePlanes(props: PropsTablaDePlanes) {
-  const { etiqueta, encabezado, textoDelBoton, planes, filas } = props
+  const { encabezado, textoDelBoton, planes, filas } = props
   const [elegido, setElegido] = useState(0)
   const [bajoElCursor, setBajoElCursor] = useState<number | null>(null)
   const claseDe = (indice: number) =>
@@ -75,7 +78,7 @@ export function TablaDePlanes(props: PropsTablaDePlanes) {
         {...propsDeRevelado({ clase: estilos.marco })}
         tabIndex={0}
         role="region"
-        aria-label={etiqueta}
+        aria-label={NOMBRE_DE_LA_TABLA}
       >
         <table
           className={estilos.tabla}

@@ -1,5 +1,6 @@
-import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+
+import { infraccionesDeAccesibilidad } from './accesibilidad'
 
 // Requiere la carga inicial (`pnpm semilla`), que el CI ejecuta antes de Playwright.
 
@@ -12,13 +13,7 @@ test.describe('Página de inicio', () => {
   })
 
   test('no tiene infracciones de accesibilidad WCAG 2.1 AA', async ({ page }) => {
-    await page.goto('/')
-
-    const resultado = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze()
-
-    expect(resultado.violations).toEqual([])
+    expect(await infraccionesDeAccesibilidad(page, '/')).toEqual([])
   })
 
   test('dibuja las secciones del panel en orden', async ({ page }) => {
@@ -86,7 +81,7 @@ test.describe('Servicios', () => {
 test.describe('Planes', () => {
   test('muestra «Consultar» y nunca un monto', async ({ page }) => {
     await page.goto('/')
-    const tabla = page.getByRole('region', { name: 'Nuestros planes' })
+    const tabla = page.getByRole('region', { name: 'Tabla comparativa de planes' })
 
     await expect(tabla.getByText('Consultar').first()).toBeVisible()
     await expect(tabla).not.toContainText(/S\/\s*\d/)

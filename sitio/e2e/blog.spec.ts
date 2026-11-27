@@ -1,5 +1,6 @@
-import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+
+import { infraccionesDeAccesibilidad } from './accesibilidad'
 
 // Requiere la base con la carga inicial (`pnpm semilla`), que guarda la página del blog.
 // Las publicaciones no forman parte de la semilla: estas pruebas no dependen de que existan.
@@ -13,13 +14,7 @@ test.describe('Blog', () => {
   })
 
   test('el listado no tiene infracciones de accesibilidad WCAG 2.1 AA', async ({ page }) => {
-    await page.goto('/blog')
-
-    const resultado = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze()
-
-    expect(resultado.violations).toEqual([])
+    expect(await infraccionesDeAccesibilidad(page, '/blog')).toEqual([])
   })
 
   test('una página que no es número o no existe responde 404', async ({ page }) => {
