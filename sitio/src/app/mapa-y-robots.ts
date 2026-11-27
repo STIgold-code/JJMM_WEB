@@ -17,11 +17,17 @@ export function entradasDelMapa(origen: URL, rutas: readonly RutaDelMapa[]): Met
   }))
 }
 
-// El panel y la API quedan fuera del índice, salvo los archivos de medios: las imágenes de
-// las publicaciones se sirven desde /api/medios/file/.
+// Los paneles (el /admin de Payload y el panel propio) y la API quedan fuera del índice, salvo
+// los archivos de medios: las imágenes de las publicaciones se sirven desde /api/medios/file/.
 export function reglasDeRobots(origen: URL): MetadataRoute.Robots {
   return {
-    rules: [{ userAgent: '*', allow: ['/', '/api/medios/file/'], disallow: ['/admin', '/api'] }],
+    rules: [
+      {
+        userAgent: '*',
+        allow: ['/', '/api/medios/file/'],
+        disallow: ['/admin', '/panel', '/api'],
+      },
+    ],
     sitemap: urlAbsoluta(origen, '/sitemap.xml'),
   }
 }

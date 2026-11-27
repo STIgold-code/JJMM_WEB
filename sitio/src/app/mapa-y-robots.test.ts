@@ -23,13 +23,13 @@ describe('entradasDelMapa', () => {
 })
 
 describe('reglasDeRobots', () => {
-  it('permite todo menos el panel y la API, salvo los archivos de medios, y enlaza el sitemap', () => {
+  it('permite todo menos los paneles y la API, salvo los archivos de medios, y enlaza el sitemap', () => {
     expect(reglasDeRobots(ORIGEN)).toEqual({
       rules: [
         {
           userAgent: '*',
           allow: ['/', '/api/medios/file/'],
-          disallow: ['/admin', '/api'],
+          disallow: ['/admin', '/panel', '/api'],
         },
       ],
       sitemap: 'https://sigemype.com/sitemap.xml',
