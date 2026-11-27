@@ -1,0 +1,157 @@
+/* Hero de la v4: portadas a todo el ancho que avanzan con la barra de progreso.
+   Transiciones y entradas reproducen las de Revolution Slider en producción (L9). */
+.hero {
+  position: relative;
+  height: clamp(34rem, 82svh, 40rem);
+  overflow: hidden;
+  background: var(--azul-noche);
+  color: var(--blanco);
+  touch-action: pan-y;
+}
+
+.portada {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1s var(--salida),
+    visibility 0s linear 1s;
+}
+
+.portada.actual {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1s var(--salida);
+}
+
+.portada::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgb(10 30 55 / 0.92) 0%,
+    rgb(10 30 55 / 0.55) 55%,
+    rgb(10 30 55 / 0.25) 100%
+  );
+}
+
+.fondo {
+  object-fit: cover;
+  object-position: 50% 35%;
+  transform: scale(1.04);
+}
+
+.actual .fondo {
+  animation: acercar calc(var(--duracion) + 1.5s) linear both;
+}
+
+/* Portada que trae su propio texto: completa sobre una versión desenfocada de sí misma. */
+.completa .fondoDesenfocado {
+  inset: -2rem !important;
+  width: calc(100% + 4rem) !important;
+  height: calc(100% + 4rem) !important;
+  object-fit: cover;
+  filter: blur(22px) brightness(0.55) saturate(1.2);
+}
+
+.imagenCompleta {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 42%;
+}
+
+.completa::after {
+  background: linear-gradient(0deg, rgb(10 30 55 / 0.7) 0%, rgb(10 30 55 / 0) 30%);
+}
+
+/* Entradas de cada portada al pasar a ser la actual (no en la primera carga). */
+.actual[data-transicion='izquierda'] {
+  animation: transicion-izquierda 1.1s var(--salida) both;
+}
+
+.actual[data-transicion='bajar'] {
+  animation: transicion-bajar 1.1s var(--salida) both;
+}
+
+.actual[data-transicion='recorte'] {
+  animation: transicion-recorte 1.1s var(--salida) both;
+}
+
+@keyframes acercar {
+  from {
+    transform: scale(1.04);
+  }
+
+  to {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes transicion-izquierda {
+  from {
+    opacity: 0;
+    transform: translateX(8%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes transicion-bajar {
+  from {
+    opacity: 0;
+    transform: translateY(-8%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes transicion-recorte {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (max-width: 45.99rem) {
+  .fondo {
+    object-position: var(--movil-x, 50%) 50%;
+  }
+}
+
+@media (min-width: 46rem) {
+  .portada::after {
+    background: linear-gradient(
+      90deg,
+      rgb(10 30 55 / 0.9) 0%,
+      rgb(10 30 55 / 0.7) 40%,
+      rgb(10 30 55 / 0.1) 75%
+    );
+  }
+
+  .textoDerecha::after {
+    background: linear-gradient(
+      270deg,
+      rgb(10 30 55 / 0.9) 0%,
+      rgb(10 30 55 / 0.7) 40%,
+      rgb(10 30 55 / 0.1) 75%
+    );
+  }
+
+  .completa::after {
+    background: linear-gradient(0deg, rgb(10 30 55 / 0.7) 0%, rgb(10 30 55 / 0) 30%);
+  }
+}

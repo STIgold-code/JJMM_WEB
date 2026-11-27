@@ -1,0 +1,169 @@
+/* Texto de cada portada: título con la parte resaltada en amarillo, sello, lista y botones. */
+.texto {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10.5rem;
+}
+
+.texto > * {
+  max-width: 36rem;
+}
+
+[data-actual='true'] .texto > * {
+  animation: subir 0.9s var(--salida) both;
+}
+
+[data-actual='true'] .texto > :nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+[data-actual='true'] .texto > :nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+[data-actual='true'] .texto > :nth-child(4) {
+  animation-delay: 0.36s;
+}
+
+.titulo {
+  font-size: clamp(2.2rem, 7vw, 3.9rem);
+  text-shadow: 0 2px 16px rgb(0 0 0 / 0.3);
+}
+
+.titulo b {
+  color: var(--amarillo);
+  font-weight: 600;
+}
+
+.subtitulo {
+  margin-top: 0.9rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+  color: var(--sobre-azul);
+}
+
+/* Sello que entra girando (randomrotate de Revolution Slider). */
+.sello {
+  width: 6.5rem;
+  height: 6.5rem;
+  margin-bottom: 1rem;
+  background: var(--blanco);
+  border-radius: 50%;
+  padding: 0.3rem;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.3);
+}
+
+[data-actual='true'] .texto > .sello {
+  animation: girar-entrar 1s var(--salida) both;
+}
+
+.lista {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lista li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.lista :global(.icono) {
+  color: var(--amarillo);
+}
+
+/* Lista que entra desde la derecha, escalonada (lfr entre 1000 y 2500 ms). */
+[data-actual='true'] .texto .lista li {
+  animation: desde-derecha 0.7s var(--salida) both;
+}
+
+[data-actual='true'] .texto .lista li:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+[data-actual='true'] .texto .lista li:nth-child(2) {
+  animation-delay: 0.9s;
+}
+
+[data-actual='true'] .texto .lista li:nth-child(3) {
+  animation-delay: 1.3s;
+}
+
+[data-actual='true'] .texto .lista li:nth-child(n + 4) {
+  animation-delay: 1.7s;
+}
+
+.acciones {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes girar-entrar {
+  from {
+    opacity: 0;
+    transform: rotate(-120deg) scale(0.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes desde-derecha {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 46rem) {
+  .texto {
+    justify-content: center;
+    padding-bottom: 7rem;
+  }
+
+  [data-disposicion='imagen-completa'] .texto {
+    justify-content: flex-end;
+    padding-bottom: 11rem;
+  }
+
+  .sello {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  [data-disposicion='texto-derecha'] .texto {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  [data-disposicion='texto-derecha'] .lista li,
+  [data-disposicion='texto-derecha'] .acciones {
+    justify-content: flex-end;
+  }
+}

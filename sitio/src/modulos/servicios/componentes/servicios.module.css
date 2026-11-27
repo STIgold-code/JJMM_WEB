@@ -1,0 +1,187 @@
+/* Servicios: rueda SIGE Mype a la izquierda; a la derecha, las áreas en rejilla de 3 × 3 y el
+   detalle del área elegida debajo (v4). */
+.servicios {
+  background: var(--gris);
+}
+
+.rejilla {
+  margin-top: 2.75rem;
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+.rueda {
+  position: relative;
+  max-width: 22rem;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.rueda img {
+  width: 100%;
+  height: auto;
+}
+
+.rueda svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rueda polygon {
+  fill: rgb(255 255 255 / 0);
+  cursor: pointer;
+  transition: fill 0.25s;
+}
+
+.rueda polygon:hover {
+  fill: rgb(255 255 255 / 0.25);
+}
+
+.rueda polygon.activo {
+  fill: rgb(254 238 0 / 0.32);
+}
+
+.pestanas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.pestanas button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  min-height: 4.5rem;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--linea);
+  background: var(--blanco);
+  color: var(--azul-hondo);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.pestanas button b {
+  font: 600 1.25rem/1 var(--titulo);
+  color: var(--azul);
+}
+
+.pestanas button:hover {
+  border-color: var(--azul);
+  box-shadow: 0 6px 16px rgb(15 51 84 / 0.08);
+}
+
+.pestanas button[aria-selected='true'] {
+  background: var(--azul);
+  border-color: var(--azul);
+  color: var(--blanco);
+  box-shadow: 0 8px 20px rgb(15 51 84 / 0.18);
+}
+
+.pestanas button[aria-selected='true'] b {
+  color: var(--amarillo);
+}
+
+.paneles {
+  display: grid;
+  margin-top: 1rem;
+}
+
+.panel {
+  grid-area: 1 / 1;
+  background: var(--blanco);
+  border-radius: 0.9rem;
+  border: 1px solid var(--linea);
+  padding: 1.5rem 1.5rem 1.6rem;
+}
+
+.panel[hidden] {
+  display: none;
+}
+
+.entra {
+  animation: entra 0.45s var(--salida);
+}
+
+@keyframes entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel h3 {
+  font-size: 1.6rem;
+  color: var(--azul-hondo);
+}
+
+.panel h3 span {
+  color: #946a10;
+  margin-right: 0.35rem;
+}
+
+.panel > p {
+  margin-top: 0.6rem;
+  color: var(--tinta-suave);
+}
+
+.panel ul {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.panel li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.panel li :global(.icono) {
+  color: var(--azul);
+  margin-top: 0.15rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke-width: 2.5;
+}
+
+.panel :global(.boton) {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 70rem) {
+  .rejilla {
+    grid-template-columns: minmax(0, 25rem) 1fr;
+    gap: 3.5rem;
+  }
+
+  .rueda {
+    max-width: 25rem;
+    position: sticky;
+    top: 7rem;
+  }
+
+  .panel ul {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+  }
+}

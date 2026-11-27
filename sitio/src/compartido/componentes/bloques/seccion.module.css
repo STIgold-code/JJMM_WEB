@@ -1,0 +1,38 @@
+/* Sección del inicio con título centrado y subrayado amarillo (v4). */
+.seccion {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+.titulo {
+  font-size: clamp(2rem, 5vw, 2.9rem);
+  color: var(--azul-hondo);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.titulo::after {
+  content: '';
+  display: block;
+  width: 4.5rem;
+  height: 4px;
+  margin: 0.9rem auto 0;
+  border-radius: 2px;
+  background: var(--amarillo);
+}
+
+.bajada {
+  margin: 1.1rem auto 0;
+  max-width: 44rem;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* En una sección oscura el título y la bajada van en claro. */
+:global(.oscuro) .titulo {
+  color: var(--blanco);
+}
+
+:global(.oscuro) .bajada {
+  color: var(--sobre-azul);
+}

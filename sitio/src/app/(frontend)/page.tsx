@@ -1,5 +1,9 @@
-// Página provisional para que la compilación tenga una ruta pública.
-// El inicio real (v4) se construye en T7 con contenido desde el panel.
-export default function PaginaInicio() {
-  return <h1>Estudio Contable JJMM</h1>
+import { RenderizadorDeBloques } from '@/compartido/componentes/bloques/renderizador-de-bloques'
+import { obtenerSeccionesDeInicio } from '@/modulos/portada/componentes/obtener-secciones-de-inicio'
+import { REGISTRO_DE_INICIO } from '@/modulos/portada/componentes/registro-de-inicio'
+
+// Inicio (S5): las secciones de la global `pagina-de-inicio`, en el orden del panel.
+export default async function PaginaInicio() {
+  const secciones = await obtenerSeccionesDeInicio()
+  return <RenderizadorDeBloques bloques={secciones} registro={REGISTRO_DE_INICIO} />
 }

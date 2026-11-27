@@ -1,0 +1,100 @@
+/* Controles del hero: barras de progreso que marcan el avance, anterior, siguiente y pausa. */
+.controles {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 5.75rem 0;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.progresos {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  max-width: 22rem;
+}
+
+.progresos button {
+  flex: 1;
+  height: 2.75rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.pista {
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.3);
+  overflow: hidden;
+}
+
+.relleno {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--amarillo);
+}
+
+.hecho .relleno {
+  width: 100%;
+}
+
+/* La barra de la portada actual se llena en `--duracion`; al terminar, avanza. */
+.corriendo .relleno {
+  animation: llenar var(--duracion) linear forwards;
+}
+
+.pausado .corriendo .relleno {
+  animation-play-state: paused;
+}
+
+/* Sin avance automático (movimiento reducido y pausa elegida): la barra se ve llena. */
+.sinAvance .corriendo .relleno {
+  animation: none;
+  width: 100%;
+}
+
+.boton {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(15 51 84 / 0.35);
+  color: var(--blanco);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.2s;
+}
+
+.boton:hover {
+  background: var(--blanco);
+  color: var(--azul-hondo);
+}
+
+@keyframes llenar {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@media (min-width: 46rem) {
+  .controles {
+    bottom: 6.5rem;
+  }
+}

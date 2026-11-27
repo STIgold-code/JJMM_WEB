@@ -1,0 +1,152 @@
+/* Planes: matriz comparativa. En el celular se ve un plan a la vez con el selector (v4). */
+.selector {
+  display: flex;
+  gap: 0.35rem;
+  margin: 2.25rem auto 0;
+  padding: 0.35rem;
+  max-width: 30rem;
+  border-radius: 2rem;
+  background: var(--cielo);
+  overflow-x: auto;
+}
+
+.selector button {
+  flex: 1;
+  min-height: 2.75rem;
+  padding: 0 0.8rem;
+  border: 0;
+  border-radius: 2rem;
+  background: none;
+  color: var(--azul-hondo);
+  font: 600 0.95rem var(--titulo);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+
+.selector button[aria-pressed='true'] {
+  background: var(--azul);
+  color: var(--blanco);
+  box-shadow: 0 4px 12px rgb(29 98 156 / 0.3);
+}
+
+.marco {
+  margin-top: 1.25rem;
+  overflow-x: auto;
+  border-radius: 1rem;
+  box-shadow: 0 14px 36px rgb(15 51 84 / 0.1);
+  background: var(--blanco);
+}
+
+.marco:focus-visible {
+  outline-offset: 2px;
+}
+
+.tabla {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.tabla th,
+.tabla td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--linea);
+  vertical-align: middle;
+  transition: background-color 0.2s;
+}
+
+.tabla thead th {
+  background: var(--azul);
+  color: var(--blanco);
+  font: 600 1.25rem/1.2 var(--titulo);
+  letter-spacing: 0.03em;
+  text-align: center;
+  padding-block: 1.1rem;
+}
+
+.tabla thead th:first-child {
+  text-align: left;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--azul-hondo);
+}
+
+.tabla tbody th {
+  text-align: left;
+  font-weight: 400;
+}
+
+.tabla td {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabla tbody tr:hover th,
+.tabla tbody tr:hover td {
+  background: #f5f9fd;
+}
+
+/* Columna del plan bajo el cursor. */
+.tabla .resaltada {
+  background: #eef5fc;
+}
+
+.tabla thead th.resaltada {
+  background: var(--azul-hondo);
+}
+
+.si {
+  color: var(--azul);
+}
+
+.no {
+  color: #a3afbd;
+}
+
+.si :global(.icono),
+.no :global(.icono) {
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-inline: auto;
+  stroke-width: 2.75;
+}
+
+.tabla tfoot td {
+  padding-block: 1.2rem;
+  border-bottom: 0;
+}
+
+.tabla tfoot :global(.boton) {
+  min-height: 2.75rem;
+  padding-inline: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.pie {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+@media (max-width: 45.99rem) {
+  .otroPlan {
+    display: none;
+  }
+
+  .tabla tbody th {
+    font-size: 0.92rem;
+  }
+}
+
+@media (min-width: 46rem) {
+  .selector {
+    display: none;
+  }
+}

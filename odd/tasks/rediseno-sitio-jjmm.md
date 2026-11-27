@@ -96,8 +96,8 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | delegada (contexto largo) | hecha; verificación de seguridad independiente: PASS | ver L14 |
 | T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | delegada (contexto largo) | hecha; falta ejecutarla contra PostgreSQL | ver L15 |
 | T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | delegada (contexto largo) | hecha; falta revisión visual en navegador | ver L16 |
-| T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | en línea | pendiente | — |
-| T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | en línea | pendiente | — |
+| T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | delegada (paralela con T9 y T10) | hecha; falta revisión visual en navegador | ver L19 |
+| T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | delegada (junto con T7) | hecha salvo el aviso por correo (falta proveedor y casilla, L6) | ver L19 |
 | T9 | S7 | Guía de clientes: avisos y vencimientos | delegada (paralela con T7+T8 y T10) | hecha; consulta por RUC sin datos hasta cargar el cronograma oficial | ver L18 |
 | T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | en línea | pendiente | — |
@@ -258,3 +258,19 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
 - No se cambió el modelo. Si se quiere agrupar «Documentos para análisis» dentro de «Cierre tributario», hace falta un arreglo de grupos en `avisos-para-clientes` y una migración.
 - Verificado: `typecheck`, `lint`, `test` (RED observado antes) y `build`.
 - La CI ahora corre `pnpm semilla` después de las migraciones. Sin eso, `/guia` y el inicio daban 404 en las pruebas de extremo a extremo con la base vacía.
+
+**L19** (27/11/2026), T7 y T8 terminadas:
+- El inicio se arma desde `pagina-de-inicio` con el registro de bloques: carrusel con las 4 transiciones, sello y lista escalonada; quiénes somos con contadores en CSS puro; pestañas 3×3 sincronizadas con la rueda; matriz de planes con selector móvil; por qué elegirnos; clientes; contacto.
+- Islas de cliente: carrusel, pestañas con rueda, tabla de planes, pista de clientes y formulario.
+- Desvíos de la v4:
+  - «Por qué elegirnos» sin foto de fondo, porque el modelo no tiene campo;
+  - «Ver mapa» abre el enlace en lugar de incrustar el mapa;
+  - el formulario suma celular obligatorio y correo opcional;
+  - borde de campos más oscuro para cumplir el contraste 3:1.
+- Contacto:
+  - validación compartida entre cliente y servidor;
+  - el mensaje se guarda con una Server Action y se abre WhatsApp;
+  - anti-spam: honeypot, mínimo de 3 s y 5 envíos por IP cada 10 minutos en memoria (vale para una sola instancia);
+  - aviso por correo con un puerto `NotificadorDeMensajes` sin implementar.
+- Verificación de unión de las tres unidades paralelas: `test` (448 pruebas), `format:check`, `lint`, `typecheck` y `build` pasan con el árbol completo.
+- Riesgo: punto 6. El comportamiento en navegador solo lo cubre Playwright en CI.
