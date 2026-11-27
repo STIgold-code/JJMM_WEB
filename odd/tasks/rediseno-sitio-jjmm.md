@@ -91,7 +91,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | ID | Specs | Tarea | Ruta | Estado | Commit |
 |---|---|---|---|---|---|
 | T1 | S1, S4 | Resolver las decisiones abiertas (ver L6, L10 y L11) | en línea | hecha; dominio y Cloudflare pasan a T14 | — |
-| T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | en línea | pendiente | — |
+| T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | delegada (contexto largo) | hecha; Playwright y Lighthouse CI solo corren en CI | `24a8c91` |
 | T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | en línea | pendiente | — |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | en línea | pendiente | — |
 | T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | en línea | pendiente | — |
@@ -176,4 +176,18 @@ Se crea este documento.
 **L11** (26/11/2026): «lo quitamos, al final, luego se puede agregar, no?»
 Decisión: el sitio nuevo sale sin AdSense. Si se decide agregarlo, es una tarea chica: un campo en la configuración del sitio (ID de cliente y activo) y el script cargado con `next/script` en modo diferido. No se deja preparado de antemano.
 
-Siguiente paso: arrancar T2 en `sitio/`.
+**L12** (27/11/2026): «dale arranca desde ya todo directo a main»
+T2 terminada. Gian confirmó los archivos en `24a8c91`.
+Versiones fijas: Next 16.4.6, React 19.2.9, Payload 3.94.2 (adaptadores Postgres y S3), TypeScript 5.9.3, ESLint 10.15.0, Vitest 4.0.18, Playwright 1.63.0, Lighthouse CI 0.16.1.
+Verificado en local: `typecheck`, `lint`, `format:check`, `test` (9 pruebas), `generate:types` y `build`, sin base de datos.
+Pendiente de la CI: Playwright y Lighthouse CI necesitan un servidor, así que corren solo en el job `extremo-a-extremo` con Postgres propio.
+Para las tareas siguientes:
+- Node local 24.13.0 está por debajo del mínimo de Payload (24.22.3); conviene actualizarlo.
+- Railway expone `DATABASE_URL` y el proyecto usa `DATABASE_URI`: se mapea en T14.
+- Wasabi queda desactivado si faltan las variables `WASABI_*`; `generate:importmap` usa valores ficticios para que el panel funcione con Wasabi activo.
+- En producción y CI el esquema necesita migraciones (T4).
+- `Users` y `Media` conservan los nombres de la plantilla; T3/T4 los mueven a módulos en español.
+- Presupuesto de JavaScript del inicio: 170 KB transferidos.
+- Sin Tailwind: estilos con CSS Modules, como dice la sección de reglas.
+
+Siguiente paso: T3 (módulos, capas, registro de bloques y ADR).
