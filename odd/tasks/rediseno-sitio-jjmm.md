@@ -101,8 +101,8 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T9 | S7 | Guía de clientes: avisos y vencimientos | delegada (paralela con T7+T8 y T10) | hecha; consulta por RUC sin datos hasta cargar el cronograma oficial | ver L18 |
 | T10 | S1, S2 | Blog: listado, detalle, categoría y etiqueta | delegada (paralela con T7+T8 y T9) | hecha; redirecciones de URL antiguas pasan a T11 | ver L17 |
 | T11 | S1, S3 | SEO: títulos por página, sitemap, robots, datos estructurados, canonical, redirecciones 301 | delegada (contexto largo) | hecha; falta verificar en navegador (CI detenida) | ver L20 |
-| T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | delegada (contexto largo) + verificación independiente | hecha; límites de Lighthouse sin medir (CI detenida) | ver L21 |
-| T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | pendiente | — |
+| T12 | S3 | Rendimiento: imágenes, fuentes, revalidación al publicar, caché, límites medidos | delegada (contexto largo) + verificación independiente | hecha; límites de Lighthouse medidos y cumplidos en CI | ver L21 y L23 |
+| T13 | S9 | Accesibilidad: axe en Playwright y recorrido con teclado | en línea | parcial: axe pasa en inicio, guía y blog en CI; falta el recorrido completo con teclado | ver L22 |
 | T14 | S1, S3 | Infraestructura: Railway (aplicación y PostgreSQL), Wasabi, Cloudflare, respaldos, entorno de prueba | en línea | en curso: Railway en marcha; faltan Wasabi, Cloudflare, dominio y respaldos | ver L22 |
 | T15 | S1 | Salida a producción: cambio de DNS con aprobación de Gian y verificación | en línea | pendiente | — |
 | T16 | S1 | Borrar el sitio anterior del repositorio y dejar solo el proyecto nuevo, con confirmación explícita de Gian antes de borrar | en línea | pendiente | — |
@@ -320,4 +320,21 @@ Siguiente paso: T7 + T8, T9 y T10 en paralelo, cada una con superficies de edici
 - Primera corrida de Playwright: 45 de 48 pruebas. Dos causas corregidas en `dbc76c7`:
   - la tabla de planes repetía el nombre accesible de su sección;
   - axe medía el contraste en medio del fundido de entrada.
-- Segunda corrida: 48 de 48. Lighthouse en móvil cumple rendimiento, CLS y peso de JavaScript, y falla solo el LCP: 3,35 s en el inicio y 2,89 s en `/guia` y `/blog`, contra 2,5 s. En análisis.
+- Segunda corrida: 48 de 48. Lighthouse en móvil cumple rendimiento, CLS y peso de JavaScript, y falla solo el LCP: 3,35 s en el inicio y 2,89 s en `/guia` y `/blog`, contra 2,5 s.
+
+**L23** (27/11/2026), LCP corregido con medición y despliegue automático:
+- «amigo, puedes subir el codigo a railway con mi usuario de git sí o no»: el servicio `web` quedó conectado a `STIgold-code/JJMM_WEB` (rama `main`, raíz `sitio`). Cada push a `main` despliega solo y Railway registra a `Gianpierre-dev` como autor del commit.
+- Los reportes de Lighthouse no se guardaban porque `.lighthouseci` es una carpeta oculta; se agregó `include-hidden-files` al artefacto.
+- Causas medidas en los reportes:
+  - en `/blog` y `/guia`, el elemento LCP estaba dentro de un contenedor con revelado, oculto hasta que corría JavaScript;
+  - en el inicio, las portadas ocultas del carrusel se pedían con prioridad alta junto con la primera.
+- Correcciones en `1ec2420`:
+  - el contenido se dibuja visible y el observador oculta con `pendiente` solo lo que queda debajo de la primera pantalla (se quitó el script en línea de la clase `js`);
+  - las portadas que no son la primera llevan `fetchPriority="low"`.
+- Desvío respecto de S6: lo que ya está en pantalla al cargar aparece sin animación de entrada; el carrusel y la barra superior conservan las suyas.
+- Resultado en CI (corrida `46033038549`, todo en verde, 48 de 48 en Playwright), primera medición de cada página:
+  - inicio: rendimiento 0,94, LCP 1,42 s, CLS 0;
+  - `/guia`: rendimiento 1,00, LCP 1,21 s;
+  - `/blog`: rendimiento 1,00, LCP 1,07 s.
+- S3 queda cumplida con medición: rendimiento ≥ 0,9, LCP < 2,5 s, CLS < 0,1 y JavaScript ≤ 170 KB.
+- Railway desplegó `1ec2420` desde GitHub con estado `SUCCESS`.
