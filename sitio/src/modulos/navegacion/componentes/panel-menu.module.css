@@ -1,0 +1,86 @@
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.abierto {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.fondo {
+  position: absolute;
+  inset: 0;
+  background: rgb(10 25 45 / 0.55);
+  opacity: 0;
+  transition: opacity 0.35s var(--salida);
+}
+
+.abierto .fondo {
+  opacity: 1;
+}
+
+.cuerpo {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(22rem, 86vw);
+  background: var(--azul-hondo);
+  color: var(--blanco);
+  padding: 1.25rem 1.5rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--salida);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.abierto .cuerpo {
+  transform: none;
+}
+
+.cerrar {
+  align-self: flex-end;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0;
+  background: rgb(255 255 255 / 0.1);
+  color: var(--blanco);
+  cursor: pointer;
+}
+
+.cuerpo nav {
+  margin-top: 1rem;
+  display: grid;
+}
+
+.cuerpo nav a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.25rem;
+  color: var(--blanco);
+  font: 500 1.25rem var(--titulo);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(255 255 255 / 0.14);
+}
+
+.cuerpo nav a[aria-current] {
+  color: var(--amarillo);
+}
+
+.cuerpo nav img {
+  height: 1.7rem;
+  width: auto;
+  border-radius: 0.2rem;
+}
+
+.cuerpo > :global(.boton) {
+  margin-top: 1.75rem;
+}

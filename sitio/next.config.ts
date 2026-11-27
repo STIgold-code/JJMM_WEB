@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
   images: {
     localPatterns: [
       {
-        pathname: '/api/media/file/**',
+        // Archivos de la colección `medios` (en disco o en Wasabi, siempre por esta ruta).
+        pathname: '/api/medios/file/**',
       },
     ],
   },

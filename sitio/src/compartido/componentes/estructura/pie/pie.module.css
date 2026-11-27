@@ -1,0 +1,76 @@
+.pie {
+  background: var(--azul-noche);
+  color: var(--sobre-azul);
+  padding-block: 3.5rem 2rem;
+}
+
+.rejilla {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.sedes {
+  display: grid;
+  gap: 2rem;
+}
+
+.titulo {
+  font-size: 1.3rem;
+  color: var(--blanco);
+  letter-spacing: 0.03em;
+}
+
+.pie address {
+  margin-top: 0.5rem;
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.pie a {
+  color: var(--blanco);
+  text-underline-offset: 0.2em;
+}
+
+.pie a:hover {
+  color: var(--amarillo);
+}
+
+.logo {
+  justify-self: center;
+  text-align: center;
+}
+
+.logo img {
+  width: 12rem;
+  height: auto;
+  margin-inline: auto;
+  padding: 0.6rem 1rem;
+  background: var(--blanco);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.2);
+}
+
+.logo p {
+  margin-top: 0.75rem;
+  font-style: italic;
+  max-width: 18rem;
+}
+
+.legal {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media (min-width: 46rem) {
+  .rejilla {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .rejilla > :last-child {
+    text-align: right;
+  }
+}

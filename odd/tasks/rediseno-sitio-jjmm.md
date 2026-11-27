@@ -95,7 +95,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | delegada (contexto largo) | hecha | ver L13 |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | delegada (contexto largo) | hecha; verificación de seguridad independiente: PASS | ver L14 |
 | T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | delegada (contexto largo) | hecha; falta ejecutarla contra PostgreSQL | ver L15 |
-| T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | en línea | pendiente | — |
+| T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | delegada (contexto largo) | hecha; falta revisión visual en navegador | ver L16 |
 | T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | en línea | pendiente | — |
 | T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | en línea | pendiente | — |
 | T9 | S7 | Guía de clientes: avisos y vencimientos | en línea | pendiente | — |
@@ -227,4 +227,12 @@ Para las tareas siguientes:
   - la fecha de CONAFOVICER, SENCICO y OSCE;
   - los títulos que se agregaron porque el sitio actual no los tiene.
 
-Siguiente paso: T6 (estructura común: barra superior, cabecera, menú, pie y WhatsApp flotante).
+**L16** (27/11/2026), T6 terminada:
+- Estructura común con datos del panel: barra superior, cabecera compacta con seguimiento de sección, menú móvil accesible (foco atrapado, Escape, `inert`), pie, WhatsApp flotante y botón para subir.
+- Tokens de la v4 en `src/app/(frontend)/estilos-globales.css`, fuentes locales con `next/font/local` y utilidad de revelado al hacer scroll (`propsDeRevelado`) que usa T7.
+- Datos públicos con `overrideAccess: false`. El layout queda en `force-dynamic` hasta T12, para que el build no necesite base de datos. Se corrigió `images.localPatterns` a `/api/medios/file/**`.
+- Verificado: `typecheck`, `lint`, `format:check`, `test` (230 pruebas, RED observado antes) y `build`.
+- Sin revisar todavía: el resultado visual en un navegador y los hooks de cliente. Los cubre Playwright con datos cargados.
+- Abierto: etiquetas para lectores de pantalla, nombres de redes y el sufijo «por WhatsApp» quedaron en código. Si se quieren editables, se agrega un campo en la configuración.
+
+Siguiente paso: T7 (secciones del inicio con sus animaciones).

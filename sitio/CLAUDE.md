@@ -45,14 +45,18 @@ Las dependencias apuntan hacia adentro. `no-restricted-imports` en `eslint.confi
 
 Estado actual:
 
-| Ruta                                   | Qué es                                                                                |
-| -------------------------------------- | ------------------------------------------------------------------------------------- |
-| `src/contenido.ts`                     | Raíz de composición: lista de colecciones y globales que registra `payload.config.ts` |
-| `src/compartido/infraestructura/`      | `medios`, `configuracion-del-sitio`, control de acceso (`acceso.ts`) y campos comunes |
-| `src/compartido/componentes/bloques/`  | `RegistroDeBloques`, `RenderizadorDeBloques` y su error                               |
-| `src/compartido/dominio/`              | Reglas transversales: celular, slug, destino de enlace, roles                         |
-| `src/modulos/<modulo>/infraestructura` | Colecciones, globales y bloques de cada módulo (ver «Modelo de datos»)                |
-| `src/migrations/`                      | Migraciones de PostgreSQL que genera Payload                                          |
+| Ruta                                     | Qué es                                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------- |
+| `src/contenido.ts`                       | Raíz de composición: lista de colecciones y globales que registra `payload.config.ts` |
+| `src/compartido/infraestructura/`        | `medios`, `configuracion-del-sitio`, control de acceso (`acceso.ts`) y campos comunes |
+| `src/compartido/componentes/bloques/`    | `RegistroDeBloques`, `RenderizadorDeBloques` y su error                               |
+| `src/compartido/dominio/`                | Reglas transversales: celular, slug, destino de enlace, roles                         |
+| `src/modulos/<modulo>/infraestructura`   | Colecciones, globales y bloques de cada módulo (ver «Modelo de datos»)                |
+| `src/migrations/`                        | Migraciones de PostgreSQL que genera Payload                                          |
+| `src/app/(frontend)/`                    | Layout público, `estilos-globales.css` (tokens v4) y fuentes locales (`fuentes/`)     |
+| `src/compartido/componentes/estructura/` | Barra superior, cabecera, pie y botones flotantes (contenedor + presentación)         |
+| `src/compartido/componentes/revelado/`   | Aparición al hacer scroll: `propsDeRevelado` y `ObservadorDeRevelado`                 |
+| `src/compartido/componentes/iconos/`     | Sprite SVG (`SpriteDeIconos`, una vez en el layout) e `Icono`                         |
 
 Colecciones: archivo `coleccion-<nombre>.ts`, exportación `coleccion<Nombre>`, slug en español y en plural. Globales: `global-<nombre>.ts`, exportación `global<Nombre>`. Bloques: `bloque-<nombre>.ts`, exportación `bloque<Nombre>` e `interfaceName` `Bloque<Nombre>`.
 
@@ -120,6 +124,16 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - Si `media/` conserva archivos de una base borrada, Payload sube el medio con otro nombre (`-1`) y la siguiente carga lo duplica: vacía `media/` al recrear la base local.
 - El administrador se crea solo con `SEMILLA_ADMIN_CORREO` y `SEMILLA_ADMIN_CLAVE`; una cuenta existente no se toca.
 - No se cargan `cronogramas-sunat` (falta el cronograma oficial), publicaciones, categorías ni etiquetas (viven en la base de producción, no en el repositorio).
+
+### Sitio público
+
+- **Lectura de datos:** cada contenedor (Server Component) llama a una función de `componentes/obtener-*.ts` o `estructura/datos-del-sitio.ts`, que une el caso de uso con su adaptador de Payload y la envuelve en `cache` de React (una lectura por petición). Los adaptadores usan la Local API con `overrideAccess: false` y sin usuario, así que solo leen lo público.
+- **Datos ausentes:** si una global nunca se guardó, su mapeador devuelve `null` y la pieza no se dibuja. Los errores reales (base caída, celular que no es celular) se propagan.
+- **Renderizado:** el layout de `(frontend)` exporta `dynamic = 'force-dynamic'`, así la compilación no necesita base de datos. La revalidación al publicar llega en T12.
+- **Tokens y estilos:** `estilos-globales.css` define los tokens de la v4 (`--azul`, `--titulo`, `--salida`…) y las clases compartidas (`contenedor`, `oculto`, `boton`, `boton-contacto`, `boton-linea`, `boton-azul`, `icono`, `marca-icono`, `oscuro`). Lo propio de cada componente va en su CSS Module.
+- **Aparición al hacer scroll (S6):** usa `propsDeRevelado({ desde: 'izquierda' | 'derecha', retraso: 0.2, clase })` y esparce el resultado en el elemento (`<li {...propsDeRevelado({ retraso: 0.1 })}>`). El `ObservadorDeRevelado` del layout agrega `visible`; sin JavaScript o con `prefers-reduced-motion` todo se ve de inmediato.
+- **Menú:** las secciones se enlazan como `/#ancla` para que funcionen desde cualquier página; una sección del inicio se marca como actual cuando su elemento con ese `id` cruza el centro de la pantalla.
+- **Imágenes de Payload:** `next/image` con `localPatterns` en `/api/medios/file/**` (en disco o en Wasabi la ruta es la misma).
 
 ## Reglas de contenido
 

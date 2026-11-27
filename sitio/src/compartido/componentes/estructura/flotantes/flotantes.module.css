@@ -1,0 +1,89 @@
+.whatsapp {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0;
+  border-radius: 2rem;
+  background: var(--whatsapp);
+  color: var(--sobre-whatsapp);
+  font: 600 1.05rem var(--titulo);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgb(15 51 84 / 0.3);
+  transition: transform 0.25s var(--salida);
+}
+
+.whatsapp:hover {
+  transform: scale(1.05);
+}
+
+.whatsapp :global(.marca-icono) {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+/* En el celular el texto se oculta a la vista, pero no a los lectores de pantalla. */
+.texto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.subir {
+  position: fixed;
+  right: 1rem;
+  bottom: 5.4rem;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0;
+  background: var(--azul-hondo);
+  color: var(--blanco);
+  box-shadow: 0 8px 20px rgb(15 51 84 / 0.3);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s var(--salida),
+    visibility 0s linear 0.3s;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.3s,
+    transform 0.3s var(--salida);
+}
+
+@media (min-width: 46rem) {
+  .whatsapp {
+    width: auto;
+    padding: 0 1.1rem;
+  }
+
+  .texto {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+}

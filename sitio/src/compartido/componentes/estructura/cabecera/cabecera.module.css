@@ -1,0 +1,74 @@
+/* Cabecera fija: se compacta al hacer scroll (clase .compacta). */
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--blanco);
+  transition: box-shadow 0.3s var(--salida);
+}
+
+.compacta {
+  box-shadow: 0 4px 20px rgb(15 51 84 / 0.12);
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-height: 5.25rem;
+  transition: min-height 0.3s var(--salida);
+}
+
+.compacta .fila {
+  min-height: 4.25rem;
+}
+
+.marca {
+  margin-right: auto;
+  color: var(--azul-hondo);
+  font: 600 1.4rem var(--titulo);
+  text-decoration: none;
+}
+
+.marca img {
+  height: 3.7rem;
+  width: auto;
+  transition: height 0.3s var(--salida);
+}
+
+.compacta .marca img {
+  height: 3rem;
+}
+
+.sello {
+  display: none;
+  height: 3.4rem;
+  width: auto;
+  transition: height 0.3s var(--salida);
+}
+
+.compacta .sello {
+  height: 2.8rem;
+}
+
+.botonMenu {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--azul);
+  border: 0;
+  color: var(--blanco);
+  cursor: pointer;
+}
+
+@media (min-width: 70rem) {
+  .botonMenu {
+    display: none;
+  }
+
+  .sello {
+    display: block;
+  }
+}

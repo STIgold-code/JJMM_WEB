@@ -1,0 +1,262 @@
+/* Estilos globales del sitio público: tokens de la v4, base y utilidades compartidas.
+   Lo propio de cada componente vive en su CSS Module. */
+
+:root {
+  --azul: #1d629c;
+  --azul-hondo: #154771;
+  --azul-noche: #0f3354;
+  --cielo: #eaf1f8;
+  --amarillo: #feee00;
+  --amarillo-hondo: #e6d600;
+  --oro: #c89628;
+  --gris: #f4f6f9;
+  --linea: #dbe3ec;
+  --blanco: #fff;
+  --tinta: #1f2d3d;
+  --tinta-suave: #4b5b6d;
+  --sobre-azul: #dbe8f5;
+  --whatsapp: #25d366;
+  --sobre-whatsapp: #0b2e17;
+  --titulo: var(--fuente-oswald), 'Arial Narrow', sans-serif;
+  --texto: var(--fuente-open-sans), system-ui, sans-serif;
+  --ancho: 73rem;
+  --borde: clamp(1rem, 4vw, 2.5rem);
+  --salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --duracion: 9s;
+  --alto-cabecera: 5.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--alto-cabecera);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tinta);
+  background: var(--blanco);
+}
+
+body.menu-abierto {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--amarillo);
+  color: var(--azul-noche);
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--azul);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.oscuro :focus-visible {
+  outline-color: var(--amarillo);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--titulo);
+  font-weight: 600;
+  line-height: 1.12;
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+}
+
+/* Íconos del sprite: de trazo (interfaz) y de relleno (marcas) */
+.icono {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.marca-icono {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  fill: currentColor;
+}
+
+.contenedor {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--borde);
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.saltar {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 90;
+  background: var(--amarillo);
+  color: var(--azul-noche);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+}
+
+.saltar:focus {
+  top: 1rem;
+}
+
+/* Botones de llamada a la acción */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 2rem;
+  border: 2px solid transparent;
+  font-family: var(--titulo);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--salida),
+    color 0.25s var(--salida),
+    transform 0.25s var(--salida),
+    box-shadow 0.25s var(--salida);
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+.boton:active {
+  transform: translateY(0);
+}
+
+.boton-contacto {
+  background: var(--amarillo);
+  color: var(--azul-noche);
+  box-shadow: 0 6px 16px rgb(10 25 45 / 0.18);
+}
+
+.boton-contacto:hover {
+  background: var(--amarillo-hondo);
+  box-shadow: 0 10px 22px rgb(10 25 45 / 0.24);
+}
+
+.boton-linea {
+  border-color: rgb(255 255 255 / 0.85);
+  color: var(--blanco);
+  background: rgb(15 51 84 / 0.25);
+  backdrop-filter: blur(4px);
+}
+
+.boton-linea:hover {
+  background: var(--blanco);
+  color: var(--azul-hondo);
+  border-color: var(--blanco);
+}
+
+.boton-azul {
+  background: var(--azul);
+  color: var(--blanco);
+}
+
+.boton-azul:hover {
+  background: var(--azul-hondo);
+}
+
+/* Aparición al hacer scroll (propsDeRevelado + ObservadorDeRevelado).
+   El contenido es visible sin JavaScript: solo se oculta si <html> tiene la clase js. */
+.js .revelar {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--salida),
+    transform 0.8s var(--salida);
+  transition-delay: var(--retraso, 0s);
+}
+
+.js .revelar.desde-izquierda {
+  transform: translateX(-48px);
+}
+
+.js .revelar.desde-derecha {
+  transform: translateX(48px);
+}
+
+.js .revelar.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .revelar,
+  .js .revelar.desde-izquierda,
+  .js .revelar.desde-derecha {
+    opacity: 1;
+    transform: none;
+  }
+}

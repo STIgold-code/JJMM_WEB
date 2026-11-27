@@ -1,0 +1,78 @@
+/* Barra superior: entra desde arriba como el fadeInDown del sitio anterior (L9). */
+.barra {
+  background: var(--azul-noche);
+  color: var(--sobre-azul);
+  font-size: 0.9rem;
+  animation: bajar 0.8s var(--salida) both;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.6rem;
+}
+
+.redes {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.redes a {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  color: var(--sobre-azul);
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.redes a:hover {
+  background: rgb(255 255 255 / 0.12);
+  color: var(--blanco);
+}
+
+.contacto {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.contacto a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.4rem;
+  color: var(--blanco);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.contacto a:hover {
+  color: var(--amarillo);
+}
+
+.contacto a.soloAmplio {
+  display: none;
+}
+
+@media (min-width: 46rem) {
+  .contacto a.soloAmplio {
+    display: inline-flex;
+  }
+}
+
+@keyframes bajar {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
