@@ -10,14 +10,14 @@ import { cargarSemilla } from './cargar'
 import { SEMILLA } from './datos'
 
 // Punto de entrada de `pnpm semilla` (`payload run`, que carga el .env y ejecuta TypeScript).
-// Las imágenes se leen de su ubicación actual en el repositorio, fuera de `sitio/`.
-const RAIZ_DEL_REPOSITORIO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
+// Las rutas de las imágenes son relativas a la raíz del proyecto (`sitio/`).
+const RAIZ_DEL_PROYECTO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
 const payload = await getPayload({ config })
 
 try {
   const { administradorCreado } = await cargarSemilla(crearPuertoPayload(payload), SEMILLA, {
-    resolverRuta: (archivo) => path.join(RAIZ_DEL_REPOSITORIO, archivo),
+    resolverRuta: (archivo) => path.join(RAIZ_DEL_PROYECTO, archivo),
     administrador: leerAdministrador(process.env),
   })
   payload.logger.info(

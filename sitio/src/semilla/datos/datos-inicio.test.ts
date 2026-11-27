@@ -13,7 +13,8 @@ import {
 import { SEMILLA } from '.'
 import { claveDeMedio, clavesDeMedioReferenciadas } from './medios-referenciados'
 
-const RAIZ_DEL_REPOSITORIO = path.resolve(process.cwd(), '..')
+// Vitest corre desde `sitio/`, la misma raíz contra la que `pnpm semilla` resuelve las rutas.
+const RAIZ_DEL_PROYECTO = process.cwd()
 const TIPOS_CON_DESTINO = ['seccion', 'interna', 'externa'] as const
 
 describe('semilla: áreas de servicio', () => {
@@ -69,7 +70,7 @@ describe('semilla: medios', () => {
 
     expect(new Set(claves).size).toBe(claves.length)
     for (const { archivo } of SEMILLA.medios) {
-      expect(existsSync(path.join(RAIZ_DEL_REPOSITORIO, archivo)), archivo).toBe(true)
+      expect(existsSync(path.join(RAIZ_DEL_PROYECTO, archivo)), archivo).toBe(true)
     }
   })
 

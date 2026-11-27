@@ -48,11 +48,11 @@ describe('cargarSemilla', () => {
     expect(puerto.operaciones.filter((o) => o.tipo === 'crear')).toHaveLength(180)
   })
 
-  it('sube cada medio desde su ruta del repositorio, una sola vez', async () => {
+  it('sube cada medio desde su ruta dentro del proyecto, una sola vez', async () => {
     const puerto = await cargarEnMemoria(2)
     const rutas = puerto.documentos('medios').map((d) => d.rutaDeArchivo)
 
-    expect(rutas).toContain('/repositorio/public/web/images/inicio/hero-plan.webp')
+    expect(rutas).toContain('/repositorio/semilla/imagenes/inicio/hero-plan.webp')
     expect(new Set(rutas).size).toBe(21)
   })
 

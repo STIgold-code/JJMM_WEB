@@ -1,8 +1,8 @@
 import type { MedioSemilla } from './tipos'
 
-// Imágenes que usa el inicio v4 (`resources/views/web/index.blade.php`). Se suben desde su
-// ubicación actual en el repositorio; no se copian a `sitio/`.
-const IMAGENES = 'public/web/images'
+// Imágenes que usa el inicio v4 (`resources/views/web/index.blade.php`), copiadas a
+// `semilla/imagenes/` para que la carga funcione dentro del contenedor y tras borrar el sitio anterior.
+const IMAGENES = 'semilla/imagenes'
 const INICIO = `${IMAGENES}/inicio`
 
 const SELLO_SIGE = 'Sello SIGE Mype del Grupo JJMM'
