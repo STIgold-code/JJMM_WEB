@@ -1,6 +1,7 @@
 import type { Rol } from '@/compartido/dominio/roles'
 
 import type { NombreDeIcono } from './iconos'
+import { RUTA_DE_MENSAJES } from './mensajes'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 
 // Menú lateral del panel, agrupado por tarea como en la maqueta aprobada. Una entrada sin
@@ -61,7 +62,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     soloAdministrador: false,
     entradas: [
       entrada('inicio', 'Inicio', 'casa', RUTA_DEL_INICIO),
-      entrada('mensajes', 'Mensajes de contacto', 'bandeja'),
+      entrada('mensajes', 'Mensajes de contacto', 'bandeja', RUTA_DE_MENSAJES),
     ],
   },
   {
@@ -117,10 +118,15 @@ export interface Miga {
   ruta: string | null
 }
 
-// Ruta de la barra superior. La última miga es la página actual y no lleva enlace.
+// Ruta de la barra superior. La última miga es la página actual y no lleva enlace; toda
+// sección cuelga del inicio.
 export function migasDeRuta(ruta: string): Miga[] {
   const actual = MENU.flatMap((g) => g.entradas).find((e) => e.ruta === ruta)
-  return [{ texto: actual?.texto ?? 'Inicio', ruta: null }]
+  if (!actual || actual.ruta === RUTA_DEL_INICIO) return [{ texto: 'Inicio', ruta: null }]
+  return [
+    { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+    { texto: actual.texto, ruta: null },
+  ]
 }
 
 const NOMBRES_DE_ROL: Readonly<Record<Rol, string>> = {

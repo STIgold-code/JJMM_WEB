@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import type { Payload, SanitizedPermissions, TypedUser } from 'payload'
 import { cache } from 'react'
 
-import { esDelEquipo } from '@/compartido/dominio/roles'
+import { esAdministrador, esDelEquipo, type Rol } from '@/compartido/dominio/roles'
 import { obtenerPayload } from '@/compartido/infraestructura/instancia-payload'
 
 import { RUTA_DE_INGRESO } from '../dominio/rutas-del-panel'
@@ -30,4 +30,9 @@ export async function exigirSesion(): Promise<SesionDelPanel> {
   const sesion = await obtenerSesion()
   if (!sesion) redirect(RUTA_DE_INGRESO)
   return sesion
+}
+
+// El rol siempre sale de la sesión validada en el servidor, nunca de lo que mande el navegador.
+export function rolDeLaSesion({ usuario }: Pick<SesionDelPanel, 'usuario'>): Rol {
+  return esAdministrador(usuario) ? 'administrador' : 'editor'
 }

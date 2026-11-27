@@ -11,10 +11,12 @@ const dibujar = (rol: 'administrador' | 'editor', mensajesNuevos: number | null 
   renderToStaticMarkup(<NavegacionDelMenu grupos={menuDelPanel(rol, { mensajesNuevos })} />)
 
 describe('NavegacionDelMenu', () => {
-  it('el único enlace es el inicio, marcado como página actual', () => {
+  it('los enlaces son el inicio (página actual) y los mensajes de contacto', () => {
     const html = dibujar('administrador')
-    expect(html.match(/<a /g)).toHaveLength(1)
+    expect(html.match(/<a /g)).toHaveLength(2)
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/mensajes"/)
+    expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel\/mensajes"/)
   })
 
   it('las secciones pendientes se ven deshabilitadas con «Próximamente», sin enlace', () => {

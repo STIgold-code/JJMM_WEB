@@ -92,6 +92,12 @@ test.describe('Panel propio: sin sesión', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
   })
 
+  test('/panel/mensajes sin sesión lleva al ingreso, aunque pida un mensaje', async ({ page }) => {
+    await page.goto('/panel/mensajes?filtro=todos&mensaje=1')
+    await expect(page).toHaveURL(RUTA_DE_INGRESO)
+    await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+  })
+
   test('el ingreso no tiene infracciones de accesibilidad (WCAG 2.1 AA)', async ({ page }) => {
     expect(await infraccionesDeAccesibilidad(page, '/panel/ingreso')).toEqual([])
   })
@@ -102,9 +108,10 @@ test.describe('Panel propio: sin sesión', () => {
     await page.getByLabel('Contraseña', { exact: true }).fill('clave-equivocada')
     await page.getByRole('button', { name: 'Ingresar' }).click()
 
-    await expect(page.getByRole('alert')).toContainText(
-      'El correo o la contraseña no son correctos',
-    )
+    // Next agrega su propio `role="alert"` (el anunciador de rutas): se filtra por el texto.
+    await expect(
+      page.getByRole('alert').filter({ hasText: 'El correo o la contraseña no son correctos' }),
+    ).toBeVisible()
     await expect(page).toHaveURL(RUTA_DE_INGRESO)
     await expect(page.getByLabel('Correo')).toHaveValue('nadie@ejemplo.pe')
   })

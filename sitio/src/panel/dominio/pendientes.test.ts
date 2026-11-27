@@ -18,18 +18,22 @@ describe('filasPendientes', () => {
     expect(filas.map((f) => f.clave)).toEqual(['mensaje-2', 'borrador-7', 'mensaje-1'])
   })
 
-  it('describe cada fila con su tipo y el enlace «Ver» a su documento en /admin', () => {
-    const [mensajeNuevo, borrador] = filasPendientes(
-      [mensaje(5, '2026-11-27T10:00:00Z')],
-      [{ id: 7, titulo: 'Cierre del año', actualizado: '2026-11-26T10:00:00Z' }],
-    )
+  it('«Ver» de un mensaje lo abre en el panel lateral de /panel/mensajes', () => {
+    const [mensajeNuevo] = filasPendientes([mensaje(5, '2026-11-27T10:00:00Z')], [])
     expect(mensajeNuevo).toMatchObject({
       titulo: 'Persona 5',
       detalle: 'Constitución',
       tipo: 'Mensaje de contacto',
-      href: '/admin/collections/mensajes-de-contacto/5',
+      href: '/panel/mensajes?mensaje=5',
       etiquetaDeAccion: 'Ver el mensaje de Persona 5',
     })
+  })
+
+  it('«Ver» de un borrador sigue abriendo el documento en /admin (sección aún sin panel)', () => {
+    const [, borrador] = filasPendientes(
+      [mensaje(5, '2026-11-27T10:00:00Z')],
+      [{ id: 7, titulo: 'Cierre del año', actualizado: '2026-11-26T10:00:00Z' }],
+    )
     expect(borrador).toMatchObject({
       titulo: 'Cierre del año',
       detalle: 'Borrador sin publicar',

@@ -1,8 +1,8 @@
 import { ChevronRight, CircleCheck } from 'lucide-react'
 
 import { fechaRelativa } from '../../dominio/fechas-del-panel'
+import { rutaDeMensajes } from '../../dominio/mensajes'
 import type { FilaPendiente } from '../../dominio/pendientes'
-import { listaEnAdmin } from '../../dominio/rutas-del-panel'
 import { Button } from '../ui/button'
 import { TarjetaDelPanel } from './tarjeta-del-panel'
 
@@ -80,11 +80,12 @@ function Tabla({ filas, ahora }: PropsDeTabla) {
   )
 }
 
-// «Ver» abre el documento en /admin hasta que existan esas pantallas en el panel (fases 2 y 3).
+// «Ver» abre un mensaje en /panel/mensajes y un borrador en /admin, hasta que exista su pantalla
+// en el panel.
 export function TablaDePendientes({ filas, ahora }: PropsDeTabla) {
   const enlaceDeMensajes = (
     <Button asChild variant="ghost" size="sm">
-      <a href={listaEnAdmin('mensajes-de-contacto')}>
+      <a href={rutaDeMensajes({ filtro: 'todos' })}>
         Ver todos los mensajes
         <ChevronRight aria-hidden="true" />
       </a>

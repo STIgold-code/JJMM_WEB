@@ -38,10 +38,10 @@ describe('tarjetasDeAtencion', () => {
     expect(tarjetas.map((t) => t.clave)).toEqual(['borradores'])
   })
 
-  it('los mensajes y borradores llevan a su lista filtrada en /admin; los datos, a la lista de abajo', () => {
+  it('los mensajes llevan a /panel/mensajes (nuevos); los borradores, a /admin; los datos, abajo', () => {
     const tarjetas = tarjetasDeAtencion({ mensajesNuevos: 1, borradores: 1, datosPorCompletar: 1 })
     expect(tarjetas.map((t) => t.href)).toEqual([
-      '/admin/collections/mensajes-de-contacto?where[estado][equals]=nuevo',
+      '/panel/mensajes',
       '/admin/collections/publicaciones?where[_status][equals]=draft',
       '#lo-que-falta',
     ])

@@ -1,7 +1,9 @@
+import { rutaDeMensajes } from './mensajes'
 import { documentoEnAdmin } from './rutas-del-panel'
 
 // Tabla «Pendientes» del inicio: mensajes nuevos y borradores del blog, lo más reciente
-// primero. «Ver» abre el documento en /admin hasta que existan esas pantallas en el panel.
+// primero. «Ver» abre el mensaje en el panel lateral de /panel/mensajes; el borrador, en
+// /admin hasta que exista su pantalla en el panel.
 export const LIMITE_DE_PENDIENTES = 8
 
 export interface MensajePendiente {
@@ -33,7 +35,7 @@ const deMensaje = ({ id, nombre, servicio, recibido }: MensajePendiente): FilaPe
   detalle: servicio?.trim() || 'Sin servicio indicado',
   tipo: 'Mensaje de contacto',
   fecha: recibido,
-  href: documentoEnAdmin('mensajes-de-contacto', id),
+  href: rutaDeMensajes({ mensaje: id }),
   etiquetaDeAccion: `Ver el mensaje de ${nombre}`,
 })
 

@@ -1,4 +1,5 @@
 import type { NombreDeIcono } from './iconos'
+import { RUTA_DE_MENSAJES } from './mensajes'
 import { listaEnAdmin } from './rutas-del-panel'
 
 // Tarjetas «Requiere atención» del inicio. Cada conteo es `null` cuando la cuenta no puede
@@ -31,7 +32,8 @@ const DEFINICIONES: readonly Definicion[] = [
     conPendiente: 'Respóndelos y márcalos como atendidos',
     sinPendiente: 'Todos los mensajes están atendidos',
     icono: 'bandeja',
-    href: listaEnAdmin('mensajes-de-contacto', '?where[estado][equals]=nuevo'),
+    // El listado de mensajes abre con el filtro «Nuevos».
+    href: RUTA_DE_MENSAJES,
   },
   {
     clave: 'borradores',
