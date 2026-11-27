@@ -7,6 +7,9 @@ Thumbs.db
 .vscode/
 .playwright-mcp/
 
+# Archivos temporales de Office mientras un documento está abierto
+~$*
+
 # Material de trabajo de Impeccable que no se versiona
 .impeccable/mocks/
 .impeccable/review/
