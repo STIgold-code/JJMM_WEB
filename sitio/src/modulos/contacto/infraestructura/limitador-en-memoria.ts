@@ -3,7 +3,7 @@ import type { LimitadorDeEnvios } from '../aplicacion/limitador-de-envios'
 interface OpcionesDelLimitador {
   maximo: number
   ventanaMs: number
-  // Tope de claves recordadas; al superarlo se olvidan las vencidas.
+  // Tope estricto de claves recordadas; al alcanzarlo se olvida la usada hace más tiempo.
   maximoDeClaves?: number
 }
 
@@ -22,23 +22,25 @@ export function crearLimitadorEnMemoria(opciones: OpcionesDelLimitador): Limitad
   const vigentes = (clave: string, ahora: number) =>
     (envios.get(clave) ?? []).filter((momento) => ahora - momento < ventanaMs)
 
-  function olvidarVencidas(ahora: number) {
-    for (const clave of envios.keys()) {
-      const quedan = vigentes(clave, ahora)
-      if (quedan.length === 0) envios.delete(clave)
-      else envios.set(clave, quedan)
+  // El Map conserva el orden de inserción: volver a insertar una clave la deja al final,
+  // así la primera clave es siempre la usada hace más tiempo (LRU) y se olvida sin recorrer todo.
+  function recordar(clave: string, momentos: number[]) {
+    envios.delete(clave)
+    if (envios.size >= maximoDeClaves) {
+      const masAntigua = envios.keys().next()
+      if (!masAntigua.done) envios.delete(masAntigua.value)
     }
+    envios.set(clave, momentos)
   }
 
   return {
     permitir(clave, ahora) {
-      if (!envios.has(clave) && envios.size >= maximoDeClaves) olvidarVencidas(ahora)
       const recientes = vigentes(clave, ahora)
       if (recientes.length >= maximo) {
-        envios.set(clave, recientes)
+        recordar(clave, recientes)
         return false
       }
-      envios.set(clave, [...recientes, ahora])
+      recordar(clave, [...recientes, ahora])
       return true
     },
     cantidadDeClaves: () => envios.size,

@@ -40,4 +40,27 @@ describe('crearLimitadorEnMemoria', () => {
     expect(limitador.cantidadDeClaves()).toBeLessThanOrEqual(2)
     expect(limitador.permitir('a', VENTANA)).toBe(true)
   })
+
+  it('no supera el tope de claves aunque todas sigan vigentes', () => {
+    const limitador = crearLimitadorEnMemoria({ maximo: 1, ventanaMs: VENTANA, maximoDeClaves: 2 })
+
+    limitador.permitir('a', 0)
+    limitador.permitir('b', 0)
+    limitador.permitir('c', 0)
+    limitador.permitir('d', 0)
+
+    expect(limitador.cantidadDeClaves()).toBe(2)
+  })
+
+  it('al llegar al tope olvida la clave usada hace más tiempo', () => {
+    const limitador = crearLimitadorEnMemoria({ maximo: 1, ventanaMs: VENTANA, maximoDeClaves: 2 })
+
+    limitador.permitir('a', 0)
+    limitador.permitir('b', 0)
+    limitador.permitir('a', 1)
+    limitador.permitir('c', 2)
+
+    expect(limitador.permitir('a', 3)).toBe(false)
+    expect(limitador.permitir('b', 3)).toBe(true)
+  })
 })
