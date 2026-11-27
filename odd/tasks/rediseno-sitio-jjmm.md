@@ -94,7 +94,7 @@ Criterios propuestos para cumplir S8. Cada uno se puede verificar.
 | T2 | S4, S8 | Crear el proyecto Next.js + Payload: TypeScript estricto, ESLint, Prettier, pnpm, `CLAUDE.md`, CI (tipos, lint, pruebas, Lighthouse CI) | delegada (contexto largo) | hecha; Playwright y Lighthouse CI solo corren en CI | `24a8c91` |
 | T3 | S8 | Estructura de módulos y capas, registro de bloques, ADR de arquitectura | delegada (contexto largo) | hecha | ver L13 |
 | T4 | S2, S7, S9 | Modelo de datos en Payload: configuración, navegación, sedes, portada, cifras, áreas, planes (3 colecciones), clientes, valores, avisos, vencimientos, blog, mensajes, medios en Wasabi, usuarios con roles | delegada (contexto largo) | hecha; verificación de seguridad independiente: PASS | ver L14 |
-| T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | en línea | pendiente | — |
+| T5 | S2, S9 | Carga inicial con el contenido real del sitio actual | delegada (contexto largo) | hecha; falta ejecutarla contra PostgreSQL | ver L15 |
 | T6 | S5, S6 | Estructura común: barra superior, cabecera, menú desde el panel, pie, WhatsApp flotante | en línea | pendiente | — |
 | T7 | S5, S6 | Inicio: hero, quiénes somos, servicios, planes, por qué elegirnos, clientes, contacto, con sus animaciones | en línea | pendiente | — |
 | T8 | S2 | Contacto: guardar el mensaje, avisar por correo y abrir WhatsApp | en línea | pendiente | — |
@@ -208,4 +208,23 @@ Para las tareas siguientes:
   - impedir que se elimine o degrade el último administrador;
   - pruebas de integración del descarte del campo `rol` y del estado `nuevo` forzado.
 
-Siguiente paso: T5 (carga inicial con el contenido real).
+**L15** (27/11/2026), T5 terminada:
+- Semilla idempotente en `sitio/src/semilla/` (`pnpm semilla`). Carga:
+  - 21 medios, 2 sedes y 9 áreas;
+  - 4 planes, 22 características y 88 inclusiones;
+  - 6 valores, 11 clientes, 3 avisos y 14 vencimientos;
+  - configuración, navegación con SIGEFact, la página de inicio con sus 7 secciones, y las páginas de la guía y del blog.
+- Queda sin cargar:
+  - el cronograma SUNAT, porque falta el oficial;
+  - las publicaciones del blog, que viven en la base de producción;
+  - los usuarios, salvo que se definan `SEMILLA_ADMIN_*`.
+- Verificado con 43 pruebas nuevas, sin base de datos: reglas de S9 sobre todos los datos y el cargador con un doble en memoria; también `typecheck`, `lint`, `format:check` y `build`. La ejecución real queda pendiente.
+- Falta en el modelo, para revisar en T9:
+  - los avisos no tienen campo de nota ni grupos de documentos; «Documentos para análisis» quedó como un aviso aparte;
+  - no hay campo para `elegirnos.webp`.
+- A confirmar con el estudio, además de lo de L7:
+  - qué celular corresponde a cada sede;
+  - la fecha de CONAFOVICER, SENCICO y OSCE;
+  - los títulos que se agregaron porque el sitio actual no los tiene.
+
+Siguiente paso: T6 (estructura común: barra superior, cabecera, menú, pie y WhatsApp flotante).

@@ -18,6 +18,7 @@
     "test:e2e": "playwright test",
     "lighthouse": "lhci autorun",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "semilla": "cross-env NODE_OPTIONS=--no-deprecation payload run src/semilla/index.ts",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation WASABI_BUCKET=importmap WASABI_REGION=importmap WASABI_ENDPOINT=https://importmap.invalid WASABI_ACCESS_KEY_ID=importmap WASABI_SECRET_ACCESS_KEY=importmap payload generate:importmap"
   },

@@ -12,20 +12,21 @@ El plan de trabajo y las especificaciones (S1–S9) están en `../odd/tasks/redi
 
 Se usa **pnpm**. Desde la raíz del repositorio, antepón `-C sitio` (por ejemplo `pnpm -C sitio test`).
 
-| Comando                                            | Qué hace                                                                                  |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `pnpm dev`                                         | Servidor de desarrollo (sitio en `/`, panel en `/admin`). Requiere PostgreSQL.            |
-| `pnpm build` / `pnpm start`                        | Compilación y servidor de producción. La compilación no necesita base de datos.           |
-| `pnpm typecheck`                                   | `tsc --noEmit`                                                                            |
-| `pnpm lint`                                        | ESLint sin advertencias permitidas                                                        |
-| `pnpm format` / `pnpm format:check`                | Prettier                                                                                  |
-| `pnpm test`                                        | Vitest (`src/**/*.test.{ts,tsx}`)                                                         |
-| `pnpm test src/compartido/dominio/celular.test.ts` | Un solo archivo de prueba                                                                 |
-| `pnpm test -t "rechaza teléfonos fijos"`           | Una sola prueba por nombre                                                                |
-| `pnpm test:e2e`                                    | Playwright (`e2e/`). En local reutiliza o levanta `pnpm dev`; en CI levanta `pnpm start`. |
-| `pnpm lighthouse`                                  | Lighthouse CI con `lighthouserc.json`; requiere `pnpm build` previo.                      |
-| `pnpm generate:types`                              | Regenera `src/payload-types.ts` tras cambiar colecciones. No necesita base de datos.      |
-| `pnpm generate:importmap`                          | Regenera el mapa de componentes del panel.                                                |
+| Comando                                            | Qué hace                                                                                   |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `pnpm dev`                                         | Servidor de desarrollo (sitio en `/`, panel en `/admin`). Requiere PostgreSQL.             |
+| `pnpm build` / `pnpm start`                        | Compilación y servidor de producción. La compilación no necesita base de datos.            |
+| `pnpm typecheck`                                   | `tsc --noEmit`                                                                             |
+| `pnpm lint`                                        | ESLint sin advertencias permitidas                                                         |
+| `pnpm format` / `pnpm format:check`                | Prettier                                                                                   |
+| `pnpm test`                                        | Vitest (`src/**/*.test.{ts,tsx}`)                                                          |
+| `pnpm test src/compartido/dominio/celular.test.ts` | Un solo archivo de prueba                                                                  |
+| `pnpm test -t "rechaza teléfonos fijos"`           | Una sola prueba por nombre                                                                 |
+| `pnpm test:e2e`                                    | Playwright (`e2e/`). En local reutiliza o levanta `pnpm dev`; en CI levanta `pnpm start`.  |
+| `pnpm lighthouse`                                  | Lighthouse CI con `lighthouserc.json`; requiere `pnpm build` previo.                       |
+| `pnpm generate:types`                              | Regenera `src/payload-types.ts` tras cambiar colecciones. No necesita base de datos.       |
+| `pnpm generate:importmap`                          | Regenera el mapa de componentes del panel.                                                 |
+| `pnpm semilla`                                     | Carga inicial e idempotente del contenido real (ver «Carga inicial»). Requiere PostgreSQL. |
 
 Variables de entorno: copia `.env.example` a `.env`. `.env` no se versiona.
 
@@ -107,6 +108,18 @@ Quedan fuera los archivos que genera Payload: `src/payload-types.ts`, `src/app/(
 - La configuración del panel es código (colecciones y globales en TypeScript), nunca cambios manuales.
 
 **Rendimiento (S3)**, verificado por Lighthouse CI en móvil: rendimiento ≥ 0,9, LCP ≤ 2500 ms, CLS ≤ 0,1 y como máximo 170 KB de JavaScript transferido en el inicio.
+
+### Carga inicial
+
+`src/semilla/` carga en Payload el contenido real del sitio actual (inicio v4, guía de clientes, `PRODUCT.md`). Está fuera de los módulos porque es una herramienta de una sola vez, no parte del sitio:
+
+- `datos/`: datos puros y tipados con `payload-types.ts`, así un cambio del modelo que rompa la semilla falla en `pnpm typecheck`. Los medios se nombran por su archivo y las relaciones por su clave natural; el `orden` sale de la posición en cada lista. Las pruebas de `datos/*.test.ts` aplican las reglas de dominio y de contenido (S9) a toda la semilla.
+- `carga/` y `cargar.ts`: el cargador depende de `PuertoDeCarga` (`puerto-de-carga.ts`), no de Payload, y se prueba con `prueba/puerto-en-memoria.ts`. `adaptador-payload.ts` lo implementa con la Local API e `index.ts` es la entrada de `pnpm semilla` (`payload run`, que lee el `.env`).
+- Idempotente: cada documento se busca por su clave natural (código del área, nombre del plan, `filename` del medio, logotipo del cliente, plan + característica, obligación + periodicidad) y se crea o se actualiza; las globales se reemplazan. Un archivo solo se sube al crear su medio.
+- Las imágenes se suben desde `../public/web/images/`, sin copiarlas a `sitio/`. Antes de borrar el sitio anterior (T16), mueve esas imágenes o ejecuta la carga.
+- Si `media/` conserva archivos de una base borrada, Payload sube el medio con otro nombre (`-1`) y la siguiente carga lo duplica: vacía `media/` al recrear la base local.
+- El administrador se crea solo con `SEMILLA_ADMIN_CORREO` y `SEMILLA_ADMIN_CLAVE`; una cuenta existente no se toca.
+- No se cargan `cronogramas-sunat` (falta el cronograma oficial), publicaciones, categorías ni etiquetas (viven en la base de producción, no en el repositorio).
 
 ## Reglas de contenido
 
