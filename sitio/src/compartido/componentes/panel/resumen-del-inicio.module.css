@@ -4,86 +4,127 @@
   line-height: 1.2;
 }
 
-.cifras {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: calc(var(--base) * 0.75);
+/* Una lista con separadores, igual que «Todo el contenido». */
+.filas {
   margin: 0;
   padding: 0;
-  list-style: none;
-}
-
-.cifra {
-  position: relative;
-  display: grid;
-  grid-template-areas:
-    'valor icono'
-    'etiqueta etiqueta'
-    'detalle detalle';
-  grid-template-columns: 1fr auto;
-  row-gap: 0.15rem;
-  height: 100%;
-  padding: 1.1rem 1.25rem 1.2rem;
+  overflow: hidden;
   border: 1px solid var(--theme-elevation-150);
   border-radius: 0.75rem;
   background: var(--theme-elevation-0);
+  list-style: none;
+}
+
+.filas li + li {
+  border-top: 1px solid var(--theme-elevation-100);
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 0.9rem 0.8rem 0.85rem;
   color: var(--theme-text);
   text-decoration: none;
-  transition:
-    border-color 0.18s var(--jjmm-salida),
-    box-shadow 0.18s var(--jjmm-salida);
+  transition: background-color 0.15s var(--jjmm-salida);
 }
 
-.cifra:hover {
-  border-color: var(--jjmm-acento);
-  box-shadow: 0 6px 18px rgb(15 51 84 / 0.1);
+.fila:hover {
+  background: var(--theme-elevation-50);
 }
 
-.cifra:focus-visible {
+.fila:focus-visible {
   outline: var(--accessibility-outline);
-  outline-offset: var(--accessibility-outline-offset);
+  outline-offset: -2px;
 }
 
-.icono {
-  grid-area: icono;
-  width: 1.4rem;
-  height: 1.4rem;
-  color: var(--jjmm-enlace);
+.marco {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  background: var(--jjmm-tenue);
+  color: var(--jjmm-sobre-tenue);
 }
 
-.valor {
-  grid-area: valor;
-  font-family: var(--jjmm-titulo);
-  font-size: 2.6rem;
-  font-weight: 500;
-  line-height: 1;
+.marco svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.texto {
+  font-size: 1.05rem;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
-.etiqueta {
-  grid-area: etiqueta;
-  margin-top: 0.35rem;
-  font-size: 1.05rem;
+.accion {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--jjmm-enlace);
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.detalle {
-  grid-area: detalle;
-  color: var(--theme-elevation-650);
+.flecha {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: translate 0.15s var(--jjmm-salida);
 }
 
-/* Mensajes por responder: el amarillo de la marca con texto azul noche (10,7:1). */
-.destacada {
-  border-color: var(--jjmm-amarillo-hondo);
+.fila:hover .flecha {
+  translate: 2px 0;
+}
+
+/* Mensajes por responder: la fila entera en el amarillo de la marca, con texto azul noche
+   (10,7:1). El tinte completo marca la urgencia. */
+.urgente,
+.urgente:hover {
   background: var(--jjmm-amarillo);
   color: var(--jjmm-noche);
 }
 
-.destacada .icono,
-.destacada .detalle {
+.urgente .accion {
   color: var(--jjmm-noche);
 }
 
-.destacada:hover {
-  border-color: var(--jjmm-noche);
+.urgente .marco {
+  background: rgb(15 51 84 / 0.12);
+  color: var(--jjmm-noche);
+}
+
+.alDia {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  color: var(--theme-elevation-800);
+}
+
+.hecho {
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--jjmm-enlace);
+}
+
+/* En pantallas angostas el enlace baja a su propia línea. */
+@media (max-width: 30rem) {
+  .fila {
+    grid-template-columns: auto 1fr;
+  }
+
+  .accion {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila:hover .flecha {
+    translate: none;
+  }
 }

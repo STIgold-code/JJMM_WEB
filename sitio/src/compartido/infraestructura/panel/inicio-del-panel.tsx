@@ -2,8 +2,8 @@ import type { Payload, SanitizedPermissions, TypedUser } from 'payload'
 
 import { InicioDelPanelVista } from '../../componentes/panel/inicio-del-panel-vista'
 import { fechaLarga } from '../../componentes/panel/textos-del-inicio'
-import { armarCifras } from './cifras-del-panel'
-import { contarCifras, contarColecciones } from './conteos-del-panel'
+import { armarPendientes } from './cifras-del-panel'
+import { contarColecciones, contarPendientes } from './conteos-del-panel'
 import { armarEnlacesRapidos } from './enlaces-rapidos'
 import { armarSecciones, entidadesDelPanel, puedeEditar } from './secciones-del-panel'
 
@@ -24,14 +24,14 @@ export async function InicioDelPanel({ payload, permissions, user }: Props) {
     .map(({ slug }) => slug)
   const contexto = { payload, permisos: permissions, user }
   const [conteos, cantidades] = await Promise.all([
-    contarCifras(contexto),
+    contarPendientes(contexto),
     contarColecciones(contexto, coleccionesVisibles),
   ])
   return (
     <InicioDelPanelVista
       nombre={user?.nombre}
       fecha={fechaLarga(new Date())}
-      cifras={armarCifras(conteos, rutaDelPanel)}
+      pendientes={armarPendientes(conteos, rutaDelPanel)}
       accesos={armarEnlacesRapidos(rutaDelPanel, permissions)}
       secciones={armarSecciones({
         entidades,

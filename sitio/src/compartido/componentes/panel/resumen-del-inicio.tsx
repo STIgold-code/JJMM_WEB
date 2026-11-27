@@ -1,36 +1,54 @@
 import Link from 'next/link'
 
-import type { Cifra } from './modelo-del-inicio'
+import type { Pendiente } from './modelo-del-inicio'
 import { TrazoDelPanel } from './trazos-del-panel'
 import estilos from './resumen-del-inicio.module.css'
 
 interface Props {
-  cifras: readonly Cifra[]
+  pendientes: readonly Pendiente[]
 }
 
-// Resumen con cifras reales; cada una lleva a la lista que la explica.
-export function ResumenDelInicio({ cifras }: Props) {
+function FilaDePendiente({ pendiente }: { pendiente: Pendiente }) {
+  const { texto, accion, href, icono, urgente } = pendiente
   return (
-    <section aria-labelledby="resumen-del-inicio">
-      <h2 id="resumen-del-inicio" className={estilos.titulo}>
-        Hoy en el sitio
+    <li>
+      <Link
+        href={href}
+        className={`${estilos.fila} ${urgente ? estilos.urgente : ''}`}
+        prefetch={false}
+      >
+        <span className={estilos.marco}>
+          <TrazoDelPanel nombre={icono} />
+        </span>
+        <span className={estilos.texto}>{texto}</span>
+        <span className={estilos.accion}>
+          {accion}
+          <TrazoDelPanel nombre="siguiente" className={estilos.flecha} />
+        </span>
+      </Link>
+    </li>
+  )
+}
+
+// Lo que pide acción hoy. Sin pendientes, una sola oración: no hace falta una caja por cada cero.
+export function PendientesDelInicio({ pendientes }: Props) {
+  return (
+    <section aria-labelledby="pendientes-del-inicio">
+      <h2 id="pendientes-del-inicio" className={estilos.titulo}>
+        Pendientes
       </h2>
-      <ul className={estilos.cifras}>
-        {cifras.map(({ clave, valor, etiqueta, detalle, href, icono, destacada }) => (
-          <li key={clave}>
-            <Link
-              href={href}
-              className={`${estilos.cifra} ${destacada ? estilos.destacada : ''}`}
-              prefetch={false}
-            >
-              <TrazoDelPanel nombre={icono} className={estilos.icono} />
-              <span className={estilos.valor}>{valor}</span>
-              <span className={estilos.etiqueta}>{etiqueta}</span>
-              <span className={estilos.detalle}>{detalle}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {pendientes.length > 0 ? (
+        <ul className={estilos.filas}>
+          {pendientes.map((pendiente) => (
+            <FilaDePendiente key={pendiente.clave} pendiente={pendiente} />
+          ))}
+        </ul>
+      ) : (
+        <p className={estilos.alDia}>
+          <TrazoDelPanel nombre="hecho" className={estilos.hecho} />
+          Todo al día: no hay mensajes por responder ni borradores sin publicar.
+        </p>
+      )}
     </section>
   )
 }

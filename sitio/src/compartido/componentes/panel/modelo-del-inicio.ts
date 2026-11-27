@@ -3,15 +3,15 @@ import type { NombreDeTrazo } from './trazos-del-panel'
 // Datos que dibuja el inicio del panel. Los arma infraestructura (`cifras-del-panel.ts`,
 // `secciones-del-panel.ts`) con los conteos y permisos de Payload.
 
-// Una cifra real del resumen, con enlace a la lista que la explica.
-export interface Cifra {
+// Algo que pide acción (mensajes por responder, borradores sin publicar), con enlace a su lista.
+export interface Pendiente {
   clave: string
-  valor: number
-  etiqueta: string
-  detalle: string
+  texto: string
+  // Nombre del enlace: dice a dónde lleva.
+  accion: string
   href: string
   icono: NombreDeTrazo
-  destacada: boolean
+  urgente: boolean
 }
 
 // Una colección o global dentro de su sección. `cantidad` es `null` en las globales.

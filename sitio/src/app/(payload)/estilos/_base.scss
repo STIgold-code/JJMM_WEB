@@ -66,4 +66,11 @@
     width: auto;
     height: auto;
   }
+
+  // Con el menú abierto la marca ya está a la vista en su cabecera: repetirla al lado es ruido.
+  // Se oculta también la barra «/» que la sigue en la ruta de navegación.
+  body:has(.template-default--nav-open) .step-nav__home,
+  body:has(.template-default--nav-open) .step-nav__home + span {
+    display: none;
+  }
 }

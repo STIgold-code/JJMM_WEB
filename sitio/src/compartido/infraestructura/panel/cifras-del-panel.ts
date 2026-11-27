@@ -1,88 +1,54 @@
-import { coleccionAvisosParaClientes } from '@/modulos/avisos/infraestructura/coleccion-avisos-para-clientes'
 import { coleccionPublicaciones } from '@/modulos/blog/infraestructura/coleccion-publicaciones'
 import { coleccionMensajesDeContacto } from '@/modulos/contacto/infraestructura/coleccion-mensajes-de-contacto'
-import { coleccionSedes } from '@/modulos/sedes/infraestructura/coleccion-sedes'
 
-import type { Cifra } from '../../componentes/panel/modelo-del-inicio'
+import type { Pendiente } from '../../componentes/panel/modelo-del-inicio'
 import { cantidadConNombre } from '../../componentes/panel/textos-del-inicio'
 
 // Conteos reales del inicio del panel. `null` cuando la cuenta no puede leer esa colección:
-// la cifra no se muestra, nunca se inventa un cero.
+// el pendiente no se muestra, nunca se inventa un cero.
 export interface ConteosDelInicio {
   mensajesNuevos: number | null
-  publicadas: number | null
   borradores: number | null
-  avisosVisibles: number | null
-  sedesActivas: number | null
 }
 
-type CifraPosible = Omit<Cifra, 'valor'> & { valor: number | null }
 type Lista = (slug: string) => string
 
-function cifraDeMensajes({ mensajesNuevos }: ConteosDelInicio, lista: Lista): CifraPosible {
-  const nuevos = mensajesNuevos ?? 0
+function mensajesPorResponder(
+  { mensajesNuevos }: ConteosDelInicio,
+  lista: Lista,
+): Pendiente | null {
+  if (!mensajesNuevos) return null
+  const nombre = cantidadConNombre(mensajesNuevos, 'mensaje nuevo', 'mensajes nuevos')
   return {
     clave: 'mensajes',
-    valor: mensajesNuevos,
-    etiqueta: cantidadConNombre(nuevos, 'mensaje nuevo', 'mensajes nuevos'),
-    detalle: nuevos > 0 ? 'Por responder' : 'Todo al día',
+    texto: `${mensajesNuevos} ${nombre} por responder`,
+    accion: 'Ver los mensajes',
     href: `${lista(coleccionMensajesDeContacto.slug)}?where[estado][equals]=nuevo`,
     icono: 'mensaje',
-    destacada: nuevos > 0,
+    urgente: true,
   }
 }
 
-function detalleDeBorradores(borradores: number | null): string {
-  if (!borradores) return 'Ningún borrador pendiente'
-  return `${borradores} ${cantidadConNombre(borradores, 'borrador sin publicar', 'borradores sin publicar')}`
-}
-
-function cifraDePublicaciones(conteos: ConteosDelInicio, lista: Lista): CifraPosible {
-  const { publicadas, borradores } = conteos
+function borradoresSinPublicar({ borradores }: ConteosDelInicio, lista: Lista): Pendiente | null {
+  if (!borradores) return null
+  const nombre = cantidadConNombre(borradores, 'borrador sin publicar', 'borradores sin publicar')
   return {
-    clave: 'publicaciones',
-    valor: publicadas,
-    etiqueta: cantidadConNombre(
-      publicadas ?? 0,
-      'publicación en el blog',
-      'publicaciones en el blog',
-    ),
-    detalle: detalleDeBorradores(borradores),
+    clave: 'borradores',
+    texto: `${borradores} ${nombre} en el blog`,
+    accion: 'Ver las publicaciones',
     href: lista(coleccionPublicaciones.slug),
     icono: 'pluma',
-    destacada: false,
+    urgente: false,
   }
 }
 
-function cifraDeAvisos({ avisosVisibles }: ConteosDelInicio, lista: Lista): CifraPosible {
-  return {
-    clave: 'avisos',
-    valor: avisosVisibles,
-    etiqueta: cantidadConNombre(avisosVisibles ?? 0, 'aviso visible', 'avisos visibles'),
-    detalle: 'En la guía de clientes',
-    href: lista(coleccionAvisosParaClientes.slug),
-    icono: 'aviso',
-    destacada: false,
-  }
-}
+const PENDIENTES = [mensajesPorResponder, borradoresSinPublicar]
 
-function cifraDeSedes({ sedesActivas }: ConteosDelInicio, lista: Lista): CifraPosible {
-  return {
-    clave: 'sedes',
-    valor: sedesActivas,
-    etiqueta: cantidadConNombre(sedesActivas ?? 0, 'sede activa', 'sedes activas'),
-    detalle: 'En la cabecera, el pie y «Contáctanos»',
-    href: lista(coleccionSedes.slug),
-    icono: 'ubicacion',
-    destacada: false,
-  }
-}
-
-const CIFRAS = [cifraDeMensajes, cifraDePublicaciones, cifraDeAvisos, cifraDeSedes]
-
-export function armarCifras(conteos: ConteosDelInicio, rutaDelPanel: string): Cifra[] {
+// Lo que pide acción hoy, en orden de urgencia. Lo que está en cero no aparece: las cantidades
+// de cada sección ya se ven en «Todo el contenido».
+export function armarPendientes(conteos: ConteosDelInicio, rutaDelPanel: string): Pendiente[] {
   const lista: Lista = (slug) => `${rutaDelPanel}/collections/${slug}`
-  return CIFRAS.map((armar) => armar(conteos, lista)).filter(
-    (cifra): cifra is Cifra => cifra.valor !== null,
+  return PENDIENTES.map((armar) => armar(conteos, lista)).filter(
+    (pendiente): pendiente is Pendiente => pendiente !== null,
   )
 }

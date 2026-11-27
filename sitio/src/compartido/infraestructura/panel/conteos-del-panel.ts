@@ -26,17 +26,13 @@ async function contar(
   return totalDocs
 }
 
-export async function contarCifras(contexto: Contexto): Promise<ConteosDelInicio> {
-  const visible: Where = { activo: { equals: true } }
-  const [mensajesNuevos, publicadas, borradores, avisosVisibles, sedesActivas] = await Promise.all([
+export async function contarPendientes(contexto: Contexto): Promise<ConteosDelInicio> {
+  const [mensajesNuevos, borradores] = await Promise.all([
     contar(contexto, 'mensajes-de-contacto', { estado: { equals: 'nuevo' } }),
     // La colección guarda la última versión publicada; `draft` son las que nunca se publicaron.
-    contar(contexto, 'publicaciones', { _status: { equals: 'published' } }),
     contar(contexto, 'publicaciones', { _status: { equals: 'draft' } }),
-    contar(contexto, 'avisos-para-clientes', visible),
-    contar(contexto, 'sedes', visible),
   ])
-  return { mensajesNuevos, publicadas, borradores, avisosVisibles, sedesActivas }
+  return { mensajesNuevos, borradores }
 }
 
 // Total de documentos de cada colección que se muestra en las secciones del inicio.
