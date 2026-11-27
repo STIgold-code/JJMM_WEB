@@ -48,7 +48,7 @@ Supuestos, marcados como tales (no son parte del encargo):
 | P1 | S2, S3, S4.1 | Maqueta HTML navegable de las pantallas principales, con datos reales | delegada (contexto largo de la sesión) | hecha: `mockup/panel/index.html` | ver L3 |
 | P2 | S4.1 | Aprobación de la maqueta por Gian | — | aprobada (L4) | — |
 | P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | hecha y verificada en producción (L5) | `45d9675`, `2d828a6`, `563c0b5`, `7ca09f6` |
-| P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario (mensajes de contacto) | delegada (respaldo de contexto) + verificador (riesgo 2: primeras escrituras del panel) | en curso | — |
+| P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario (mensajes de contacto) | delegada (respaldo de contexto) + verificador (riesgo 2: primeras escrituras del panel) | hecha y verificada en producción (L6) | `46b5582` |
 | P5 | S1, S3, S4.2 | Fase 3: el catálogo principal | por definir | bloqueada por P2 | — |
 | P6 | S1, S3, S4.2 | Fase 4: el resto de secciones | por definir | bloqueada por P2 | — |
 | P7 | S0, S1 | Ocultar el `/admin` de Payload y dejarlo solo para el desarrollador | por definir | bloqueada por P3 | — |
@@ -111,4 +111,13 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Sin verificar: la vista de un editor (no existe la cuenta) y las pruebas de Playwright nuevas, que corren en CI.
 - P7 no puede entrar antes de que P4–P6 reemplacen los enlaces a `/admin`.
 
-Siguiente paso: P4.
+**L6** (27/11/2026), P4 terminada (`46b5582` y el commit de dependencias anterior):
+- `/panel/mensajes`: filtros con conteo y buscador en la URL, 25 por página, detalle en panel lateral, datos de contacto (celular y correo, que la colección ya tenía), marcar como atendido o volver a nuevo, borrado solo del administrador con diálogo propio, avisos y estados vacíos. El menú y el inicio enlazan aquí.
+- Escrituras: server actions que llaman a `exigirSesion()`, rol tomado de la sesión del servidor, Local API con `overrideAccess: false` y el `user`, entradas validadas en el servidor.
+- Verificador: un bloqueo (B1: un correo que el panel aceptaba y Payload rechazaba rompía la pantalla). Corregido en un lote y recomprobado: regla de correo igual a la de Payload (hay que volver a copiarla si Payload cambia de versión), el 400 llega como error de campo o aviso, `error.tsx` propio como red de seguridad.
+- Sin nota interna: la colección no tiene ese campo y esta fase no cambia el esquema.
+- La prueba de Playwright del aviso de ingreso fallaba en CI por el anunciador de rutas de Next (`role="alert"`); se filtró por texto.
+- Verificado en producción a 1440×900 y 390×844 con un mensaje de prueba enviado desde el formulario público («Prueba del panel (borrar)», id 1): redirección sin sesión, lista, panel lateral, error de correo inválido en el campo, marcar como atendido con aviso, conteos del menú y del inicio actualizados. Corregido después: los avisos tapaban los botones del panel lateral (ahora salen arriba).
+- Sin verificar: borrado real (el mensaje de prueba sigue en producción hasta que Gian confirme), vista de un editor, paginación con más de 25 mensajes.
+
+Siguiente paso: P5.

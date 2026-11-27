@@ -14,7 +14,8 @@ export default async function LayoutDelEscritorio({ children }: { children: Reac
   return (
     <>
       <EstructuraDelPanel {...await datosDelMenu(sesion)}>{children}</EstructuraDelPanel>
-      <Toaster position="bottom-right" />
+      {/* Arriba y al centro: abajo a la derecha tapaba las acciones del panel lateral. */}
+      <Toaster position="top-center" />
     </>
   )
 }
