@@ -67,7 +67,7 @@ export function NavegacionDelMenu({ grupos }: { grupos: GrupoDelMenu[] }) {
           >
             {grupo.titulo}
           </p>
-          <ul aria-labelledby={`${prefijo}-${indice}`} className="grid gap-px">
+          <ul aria-labelledby={`${prefijo}-${indice}`} className="grid grid-cols-[minmax(0,1fr)] gap-px">
             {grupo.entradas.map((entrada) => (
               <li key={entrada.clave}>
                 <Entrada entrada={entrada} actual={entrada.ruta === ruta} />

@@ -20,6 +20,7 @@ export function ContenidoDelMenu({ grupos, usuario }: DatosDelMenu) {
           alt=""
           width={216}
           height={73}
+          unoptimized
           className="h-auto w-15 flex-none"
         />
         <span className="grid min-w-0 leading-[1.15]">

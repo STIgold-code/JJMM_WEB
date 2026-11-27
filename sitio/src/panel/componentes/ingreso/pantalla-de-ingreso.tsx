@@ -14,6 +14,7 @@ export function PantallaDeIngreso() {
             alt="JJMM, Mariñas & Asociados, Estudio Contable"
             width={216}
             height={128}
+            unoptimized
             priority
             className="h-auto w-44"
           />
