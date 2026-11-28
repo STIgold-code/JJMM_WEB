@@ -53,6 +53,10 @@ describe('faltantesDelSitio', () => {
     expect(sedes).toMatchObject({ actual: 1, total: 2, etiqueta: '1 de 2 sedes', completo: false })
   })
 
+  it('las sedes llevan a su sección del panel', () => {
+    expect(faltantesDelSitio(COMPLETO)[1]?.href).toBe('/panel/sedes')
+  })
+
   it('pide la primera publicación del blog hasta que haya una publicada', () => {
     const sinPublicar = faltantesDelSitio({ ...COMPLETO, publicadas: 0 })[2]
     const conTres = faltantesDelSitio(COMPLETO)[2]

@@ -2,17 +2,23 @@ import type { Rol } from '@/compartido/dominio/roles'
 
 import { avisoDePlanEliminado, avisoDeVisibilidad } from '../dominio/avisos-de-planes'
 import { leerId } from '../dominio/identificadores'
-import { ordenesAActualizar, type PosicionGuardada } from '../dominio/orden-de-planes'
+import { ordenesAActualizar, type PosicionGuardada } from '../dominio/orden'
 import { puedeEliminarPlanes } from '../dominio/planes'
 import type { Aviso } from '../dominio/respuesta-al-mensaje'
 import type { PlanValidado } from '../dominio/validacion-de-plan'
 import { ERROR_SIN_PERMISO, type ResultadoDelRepositorio } from './gestionar-mensajes'
+import {
+  ERROR_DE_VALOR,
+  type RechazoDelRepositorio,
+  type ResultadoDeAccionRapida,
+  type ResultadoDeCreacion,
+  type ResultadoDeEscritura,
+} from './resultados-de-escritura'
 
 // Escrituras sobre los planes. Todo lo que llega del navegador es `unknown` y se valida aquí; el
 // repositorio escribe con los permisos de la sesión, así la colección tiene la última palabra.
-export type RechazoDelRepositorio = Exclude<ResultadoDelRepositorio, { estado: 'hecho' }>
-export type ResultadoDeEscritura = { estado: 'hecho' } | RechazoDelRepositorio
-export type ResultadoDeCreacion = { estado: 'hecho'; id: number } | RechazoDelRepositorio
+export type { RechazoDelRepositorio, ResultadoDeCreacion, ResultadoDeEscritura }
+export { ERROR_DE_VALOR }
 
 export interface RepositorioDeEscrituraDePlanes {
   listarPosiciones(): Promise<PosicionGuardada[]>
@@ -26,11 +32,10 @@ export interface RepositorioDeEscrituraDePlanes {
   eliminar(id: number): Promise<ResultadoDelRepositorio>
 }
 
-export type ResultadoDeAccionDePlan = { ok: true; aviso?: Aviso } | { ok: false; error: string }
+export type ResultadoDeAccionDePlan = ResultadoDeAccionRapida
 
 export const ERROR_DE_PLAN_INEXISTENTE =
   'No encontramos ese plan. Puede que alguien lo haya eliminado; recarga la página.'
-export const ERROR_DE_VALOR = 'Ese valor no es válido. Recarga la página e inténtalo de nuevo.'
 export const ERROR_DE_ORDEN =
   'La lista de planes cambió mientras ordenabas. Recarga la página e inténtalo de nuevo.'
 // Por ejemplo, un plan antiguo con un nombre que hoy no pasa la validación de la colección.

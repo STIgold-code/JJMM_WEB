@@ -1,7 +1,5 @@
 'use client'
 
-import { ArrowLeft } from 'lucide-react'
-import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
 import type { DatosDeEdicionDePlan } from '../../aplicacion/consultar-planes'
@@ -9,12 +7,12 @@ import { erroresEnVivo, type FormularioDePlan, unirErrores } from '../../dominio
 import { RUTA_DE_PLANES } from '../../dominio/planes'
 import type { ErroresDelPlan } from '../../dominio/validacion-de-plan'
 import { vistaPreviaDePlanes } from '../../dominio/vista-previa-de-planes'
-import { BarraDeGuardado } from './barra-de-guardado'
-import { Confirmacion } from './confirmacion'
+import { AvisoDeSalida } from '../comunes/aviso-de-salida'
+import { BarraDeGuardado } from '../comunes/barra-de-guardado'
+import { CabeceraDeEdicion } from '../comunes/cabecera-de-edicion'
 import { DatosDelPlan } from './datos-del-plan'
 import { EliminarPlan } from './eliminar-plan'
 import { QueIncluye } from './que-incluye'
-import { useAvisoDeSalida } from './use-aviso-de-salida'
 import { useEdicionDePlan } from './use-edicion-de-plan'
 import { VistaPrevia } from './vista-previa'
 
@@ -26,37 +24,10 @@ interface Props {
 
 function Cabecera({ nombre }: { nombre: string }) {
   return (
-    <div className="mb-6 grid gap-1">
-      <Link
-        href={RUTA_DE_PLANES}
-        className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-primary hover:underline"
-      >
-        <ArrowLeft aria-hidden="true" className="size-3.5" />
-        Planes
-      </Link>
-      <h1 className="font-marca text-[1.75rem] leading-[1.15] font-medium tracking-[0.005em] text-balance [overflow-wrap:anywhere] max-sm:text-2xl">
-        {nombre.trim() || 'Sin nombre'}
-      </h1>
-      <p className="max-w-[60ch] text-muted-foreground">
-        Edita el plan y mira la vista previa para ver cómo queda la tabla del sitio antes de
-        guardar.
-      </p>
-    </div>
-  )
-}
-
-// Con cambios sin guardar, salir por un enlace del panel pide confirmación.
-function AvisoDeSalida({ sucio }: { sucio: boolean }) {
-  const { destino, salirSinGuardar, seguirEditando } = useAvisoDeSalida(sucio)
-  return (
-    <Confirmacion
-      abierta={destino !== null}
-      titulo="Tienes cambios sin guardar"
-      texto="Si sales ahora, se pierden. Vuelve y pulsa «Guardar cambios» para conservarlos."
-      accion="Salir sin guardar"
-      cancelar="Seguir editando"
-      alConfirmar={salirSinGuardar}
-      alCerrar={seguirEditando}
+    <CabeceraDeEdicion
+      volverA={{ ruta: RUTA_DE_PLANES, texto: 'Planes' }}
+      titulo={nombre.trim() || 'Sin nombre'}
+      bajada="Edita el plan y mira la vista previa para ver cómo queda la tabla del sitio antes de guardar."
     />
   )
 }

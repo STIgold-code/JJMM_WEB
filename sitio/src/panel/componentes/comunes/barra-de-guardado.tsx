@@ -10,6 +10,8 @@ interface Props {
   guardando: boolean
   guardadoRecien: boolean
   alDescartar: () => void
+  // Texto del botón principal; en una creación, por ejemplo, «Crear sede».
+  textoDeGuardar?: string
 }
 
 function Estado({ sucio, guardadoRecien }: Pick<Props, 'sucio' | 'guardadoRecien'>) {
@@ -29,7 +31,8 @@ function Estado({ sucio, guardadoRecien }: Pick<Props, 'sucio' | 'guardadoRecien
 // Barra fija al pie de la edición: estado de los cambios, «Descartar cambios» (con confirmación)
 // y «Guardar cambios», activo solo si hay algo que guardar. El botón de guardar envía el
 // formulario que la contiene.
-export function BarraDeGuardado({ sucio, guardando, guardadoRecien, alDescartar }: Props) {
+export function BarraDeGuardado(props: Props) {
+  const { sucio, guardando, guardadoRecien, alDescartar } = props
   const [confirmando, setConfirmando] = useState(false)
   return (
     <div className="sticky bottom-0 z-15 mt-6 flex flex-wrap items-center justify-end gap-3 rounded-lg border bg-white/96 px-4 py-[0.85rem] shadow-md">
@@ -52,7 +55,7 @@ export function BarraDeGuardado({ sucio, guardando, guardadoRecien, alDescartar 
         disabled={!sucio || guardando}
         className="hover:bg-primary-hover max-sm:flex-1"
       >
-        {guardando ? 'Guardando…' : 'Guardar cambios'}
+        {guardando ? 'Guardando…' : (props.textoDeGuardar ?? 'Guardar cambios')}
       </Button>
       <Confirmacion
         abierta={confirmando}

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { moverEnLista, ordenesAActualizar } from './orden-de-planes'
+import { avisoDeOrden, moverEnLista, ordenAlFinal, ordenesAActualizar } from './orden'
 
 describe('moverEnLista', () => {
   it('sube y baja un elemento sin tocar la lista original', () => {
@@ -24,7 +24,7 @@ describe('ordenesAActualizar', () => {
     { id: 3, orden: 2 },
   ]
 
-  it('devuelve solo los planes cuyo orden cambia, numerados desde cero', () => {
+  it('devuelve solo los documentos cuyo orden cambia, numerados desde cero', () => {
     expect(ordenesAActualizar(GUARDADOS, [2, 1, 3])).toEqual([
       { id: 2, orden: 0 },
       { id: 1, orden: 1 },
@@ -45,12 +45,33 @@ describe('ordenesAActualizar', () => {
 
   it.each([
     ['no es una lista', 'uno,dos'],
-    ['falta un plan', [1, 2]],
-    ['sobra un plan', [1, 2, 3, 4]],
-    ['un plan repetido', [1, 1, 3]],
+    ['falta un documento', [1, 2]],
+    ['sobra un documento', [1, 2, 3, 4]],
+    ['un documento repetido', [1, 1, 3]],
     ['un id inválido', [1, 2, 'x']],
-    ['un plan que no existe', [1, 2, 9]],
+    ['un documento que no existe', [1, 2, 9]],
   ])('rechaza la lista si %s', (_, ids) => {
     expect(ordenesAActualizar(GUARDADOS, ids)).toBeNull()
+  })
+})
+
+describe('ordenAlFinal', () => {
+  it('es uno más que el mayor orden guardado, o cero en una lista vacía', () => {
+    expect(
+      ordenAlFinal([
+        { id: 1, orden: 0 },
+        { id: 2, orden: 4 },
+      ]),
+    ).toBe(5)
+    expect(ordenAlFinal([])).toBe(0)
+  })
+})
+
+describe('avisoDeOrden', () => {
+  it('dice en qué posición quedó, contando desde uno', () => {
+    expect(avisoDeOrden('Emprende', 2)).toEqual({
+      titulo: 'Orden actualizado',
+      detalle: 'Emprende quedó en la posición 2.',
+    })
   })
 })

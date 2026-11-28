@@ -1,16 +1,19 @@
 'use client'
 
-import { ArrowDown, ArrowUp, GripVertical } from 'lucide-react'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
 import type { PlanDelListado } from '../../aplicacion/consultar-planes'
 import { resumenDeInclusiones, rutaDelPlan } from '../../dominio/planes'
+import {
+  BotonesDeOrden,
+  CELDA_DE_LISTADO as CELDA,
+  CeldaDeOrden,
+  FILA_DE_LISTADO,
+} from '../comunes/controles-de-orden'
+import { InsigniaDeVisibilidad } from '../comunes/insignia-de-visibilidad'
+import { Interruptor } from '../comunes/interruptor'
 import { Button } from '../ui/button'
-import { InsigniaDeVisibilidad } from './insignia-de-visibilidad'
-import { Interruptor } from './interruptor'
-
-const CELDA = 'px-4 py-[0.7rem] align-middle max-sm:p-0'
 
 interface Props {
   plan: PlanDelListado
@@ -21,64 +24,6 @@ interface Props {
   alMover: (desde: number, hacia: number, paso: -1 | 1) => void
   propsDeFila: ComponentProps<'tr'>
   propsDeAsa: ComponentProps<'span'>
-}
-
-function BotonesDeOrden({
-  plan,
-  indice,
-  total,
-  alMover,
-}: Omit<Props, 'propsDeFila' | 'propsDeAsa' | 'caracteristicas' | 'alCambiarVisibilidad'>) {
-  return (
-    <>
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon-sm"
-        data-mover={-1}
-        disabled={indice === 0}
-        aria-label={`Subir ${plan.nombre}`}
-        onClick={() => alMover(indice, indice - 1, -1)}
-      >
-        <ArrowUp aria-hidden="true" />
-      </Button>
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon-sm"
-        data-mover={1}
-        disabled={indice === total - 1}
-        aria-label={`Bajar ${plan.nombre}`}
-        onClick={() => alMover(indice, indice + 1, 1)}
-      >
-        <ArrowDown aria-hidden="true" />
-      </Button>
-    </>
-  )
-}
-
-// Asa para arrastrar (solo ratón) y posición. En celulares no se muestra.
-function CeldaDeOrden({
-  posicion,
-  propsDeAsa,
-}: {
-  posicion: number
-  propsDeAsa: Props['propsDeAsa']
-}) {
-  return (
-    <td className={`${CELDA} w-px whitespace-nowrap max-sm:hidden`}>
-      <div className="flex items-center gap-1 text-muted-foreground">
-        <span
-          title="Arrastra para cambiar el orden"
-          className="grid size-7 cursor-grab place-items-center rounded-sm hover:bg-muted active:cursor-grabbing"
-          {...propsDeAsa}
-        >
-          <GripVertical aria-hidden="true" className="size-4" />
-        </span>
-        <span className="min-w-[1.25rem] text-center text-sm font-semibold">{posicion}</span>
-      </div>
-    </td>
-  )
 }
 
 function CeldaDelNombre({ plan, caracteristicas }: Pick<Props, 'plan' | 'caracteristicas'>) {
@@ -102,14 +47,10 @@ function CeldaDelNombre({ plan, caracteristicas }: Pick<Props, 'plan' | 'caracte
 // Fila del listado de planes. En celulares se apila: nombre e interruptor arriba, estado y
 // acciones debajo; la columna del asa se oculta (el orden sigue con «Subir» y «Bajar»).
 export function FilaDePlan(props: Props) {
-  const { plan, indice, caracteristicas, alCambiarVisibilidad, propsDeFila, propsDeAsa } = props
+  const { plan, indice, total, caracteristicas, alCambiarVisibilidad, alMover } = props
   return (
-    <tr
-      data-plan={plan.id}
-      className="border-b transition-colors last:border-b-0 hover:bg-[#f8fafd] data-arrastrada:opacity-50 max-sm:grid max-sm:grid-cols-[minmax(0,1fr)_auto] max-sm:gap-x-3 max-sm:gap-y-[0.35rem] max-sm:px-4 max-sm:py-[0.85rem]"
-      {...propsDeFila}
-    >
-      <CeldaDeOrden posicion={indice + 1} propsDeAsa={propsDeAsa} />
+    <tr data-fila={plan.id} className={FILA_DE_LISTADO} {...props.propsDeFila}>
+      <CeldaDeOrden posicion={indice + 1} propsDeAsa={props.propsDeAsa} />
       <CeldaDelNombre plan={plan} caracteristicas={caracteristicas} />
       <td className={`${CELDA} max-sm:col-span-full`}>
         <InsigniaDeVisibilidad visible={plan.visible} />
@@ -125,7 +66,7 @@ export function FilaDePlan(props: Props) {
       </td>
       <td className={`${CELDA} max-sm:col-span-full`}>
         <div className="flex items-center justify-end gap-1 max-sm:justify-start">
-          <BotonesDeOrden {...props} />
+          <BotonesDeOrden nombre={plan.nombre} indice={indice} total={total} alMover={alMover} />
           <Button asChild variant="outline" size="sm" className="ml-1 bg-card">
             <Link href={rutaDelPlan(plan.id)} aria-label={`Editar ${plan.nombre}`}>
               Editar

@@ -106,6 +106,16 @@ test.describe('Panel propio: sin sesión', () => {
     }
   })
 
+  test('/panel/sedes, la edición y la creación de una sede sin sesión llevan al ingreso', async ({
+    page,
+  }) => {
+    for (const ruta of ['/panel/sedes', '/panel/sedes/1', '/panel/sedes/nueva']) {
+      await page.goto(ruta)
+      await expect(page).toHaveURL(RUTA_DE_INGRESO)
+      await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+    }
+  })
+
   test('el ingreso no tiene infracciones de accesibilidad (WCAG 2.1 AA)', async ({ page }) => {
     expect(await infraccionesDeAccesibilidad(page, '/panel/ingreso')).toEqual([])
   })

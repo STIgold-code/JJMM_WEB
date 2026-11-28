@@ -6,9 +6,9 @@ import { useState, useTransition } from 'react'
 
 import { eliminarElPlan } from '../../acciones/planes'
 import { RUTA_DE_PLANES } from '../../dominio/planes'
-import { Button } from '../ui/button'
+import { Confirmacion } from '../comunes/confirmacion'
 import { avisarResultado } from '../mensajes/avisos'
-import { Confirmacion } from './confirmacion'
+import { Button } from '../ui/button'
 
 interface Props {
   id: number

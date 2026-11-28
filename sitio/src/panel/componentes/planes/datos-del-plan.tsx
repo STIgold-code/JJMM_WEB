@@ -1,73 +1,9 @@
 'use client'
 
-import type { ComponentProps } from 'react'
-
 import type { FormularioDePlan } from '../../dominio/formulario-de-plan'
+import { Campo } from '../comunes/campo'
+import { FilaVisible } from '../comunes/fila-visible'
 import { TarjetaDelPanel } from '../inicio/tarjeta-del-panel'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
-import { Interruptor } from './interruptor'
-import { MensajeDeError } from './mensaje-de-error'
-
-const AYUDA = 'text-[0.8125rem] text-muted-foreground'
-
-type PropsDeCampo = ComponentProps<typeof Input> & {
-  id: string
-  etiqueta: string
-  ayuda: string
-  error?: string
-}
-
-function Campo({ id, etiqueta, ayuda, error, ...entrada }: PropsDeCampo) {
-  const describe = [`${id}-ayuda`, error && `${id}-error`].filter(Boolean).join(' ')
-  return (
-    <div className="grid gap-[0.4rem]">
-      <Label htmlFor={id} className="font-semibold">
-        {etiqueta}
-      </Label>
-      <Input
-        id={id}
-        autoComplete="off"
-        aria-invalid={error ? true : undefined}
-        aria-describedby={describe}
-        className="bg-card"
-        {...entrada}
-      />
-      <p id={`${id}-ayuda`} className={AYUDA}>
-        {ayuda}
-      </p>
-      {error && <MensajeDeError id={`${id}-error`} texto={error} />}
-    </div>
-  )
-}
-
-function FilaVisible({
-  visible,
-  alCambiar,
-}: {
-  visible: boolean
-  alCambiar: (v: boolean) => void
-}) {
-  return (
-    <div className="flex items-start gap-3">
-      <Interruptor
-        activo={visible}
-        alCambiar={alCambiar}
-        aria-labelledby="plan-visible-etiqueta"
-        aria-describedby="plan-visible-ayuda"
-        className="mt-[0.15rem]"
-      />
-      <div>
-        <p id="plan-visible-etiqueta" className="text-sm font-semibold">
-          Visible en el sitio
-        </p>
-        <p id="plan-visible-ayuda" className={AYUDA}>
-          Si lo apagas, la columna deja de mostrarse sin borrar el plan.
-        </p>
-      </div>
-    </div>
-  )
-}
 
 interface Props {
   formulario: FormularioDePlan
@@ -98,7 +34,12 @@ export function DatosDelPlan({ formulario, errorDelNombre, alCambiar }: Props) {
           value={formulario.mensajeDeConsulta}
           onChange={(evento) => alCambiar({ mensajeDeConsulta: evento.target.value })}
         />
-        <FilaVisible visible={formulario.visible} alCambiar={(visible) => alCambiar({ visible })} />
+        <FilaVisible
+          id="plan-visible"
+          visible={formulario.visible}
+          ayuda="Si lo apagas, la columna deja de mostrarse sin borrar el plan."
+          alCambiar={(visible) => alCambiar({ visible })}
+        />
       </div>
     </TarjetaDelPanel>
   )

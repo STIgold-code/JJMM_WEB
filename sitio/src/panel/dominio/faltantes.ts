@@ -1,4 +1,5 @@
 import { listaEnAdmin } from './rutas-del-panel'
+import { RUTA_DE_SEDES } from './sedes'
 
 // «Lo que falta completar»: solo lo que se puede calcular con los datos. Lo que no se puede
 // medir con honestidad (por ejemplo, si los vencimientos tienen fecha: la colección no guarda
@@ -63,7 +64,7 @@ function sedes(avance: AvanceDelSitio['sedes']): Faltante[] {
       actual: avance.conCelular,
       total: avance.activas,
       etiqueta: `${avance.conCelular} de ${avance.activas} sedes`,
-      href: listaEnAdmin('sedes'),
+      href: RUTA_DE_SEDES,
     }),
   ]
 }

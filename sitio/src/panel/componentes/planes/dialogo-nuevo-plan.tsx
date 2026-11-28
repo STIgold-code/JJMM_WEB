@@ -7,6 +7,7 @@ import { useActionState, useState } from 'react'
 import { crearElPlan } from '../../acciones/planes'
 import { ESTADO_INICIAL_DE_CREACION, type EstadoDeCreacion } from '../../aplicacion/guardar-plan'
 import { rutaDelPlan } from '../../dominio/planes'
+import { MensajeDeError } from '../comunes/mensaje-de-error'
 import { Button } from '../ui/button'
 import {
   Dialog,
@@ -21,7 +22,6 @@ import {
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
 import { avisarError, avisarExito } from '../mensajes/avisos'
-import { MensajeDeError } from './mensaje-de-error'
 
 // Al crear, el aviso se da y se va a la edición del plan nuevo para elegir qué incluye.
 function useCrearPlan() {

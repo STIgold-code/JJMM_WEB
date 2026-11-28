@@ -4,6 +4,7 @@ import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_MENSAJES } from './mensajes'
 import { RUTA_DE_PLANES } from './planes'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
+import { RUTA_DE_NUEVA_SEDE, RUTA_DE_SEDES } from './sedes'
 
 // Menú lateral del panel, agrupado por tarea como en la maqueta aprobada. Una entrada sin
 // `ruta` es una sección que aún no se construye: se muestra deshabilitada («Próximamente»).
@@ -79,7 +80,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     soloAdministrador: false,
     entradas: [
       entrada('pagina-de-inicio', 'Página de inicio', 'diseno'),
-      entrada('sedes', 'Sedes', 'pin'),
+      entrada('sedes', 'Sedes', 'pin', RUTA_DE_SEDES),
       entrada('clientes', 'Clientes', 'edificio'),
     ],
   },
@@ -125,8 +126,17 @@ export function esRutaActual(rutaDeLaEntrada: string, ruta: string): boolean {
   return rutaDeLaEntrada !== RUTA_DEL_INICIO && ruta.startsWith(`${rutaDeLaEntrada}/`)
 }
 
-// Última miga de las páginas internas de una sección.
-const PAGINAS_INTERNAS: Readonly<Record<string, string>> = { planes: 'Editar plan' }
+// Última miga de las páginas internas de una sección; las de creación tienen ruta propia.
+const PAGINAS_INTERNAS: Readonly<Record<string, string>> = {
+  planes: 'Editar plan',
+  sedes: 'Editar sede',
+}
+const PAGINAS_DE_CREACION: Readonly<Record<string, string>> = {
+  [RUTA_DE_NUEVA_SEDE]: 'Nueva sede',
+}
+
+const paginaInterna = (clave: string, ruta: string): string =>
+  PAGINAS_DE_CREACION[ruta] ?? PAGINAS_INTERNAS[clave] ?? 'Detalle'
 
 // Ruta de la barra superior. La última miga es la página actual y no lleva enlace; toda
 // sección cuelga del inicio y sus páginas internas, de la sección.
@@ -141,7 +151,7 @@ export function migasDeRuta(ruta: string): Miga[] {
     { texto: actual.texto, ruta: enLaSeccion ? null : actual.ruta },
   ]
   if (enLaSeccion) return migas
-  return [...migas, { texto: PAGINAS_INTERNAS[actual.clave] ?? 'Detalle', ruta: null }]
+  return [...migas, { texto: paginaInterna(actual.clave, ruta), ruta: null }]
 }
 
 const NOMBRES_DE_ROL: Readonly<Record<Rol, string>> = {

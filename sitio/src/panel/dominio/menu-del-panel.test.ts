@@ -25,13 +25,14 @@ describe('menuDelPanel', () => {
   })
 
   it.each(['administrador', 'editor'] as const)(
-    'para %s, solo el inicio, los mensajes y los planes tienen ruta: el resto va sin enlace',
+    'para %s, solo el inicio, los mensajes, los planes y las sedes tienen ruta: el resto va sin enlace',
     (rol) => {
       const todas = entradas(menuDelPanel(rol, { mensajesNuevos: 0 }))
       expect(todas.filter((e) => e.ruta !== null)).toEqual([
         expect.objectContaining({ clave: 'inicio', ruta: RUTA_DEL_INICIO }),
         expect.objectContaining({ clave: 'mensajes', ruta: '/panel/mensajes' }),
         expect.objectContaining({ clave: 'planes', ruta: '/panel/planes' }),
+        expect.objectContaining({ clave: 'sedes', ruta: '/panel/sedes' }),
       ])
       expect(todas.filter((e) => e.ruta === null).length).toBeGreaterThan(0)
     },
@@ -77,6 +78,21 @@ describe('migasDeRuta', () => {
       { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
       { texto: 'Planes', ruta: '/panel/planes' },
       { texto: 'Editar plan', ruta: null },
+    ])
+  })
+
+  it('la edición y la creación de una sede cuelgan de «Sedes»', () => {
+    const seccion = [
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Sedes', ruta: '/panel/sedes' },
+    ]
+    expect(migasDeRuta('/panel/sedes/2')).toEqual([
+      ...seccion,
+      { texto: 'Editar sede', ruta: null },
+    ])
+    expect(migasDeRuta('/panel/sedes/nueva')).toEqual([
+      ...seccion,
+      { texto: 'Nueva sede', ruta: null },
     ])
   })
 

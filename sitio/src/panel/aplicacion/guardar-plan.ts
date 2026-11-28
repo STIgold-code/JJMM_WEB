@@ -1,6 +1,7 @@
 import { AVISO_DE_PLAN_GUARDADO, avisoDePlanCreado } from '../dominio/avisos-de-planes'
 import { ERROR_NOMBRE_REPETIDO } from '../dominio/formulario-de-plan'
 import { leerId } from '../dominio/identificadores'
+import { ordenAlFinal } from '../dominio/orden'
 import type { Aviso } from '../dominio/respuesta-al-mensaje'
 import {
   type ErroresDelPlan,
@@ -75,8 +76,7 @@ export async function crearPlan(
 ): Promise<EstadoDeCreacion> {
   const nombre = validarNombreDePlan(entrada.nombre)
   if ('error' in nombre) return { estado: 'invalido', error: nombre.error }
-  const posiciones = await repositorio.listarPosiciones()
-  const orden = Math.max(-1, ...posiciones.map((p) => p.orden)) + 1
+  const orden = ordenAlFinal(await repositorio.listarPosiciones())
   const escritura = await repositorio.crear(nombre.nombre, orden)
   if (escritura.estado === 'hecho')
     return { estado: 'creado', id: escritura.id, aviso: avisoDePlanCreado(nombre.nombre) }

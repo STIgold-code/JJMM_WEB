@@ -30,8 +30,9 @@ describe('cifrasDelSitio', () => {
     expect(cifras.map((c) => c.clave)).toEqual(['areas', 'sedes', 'clientes', 'avisos'])
   })
 
-  it('«Planes» lleva a su sección del panel', () => {
+  it('«Planes» y «Sedes activas» llevan a su sección del panel', () => {
     expect(cifrasDelSitio(TODAS)[0]?.href).toBe('/panel/planes')
+    expect(cifrasDelSitio(TODAS)[2]?.href).toBe('/panel/sedes')
   })
 
   it('las demás cifras llevan a su lista en /admin mientras su sección del panel no exista', () => {

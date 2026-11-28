@@ -1,7 +1,14 @@
 import { cn } from 'cn'
 
-// «Visible» es listo (verde); «Oculto», neutro: no es un error ni algo pendiente.
-export function InsigniaDeVisibilidad({ visible }: { visible: boolean }) {
+// «Visible» es listo (verde); el oculto, neutro: no es un error ni algo pendiente. `oculto` es el
+// texto del estado apagado, en el género de lo que se muestra («Oculto», «Oculta»).
+export function InsigniaDeVisibilidad({
+  visible,
+  oculto = 'Oculto',
+}: {
+  visible: boolean
+  oculto?: string
+}) {
   return (
     <span
       className={cn(
@@ -12,7 +19,7 @@ export function InsigniaDeVisibilidad({ visible }: { visible: boolean }) {
           : 'border-border bg-muted text-muted-foreground',
       )}
     >
-      {visible ? 'Visible' : 'Oculto'}
+      {visible ? 'Visible' : oculto}
     </span>
   )
 }

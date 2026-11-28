@@ -6,10 +6,10 @@ import type {
   ResultadoDeEscritura,
 } from '../aplicacion/gestionar-planes'
 import { cambiosDeInclusiones } from '../dominio/inclusiones-a-guardar'
-import type { PosicionGuardada } from '../dominio/orden-de-planes'
 import type { InclusionDelPanel } from '../dominio/planes'
 import type { PlanValidado } from '../dominio/validacion-de-plan'
 import { traducirErrorDePayload } from './errores-de-payload'
+import { reordenarEnTransaccion } from './reordenar-payload'
 import type { SesionDelPanel } from './sesion-del-panel'
 import { enTransaccion, type PeticionDeTransaccion } from './transaccion-payload'
 
@@ -24,21 +24,6 @@ async function escribir(
   try {
     const { nombre } = await operacion()
     return { estado: 'hecho', nombre }
-  } catch (error) {
-    return traducirErrorDePayload(error)
-  }
-}
-
-async function reordenar(
-  { payload, permisos }: Contexto,
-  cambios: readonly PosicionGuardada[],
-): Promise<ResultadoDeEscritura> {
-  try {
-    await enTransaccion(payload, async (req) => {
-      for (const { id, orden } of cambios)
-        await payload.update({ collection: 'planes', id, data: { orden }, ...permisos, req })
-    })
-    return { estado: 'hecho' }
   } catch (error) {
     return traducirErrorDePayload(error)
   }
@@ -141,7 +126,7 @@ export function crearEscrituraDePlanes(sesion: SesionDelPanel): RepositorioDeEsc
       escribir(() =>
         payload.update({ collection: 'planes', id, data: { activo: visible }, ...permisos }),
       ),
-    reordenar: (cambios) => reordenar(contexto, cambios),
+    reordenar: (cambios) => reordenarEnTransaccion(payload, permisos, 'planes', cambios),
     crear: async (nombre, orden) => {
       try {
         const data = { nombre, orden, activo: false }

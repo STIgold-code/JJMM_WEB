@@ -7,13 +7,13 @@ import {
 } from '@/modulos/planes/dominio/inclusion-de-plan'
 
 import { ERROR_DE_TABLA_CAMBIADA, ERROR_NOMBRE_VACIO } from './formulario-de-plan'
+import { ERROR_DE_FORMULARIO, esObjeto } from './formularios'
 import { leerId } from './identificadores'
 
 // Validación en el servidor de lo que manda el formulario del plan (`unknown`). Aplica las mismas
 // reglas de dominio que la colección (nombre obligatorio, sin montos, texto de cada celda), así
 // el error llega junto a su campo antes de tocar Payload.
-export const ERROR_DE_FORMULARIO =
-  'No se pudo leer el formulario. Recarga la página e inténtalo de nuevo.'
+export { ERROR_DE_FORMULARIO }
 
 export interface CeldaValidada {
   caracteristica: number
@@ -43,9 +43,6 @@ interface CeldaLeida {
   tipo: TipoDeInclusion
   texto: string
 }
-
-const esObjeto = (valor: unknown): valor is Record<string, unknown> =>
-  typeof valor === 'object' && valor !== null && !Array.isArray(valor)
 
 export function validarNombreDePlan(valor: unknown): { nombre: string } | { error: string } {
   const nombre = typeof valor === 'string' ? valor.trim() : ''

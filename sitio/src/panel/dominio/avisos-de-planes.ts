@@ -10,10 +10,6 @@ export function avisoDeVisibilidad(nombre: string, visible: boolean): Aviso {
   }
 }
 
-export function avisoDeOrden(nombre: string, posicion: number): Aviso {
-  return { titulo: 'Orden actualizado', detalle: `${nombre} quedó en la posición ${posicion}.` }
-}
-
 export const AVISO_DE_PLAN_GUARDADO: Aviso = {
   titulo: 'Cambios guardados',
   detalle: 'La tabla «Nuestros planes» ya muestra los cambios.',

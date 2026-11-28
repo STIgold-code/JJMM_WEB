@@ -47,7 +47,8 @@ export type ValidacionDeContacto =
 
 const comoTexto = (valor: unknown): string => (typeof valor === 'string' ? valor.trim() : '')
 
-const correoValido = (correo: string): boolean =>
+// La misma regla vale para el correo de una sede (también un campo `email` de Payload).
+export const esCorreoValido = (correo: string): boolean =>
   correo.length <= LARGO_MAXIMO_DE_CORREO && PATRON_DE_CORREO.test(correo)
 
 export function validarDatosDeContacto(entrada: {
@@ -58,7 +59,7 @@ export function validarDatosDeContacto(entrada: {
   const correo = comoTexto(entrada.correo)
   const errores: ErroresDeContacto = {}
   if (celular && !esCelularPeruano(celular)) errores.celular = ERROR_DE_CELULAR
-  if (correo && !correoValido(correo)) errores.correo = ERROR_DE_CORREO
+  if (correo && !esCorreoValido(correo)) errores.correo = ERROR_DE_CORREO
   if (Object.keys(errores).length > 0) return { valido: false, errores }
   return {
     valido: true,

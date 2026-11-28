@@ -13,12 +13,13 @@ const dibujar = (rol: 'administrador' | 'editor', mensajesNuevos: number | null 
   renderToStaticMarkup(<NavegacionDelMenu grupos={menuDelPanel(rol, { mensajesNuevos })} />)
 
 describe('NavegacionDelMenu', () => {
-  it('los enlaces son el inicio (página actual), los mensajes de contacto y los planes', () => {
+  it('los enlaces son el inicio (página actual), los mensajes, los planes y las sedes', () => {
     const html = dibujar('administrador')
-    expect(html.match(/<a /g)).toHaveLength(3)
+    expect(html.match(/<a /g)).toHaveLength(4)
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/mensajes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/planes"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/sedes"/)
     expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel\/mensajes"/)
   })
 
@@ -34,6 +35,14 @@ describe('NavegacionDelMenu', () => {
     ruta.actual = '/panel'
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel\/planes"/)
     expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
+  })
+
+  it('en la edición de una sede, «Sedes» queda marcado', () => {
+    ruta.actual = '/panel/sedes/2'
+    const html = dibujar('editor')
+    ruta.actual = '/panel'
+    expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel\/sedes"/)
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1)
   })
 
   it('el editor no ve la sección de administración', () => {

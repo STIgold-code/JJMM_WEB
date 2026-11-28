@@ -1,6 +1,7 @@
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_PLANES } from './planes'
 import { listaEnAdmin } from './rutas-del-panel'
+import { RUTA_DE_SEDES } from './sedes'
 
 // «Lo que publica hoy el sitio»: cifras reales del contenido. `null` = la cuenta no puede
 // leer esa colección y la cifra no se muestra.
@@ -53,6 +54,7 @@ const DEFINICIONES: readonly Definicion[] = [
     etiqueta: 'Sedes activas',
     icono: 'pin',
     slug: 'sedes',
+    ruta: RUTA_DE_SEDES,
   },
   {
     clave: 'clientes',

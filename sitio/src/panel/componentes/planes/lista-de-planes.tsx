@@ -1,9 +1,10 @@
 'use client'
 
+import { cambiarVisibilidadDelPlan, ordenarLosPlanes } from '../../acciones/planes'
 import type { PlanDelListado } from '../../aplicacion/consultar-planes'
+import { useArrastre } from '../comunes/use-arrastre'
+import { type AccionesDeLaLista, useListaOrdenable } from '../comunes/use-lista-ordenable'
 import { FilaDePlan } from './fila-de-plan'
-import { useArrastre } from './use-arrastre'
-import { useListaDePlanes } from './use-lista-de-planes'
 
 interface Props {
   planes: PlanDelListado[]
@@ -11,6 +12,11 @@ interface Props {
 }
 
 const ENCABEZADO = 'px-4 py-[0.6rem] font-semibold'
+
+const ACCIONES: AccionesDeLaLista = {
+  cambiarVisibilidad: cambiarVisibilidadDelPlan,
+  ordenar: ordenarLosPlanes,
+}
 
 // En celulares la tabla se apila y el encabezado se oculta.
 function Encabezado() {
@@ -40,7 +46,8 @@ function Encabezado() {
 // Listado de planes en el orden de la tabla del sitio: interruptor «Visible» y orden (asa para
 // arrastrar, botones «Subir» y «Bajar»), los dos guardados al instante.
 export function ListaDePlanes({ planes: delServidor, caracteristicas }: Props) {
-  const { planes, anuncio, cambiarVisibilidad, mover } = useListaDePlanes(delServidor)
+  const lista = useListaOrdenable(delServidor, ACCIONES)
+  const { elementos: planes, anuncio, cambiarVisibilidad, mover } = lista
   const { propsDeFila, propsDeAsa } = useArrastre((desde, hacia) => mover(desde, hacia))
   return (
     <>

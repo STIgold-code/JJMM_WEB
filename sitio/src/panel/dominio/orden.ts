@@ -1,8 +1,9 @@
 import { leerId } from './identificadores'
+import type { Aviso } from './respuesta-al-mensaje'
 
-// Orden de los planes: el campo numérico `orden` (menor primero). El listado manda la lista
-// completa de ids en el orden nuevo; el servidor la valida contra lo guardado y escribe solo
-// los planes cuyo número cambia.
+// Orden de las listas del panel (planes, sedes): el campo numérico `orden` (menor primero). El
+// listado manda la lista completa de ids en el orden nuevo; el servidor la valida contra lo
+// guardado y escribe solo los documentos cuyo número cambia.
 export interface PosicionGuardada {
   id: number
   orden: number
@@ -27,8 +28,8 @@ function leerIds(valor: unknown): number[] | null {
   return new Set(validos).size === validos.length ? validos : null
 }
 
-// `null` si `idsEnOrden` no es exactamente la lista de planes guardados (falta, sobra o se
-// repite alguno): alguien cambió la lista mientras tanto y no se adivina qué quiso hacer.
+// `null` si `idsEnOrden` no es exactamente la lista guardada (falta, sobra o se repite alguno):
+// alguien cambió la lista mientras tanto y no se adivina qué quiso hacer.
 export function ordenesAActualizar(
   guardados: readonly PosicionGuardada[],
   idsEnOrden: unknown,
@@ -38,4 +39,13 @@ export function ordenesAActualizar(
   const ordenActual = new Map(guardados.map(({ id, orden }) => [id, orden]))
   if (ids.some((id) => !ordenActual.has(id))) return null
   return ids.flatMap((id, orden) => (ordenActual.get(id) === orden ? [] : [{ id, orden }]))
+}
+
+// El siguiente número de orden: el elemento nuevo va al final de la lista.
+export function ordenAlFinal(posiciones: readonly PosicionGuardada[]): number {
+  return Math.max(-1, ...posiciones.map((p) => p.orden)) + 1
+}
+
+export function avisoDeOrden(nombre: string, posicion: number): Aviso {
+  return { titulo: 'Orden actualizado', detalle: `${nombre} quedó en la posición ${posicion}.` }
 }

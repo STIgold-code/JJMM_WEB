@@ -1,6 +1,6 @@
 import { expect, vi } from 'vitest'
 
-// Dobles de Next y de la Local API de Payload para probar las acciones de planes con la guardia
+// Dobles de Next y de la Local API de Payload para probar las acciones (planes, sedes) con la guardia
 // y el adaptador reales. Cada archivo de prueba registra los `vi.mock` (que se elevan) y toma
 // estos dobles con una importación dinámica dentro de la fábrica.
 export const dobles = {

@@ -6,9 +6,9 @@ import type { TipoDeInclusion } from '@/modulos/planes/dominio/inclusion-de-plan
 
 import type { CeldaDelFormulario } from '../../dominio/formulario-de-plan'
 import type { CaracteristicaDelPanel } from '../../dominio/planes'
+import { MensajeDeError } from '../comunes/mensaje-de-error'
 import { TarjetaDelPanel } from '../inicio/tarjeta-del-panel'
 import { Input } from '../ui/input'
-import { MensajeDeError } from './mensaje-de-error'
 
 const OPCIONES: readonly { tipo: TipoDeInclusion; texto: string }[] = [
   { tipo: 'incluido', texto: 'Incluido' },
