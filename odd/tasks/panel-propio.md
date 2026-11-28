@@ -155,4 +155,13 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844, solo lectura: los 3 avisos, los 14 vencimientos y el estado vacío del cronograma con su formulario, sin desborde ni errores; `/guia` público sin cambios.
 - Sin verificar: ninguna escritura (datos reales) ni la vista de un editor.
 
-Siguiente paso: P6, Imágenes; después Página de inicio y Publicaciones (su editor no tiene maqueta).
+**L11** (27/11/2026), P6 · Imágenes terminada (`c0f0e19`):
+- `/panel/imagenes`: cuadrícula con filtros por uso y buscador, paginación, subida de una o varias imágenes con texto alternativo obligatorio, detalle en panel lateral con «Se usa en», borrado solo del administrador y solo si la imagen no está en uso. `SelectorDeImagen` reutilizable en `componentes/comunes/` (aún sin conectar a ningún formulario).
+- Subida: manejador de ruta `POST /panel/imagenes/subir` (las server actions aceptan 1 MB): sesión antes de leer el cuerpo (401), mismo origen (403), tope de 10 MB (413), tipo real por los primeros bytes (JPEG, PNG, WebP, AVIF) y extensión reemplazada por la del tipo real.
+- Colección `medios`: `upload.mimeTypes` limitado a esos cuatro tipos (vale para `/admin` y `/api/medios`). Sin cambio de esquema. Payload valida el tipo guardado en cada actualización: se comprobó por la API pública que las 21 imágenes de producción son PNG (15) o WebP (6), así que ninguna queda sin poder editarse.
+- Las llaves foráneas a `medios` son `ON DELETE SET NULL`: borrar una imagen en uso vaciaría en silencio campos obligatorios. El bloqueo por uso del panel es la única defensa; el verificador confirmó que el inventario cubre los 12 campos que apuntan a `medios`.
+- Verificador independiente: dos bloqueos, resueltos antes de subir (el de los tipos existentes, con el dato de producción; una frase desactualizada de `sitio/CLAUDE.md`). Avisos anotados: un editor aún puede borrar imágenes en uso desde `/admin` o la API (falta un hook `beforeDelete` o P7); algunos AVIF válidos se rechazan; el texto de «Quiénes somos» no se revisa en el inventario (el sitio solo dibuja su texto).
+- Verificado en producción a 1440×900 y 390×844, solo lectura: 21 miniaturas sin ninguna rota, filtros con conteo, detalle con «Se usa en», sin desborde ni errores; la subida sin sesión responde 401.
+- Sin verificar: una subida real, editar un texto alternativo y un borrado.
+
+Siguiente paso: P6, Página de inicio (con maqueta para la lista de secciones y el carrusel) y, en paralelo, P6b: la maqueta de lo que falta.
