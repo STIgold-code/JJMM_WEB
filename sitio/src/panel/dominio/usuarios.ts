@@ -1,5 +1,6 @@
 import type { Rol } from '@/compartido/dominio/roles'
 
+import { normalizarParaBuscar as normalizar } from './busqueda'
 import type { Aviso } from './respuesta-al-mensaje'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 
@@ -44,14 +45,6 @@ export function filtrosDeUsuarios(
     { filtro: 'editor', texto: 'Editores', cantidad: usuarios.length - administradores },
   ]
 }
-
-// Sin tildes ni mayúsculas: «maria» encuentra a «María».
-const normalizar = (texto: string) =>
-  texto
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
-    .trim()
 
 export function filtrarUsuarios(
   usuarios: readonly UsuarioDelPanel[],

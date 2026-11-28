@@ -35,6 +35,11 @@ describe('cifrasDelSitio', () => {
     expect(cifrasDelSitio(TODAS)[2]?.href).toBe('/panel/sedes')
   })
 
+  it('«Avisos para clientes» y «Vencimientos» llevan a su parte de la guía de clientes', () => {
+    expect(cifrasDelSitio(TODAS)[4]?.href).toBe('/panel/guia#avisos')
+    expect(cifrasDelSitio(TODAS)[5]?.href).toBe('/panel/guia#vencimientos')
+  })
+
   it('las demás cifras llevan a su lista en /admin mientras su sección del panel no exista', () => {
     expect(cifrasDelSitio(TODAS)[1]?.href).toBe('/admin/collections/areas-de-servicio')
   })

@@ -3,7 +3,7 @@ import type { Rol } from '@/compartido/dominio/roles'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_MENSAJES } from './mensajes'
 import { RUTA_DE_PLANES } from './planes'
-import { RUTA_DEL_INICIO } from './rutas-del-panel'
+import { RUTA_DE_LA_GUIA, RUTA_DEL_INICIO } from './rutas-del-panel'
 import { RUTA_DE_NUEVA_SEDE, RUTA_DE_SEDES } from './sedes'
 import { RUTA_DE_MI_CUENTA, RUTA_DE_USUARIOS } from './usuarios'
 
@@ -89,7 +89,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     titulo: 'Para tus clientes',
     soloAdministrador: false,
     entradas: [
-      entrada('guia', 'Guía de clientes', 'libro'),
+      entrada('guia', 'Guía de clientes', 'libro', RUTA_DE_LA_GUIA),
       entrada('publicaciones', 'Publicaciones', 'periodico'),
       entrada('medios', 'Imágenes', 'imagen'),
     ],

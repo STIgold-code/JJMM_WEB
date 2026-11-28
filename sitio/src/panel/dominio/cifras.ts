@@ -1,3 +1,4 @@
+import { rutaDeLaParte } from './guia-de-clientes'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_PLANES } from './planes'
 import { listaEnAdmin } from './rutas-del-panel'
@@ -69,6 +70,7 @@ const DEFINICIONES: readonly Definicion[] = [
     etiqueta: 'Avisos para clientes',
     icono: 'libro',
     slug: 'avisos-para-clientes',
+    ruta: rutaDeLaParte('avisos'),
   },
   {
     clave: 'vencimientos',
@@ -76,6 +78,7 @@ const DEFINICIONES: readonly Definicion[] = [
     etiqueta: 'Vencimientos',
     icono: 'calendario',
     slug: 'vencimientos',
+    ruta: rutaDeLaParte('vencimientos'),
   },
 ]
 

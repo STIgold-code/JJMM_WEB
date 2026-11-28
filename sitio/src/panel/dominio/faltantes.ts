@@ -1,3 +1,4 @@
+import { rutaDeLaParte } from './guia-de-clientes'
 import { listaEnAdmin } from './rutas-del-panel'
 import { RUTA_DE_SEDES } from './sedes'
 
@@ -50,7 +51,7 @@ function cronograma(digitos: number | null): Faltante[] {
       actual: digitos,
       total: DIGITOS_DEL_RUC,
       etiqueta: `${digitos} de ${DIGITOS_DEL_RUC} dígitos`,
-      href: listaEnAdmin('cronogramas-sunat'),
+      href: rutaDeLaParte('cronograma'),
     }),
   ]
 }

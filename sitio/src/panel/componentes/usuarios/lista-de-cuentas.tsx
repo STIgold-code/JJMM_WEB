@@ -1,6 +1,5 @@
 'use client'
 
-import { Search } from 'lucide-react'
 import { useState } from 'react'
 
 import {
@@ -10,7 +9,7 @@ import {
   textoSinUsuarios,
   type UsuarioDelPanel,
 } from '../../dominio/usuarios'
-import { Input } from '../ui/input'
+import { Buscador } from '../comunes/buscador'
 import { FiltrosDeCuentas } from './filtros-de-cuentas'
 import { FilaDeCuenta } from './fila-de-cuenta'
 
@@ -21,30 +20,6 @@ interface Props {
 }
 
 const ENCABEZADO = 'px-4 py-[0.6rem] font-semibold'
-
-function Buscador({ valor, alCambiar }: { valor: string; alCambiar: (valor: string) => void }) {
-  return (
-    <div role="search" className="relative flex-[1_1_14rem] sm:ml-auto sm:max-w-80">
-      <label htmlFor="buscar-cuentas" className="sr-only">
-        Buscar cuentas
-      </label>
-      <Search
-        aria-hidden="true"
-        strokeWidth={1.75}
-        className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground"
-      />
-      <Input
-        id="buscar-cuentas"
-        type="search"
-        value={valor}
-        onChange={(evento) => alCambiar(evento.target.value)}
-        maxLength={100}
-        placeholder="Buscar por nombre o correo"
-        className="h-9 bg-card pl-9 text-sm"
-      />
-    </div>
-  )
-}
 
 function Tabla({ cuentas, idPropio, textoVacio }: Props & { textoVacio: string }) {
   return (
@@ -94,7 +69,13 @@ export function ListaDeCuentas({ cuentas, idPropio }: Props) {
           actual={filtro}
           alElegir={setFiltro}
         />
-        <Buscador valor={busqueda} alCambiar={setBusqueda} />
+        <Buscador
+          id="buscar-cuentas"
+          etiqueta="Buscar cuentas"
+          placeholder="Buscar por nombre o correo"
+          valor={busqueda}
+          alCambiar={setBusqueda}
+        />
       </div>
       <Tabla
         cuentas={visibles}

@@ -6,7 +6,7 @@ import { traducirErrorDePayload } from './errores-de-payload'
 import { enTransaccion } from './transaccion-payload'
 
 // Colecciones del panel con el campo numérico `orden`.
-export type ColeccionOrdenable = 'planes' | 'sedes'
+export type ColeccionOrdenable = 'planes' | 'sedes' | 'avisos-para-clientes'
 
 interface Permisos {
   overrideAccess: false

@@ -13,16 +13,17 @@ const dibujar = (rol: 'administrador' | 'editor', mensajesNuevos: number | null 
   renderToStaticMarkup(<NavegacionDelMenu grupos={menuDelPanel(rol, { mensajesNuevos })} />)
 
 describe('NavegacionDelMenu', () => {
-  it('los enlaces son el inicio (página actual), los mensajes, los planes, las sedes y, para el administrador, los usuarios', () => {
+  it('los enlaces son el inicio (página actual), los mensajes, los planes, las sedes, la guía y, para el administrador, los usuarios', () => {
     const html = dibujar('administrador')
-    expect(html.match(/<a /g)).toHaveLength(5)
+    expect(html.match(/<a /g)).toHaveLength(6)
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/mensajes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/planes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/sedes"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/guia"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/usuarios"/)
     expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel\/mensajes"/)
-    expect(dibujar('editor').match(/<a /g)).toHaveLength(4)
+    expect(dibujar('editor').match(/<a /g)).toHaveLength(5)
   })
 
   it('las secciones pendientes se ven deshabilitadas con «Próximamente», sin enlace', () => {

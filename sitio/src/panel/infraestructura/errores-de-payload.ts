@@ -31,6 +31,17 @@ export function traducirErrorDePayload(error: unknown): RechazoDePayload {
   throw error
 }
 
+// Una escritura de la Local API: «hecho» con el documento escrito, o el rechazo tipado.
+export async function escribirDocumento<T>(
+  operacion: () => Promise<T>,
+): Promise<{ estado: 'hecho'; documento: T } | RechazoDePayload> {
+  try {
+    return { estado: 'hecho', documento: await operacion() }
+  } catch (error) {
+    return traducirErrorDePayload(error)
+  }
+}
+
 // Una escritura de la Local API cuyo resultado no hace falta: «hecho» o el rechazo tipado.
 export async function escribirConPayload(
   operacion: () => Promise<unknown>,

@@ -44,7 +44,7 @@ describe('faltantesDelSitio', () => {
       total: 10,
       etiqueta: '0 de 10 dígitos',
       completo: false,
-      href: '/admin/collections/cronogramas-sunat',
+      href: '/panel/guia#cronograma',
     })
   })
 
