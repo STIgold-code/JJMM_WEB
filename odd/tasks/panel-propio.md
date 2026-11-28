@@ -192,4 +192,13 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Sobre las tres decisiones de datos: el orquestador borra los datos de prueba que él creó (mensaje id 1, plan id 5), prueba las escrituras con datos de prueba que crea y borra, y para ver el panel como editor crea una cuenta temporal con contraseña aleatoria que elimina al terminar. No se modifica ningún dato real del estudio.
 - Orden de construcción: (1) catálogo: áreas, valores, clientes y filas de la tabla; (2) datos del estudio y menú del sitio; (3) secciones del inicio, portadas y textos de páginas; (4) publicaciones, categorías y etiquetas; (5) reglas en las colecciones (último administrador, borrado de medios) y P7.
 
-Siguiente paso: construcción (1).
+**L15** (28/11/2026), pruebas de escritura en producción con datos de prueba, todos creados y borrados por el orquestador (producción quedó con 4 planes, 2 sedes, 21 imágenes, 1 cuenta y 0 mensajes, como antes):
+- Planes: eliminar el plan de prueba (id 5) con su diálogo; el sitio conserva sus 4 columnas y 22 filas.
+- Mensajes: eliminar el mensaje de prueba (id 1); el listado vuelve a su estado vacío.
+- Usuarios: crear una cuenta de editor temporal con contraseña aleatoria, entrar con ella y eliminarla. Como editor: no ve el grupo «Administración», `/panel/usuarios` muestra «Solo para el administrador», no hay botón «Eliminar plan», «Mi cuenta» muestra su rol. Todavía puede entrar a `/admin` (se resuelve con P7).
+- Sedes: crear una sede oculta (un teléfono fijo se rechaza con su mensaje; con un celular se crea), comprobar que el sitio no la muestra, editarla, comprobar que persiste y eliminarla.
+- Imágenes: subir un PNG real (aceptado; el control de mismo origen funciona detrás del proxy de Railway) y un HTML disfrazado de PNG (rechazado: «Solo se aceptan imágenes JPG, PNG, WebP o AVIF.»); editar su texto alternativo; eliminarla.
+- Observado: tras borrar una imagen, pedir su archivo a `/api/medios/file/...` responde 500 en vez de 404 (comportamiento de Payload, anterior al panel).
+- No se probó: guardar el carrusel ni la guía (no tienen dato de prueba posible: se publican al guardar) ni cargar un cronograma.
+
+Siguiente paso: construcción (1), en curso.
