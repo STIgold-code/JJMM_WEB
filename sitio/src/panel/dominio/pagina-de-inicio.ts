@@ -1,12 +1,16 @@
+import { RUTA_DE_AREAS } from './areas-de-servicio'
+import { RUTA_DE_CLIENTES } from './clientes'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_PLANES } from './planes'
 import type { Aviso } from './respuesta-al-mensaje'
-import { RUTA_DEL_INICIO } from './rutas-del-panel'
+import { RUTA_DE_LA_PAGINA_DE_INICIO } from './rutas-del-panel'
 import { RUTA_DE_SEDES } from './sedes'
+import { RUTA_DE_VALORES } from './valores'
 
 // Página de inicio del sitio (global `pagina-de-inicio`): sus secciones en orden y, por ahora,
-// el editor del carrusel de portadas. Las demás secciones aún no tienen pantalla aprobada.
-export const RUTA_DE_LA_PAGINA_DE_INICIO = `${RUTA_DEL_INICIO}/pagina-de-inicio`
+// el editor del carrusel de portadas. Las demás secciones aún no tienen pantalla; las listas que
+// muestran (áreas, planes, valores, clientes, sedes) se editan en la suya.
+export { RUTA_DE_LA_PAGINA_DE_INICIO }
 export const RUTA_DEL_CARRUSEL = `${RUTA_DE_LA_PAGINA_DE_INICIO}/portadas`
 export const TIPO_CARRUSEL = 'carrusel-de-portadas'
 
@@ -65,6 +69,7 @@ const DESCRIPCIONES: Readonly<Record<string, Descripcion>> = {
     nombre: 'Nuestros servicios',
     icono: 'maletin',
     detalle: () => 'Rueda SIGE Mype con las áreas de servicio',
+    irA: { texto: 'Ir a Áreas', ruta: RUTA_DE_AREAS },
   },
   planes: {
     nombre: 'Nuestros planes',
@@ -76,11 +81,13 @@ const DESCRIPCIONES: Readonly<Record<string, Descripcion>> = {
     nombre: '¿Por qué elegirnos?',
     icono: 'estrella',
     detalle: () => 'Los valores del estudio, cada uno con su ícono',
+    irA: { texto: 'Ir a Valores', ruta: RUTA_DE_VALORES },
   },
   clientes: {
     nombre: 'Nuestros clientes',
     icono: 'edificio',
     detalle: () => 'Logotipos de clientes',
+    irA: { texto: 'Ir a Clientes', ruta: RUTA_DE_CLIENTES },
   },
   contacto: {
     nombre: 'Contáctanos',

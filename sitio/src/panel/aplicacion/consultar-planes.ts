@@ -68,6 +68,27 @@ export async function obtenerListadoDePlanes(
   }
 }
 
+// «Filas de la tabla»: las características en orden, con lo que tiene cada plan en cada una
+// (para su resumen, el diálogo de borrado y la vista previa).
+export interface DatosDeLasFilas {
+  caracteristicas: CaracteristicaDelPanel[]
+  planes: PlanDelPanel[]
+  inclusiones: InclusionDelPanel[]
+  textos: TextosDeLaSeccion
+}
+
+export async function obtenerFilasDeLaTabla(
+  repositorio: RepositorioDeLecturaDePlanes,
+): Promise<DatosDeLasFilas> {
+  const [caracteristicas, planes, inclusiones, textos] = await Promise.all([
+    repositorio.listarCaracteristicas(),
+    repositorio.listarPlanes(),
+    repositorio.listarInclusiones(),
+    repositorio.leerTextosDeLaSeccion(),
+  ])
+  return { caracteristicas, planes, inclusiones, textos: textos ?? TEXTOS_PREDETERMINADOS }
+}
+
 // `null` si el id de la URL no es válido o el plan no existe (la página responde 404).
 export async function obtenerEdicionDePlan(
   repositorio: RepositorioDeLecturaDePlanes,

@@ -38,7 +38,8 @@ interface Valor {
   texto: string | null
 }
 
-function aCelda(valor: Valor | undefined): CeldaDePlan {
+// Lo vacío o sin guardar se ve como no incluido, igual que en el sitio.
+export function aCelda(valor: Valor | undefined): CeldaDePlan {
   const texto = valor?.texto?.trim() ?? ''
   if (valor?.tipo === 'incluido') return { tipo: 'incluido' }
   if (valor?.tipo === 'texto' && texto !== '') return { tipo: 'texto', texto }

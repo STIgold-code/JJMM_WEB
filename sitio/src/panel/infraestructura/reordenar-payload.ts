@@ -6,12 +6,28 @@ import { traducirErrorDePayload } from './errores-de-payload'
 import { enTransaccion } from './transaccion-payload'
 
 // Colecciones del panel con el campo numérico `orden`.
-export type ColeccionOrdenable = 'planes' | 'sedes' | 'avisos-para-clientes'
+export type ColeccionOrdenable =
+  'planes' | 'sedes' | 'avisos-para-clientes' | 'areas-de-servicio' | 'valores' | 'clientes'
 
 interface Permisos {
   overrideAccess: false
   user: TypedUser
   depth: 0
+}
+
+// El `orden` guardado de cada documento, con los permisos de la sesión.
+export async function listarPosicionesDe(
+  payload: Payload,
+  permisos: Permisos,
+  coleccion: ColeccionOrdenable,
+): Promise<PosicionGuardada[]> {
+  const { docs } = await payload.find({
+    collection: coleccion,
+    sort: 'orden',
+    pagination: false,
+    ...permisos,
+  })
+  return docs.map(({ id, orden }) => ({ id, orden }))
 }
 
 // Escribe el `orden` nuevo de cada documento en una sola transacción: todos o ninguno. Solo toca

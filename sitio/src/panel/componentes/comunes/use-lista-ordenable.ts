@@ -6,15 +6,16 @@ import type { ResultadoDeAccionRapida } from '../../aplicacion/resultados-de-esc
 import { avisoDeOrden, moverEnLista } from '../../dominio/orden'
 import { avisarError, avisarExito, avisarResultado } from '../mensajes/avisos'
 
+// `visible` solo en las listas con interruptor (las áreas y los valores no lo tienen).
 export interface ElementoOrdenable {
   id: number
   nombre: string
-  visible: boolean
+  visible?: boolean
 }
 
 // Las acciones de servidor del listado; reciben `unknown` y validan en el servidor.
 export interface AccionesDeLaLista {
-  cambiarVisibilidad: (id: number, visible: boolean) => Promise<ResultadoDeAccionRapida>
+  cambiarVisibilidad?: (id: number, visible: boolean) => Promise<ResultadoDeAccionRapida>
   ordenar: (ids: number[]) => Promise<ResultadoDeAccionRapida>
 }
 
@@ -61,9 +62,11 @@ export function useListaOrdenable<T extends ElementoOrdenable>(
   }, [elementos])
 
   function cambiarVisibilidad(id: number, visible: boolean): void {
+    const guardarVisibilidad = acciones.cambiarVisibilidad
+    if (!guardarVisibilidad) return
     iniciar(async () => {
       aplicar({ tipo: 'visibilidad', id, visible })
-      avisarResultado(await acciones.cambiarVisibilidad(id, visible))
+      avisarResultado(await guardarVisibilidad(id, visible))
     })
   }
 

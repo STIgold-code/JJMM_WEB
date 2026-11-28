@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { migasDeRuta } from '../../dominio/menu-del-panel'
+import { migasDeRuta } from '../../dominio/migas-del-panel'
 
 // Ruta de la barra superior. La última miga es la página actual.
 export function RutaDeLaPagina() {

@@ -13,25 +13,45 @@ const dibujar = (rol: 'administrador' | 'editor', mensajesNuevos: number | null 
   renderToStaticMarkup(<NavegacionDelMenu grupos={menuDelPanel(rol, { mensajesNuevos })} />)
 
 describe('NavegacionDelMenu', () => {
-  it('los enlaces son el inicio (página actual), los mensajes, los planes, la página de inicio, las sedes, la guía, las imágenes y, para el administrador, los usuarios', () => {
+  it('los enlaces son el inicio (página actual), los mensajes, los planes, las áreas, la página de inicio, las sedes, los clientes, la guía, las imágenes y, para el administrador, los usuarios', () => {
     const html = dibujar('administrador')
-    expect(html.match(/<a /g)).toHaveLength(8)
+    expect(html.match(/<a /g)).toHaveLength(10)
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/mensajes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/planes"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/areas"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/pagina-de-inicio"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/sedes"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/clientes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/guia"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/imagenes"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/usuarios"/)
     expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel\/mensajes"/)
-    expect(dibujar('editor').match(/<a /g)).toHaveLength(7)
+    expect(dibujar('editor').match(/<a /g)).toHaveLength(9)
   })
 
   it('las secciones pendientes se ven deshabilitadas con «Próximamente», sin enlace', () => {
     const html = dibujar('administrador')
-    expect(html).toMatch(/aria-disabled="true"[^>]*>.*Áreas de servicio.*Próximamente/)
+    expect(html).toMatch(/aria-disabled="true"[^>]*>.*Publicaciones.*Próximamente/)
     expect(html).not.toContain('href="#"')
+  })
+
+  it('en la edición de un área, «Áreas de servicio» queda marcada', () => {
+    ruta.actual = '/panel/areas/3'
+    const html = dibujar('editor')
+    ruta.actual = '/panel'
+    expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel\/areas"/)
+    expect(html.match(/aria-current="page"/g)).toHaveLength(1)
+  })
+
+  it('en «Valores», «Página de inicio» queda marcada; en «Filas de la tabla», «Planes»', () => {
+    ruta.actual = '/panel/pagina-de-inicio/valores'
+    const valores = dibujar('editor')
+    ruta.actual = '/panel/planes/filas'
+    const filas = dibujar('editor')
+    ruta.actual = '/panel'
+    expect(valores).toMatch(/<a aria-current="page"[^>]*href="\/panel\/pagina-de-inicio"/)
+    expect(filas).toMatch(/<a aria-current="page"[^>]*href="\/panel\/planes"/)
   })
 
   it('en la edición de un plan, «Planes» queda marcado y el inicio no', () => {

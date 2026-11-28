@@ -40,7 +40,12 @@ describe('cifrasDelSitio', () => {
     expect(cifrasDelSitio(TODAS)[5]?.href).toBe('/panel/guia#vencimientos')
   })
 
-  it('las demás cifras llevan a su lista en /admin mientras su sección del panel no exista', () => {
-    expect(cifrasDelSitio(TODAS)[1]?.href).toBe('/admin/collections/areas-de-servicio')
+  it('«Áreas de servicio» y «Clientes en el inicio» llevan a su sección del panel', () => {
+    expect(cifrasDelSitio(TODAS)[1]?.href).toBe('/panel/areas')
+    expect(cifrasDelSitio(TODAS)[3]?.href).toBe('/panel/clientes')
+  })
+
+  it('ninguna cifra lleva ya al /admin', () => {
+    expect(cifrasDelSitio(TODAS).filter((c) => c.href.startsWith('/admin'))).toEqual([])
   })
 })

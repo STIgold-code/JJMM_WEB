@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { esRutaActual, migasDeRuta } from './menu-del-panel'
+import { esRutaActual } from './menu-del-panel'
+import { migasDeRuta } from './migas-del-panel'
 import {
   RUTA_DE_LA_PAGINA_DE_INICIO,
   rutaDelCarrusel,
@@ -50,6 +51,17 @@ describe('resumenDeSeccion', () => {
     )
   })
 
+  it('«Nuestros servicios», «¿Por qué elegirnos?» y «Nuestros clientes» enlazan a su pantalla', () => {
+    const irA = (tipo: string) => resumenDeSeccion(leida({ tipo })).irA
+    expect(irA('servicios')).toEqual({ texto: 'Ir a Áreas', ruta: '/panel/areas' })
+    expect(irA('por-que-elegirnos')).toEqual({
+      texto: 'Ir a Valores',
+      ruta: '/panel/pagina-de-inicio/valores',
+    })
+    expect(irA('clientes')).toEqual({ texto: 'Ir a Clientes', ruta: '/panel/clientes' })
+    expect(resumenDeSeccion(leida({ tipo: 'servicios' })).editar).toBeNull()
+  })
+
   it('un tipo que el panel no conoce se muestra como tal y no se edita', () => {
     expect(resumenDeSeccion(leida({ tipo: 'bloque-del-futuro' }))).toMatchObject({
       nombre: 'Sección sin nombre',
@@ -77,6 +89,15 @@ describe('rutas', () => {
       { texto: 'Carrusel de portadas', ruta: null },
     ])
     expect(esRutaActual('/panel/pagina-de-inicio', '/panel/pagina-de-inicio/portadas')).toBe(true)
+  })
+
+  it('«Valores» cuelga de «Página de inicio», como en la maqueta, sin entrada propia en el menú', () => {
+    expect(migasDeRuta('/panel/pagina-de-inicio/valores')).toEqual([
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Página de inicio', ruta: '/panel/pagina-de-inicio' },
+      { texto: 'Valores', ruta: null },
+    ])
+    expect(esRutaActual('/panel/pagina-de-inicio', '/panel/pagina-de-inicio/valores')).toBe(true)
   })
 
   it('el carrusel se abre con el id de su sección', () => {

@@ -1,3 +1,5 @@
+import { RUTA_DE_AREAS } from './areas-de-servicio'
+import { RUTA_DE_CLIENTES } from './clientes'
 import { rutaDeLaParte } from './guia-de-clientes'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_PLANES } from './planes'
@@ -48,6 +50,7 @@ const DEFINICIONES: readonly Definicion[] = [
     etiqueta: 'Áreas de servicio',
     icono: 'maletin',
     slug: 'areas-de-servicio',
+    ruta: RUTA_DE_AREAS,
   },
   {
     clave: 'sedes',
@@ -63,6 +66,7 @@ const DEFINICIONES: readonly Definicion[] = [
     etiqueta: 'Clientes en el inicio',
     icono: 'edificio',
     slug: 'clientes',
+    ruta: RUTA_DE_CLIENTES,
   },
   {
     clave: 'avisos',

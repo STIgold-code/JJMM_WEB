@@ -1,10 +1,11 @@
 import { cn } from 'cn'
-import { Check, Eye } from 'lucide-react'
+import { Check } from 'lucide-react'
 
 import type { CeldaDePlan } from '@/modulos/planes/dominio/matriz-de-planes'
 
 import type { TextosDeLaSeccion } from '../../aplicacion/consultar-planes'
 import type { VistaPreviaDePlanes } from '../../dominio/vista-previa-de-planes'
+import { MarcoDeVistaPrevia } from '../comunes/marco-de-vista-previa'
 
 // Colores del sitio público (tokens v4), solo para que la vista previa se parezca a él.
 function Celda({ celda }: { celda: CeldaDePlan }) {
@@ -97,40 +98,31 @@ interface Props {
 export function VistaPrevia({ vista, textos }: Props) {
   const conColumnas = vista.columnas.length > 0
   return (
-    <aside
-      aria-labelledby="titulo-vista"
-      className="overflow-hidden rounded-lg border bg-card amplio:sticky amplio:top-[calc(var(--alto-barra)+1.25rem)]"
-    >
-      <div className="flex items-center justify-between gap-2 border-b bg-muted px-[0.9rem] py-[0.55rem] text-[0.8125rem] font-semibold text-muted-foreground">
-        <span id="titulo-vista">Vista previa: «{textos.titulo}» en el sitio</span>
-        <Eye aria-hidden="true" className="size-4 shrink-0" />
-      </div>
-      <div className="overflow-x-auto bg-white px-4 py-5 text-xs text-[#1f2d3d] amplio:max-h-[calc(100vh-var(--alto-barra)-5rem)] amplio:overflow-y-auto">
-        <p className="mb-1 text-center font-marca text-[1.35rem] font-medium text-[#0f3354] uppercase">
-          {textos.titulo}
+    <MarcoDeVistaPrevia titulo={`Vista previa: «${textos.titulo}» en el sitio`}>
+      <p className="mb-1 text-center font-marca text-[1.35rem] font-medium text-[#0f3354] uppercase">
+        {textos.titulo}
+      </p>
+      {textos.bajada && (
+        <p className="mx-auto mb-4 max-w-[28rem] text-center text-[#4b5b6d]">{textos.bajada}</p>
+      )}
+      {vista.planOculto && (
+        <p className="mb-3 rounded-md border border-pendiente-borde bg-pendiente-fondo px-3 py-2 text-[0.8125rem] text-pendiente">
+          Este plan está oculto: su columna no aparece en el sitio.
         </p>
-        {textos.bajada && (
-          <p className="mx-auto mb-4 max-w-[28rem] text-center text-[#4b5b6d]">{textos.bajada}</p>
-        )}
-        {vista.planOculto && (
-          <p className="mb-3 rounded-md border border-pendiente-borde bg-pendiente-fondo px-3 py-2 text-[0.8125rem] text-pendiente">
-            Este plan está oculto: su columna no aparece en el sitio.
-          </p>
-        )}
-        {conColumnas ? (
-          <Tabla vista={vista} encabezado={textos.encabezado} />
-        ) : (
-          <p className="py-6 text-center text-[#4b5b6d]">
-            Ningún plan está visible: el sitio no muestra esta tabla.
-          </p>
-        )}
-        <p className="mt-3 text-center text-[#4b5b6d]">
-          {textos.notaAlPie && <>{textos.notaAlPie} </>}
-          <span className="inline-block rounded-sm bg-[#feee00] px-[0.7rem] py-[0.3rem] font-bold text-[#0f3354]">
-            {textos.textoDelBoton}
-          </span>
+      )}
+      {conColumnas ? (
+        <Tabla vista={vista} encabezado={textos.encabezado} />
+      ) : (
+        <p className="py-6 text-center text-[#4b5b6d]">
+          Ningún plan está visible: el sitio no muestra esta tabla.
         </p>
-      </div>
-    </aside>
+      )}
+      <p className="mt-3 text-center text-[#4b5b6d]">
+        {textos.notaAlPie && <>{textos.notaAlPie} </>}
+        <span className="inline-block rounded-sm bg-[#feee00] px-[0.7rem] py-[0.3rem] font-bold text-[#0f3354]">
+          {textos.textoDelBoton}
+        </span>
+      </p>
+    </MarcoDeVistaPrevia>
   )
 }

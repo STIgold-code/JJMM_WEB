@@ -1,13 +1,14 @@
 import type { Rol } from '@/compartido/dominio/roles'
 
+import { RUTA_DE_AREAS } from './areas-de-servicio'
+import { RUTA_DE_CLIENTES } from './clientes'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_IMAGENES } from './imagenes'
 import { RUTA_DE_MENSAJES } from './mensajes'
-import { RUTA_DE_LA_PAGINA_DE_INICIO } from './pagina-de-inicio'
 import { RUTA_DE_PLANES } from './planes'
-import { RUTA_DE_LA_GUIA, RUTA_DEL_INICIO } from './rutas-del-panel'
-import { RUTA_DE_NUEVA_SEDE, RUTA_DE_SEDES } from './sedes'
-import { RUTA_DE_MI_CUENTA, RUTA_DE_USUARIOS } from './usuarios'
+import { RUTA_DE_LA_GUIA, RUTA_DE_LA_PAGINA_DE_INICIO, RUTA_DEL_INICIO } from './rutas-del-panel'
+import { RUTA_DE_SEDES } from './sedes'
+import { RUTA_DE_USUARIOS } from './usuarios'
 
 // Menú lateral del panel, agrupado por tarea como en la maqueta aprobada. Una entrada sin
 // `ruta` es una sección que aún no se construye: se muestra deshabilitada («Próximamente»).
@@ -75,7 +76,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     soloAdministrador: false,
     entradas: [
       entrada('planes', 'Planes', 'capas', RUTA_DE_PLANES),
-      entrada('areas', 'Áreas de servicio', 'maletin'),
+      entrada('areas', 'Áreas de servicio', 'maletin', RUTA_DE_AREAS),
     ],
   },
   {
@@ -84,7 +85,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     entradas: [
       entrada('pagina-de-inicio', 'Página de inicio', 'diseno', RUTA_DE_LA_PAGINA_DE_INICIO),
       entrada('sedes', 'Sedes', 'pin', RUTA_DE_SEDES),
-      entrada('clientes', 'Clientes', 'edificio'),
+      entrada('clientes', 'Clientes', 'edificio', RUTA_DE_CLIENTES),
     ],
   },
   {
@@ -118,46 +119,15 @@ export function menuDelPanel(rol: Rol, contadores: ContadoresDelMenu): GrupoDelM
   )
 }
 
-export interface Miga {
-  texto: string
-  ruta: string | null
-}
-
 // Una sección queda marcada también en sus páginas internas (por ejemplo, la edición de un plan).
 export function esRutaActual(rutaDeLaEntrada: string, ruta: string): boolean {
   if (ruta === rutaDeLaEntrada) return true
   return rutaDeLaEntrada !== RUTA_DEL_INICIO && ruta.startsWith(`${rutaDeLaEntrada}/`)
 }
 
-// Última miga de las páginas internas de una sección; las de creación tienen ruta propia.
-const PAGINAS_INTERNAS: Readonly<Record<string, string>> = {
-  planes: 'Editar plan',
-  sedes: 'Editar sede',
-  'pagina-de-inicio': 'Carrusel de portadas',
-}
-const PAGINAS_DE_CREACION: Readonly<Record<string, string>> = {
-  [RUTA_DE_NUEVA_SEDE]: 'Nueva sede',
-}
-
-const paginaInterna = (clave: string, ruta: string): string =>
-  PAGINAS_DE_CREACION[ruta] ?? PAGINAS_INTERNAS[clave] ?? 'Detalle'
-
-// Primera miga de toda página que no es el inicio.
-const INICIO: Miga = { texto: 'Inicio', ruta: RUTA_DEL_INICIO }
-
-// Ruta de la barra superior. La última miga es la página actual y no lleva enlace; toda
-// sección cuelga del inicio y sus páginas internas, de la sección. «Mi cuenta» no está en el menú
-// (se entra desde la cuenta, abajo) y cuelga del inicio.
-export function migasDeRuta(ruta: string): Miga[] {
-  if (ruta === RUTA_DE_MI_CUENTA) return [INICIO, { texto: 'Mi cuenta', ruta: null }]
-  const actual = MENU.flatMap((g) => g.entradas).find(
-    (e) => e.ruta !== null && esRutaActual(e.ruta, ruta),
-  )
-  if (!actual?.ruta || actual.ruta === RUTA_DEL_INICIO) return [{ texto: 'Inicio', ruta: null }]
-  const enLaSeccion = actual.ruta === ruta
-  const migas = [INICIO, { texto: actual.texto, ruta: enLaSeccion ? null : actual.ruta }]
-  if (enLaSeccion) return migas
-  return [...migas, { texto: paginaInterna(actual.clave, ruta), ruta: null }]
+// La entrada del menú de la sección a la que pertenece una ruta (también una página interna).
+export function seccionDeLaRuta(ruta: string): Definicion | undefined {
+  return MENU.flatMap((g) => g.entradas).find((e) => e.ruta !== null && esRutaActual(e.ruta, ruta))
 }
 
 const NOMBRES_DE_ROL: Readonly<Record<Rol, string>> = {

@@ -6,6 +6,9 @@ import { RUTA_DEL_INICIO } from './rutas-del-panel'
 // Planes en el panel: columnas de la tabla «Nuestros planes» del inicio, con su orden, su
 // interruptor «Visible» y sus celdas de «Qué incluye» (una por característica).
 export const RUTA_DE_PLANES = `${RUTA_DEL_INICIO}/planes`
+// Las filas (características) de la tabla, comunes a todos los planes (maqueta «Planes › Filas
+// de la tabla»).
+export const RUTA_DE_FILAS_DE_LA_TABLA = `${RUTA_DE_PLANES}/filas`
 
 export function rutaDelPlan(id: number): string {
   return `${RUTA_DE_PLANES}/${id}`

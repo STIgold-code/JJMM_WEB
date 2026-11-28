@@ -138,6 +138,23 @@ test.describe('Panel propio: sin sesión', () => {
     }
   })
 
+  test('áreas, valores, clientes y filas de la tabla sin sesión llevan al ingreso', async ({
+    page,
+  }) => {
+    const rutas = [
+      '/panel/areas',
+      '/panel/areas/1',
+      '/panel/pagina-de-inicio/valores',
+      '/panel/clientes',
+      '/panel/planes/filas',
+    ]
+    for (const ruta of rutas) {
+      await page.goto(ruta)
+      await expect(page).toHaveURL(RUTA_DE_INGRESO)
+      await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+    }
+  })
+
   test('/panel/imagenes sin sesión lleva al ingreso, aunque pida una imagen', async ({ page }) => {
     await page.goto('/panel/imagenes?filtro=clientes&imagen=1')
     await expect(page).toHaveURL(RUTA_DE_INGRESO)

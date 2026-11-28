@@ -10,8 +10,9 @@ import type { BotonValidado, PortadaValidada } from '../dominio/validacion-de-po
 export type SeccionDePayload = NonNullable<PaginaDeInicio['secciones']>[number]
 type PortadaDePayload = NonNullable<BloqueCarruselDePortadas['portadas']>[number]
 
-// Una imagen poblada (`depth: 1`) con dirección de medios válida; si no, `null`.
-function aImagenElegida(valor: number | Medio | null | undefined): ImagenElegida | null {
+// Una imagen poblada (`depth: 1`) con dirección de medios válida; si no, `null`. También la usan
+// los logotipos de los clientes.
+export function aImagenElegida(valor: number | Medio | null | undefined): ImagenElegida | null {
   if (typeof valor !== 'object' || valor === null) return null
   return leerImagenElegida({
     id: valor.id,
