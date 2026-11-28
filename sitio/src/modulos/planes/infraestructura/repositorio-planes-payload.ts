@@ -15,20 +15,29 @@ const idDe = (valor: number | { id: number }): number =>
   typeof valor === 'number' ? valor : valor.id
 
 export const repositorioPlanesPayload: RepositorioPlanes = {
-  listarPlanes: leerEnCache('planes.listar', [etiquetaDeColeccion('planes')], async () => {
-    const payload = await obtenerPayload()
-    const { docs } = await payload.find({
-      collection: 'planes',
-      sort: 'orden',
-      limit: MAXIMO_DE_PLANES,
-      ...LECTURA_PUBLICA,
-    })
-    return docs.map(({ id, nombre, mensajeDeConsulta }) => ({
-      id,
-      nombre,
-      mensajeDeConsulta: mensajeDeConsulta || null,
-    }))
-  }),
+  // La clave cambió al agregar `visible`: una entrada guardada antes no lo trae y ocultaría
+  // todos los planes si se leyera con la regla nueva.
+  listarPlanes: leerEnCache(
+    'planes.listarConVisibilidad',
+    [etiquetaDeColeccion('planes')],
+    async () => {
+      const payload = await obtenerPayload()
+      const { docs } = await payload.find({
+        collection: 'planes',
+        sort: 'orden',
+        limit: MAXIMO_DE_PLANES,
+        ...LECTURA_PUBLICA,
+      })
+      // `activo` vacío solo existiría en una fila anterior a la migración que lo agregó con valor
+      // `true`; se trata igual que la base: visible.
+      return docs.map(({ id, nombre, mensajeDeConsulta, activo }) => ({
+        id,
+        nombre,
+        mensajeDeConsulta: mensajeDeConsulta || null,
+        visible: activo !== false,
+      }))
+    },
+  ),
   listarCaracteristicas: leerEnCache(
     'caracteristicas-de-plan.listar',
     [etiquetaDeColeccion('caracteristicas-de-plan')],

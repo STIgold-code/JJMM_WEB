@@ -197,7 +197,7 @@ export interface AreasDeServicio {
   createdAt: string;
 }
 /**
- * Columnas de la tabla «Nuestros planes» del inicio. Nunca se publican montos: en lugar del precio se muestra «Consultar», y el panel no acepta textos con montos.
+ * Columnas de la tabla «Nuestros planes» del inicio. Nunca se publican montos: en lugar del precio se muestra «Consultar», y el panel no acepta textos con montos. Desmarca «Visible» para ocultar un plan sin borrarlo.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "planes".
@@ -221,6 +221,10 @@ export interface Plane {
    * Posición en el sitio: el número más bajo aparece primero. Si dos tienen el mismo número, el orden entre ellos puede variar.
    */
   orden: number;
+  /**
+   * Si lo desmarcas, deja de mostrarse en el sitio, pero no se borra: puedes volver a marcarlo cuando quieras.
+   */
+  activo?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -758,6 +762,7 @@ export interface PlanesSelect<T extends boolean = true> {
   destacado?: T;
   mensajeDeConsulta?: T;
   orden?: T;
+  activo?: T;
   updatedAt?: T;
   createdAt?: T;
 }

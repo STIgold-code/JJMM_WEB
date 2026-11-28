@@ -8,6 +8,7 @@ const repositorio = (planes: number): RepositorioPlanes => ({
       id: i + 1,
       nombre: `Plan ${i + 1}`,
       mensajeDeConsulta: null,
+      visible: true,
     })),
   listarCaracteristicas: async () => [{ id: 10, nombre: 'Libros electrónicos' }],
   listarInclusiones: async () => [{ plan: 1, caracteristica: 10, tipo: 'incluido', texto: null }],
@@ -23,6 +24,19 @@ describe('crearObtenerMatrizDePlanes', () => {
         celdas: [{ tipo: 'incluido' }, { tipo: 'no-incluido' }],
       },
     ])
+  })
+
+  it('deja fuera de la tabla del sitio el plan oculto en el panel', async () => {
+    const base = repositorio(2)
+    const conUnOculto: RepositorioPlanes = {
+      ...base,
+      listarPlanes: async () =>
+        (await base.listarPlanes()).map((plan) => ({ ...plan, visible: plan.id !== 1 })),
+    }
+    const matriz = await crearObtenerMatrizDePlanes(conUnOculto)()
+
+    expect(matriz?.planes.map((plan) => plan.nombre)).toEqual(['Plan 2'])
+    expect(matriz?.filas[0]?.celdas).toEqual([{ tipo: 'no-incluido' }])
   })
 
   it('devuelve null si no hay planes', async () => {

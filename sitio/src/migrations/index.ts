@@ -1,6 +1,7 @@
 import * as migration_20261127_140109_inicial from './20261127_140109_inicial'
 import * as migration_20261127_164725_contacto_quitar_canales_y_sede_del_mapa from './20261127_164725_contacto_quitar_canales_y_sede_del_mapa'
 import * as migration_20261127_164736_contacto_sedes_v5 from './20261127_164736_contacto_sedes_v5'
+import * as migration_20261127_233245_planes_visible from './20261127_233245_planes_visible'
 
 export const migrations = [
   {
@@ -17,5 +18,10 @@ export const migrations = [
     up: migration_20261127_164736_contacto_sedes_v5.up,
     down: migration_20261127_164736_contacto_sedes_v5.down,
     name: '20261127_164736_contacto_sedes_v5',
+  },
+  {
+    up: migration_20261127_233245_planes_visible.up,
+    down: migration_20261127_233245_planes_visible.down,
+    name: '20261127_233245_planes_visible',
   },
 ]

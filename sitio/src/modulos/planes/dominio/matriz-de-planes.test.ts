@@ -8,10 +8,11 @@ import {
   type PlanGuardado,
 } from './matriz-de-planes'
 
-const plan = (id: number, nombre: string): PlanGuardado => ({
+const plan = (id: number, nombre: string, visible = true): PlanGuardado => ({
   id,
   nombre,
   mensajeDeConsulta: `Hola, quiero información del plan ${nombre}.`,
+  visible,
 })
 
 const PLANES = [plan(1, 'Emprende'), plan(2, 'SIGEMype I')]
@@ -64,6 +65,30 @@ describe('armarMatrizDePlanes', () => {
     expect(() =>
       armarMatrizDePlanes(PLANES, CARACTERISTICAS, [inclusion(1, 10, 'texto', 'S/ 350')]),
     ).toThrow(MontoNoPublicableError)
+  })
+
+  it('un plan oculto no aparece: ni su columna ni sus celdas', () => {
+    const matriz = armarMatrizDePlanes(
+      [plan(1, 'Emprende'), plan(2, 'SIGEMype I', false), plan(3, 'SIGEMype II')],
+      CARACTERISTICAS.slice(1),
+      [inclusion(1, 11, 'no-incluido'), inclusion(2, 11, 'incluido'), inclusion(3, 11, 'incluido')],
+    )
+
+    expect(matriz?.planes.map((p) => p.nombre)).toEqual(['Emprende', 'SIGEMype II'])
+    expect(matriz?.filas[0]?.celdas).toEqual([{ tipo: 'no-incluido' }, { tipo: 'incluido' }])
+  })
+
+  it('un plan oculto con un monto guardado no rompe la tabla: no se publica', () => {
+    const oculto = plan(2, 'SIGEMype I', false)
+    expect(() =>
+      armarMatrizDePlanes([plan(1, 'Emprende'), oculto], CARACTERISTICAS, [
+        inclusion(2, 10, 'texto', 'S/ 350'),
+      ]),
+    ).not.toThrow()
+  })
+
+  it('sin ningún plan visible no hay tabla que dibujar', () => {
+    expect(armarMatrizDePlanes([plan(1, 'Emprende', false)], CARACTERISTICAS, [])).toBeNull()
   })
 
   it('no arma la matriz sin planes o sin características', () => {
