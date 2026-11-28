@@ -138,4 +138,13 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844: listado y edición con los datos reales de las dos sedes, sin desborde ni errores; planes sigue igual tras el refactor; el sitio público mantiene sus dos pestañas y sus cuatro planes.
 - Sin verificar: ninguna escritura sobre sedes (son datos reales del estudio), arrastre, vista de un editor.
 
-Siguiente paso: P6, Usuarios y Mi cuenta.
+**L9** (27/11/2026), P6 · Usuarios y Mi cuenta terminadas (`90d4f85`):
+- `/panel/usuarios` (solo administrador, guardia `exigirAdministrador()`): filtro por rol, buscador, crear, editar, restablecer la contraseña de otra cuenta, eliminar. `/panel/cuenta`: nombre y contraseña propios, verificando la actual con `payload.login`. Sin cambio de esquema. El enlace de la cuenta del menú ya no abre `/admin`.
+- Reglas del servidor: un editor no ejecuta ninguna acción de administrador ni cambia su rol; nadie elimina ni edita su propia cuenta desde «Usuarios»; el último administrador no se elimina ni se degrada; contraseña nueva de 10 a 256 caracteres, nunca solo espacios.
+- Verificador independiente: sin bloqueos. Corregidos antes de subir los avisos A1 y A2 (una contraseña de solo espacios rompía la pantalla o creaba una cuenta que no podía entrar).
+- Pendiente (A3): la regla del último administrador vive solo en el panel; dos administradores a la vez podrían saltársela y desde `/admin` un administrador puede eliminarse. Va como hook en `coleccion-usuarios.ts`, en un cambio aparte.
+- Pendiente: el único administrador no puede cambiar su propio correo (ni en «Usuarios», que no edita la cuenta propia, ni en «Mi cuenta», donde es de solo lectura).
+- Verificado en producción a 1440×900 y 390×844, solo lectura: listado, diálogo «Nueva cuenta» y «Mi cuenta», sin desborde ni errores.
+- Sin verificar: ninguna escritura (crear una cuenta en producción necesita el visto bueno de Gian) ni la vista de un editor.
+
+Siguiente paso: P6, Guía de clientes.
