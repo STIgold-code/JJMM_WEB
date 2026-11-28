@@ -7,6 +7,9 @@ export const dobles = {
   auth: vi.fn(),
   login: vi.fn(),
   find: vi.fn(),
+  findByID: vi.fn(),
+  findGlobal: vi.fn(),
+  count: vi.fn(),
   update: vi.fn(),
   create: vi.fn(),
   delete: vi.fn(),
@@ -20,6 +23,9 @@ export const payloadDoble = {
   auth: dobles.auth,
   login: dobles.login,
   find: dobles.find,
+  findByID: dobles.findByID,
+  findGlobal: dobles.findGlobal,
+  count: dobles.count,
   update: dobles.update,
   create: dobles.create,
   delete: dobles.delete,
@@ -37,13 +43,21 @@ export function conSesion(usuario: object | null): void {
   dobles.auth.mockResolvedValue({ user: usuario, permissions: { collections: {} } })
 }
 
-// Reinicia los dobles: cada `find` devuelve lo que `colecciones` tenga para su colección, y la
-// base abre la transacción `tx-1`.
-export function reiniciarDobles(colecciones: Readonly<Record<string, unknown[]>>): void {
+// Reinicia los dobles: cada `find` devuelve lo que `colecciones` tenga para su colección (y
+// `count`, cuántos son), cada global sale vacía salvo que `globales` traiga una, y la base abre la
+// transacción `tx-1`.
+export function reiniciarDobles(
+  colecciones: Readonly<Record<string, unknown[]>>,
+  globales: Readonly<Record<string, object>> = {},
+): void {
   for (const doble of Object.values(dobles)) doble.mockReset()
   dobles.find.mockImplementation(async ({ collection }: { collection: string }) => ({
     docs: colecciones[collection] ?? [],
   }))
+  dobles.count.mockImplementation(async ({ collection }: { collection: string }) => ({
+    totalDocs: colecciones[collection]?.length ?? 0,
+  }))
+  dobles.findGlobal.mockImplementation(async ({ slug }: { slug: string }) => globales[slug] ?? {})
   dobles.beginTransaction.mockResolvedValue('tx-1')
 }
 

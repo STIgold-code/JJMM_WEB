@@ -130,6 +130,22 @@ test.describe('Panel propio: sin sesión', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
   })
 
+  test('/panel/imagenes sin sesión lleva al ingreso, aunque pida una imagen', async ({ page }) => {
+    await page.goto('/panel/imagenes?filtro=clientes&imagen=1')
+    await expect(page).toHaveURL(RUTA_DE_INGRESO)
+    await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+  })
+
+  test('la subida de imágenes sin sesión responde 401 y no sube nada', async ({ request }) => {
+    const respuesta = await request.post('/panel/imagenes/subir', {
+      multipart: {
+        alt: 'Prueba',
+        archivo: { name: 'a.png', mimeType: 'image/png', buffer: Buffer.from('x') },
+      },
+    })
+    expect(respuesta.status()).toBe(401)
+  })
+
   test('el ingreso no tiene infracciones de accesibilidad (WCAG 2.1 AA)', async ({ page }) => {
     expect(await infraccionesDeAccesibilidad(page, '/panel/ingreso')).toEqual([])
   })

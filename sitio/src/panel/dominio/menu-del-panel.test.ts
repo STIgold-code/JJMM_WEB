@@ -30,9 +30,10 @@ describe('menuDelPanel', () => {
     expect.objectContaining({ clave: 'planes', ruta: '/panel/planes' }),
     expect.objectContaining({ clave: 'sedes', ruta: '/panel/sedes' }),
     expect.objectContaining({ clave: 'guia', ruta: '/panel/guia' }),
+    expect.objectContaining({ clave: 'medios', ruta: '/panel/imagenes' }),
   ]
 
-  it('para el editor, solo el inicio, los mensajes, los planes, las sedes y la guía tienen ruta', () => {
+  it('para el editor, solo el inicio, los mensajes, los planes, las sedes, la guía y las imágenes tienen ruta', () => {
     const todas = entradas(menuDelPanel('editor', { mensajesNuevos: 0 }))
     expect(todas.filter((e) => e.ruta !== null)).toEqual(SECCIONES_DEL_EQUIPO)
     expect(todas.filter((e) => e.ruta === null).length).toBeGreaterThan(0)
@@ -85,6 +86,10 @@ describe('migasDeRuta', () => {
     expect(migasDeRuta('/panel/guia')).toEqual([
       { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
       { texto: 'Guía de clientes', ruta: null },
+    ])
+    expect(migasDeRuta('/panel/imagenes')).toEqual([
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Imágenes', ruta: null },
     ])
   })
 

@@ -1,6 +1,7 @@
 import type { Rol } from '@/compartido/dominio/roles'
 
 import type { NombreDeIcono } from './iconos'
+import { RUTA_DE_IMAGENES } from './imagenes'
 import { RUTA_DE_MENSAJES } from './mensajes'
 import { RUTA_DE_PLANES } from './planes'
 import { RUTA_DE_LA_GUIA, RUTA_DEL_INICIO } from './rutas-del-panel'
@@ -91,7 +92,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     entradas: [
       entrada('guia', 'Guía de clientes', 'libro', RUTA_DE_LA_GUIA),
       entrada('publicaciones', 'Publicaciones', 'periodico'),
-      entrada('medios', 'Imágenes', 'imagen'),
+      entrada('medios', 'Imágenes', 'imagen', RUTA_DE_IMAGENES),
     ],
   },
   {

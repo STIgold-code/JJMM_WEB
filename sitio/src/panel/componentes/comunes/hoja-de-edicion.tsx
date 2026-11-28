@@ -25,6 +25,8 @@ interface Props {
   alGuardar: () => void
   // «Eliminar…», solo si la cuenta puede borrar.
   eliminar?: ReactNode
+  // Si el panel se abrió desde la URL (sin un botón que lo abra), a dónde vuelve el foco.
+  alCerrarFoco?: (evento: Event) => void
   children: ReactNode
 }
 
@@ -34,6 +36,29 @@ function Estado({ sucio }: { sucio: boolean }) {
     <span className="inline-flex items-center gap-[0.45rem] font-[650] text-pendiente before:size-2 before:rounded-full before:bg-pendiente-solido before:content-['']">
       Cambios sin guardar
     </span>
+  )
+}
+
+function Contenido(props: Props & { intentarCerrar: () => void }) {
+  return (
+    <SheetContent
+      showCloseButton={false}
+      onCloseAutoFocus={props.alCerrarFoco}
+      className="w-full gap-0 bg-card p-0 sm:max-w-lg"
+    >
+      <form
+        noValidate
+        className="flex min-h-0 flex-1 flex-col"
+        onSubmit={(evento) => {
+          evento.preventDefault()
+          props.alGuardar()
+        }}
+      >
+        <Cabecera {...props} alCerrar={props.intentarCerrar} />
+        <div className="grid flex-1 content-start gap-5 overflow-y-auto p-5">{props.children}</div>
+        <Pie {...props} alCancelar={props.intentarCerrar} />
+      </form>
+    </SheetContent>
   )
 }
 
@@ -51,22 +76,7 @@ export function HojaDeEdicion(props: Props) {
   }
   return (
     <Sheet open={abierta} onOpenChange={(abrir) => !abrir && intentarCerrar()}>
-      <SheetContent showCloseButton={false} className="w-full gap-0 bg-card p-0 sm:max-w-lg">
-        <form
-          noValidate
-          className="flex min-h-0 flex-1 flex-col"
-          onSubmit={(evento) => {
-            evento.preventDefault()
-            props.alGuardar()
-          }}
-        >
-          <Cabecera {...props} alCerrar={intentarCerrar} />
-          <div className="grid flex-1 content-start gap-5 overflow-y-auto p-5">
-            {props.children}
-          </div>
-          <Pie {...props} alCancelar={intentarCerrar} />
-        </form>
-      </SheetContent>
+      <Contenido {...props} intentarCerrar={intentarCerrar} />
       <ConfirmarDescarte
         abierta={confirmando}
         alDescartar={() => {

@@ -30,5 +30,8 @@ export const coleccionMedios: CollectionConfig = {
   ],
   upload: {
     staticDir: 'media',
+    // Solo imágenes de mapa de bits. Sin SVG: un SVG puede llevar scripts y se serviría desde
+    // el mismo origen del sitio. Vale para el panel, el /admin y `POST /api/medios`.
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
   },
 }
