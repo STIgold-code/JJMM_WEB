@@ -131,4 +131,11 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Detalles pendientes: la vista previa parte «trabajadores» sin guion; el aviso de guardado dice que la tabla ya muestra los cambios aunque el plan esté oculto; la ruta termina en «Editar plan»; editar las características (filas) queda para P6.
 - P6 se divide: lo que tiene maqueta aprobada (sedes, página de inicio, guía de clientes, publicaciones, imágenes, usuarios, mi cuenta) se construye; Áreas de servicio, Clientes, Datos del estudio y Menú del sitio no tienen maqueta («No incluida») y por S4.1 necesitan la suya antes.
 
-Siguiente paso: P6, empezando por Sedes.
+**L8** (27/11/2026), P6 · Sedes terminada (`7154a08`):
+- `/panel/sedes`, `/panel/sedes/[id]` y `/panel/sedes/nueva`, sin cambio de esquema. Lo genérico de planes pasó a `sitio/src/panel/componentes/comunes/` y a `dominio/orden.ts`; planes usa esas piezas (los archivos movidos son idénticos, según el verificador).
+- Decisiones: se permite ocultar o borrar la última sede visible, con advertencia (el sitio público funciona con cero sedes); crear una sede es una página completa (la colección exige dirección y celular); los celulares se reordenan porque el orden decide el botón de WhatsApp.
+- Verificador independiente: sin bloqueos. El enlace del mapa usa la misma regla que la colección y el sitio (`esMapaIncrustadoDeGoogle`: origen `https://www.google.com`, ruta `/maps/embed`). Avisos anotados, anteriores al cambio: el sitio usa el nombre de la sede como `key` de React y nada impide nombres repetidos; el correo acepta `?`, `&` y `=` antes de la `@` (regla de Payload); el `iframe` público no lleva `sandbox`.
+- Verificado en producción a 1440×900 y 390×844: listado y edición con los datos reales de las dos sedes, sin desborde ni errores; planes sigue igual tras el refactor; el sitio público mantiene sus dos pestañas y sus cuatro planes.
+- Sin verificar: ninguna escritura sobre sedes (son datos reales del estudio), arrastre, vista de un editor.
+
+Siguiente paso: P6, Usuarios y Mi cuenta.
