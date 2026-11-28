@@ -1,5 +1,6 @@
 import type { Rol } from '@/compartido/dominio/roles'
 
+import { leerId } from './identificadores'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 
 // Mensajes de contacto en el panel: filtros, búsqueda y mensaje abierto viven en la URL, así un
@@ -26,13 +27,7 @@ export interface ConsultaDeMensajes {
 
 export type ParametrosDeLaUrl = Readonly<Record<string, string | string[] | undefined>>
 
-const SOLO_DIGITOS = /^\d+$/
-
-export function leerIdDeMensaje(valor: unknown): number | null {
-  const numero = typeof valor === 'string' && SOLO_DIGITOS.test(valor) ? Number(valor) : valor
-  if (typeof numero !== 'number' || !Number.isSafeInteger(numero) || numero < 1) return null
-  return numero
-}
+export const leerIdDeMensaje = leerId
 
 export function esEstadoDeMensaje(valor: unknown): valor is EstadoDeMensaje {
   return ESTADOS_DE_MENSAJE.some((estado) => estado === valor)

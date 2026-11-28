@@ -98,6 +98,14 @@ test.describe('Panel propio: sin sesión', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
   })
 
+  test('/panel/planes y la edición de un plan sin sesión llevan al ingreso', async ({ page }) => {
+    for (const ruta of ['/panel/planes', '/panel/planes/1']) {
+      await page.goto(ruta)
+      await expect(page).toHaveURL(RUTA_DE_INGRESO)
+      await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+    }
+  })
+
   test('el ingreso no tiene infracciones de accesibilidad (WCAG 2.1 AA)', async ({ page }) => {
     expect(await infraccionesDeAccesibilidad(page, '/panel/ingreso')).toEqual([])
   })

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { iniciales, menuDelPanel, migasDeRuta, nombreDelRol } from './menu-del-panel'
+import { esRutaActual, iniciales, menuDelPanel, migasDeRuta, nombreDelRol } from './menu-del-panel'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 
 const entradas = (grupos: ReturnType<typeof menuDelPanel>) => grupos.flatMap((g) => g.entradas)
@@ -25,12 +25,13 @@ describe('menuDelPanel', () => {
   })
 
   it.each(['administrador', 'editor'] as const)(
-    'para %s, solo el inicio y los mensajes tienen ruta: el resto (también Administración) va sin enlace',
+    'para %s, solo el inicio, los mensajes y los planes tienen ruta: el resto va sin enlace',
     (rol) => {
       const todas = entradas(menuDelPanel(rol, { mensajesNuevos: 0 }))
       expect(todas.filter((e) => e.ruta !== null)).toEqual([
         expect.objectContaining({ clave: 'inicio', ruta: RUTA_DEL_INICIO }),
         expect.objectContaining({ clave: 'mensajes', ruta: '/panel/mensajes' }),
+        expect.objectContaining({ clave: 'planes', ruta: '/panel/planes' }),
       ])
       expect(todas.filter((e) => e.ruta === null).length).toBeGreaterThan(0)
     },
@@ -69,6 +70,28 @@ describe('migasDeRuta', () => {
       { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
       { texto: 'Mensajes de contacto', ruta: null },
     ])
+  })
+
+  it('la edición de un plan cuelga de «Planes», que lleva enlace', () => {
+    expect(migasDeRuta('/panel/planes/7')).toEqual([
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Planes', ruta: '/panel/planes' },
+      { texto: 'Editar plan', ruta: null },
+    ])
+  })
+
+  it('una ruta que no es del menú se queda en «Inicio»', () => {
+    expect(migasDeRuta('/panel/planesx')).toEqual([{ texto: 'Inicio', ruta: null }])
+  })
+})
+
+describe('esRutaActual', () => {
+  it('marca la sección también en sus páginas internas, salvo el inicio', () => {
+    expect(esRutaActual('/panel/planes', '/panel/planes')).toBe(true)
+    expect(esRutaActual('/panel/planes', '/panel/planes/7')).toBe(true)
+    expect(esRutaActual('/panel/planes', '/panel/planesx')).toBe(false)
+    expect(esRutaActual(RUTA_DEL_INICIO, '/panel/planes')).toBe(false)
+    expect(esRutaActual(RUTA_DEL_INICIO, RUTA_DEL_INICIO)).toBe(true)
   })
 })
 

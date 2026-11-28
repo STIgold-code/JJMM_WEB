@@ -2,6 +2,7 @@ import type { Rol } from '@/compartido/dominio/roles'
 
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_MENSAJES } from './mensajes'
+import { RUTA_DE_PLANES } from './planes'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 
 // Menú lateral del panel, agrupado por tarea como en la maqueta aprobada. Una entrada sin
@@ -69,7 +70,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     titulo: 'Lo que ofreces',
     soloAdministrador: false,
     entradas: [
-      entrada('planes', 'Planes', 'capas'),
+      entrada('planes', 'Planes', 'capas', RUTA_DE_PLANES),
       entrada('areas', 'Áreas de servicio', 'maletin'),
     ],
   },
@@ -118,15 +119,29 @@ export interface Miga {
   ruta: string | null
 }
 
+// Una sección queda marcada también en sus páginas internas (por ejemplo, la edición de un plan).
+export function esRutaActual(rutaDeLaEntrada: string, ruta: string): boolean {
+  if (ruta === rutaDeLaEntrada) return true
+  return rutaDeLaEntrada !== RUTA_DEL_INICIO && ruta.startsWith(`${rutaDeLaEntrada}/`)
+}
+
+// Última miga de las páginas internas de una sección.
+const PAGINAS_INTERNAS: Readonly<Record<string, string>> = { planes: 'Editar plan' }
+
 // Ruta de la barra superior. La última miga es la página actual y no lleva enlace; toda
-// sección cuelga del inicio.
+// sección cuelga del inicio y sus páginas internas, de la sección.
 export function migasDeRuta(ruta: string): Miga[] {
-  const actual = MENU.flatMap((g) => g.entradas).find((e) => e.ruta === ruta)
-  if (!actual || actual.ruta === RUTA_DEL_INICIO) return [{ texto: 'Inicio', ruta: null }]
-  return [
+  const actual = MENU.flatMap((g) => g.entradas).find(
+    (e) => e.ruta !== null && esRutaActual(e.ruta, ruta),
+  )
+  if (!actual?.ruta || actual.ruta === RUTA_DEL_INICIO) return [{ texto: 'Inicio', ruta: null }]
+  const enLaSeccion = actual.ruta === ruta
+  const migas = [
     { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
-    { texto: actual.texto, ruta: null },
+    { texto: actual.texto, ruta: enLaSeccion ? null : actual.ruta },
   ]
+  if (enLaSeccion) return migas
+  return [...migas, { texto: PAGINAS_INTERNAS[actual.clave] ?? 'Detalle', ruta: null }]
 }
 
 const NOMBRES_DE_ROL: Readonly<Record<Rol, string>> = {

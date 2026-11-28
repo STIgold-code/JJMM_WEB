@@ -19,7 +19,10 @@ function camposRechazados(error: Record<string, unknown>): string[] {
   )
 }
 
-export function traducirErrorDePayload(error: unknown): ResultadoDelRepositorio {
+// Lo que puede salir de una escritura rechazada; nunca un «hecho».
+export type RechazoDePayload = Exclude<ResultadoDelRepositorio, { estado: 'hecho' }>
+
+export function traducirErrorDePayload(error: unknown): RechazoDePayload {
   if (!esObjeto(error)) throw error
   if (error.status === ESTADO_HTTP_INVALIDO)
     return { estado: 'invalido', campos: camposRechazados(error) }

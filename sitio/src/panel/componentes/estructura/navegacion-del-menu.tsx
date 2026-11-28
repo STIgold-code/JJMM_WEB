@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useId } from 'react'
 
-import type { EntradaDelMenu, GrupoDelMenu } from '../../dominio/menu-del-panel'
+import { type EntradaDelMenu, esRutaActual, type GrupoDelMenu } from '../../dominio/menu-del-panel'
 import { IconoDelPanel } from '../iconos/icono-del-panel'
 
 const ENTRADA =
@@ -73,7 +73,10 @@ export function NavegacionDelMenu({ grupos }: { grupos: GrupoDelMenu[] }) {
           >
             {grupo.entradas.map((entrada) => (
               <li key={entrada.clave}>
-                <Entrada entrada={entrada} actual={entrada.ruta === ruta} />
+                <Entrada
+                  entrada={entrada}
+                  actual={entrada.ruta !== null && esRutaActual(entrada.ruta, ruta)}
+                />
               </li>
             ))}
           </ul>

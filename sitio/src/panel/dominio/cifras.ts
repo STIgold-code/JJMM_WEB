@@ -1,4 +1,5 @@
 import type { NombreDeIcono } from './iconos'
+import { RUTA_DE_PLANES } from './planes'
 import { listaEnAdmin } from './rutas-del-panel'
 
 // «Lo que publica hoy el sitio»: cifras reales del contenido. `null` = la cuenta no puede
@@ -26,10 +27,19 @@ interface Definicion {
   etiqueta: string
   icono: NombreDeIcono
   slug: string
+  // Sección del panel propio; sin ella, la cifra lleva a la lista del /admin.
+  ruta?: string
 }
 
 const DEFINICIONES: readonly Definicion[] = [
-  { clave: 'planes', conteo: 'planes', etiqueta: 'Planes', icono: 'capas', slug: 'planes' },
+  {
+    clave: 'planes',
+    conteo: 'planes',
+    etiqueta: 'Planes',
+    icono: 'capas',
+    slug: 'planes',
+    ruta: RUTA_DE_PLANES,
+  },
   {
     clave: 'areas',
     conteo: 'areas',
@@ -68,9 +78,9 @@ const DEFINICIONES: readonly Definicion[] = [
 ]
 
 export function cifrasDelSitio(conteos: ConteosDelSitio): Cifra[] {
-  return DEFINICIONES.flatMap(({ clave, conteo, etiqueta, icono, slug }) => {
+  return DEFINICIONES.flatMap(({ clave, conteo, etiqueta, icono, slug, ruta }) => {
     const cantidad = conteos[conteo]
     if (cantidad === null) return []
-    return [{ clave, etiqueta, cantidad, icono, href: listaEnAdmin(slug) }]
+    return [{ clave, etiqueta, cantidad, icono, href: ruta ?? listaEnAdmin(slug) }]
   })
 }

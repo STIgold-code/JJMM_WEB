@@ -3,7 +3,9 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { menuDelPanel } from '../../dominio/menu-del-panel'
 
-vi.mock('next/navigation', () => ({ usePathname: () => '/panel' }))
+const ruta = vi.hoisted(() => ({ actual: '/panel' }))
+
+vi.mock('next/navigation', () => ({ usePathname: () => ruta.actual }))
 
 const { NavegacionDelMenu } = await import('./navegacion-del-menu')
 
@@ -11,18 +13,27 @@ const dibujar = (rol: 'administrador' | 'editor', mensajesNuevos: number | null 
   renderToStaticMarkup(<NavegacionDelMenu grupos={menuDelPanel(rol, { mensajesNuevos })} />)
 
 describe('NavegacionDelMenu', () => {
-  it('los enlaces son el inicio (página actual) y los mensajes de contacto', () => {
+  it('los enlaces son el inicio (página actual), los mensajes de contacto y los planes', () => {
     const html = dibujar('administrador')
-    expect(html.match(/<a /g)).toHaveLength(2)
+    expect(html.match(/<a /g)).toHaveLength(3)
     expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
     expect(html).toMatch(/<a [^>]*href="\/panel\/mensajes"/)
+    expect(html).toMatch(/<a [^>]*href="\/panel\/planes"/)
     expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel\/mensajes"/)
   })
 
   it('las secciones pendientes se ven deshabilitadas con «Próximamente», sin enlace', () => {
     const html = dibujar('administrador')
-    expect(html).toMatch(/aria-disabled="true"[^>]*>.*Planes.*Próximamente/)
+    expect(html).toMatch(/aria-disabled="true"[^>]*>.*Áreas de servicio.*Próximamente/)
     expect(html).not.toContain('href="#"')
+  })
+
+  it('en la edición de un plan, «Planes» queda marcado y el inicio no', () => {
+    ruta.actual = '/panel/planes/7'
+    const html = dibujar('editor')
+    ruta.actual = '/panel'
+    expect(html).toMatch(/<a aria-current="page"[^>]*href="\/panel\/planes"/)
+    expect(html).not.toMatch(/<a aria-current="page"[^>]*href="\/panel"/)
   })
 
   it('el editor no ve la sección de administración', () => {

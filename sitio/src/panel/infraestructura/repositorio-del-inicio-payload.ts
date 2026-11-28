@@ -51,7 +51,8 @@ async function listarBorradores(c: Contexto, limite: number): Promise<BorradorPe
 async function contarContenido(c: Contexto): Promise<ConteosDelSitio> {
   const [planes, areas, sedesActivas, clientesActivos, avisosActivos, vencimientos] =
     await Promise.all([
-      c.contar('planes'),
+      // Solo los visibles: es lo que publica el sitio.
+      c.contar('planes', ACTIVOS),
       c.contar('areas-de-servicio'),
       c.contar('sedes', ACTIVOS),
       c.contar('clientes', ACTIVOS),

@@ -11,9 +11,10 @@ export function avisarError(error: string): void {
   toast.error(error)
 }
 
+// Un resultado correcto sin aviso (por ejemplo, ordenar sin cambios) no muestra nada.
 export function avisarResultado(
-  resultado: { ok: true; aviso: Aviso } | { ok: false; error: string },
+  resultado: { ok: true; aviso?: Aviso } | { ok: false; error: string },
 ): void {
-  if (resultado.ok) avisarExito(resultado.aviso)
-  else avisarError(resultado.error)
+  if (!resultado.ok) avisarError(resultado.error)
+  else if (resultado.aviso) avisarExito(resultado.aviso)
 }
