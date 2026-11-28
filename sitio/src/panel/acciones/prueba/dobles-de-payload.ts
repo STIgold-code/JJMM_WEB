@@ -11,6 +11,7 @@ export const dobles = {
   findGlobal: vi.fn(),
   count: vi.fn(),
   update: vi.fn(),
+  updateGlobal: vi.fn(),
   create: vi.fn(),
   delete: vi.fn(),
   beginTransaction: vi.fn(),
@@ -27,6 +28,7 @@ export const payloadDoble = {
   findGlobal: dobles.findGlobal,
   count: dobles.count,
   update: dobles.update,
+  updateGlobal: dobles.updateGlobal,
   create: dobles.create,
   delete: dobles.delete,
   db: {
@@ -68,7 +70,13 @@ export function redireccionDePrueba(ruta: string): never {
 // Ninguna escritura llegó a Payload y nada se revalidó. `login` cuenta como escritura: suma intentos
 // fallidos y abre sesiones.
 export function nadaSeEscribio(): void {
-  const escrituras = [dobles.update, dobles.create, dobles.delete, dobles.beginTransaction]
+  const escrituras = [
+    dobles.update,
+    dobles.updateGlobal,
+    dobles.create,
+    dobles.delete,
+    dobles.beginTransaction,
+  ]
   for (const doble of [...escrituras, dobles.login]) expect(doble).not.toHaveBeenCalled()
   expect(dobles.revalidatePath).not.toHaveBeenCalled()
 }

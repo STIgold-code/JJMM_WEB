@@ -16,3 +16,4 @@ export type NombreDeIcono =
   | 'lista'
   | 'calendario'
   | 'tareas'
+  | 'estrella'

@@ -15,6 +15,7 @@ import {
   Newspaper,
   PanelsTopLeft,
   Settings,
+  Star,
   Users,
 } from 'lucide-react'
 
@@ -37,6 +38,7 @@ const ICONOS: Readonly<Record<NombreDeIcono, LucideIcon>> = {
   lista: List,
   calendario: Calendar,
   tareas: ListChecks,
+  estrella: Star,
 }
 
 interface Props {

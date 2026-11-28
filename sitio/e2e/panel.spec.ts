@@ -130,6 +130,14 @@ test.describe('Panel propio: sin sesión', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
   })
 
+  test('/panel/pagina-de-inicio y su carrusel sin sesión llevan al ingreso', async ({ page }) => {
+    for (const ruta of ['/panel/pagina-de-inicio', '/panel/pagina-de-inicio/portadas']) {
+      await page.goto(ruta)
+      await expect(page).toHaveURL(RUTA_DE_INGRESO)
+      await expect(page.getByRole('heading', { level: 1, name: 'Ingresa al panel' })).toBeVisible()
+    }
+  })
+
   test('/panel/imagenes sin sesión lleva al ingreso, aunque pida una imagen', async ({ page }) => {
     await page.goto('/panel/imagenes?filtro=clientes&imagen=1')
     await expect(page).toHaveURL(RUTA_DE_INGRESO)

@@ -9,10 +9,18 @@ interface Props {
   visible: boolean
   ayuda: string
   alCambiar: (visible: boolean) => void
+  // Otro interruptor de sí o no con el mismo dibujo (por ejemplo, «La imagen es decorativa»).
+  etiqueta?: string
 }
 
 // «Visible en el sitio» de una edición: el interruptor con su etiqueta y su ayuda.
-export function FilaVisible({ id, visible, ayuda, alCambiar }: Props) {
+export function FilaVisible({
+  id,
+  visible,
+  ayuda,
+  alCambiar,
+  etiqueta = 'Visible en el sitio',
+}: Props) {
   return (
     <div className="flex items-start gap-3">
       <Interruptor
@@ -24,7 +32,7 @@ export function FilaVisible({ id, visible, ayuda, alCambiar }: Props) {
       />
       <div>
         <p id={`${id}-etiqueta`} className="text-sm font-semibold">
-          Visible en el sitio
+          {etiqueta}
         </p>
         <p id={`${id}-ayuda`} className={CLASE_DE_AYUDA}>
           {ayuda}

@@ -3,6 +3,7 @@ import type { Rol } from '@/compartido/dominio/roles'
 import type { NombreDeIcono } from './iconos'
 import { RUTA_DE_IMAGENES } from './imagenes'
 import { RUTA_DE_MENSAJES } from './mensajes'
+import { RUTA_DE_LA_PAGINA_DE_INICIO } from './pagina-de-inicio'
 import { RUTA_DE_PLANES } from './planes'
 import { RUTA_DE_LA_GUIA, RUTA_DEL_INICIO } from './rutas-del-panel'
 import { RUTA_DE_NUEVA_SEDE, RUTA_DE_SEDES } from './sedes'
@@ -81,7 +82,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     titulo: 'Sitio web',
     soloAdministrador: false,
     entradas: [
-      entrada('pagina-de-inicio', 'Página de inicio', 'diseno'),
+      entrada('pagina-de-inicio', 'Página de inicio', 'diseno', RUTA_DE_LA_PAGINA_DE_INICIO),
       entrada('sedes', 'Sedes', 'pin', RUTA_DE_SEDES),
       entrada('clientes', 'Clientes', 'edificio'),
     ],
@@ -132,6 +133,7 @@ export function esRutaActual(rutaDeLaEntrada: string, ruta: string): boolean {
 const PAGINAS_INTERNAS: Readonly<Record<string, string>> = {
   planes: 'Editar plan',
   sedes: 'Editar sede',
+  'pagina-de-inicio': 'Carrusel de portadas',
 }
 const PAGINAS_DE_CREACION: Readonly<Record<string, string>> = {
   [RUTA_DE_NUEVA_SEDE]: 'Nueva sede',

@@ -28,13 +28,13 @@ function aplicarCambio<T extends ElementoOrdenable>(lista: T[], cambio: Cambio):
 }
 
 // Botón que recupera el foco tras mover una fila (React la mueve en el DOM y el foco se pierde).
-interface FocoPendiente {
-  id: number
+export interface FocoPendiente {
+  id: number | string
   paso: -1 | 1
 }
 
 // Cada fila lleva `data-fila` con el id de su elemento.
-function enfocar({ id, paso }: FocoPendiente): void {
+export function enfocar({ id, paso }: FocoPendiente): void {
   const fila = document.querySelector(`[data-fila="${id}"]`)
   const mismo = fila?.querySelector<HTMLButtonElement>(`[data-mover="${paso}"]:not(:disabled)`)
   ;(mismo ?? fila?.querySelector<HTMLButtonElement>('[data-mover]:not(:disabled)'))?.focus()
