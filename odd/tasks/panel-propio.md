@@ -147,4 +147,12 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844, solo lectura: listado, diálogo «Nueva cuenta» y «Mi cuenta», sin desborde ni errores.
 - Sin verificar: ninguna escritura (crear una cuenta en producción necesita el visto bueno de Gian) ni la vista de un editor.
 
-Siguiente paso: P6, Guía de clientes.
+**L10** (27/11/2026), P6 · Guía de clientes terminada (`d36c598`):
+- `/panel/guia` en una pantalla con tres partes y anclas (`#avisos`, `#vencimientos`, `#cronograma`): avisos (interruptor, orden, edición en panel lateral, documentos uno por línea como en la maqueta), vencimientos (filtro con conteo y buscador), cronograma de SUNAT (periodo con diez fechas por dígito del RUC y la de buenos contribuyentes). Sin cambio de esquema.
+- Fechas: se guardan como mediodía de Lima (`T17:00:00.000Z`) y se leen con `diaEnLima`, igual que `/guia`; el verificador confirmó que ningún camino corre el día, tampoco con lo cargado antes desde `/admin`.
+- Verificador independiente: sin bloqueos. Avisos anotados: dos cargas simultáneas del mismo periodo darían un mensaje genérico; `/guia` usa textos como `key` de React (dos líneas iguales dan una advertencia); un cronograma anterior a 2020 no se puede volver a guardar desde el panel.
+- Diferencias con la maqueta: «Fecha por confirmar» sale del texto «Consulta la fecha con el estudio.» (no hay campo de fecha); el cronograma sí se puede cargar; los avisos nuevos nacen ocultos; los textos de la página (global `guia-de-clientes`) quedaron fuera.
+- Verificado en producción a 1440×900 y 390×844, solo lectura: los 3 avisos, los 14 vencimientos y el estado vacío del cronograma con su formulario, sin desborde ni errores; `/guia` público sin cambios.
+- Sin verificar: ninguna escritura (datos reales) ni la vista de un editor.
+
+Siguiente paso: P6, Imágenes; después Página de inicio y Publicaciones (su editor no tiene maqueta).
