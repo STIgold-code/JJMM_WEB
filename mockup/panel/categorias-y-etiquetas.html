@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Categorías y etiquetas · Publicaciones · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="publicaciones" data-pantalla="taxonomias" data-maqueta="publicaciones" data-migas="Inicio|inicio.html>Publicaciones|publicaciones.html>Categorías y etiquetas">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <a class="volver" href="publicaciones.html"><span data-icono="volver" class="icono-sm"></span>Publicaciones</a>
+        <h1 class="titulo-pagina">Categorías y etiquetas</h1>
+        <p>Cómo se ordena el blog. Cada publicación tiene una categoría y puede tener varias etiquetas; cada una tiene su propia página en el blog.</p>
+      </div>
+    </div>
+
+    <div class="pila">
+      <div class="aviso-ejemplo" id="aviso-ejemplo-tax"><span class="ejemplo">Ejemplo</span><p>Las categorías y etiquetas reales están en la base del sitio y todavía no se ven aquí; estas son de ejemplo. Usa «Maqueta» para ver el blog vacío.</p></div>
+
+      <section class="tarjeta" aria-labelledby="titulo-categorias">
+        <div class="tarjeta-cabecera">
+          <div><h2 id="titulo-categorias">Categorías</h2><p>Temas del blog, por ejemplo «Tributación». Se muestran en orden alfabético.</p></div>
+          <button class="boton boton-secundario boton-sm" type="button" data-editar-tax="categoria"><span data-icono="mas" class="icono-sm"></span>Nueva categoría</button>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable" id="tabla-categorias">
+            <thead><tr><th scope="col">Categoría</th><th scope="col">Publicaciones</th><th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="vacio" id="categorias-vacio" hidden>
+          <span class="vacio-icono"><span data-icono="periodico" class="icono-lg"></span></span>
+          <h3>Todavía no hay categorías</h3>
+          <p>Crea al menos una antes de publicar: cada publicación necesita una. También puedes crearla mientras escribes.</p>
+        </div>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="titulo-etiquetas">
+        <div class="tarjeta-cabecera">
+          <div><h2 id="titulo-etiquetas">Etiquetas</h2><p>Palabras clave, por ejemplo «IGV». Su color es el de su chip en el blog.</p></div>
+          <button class="boton boton-secundario boton-sm" type="button" data-editar-tax="etiqueta"><span data-icono="mas" class="icono-sm"></span>Nueva etiqueta</button>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable" id="tabla-etiquetas">
+            <thead><tr><th scope="col">Etiqueta</th><th scope="col">Publicaciones</th><th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="vacio" id="etiquetas-vacio" hidden>
+          <span class="vacio-icono"><span data-icono="etiqueta" class="icono-lg"></span></span>
+          <h3>Todavía no hay etiquetas</h3>
+          <p>Son opcionales. Aparecerán aquí con su color y cuántas publicaciones las usan.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="capa" id="hoja-taxonomia" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="tax-titulo" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="tax-titulo">Editar categoría</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo">
+          <label for="tax-nombre">Nombre</label>
+          <input class="entrada" id="tax-nombre" required>
+        </div>
+        <div class="campo">
+          <label for="tax-slug">Dirección</label>
+          <div class="slug"><span id="tax-ruta">/blog/categoria/</span><input class="entrada" id="tax-slug" data-validar="slug" aria-describedby="tax-slug-ayuda"></div>
+          <p class="ayuda" id="tax-slug-ayuda">Sale del nombre. Si la cambias, los enlaces que ya compartiste dejan de funcionar.</p>
+        </div>
+        <fieldset class="opciones-visuales" id="campo-color" hidden>
+          <legend>Color</legend>
+          <div id="opciones-color" style="display: contents"></div>
+        </fieldset>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <span class="separador"></span>
+        <button class="boton boton-destructivo-linea" type="button" id="tax-eliminar" aria-describedby="tax-eliminar-motivo"><span data-icono="basura" class="icono-sm"></span>Eliminar</button>
+        <p class="ayuda" id="tax-eliminar-motivo" hidden style="flex-basis: 100%"></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

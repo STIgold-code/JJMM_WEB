@@ -14,6 +14,9 @@
         <h1 class="titulo-pagina">Guía de clientes</h1>
         <p>Todo lo que muestra la página /guia del sitio: los avisos de cierre, los vencimientos y el cronograma de SUNAT.</p>
       </div>
+      <div class="cabecera-acciones">
+        <button class="boton boton-secundario" type="button" data-abre="hoja-textos-guia"><span data-icono="lapiz"></span>Textos de la página</button>
+      </div>
     </div>
 
     <div class="pila">
@@ -215,6 +218,53 @@
       </div>
       <div class="hoja-pie">
         <button class="boton boton-principal" type="submit">Guardar vencimiento</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="capa" id="hoja-textos-guia" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="textos-guia-titulo" data-hoja-guardar="La página /guia ya muestra los textos nuevos." novalidate>
+      <div class="hoja-cabecera">
+        <div><h2 id="textos-guia-titulo">Textos de la página de la guía</h2><p class="ayuda">El encabezado de /guia y el título de cada una de sus tres partes.</p></div>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo">
+          <label for="guia-titulo">Título de la página</label>
+          <input class="entrada" id="guia-titulo" value="Guía de clientes" required>
+        </div>
+        <div class="campo">
+          <label for="guia-introduccion">Introducción</label>
+          <textarea class="area-texto" id="guia-introduccion" rows="3" aria-describedby="guia-introduccion-ayuda"></textarea>
+          <p class="ayuda" id="guia-introduccion-ayuda">Opcional. Hoy está vacía.</p>
+        </div>
+        <div class="campo">
+          <label for="guia-avisos">Título de los avisos</label>
+          <input class="entrada" id="guia-avisos" value="Avisos para clientes" required>
+        </div>
+        <div class="campo">
+          <label for="guia-vencimientos">Título de los vencimientos</label>
+          <input class="entrada" id="guia-vencimientos" value="Vencimientos tributarios" required>
+        </div>
+        <div class="campo">
+          <label for="guia-cronograma">Título del cronograma de SUNAT</label>
+          <input class="entrada" id="guia-cronograma" value="Cronograma de SUNAT" required>
+        </div>
+        <h3>Cómo aparece en Google</h3>
+        <div class="campo">
+          <label for="guia-seo-titulo">Título para Google</label>
+          <input class="entrada" id="guia-seo-titulo" aria-describedby="guia-seo-ayuda">
+          <p class="ayuda" id="guia-seo-ayuda">Opcional. Si lo dejas vacío, se usan el título y la introducción de arriba.</p>
+        </div>
+        <div class="campo">
+          <div class="etiqueta-con-contador"><label for="guia-seo-descripcion">Descripción para Google</label><span class="contador-caracteres" id="guia-seo-descripcion-contador" aria-live="polite"></span></div>
+          <textarea class="area-texto" id="guia-seo-descripcion" rows="2" maxlength="160" data-contar></textarea>
+        </div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar</button>
         <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
       </div>
     </form>

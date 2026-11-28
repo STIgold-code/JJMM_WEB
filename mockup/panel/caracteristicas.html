@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filas de la tabla · Planes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="planes" data-pantalla="caracteristicas" data-migas="Inicio|inicio.html>Planes|planes.html>Filas de la tabla">
+  <main>
+    <form data-edicion data-aviso-guardado="La tabla «Nuestros planes» ya muestra las filas en este orden." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="planes.html"><span data-icono="volver" class="icono-sm"></span>Planes</a>
+          <h1 class="titulo-pagina">Filas de la tabla</h1>
+          <p>Lo que se compara en «Nuestros planes»: las filas son las mismas para todos los planes. Qué incluye cada plan en cada fila se marca al editar el plan.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-filas">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-filas">Filas</h2><p>Cambia el nombre en la misma fila, ordénalas o quita las que ya no ofreces. Nunca escribas montos: el sitio muestra «Consultar».</p></div>
+            </div>
+            <ol class="ordenable" id="lista-filas" data-ordenable></ol>
+            <div class="pie-tabla">
+              <button class="boton boton-secundario boton-sm" type="button" id="agregar-fila"><span data-icono="mas" class="icono-sm"></span>Agregar fila</button>
+              <span><span id="total-filas"></span> · Los cambios se aplican al guardar.</span>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Nuestros planes» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica vista-previa-scroll">
+              <p class="publica-titulo">Nuestros planes</p>
+              <p class="publica-bajada">Outsourcing contable para pymes. Compara lo que incluye cada plan y consúltanos por el que necesitas.</p>
+              <table class="publica-tabla">
+                <caption class="oculto-visual">Vista previa de la tabla de planes</caption>
+                <thead><tr><th scope="col">Qué incluye</th><th scope="col">Emprende</th><th scope="col">SIGEMype I</th><th scope="col" class="resaltada">SIGEMype II</th><th scope="col">SIGEMype Business</th></tr></thead>
+                <tbody id="vista-filas"></tbody>
+              </table>
+              <p class="publica-pie">Precio de cada plan: consultar. <span class="publica-boton">Solicitar</span></p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contáctanos · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="seccion" data-seccion="contacto" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Contáctanos">
+  <main>
+    <form data-edicion data-aviso-guardado="«Contáctanos» ya muestra los cambios en el inicio." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+          <h1 class="titulo-pagina">Contáctanos</h1>
+          <p>Los textos del formulario y de los botones de cada sede. Dirección, celulares y mapa de cada sede se editan en Sedes.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-encabezado">
+            <div class="tarjeta-cabecera"><h2 id="titulo-encabezado">Encabezado de la sección</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seccion-titulo">Título</label>
+                <input class="entrada" id="seccion-titulo" value="Contáctanos" required>
+              </div>
+              <div class="campo">
+                <label for="seccion-bajada">Bajada</label>
+                <textarea class="area-texto" id="seccion-bajada" rows="2" aria-describedby="seccion-bajada-ayuda" style="min-height: 4rem">Visítanos en cualquiera de nuestras sedes o escríbenos por WhatsApp.</textarea>
+                <p class="ayuda" id="seccion-bajada-ayuda">Opcional. Texto corto debajo del título.</p>
+              </div>
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Enlace desde el menú (ancla)</summary>
+                <div class="campo" style="margin-top: 0.75rem">
+                  <label for="seccion-ancla">Ancla</label>
+                  <input class="entrada" id="seccion-ancla" value="contacto" data-validar="ancla" aria-describedby="seccion-ancla-ayuda">
+                  <p class="ayuda" id="seccion-ancla-ayuda">Nombre corto para que el menú lleve a esta sección, sin #.</p>
+                </div>
+              </details>
+              <div class="nota" id="ancla-info"></div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-formulario">
+            <div class="tarjeta-cabecera"><div><h2 id="titulo-formulario">Formulario</h2><p>Los mensajes llegan a <a href="mensajes.html">Mensajes de contacto</a>.</p></div></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="rejilla-campos">
+                <div class="campo">
+                  <label for="form-titulo">Título del formulario</label>
+                  <input class="entrada" id="form-titulo" value="Escríbenos" required>
+                </div>
+                <div class="campo">
+                  <label for="form-boton">Texto del botón</label>
+                  <input class="entrada" id="form-boton" value="Enviar por WhatsApp" required>
+                </div>
+                <div class="campo ancho-completo">
+                  <label for="form-texto">Texto</label>
+                  <textarea class="area-texto" id="form-texto" rows="2" style="min-height: 4rem">Completa tus datos y te llevamos a WhatsApp con el mensaje listo para enviar.</textarea>
+                </div>
+              </div>
+              <div class="etiqueta-con-contador">
+                <span class="etiqueta" id="opciones-etq">Opciones de «¿Qué necesitas?»</span>
+                <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-opciones"><span data-icono="mas" class="icono-sm"></span>Agregar opción</button>
+              </div>
+              <ol class="lista-campos" id="lista-opciones" data-lista-campos data-ordenable data-minimo="1" aria-labelledby="opciones-etq"></ol>
+              <template id="lista-opciones-plantilla">
+                <li>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <label class="oculto-visual" for="opcion-__n__">Opción</label>
+                    <input class="entrada" id="opcion-__n__" data-clave="texto" required>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir esta opción"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar esta opción"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar esta opción"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+              <p class="ayuda">Debe quedar al menos una. Cambiarlas no modifica los mensajes que ya llegaron.</p>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-canales">
+            <div class="tarjeta-cabecera"><div><h2 id="titulo-canales">Botones de cada sede</h2><p>Se repiten en la pestaña de cada sede visible.</p></div></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="rejilla-campos">
+                <div class="campo">
+                  <label for="canal-llegar">Texto de «Cómo llegar»</label>
+                  <input class="entrada" id="canal-llegar" value="Cómo llegar">
+                </div>
+                <div class="campo">
+                  <label for="canal-mapa">Texto del botón del mapa</label>
+                  <input class="entrada" id="canal-mapa" value="Ver mapa">
+                </div>
+              </div>
+              <div class="selector-imagen" data-selector-imagen data-opcional data-id="foto-mapa" data-etiqueta="Foto de fondo del mapa" data-valor="hero-equipo.webp" data-uso="inicio" data-ayuda="Se ve detrás del botón del mapa hasta que la persona lo pulsa; recién entonces se carga Google Maps."></div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-sedes">
+            <div class="tarjeta-cuerpo fila-interruptor" style="justify-content: space-between; flex-wrap: wrap">
+              <div><h2 id="titulo-sedes">Sedes</h2><p class="ayuda">Una pestaña por sede visible: San Martín de Porres y San Isidro.</p></div>
+              <a class="boton boton-secundario" href="sedes.html"><span data-icono="pin" class="icono-sm"></span>Ir a Sedes</a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Contáctanos» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica publica-contacto vista-previa-scroll">
+              <p class="publica-titulo" data-refleja="seccion-titulo">Contáctanos</p>
+              <p class="publica-bajada" data-refleja="seccion-bajada" data-ocultar-vacio></p>
+              <div class="publica-pestanas" aria-hidden="true"><span class="activa">San Martín de Porres</span><span>San Isidro</span></div>
+              <div class="publica-sede">
+                <h3>Sede San Martín de Porres</h3>
+                <p>Jr. Iquitos 593, San Martín de Porres, Lima</p>
+                <div class="publica-botones">
+                  <span class="publica-wa"><span data-icono="whatsapp" class="icono-sm"></span>WhatsApp 951 965 242</span>
+                  <span class="publica-llamar"><span data-icono="telefono" class="icono-sm"></span>Llamar 952 249 102</span>
+                  <span class="publica-linea"><span data-icono="pin" class="icono-sm"></span><span data-refleja="canal-llegar" data-respaldo="Cómo llegar">Cómo llegar</span></span>
+                </div>
+                <div class="publica-mapa" id="vista-mapa" data-refleja="canal-mapa" data-respaldo="Ver mapa">Ver mapa</div>
+              </div>
+              <div class="publica-formulario">
+                <h3 data-refleja="form-titulo">Escríbenos</h3>
+                <p data-refleja="form-texto" data-ocultar-vacio></p>
+                <span class="publica-campo">Nombre</span>
+                <span class="publica-campo">¿Qué necesitas? <span class="publica-meta" id="vista-opciones"></span></span>
+                <span class="publica-campo">Mensaje</span>
+                <span class="publica-boton" data-refleja="form-boton" style="justify-self: start">Enviar por WhatsApp</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

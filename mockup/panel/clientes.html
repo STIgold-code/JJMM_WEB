@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="clientes" data-pantalla="clientes" data-migas="Inicio|inicio.html>Clientes">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Clientes</h1>
+        <p>Los logotipos que pasan en «Nuestros clientes» del inicio, en este orden. Publica solo clientes reales que aceptaron aparecer.</p>
+      </div>
+      <div class="cabecera-acciones">
+        <button class="boton boton-principal" type="button" id="nuevo-cliente"><span data-icono="mas"></span>Nuevo cliente</button>
+      </div>
+    </div>
+
+    <div class="pila">
+      <div class="nota nota-pendiente" id="nota-por-confirmar" hidden>
+        <span data-icono="alerta"></span>
+        <p><strong data-texto></strong> El sitio los publica como «Cliente del estudio (nombre por confirmar)», que también es lo que leen los lectores de pantalla. Pide al estudio el nombre real y escríbelo al editarlos.</p>
+      </div>
+
+      <section class="tarjeta" data-listado aria-label="Lista de clientes">
+        <div class="herramientas">
+          <div class="segmentado" data-filtros role="group" aria-label="Filtrar por visibilidad">
+            <button type="button" data-filtro="todos" aria-pressed="true" data-vacio="No hay clientes.">Todos <span class="conteo">0</span></button>
+            <button type="button" data-filtro="visible" aria-pressed="false" data-vacio="Ningún logotipo se muestra en el sitio.">Visibles <span class="conteo">0</span></button>
+            <button type="button" data-filtro="oculta" aria-pressed="false" data-vacio="No hay logotipos ocultos.">Ocultos <span class="conteo">0</span></button>
+          </div>
+          <div class="campo-con-icono">
+            <span data-icono="buscar" class="icono-sm"></span>
+            <label class="oculto-visual" for="buscar-clientes">Buscar clientes</label>
+            <input class="entrada" id="buscar-clientes" type="search" placeholder="Buscar por nombre" data-buscar>
+          </div>
+        </div>
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable" id="tabla-clientes">
+            <thead>
+              <tr>
+                <th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th>
+                <th scope="col">Cliente</th>
+                <th scope="col">En el sitio</th>
+                <th scope="col">Visible</th>
+                <th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody data-ordenable data-guardar-al-mover></tbody>
+          </table>
+        </div>
+        <p class="lista-campos-vacia" data-sin-resultados hidden><span data-texto-vacio></span></p>
+        <div class="pie-tabla"><span>Mostrando <span data-total></span></span><span>Arrastra o usa las flechas para ordenar; el cambio se guarda solo.</span></div>
+      </section>
+    </div>
+  </main>
+
+  <div class="capa" id="hoja-cliente" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="cliente-hoja-titulo" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="cliente-hoja-titulo">Editar cliente</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="selector-imagen" data-selector-imagen data-logo data-id="cliente-logo" data-etiqueta="Logotipo" data-uso="clientes" data-ayuda="PNG con fondo transparente o blanco. Se muestra en gris y toma color al pasar el mouse."></div>
+        <p class="error-campo" id="error-logo" hidden><span data-icono="alerta" class="icono-sm"></span>Elige o sube el logotipo del cliente.</p>
+        <div class="campo">
+          <label for="cliente-nombre">Nombre</label>
+          <input class="entrada" id="cliente-nombre" required aria-describedby="cliente-nombre-ayuda">
+          <p class="ayuda" id="cliente-nombre-ayuda">Tal como el cliente quiere aparecer. También es el texto alternativo del logotipo.</p>
+          <p class="nota nota-pendiente" id="cliente-pendiente" hidden><span data-icono="alerta" class="icono-sm"></span><span>Este nombre está por confirmar con el estudio.</span></p>
+        </div>
+        <div class="campo">
+          <label for="cliente-enlace">Sitio web del cliente</label>
+          <input class="entrada" id="cliente-enlace" type="url" inputmode="url" placeholder="https://" data-validar="https" aria-describedby="cliente-enlace-ayuda">
+          <p class="ayuda" id="cliente-enlace-ayuda">Opcional. Si lo escribes, el logotipo lleva a ese sitio en una pestaña nueva.</p>
+        </div>
+        <div class="fila-interruptor">
+          <button class="interruptor" id="cliente-visible" type="button" role="switch" aria-checked="true" aria-labelledby="cliente-visible-etq" aria-describedby="cliente-visible-ayuda"></button>
+          <div><p class="etiqueta" id="cliente-visible-etq">Visible en el sitio</p><p class="ayuda" id="cliente-visible-ayuda">Apágalo para dejar de mostrar el logotipo sin borrarlo.</p></div>
+        </div>
+        <p class="nota" id="cliente-nuevo-nota" hidden><span data-icono="info" class="icono-sm"></span><span>Se agrega al final del carrusel.</span></p>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar cliente</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <span class="separador"></span>
+        <button class="boton boton-destructivo-linea" type="button" id="eliminar-cliente"><span data-icono="basura" class="icono-sm"></span>Eliminar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

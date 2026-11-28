@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Áreas de servicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="areas" data-pantalla="areas" data-migas="Inicio|inicio.html>Áreas de servicio">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <h1 class="titulo-pagina">Áreas de servicio</h1>
+        <p>Las nueve áreas de la rueda SIGE Mype que muestra «Nuestros servicios» en el inicio. Este orden es el de las pestañas debajo de la rueda.</p>
+      </div>
+      <div class="cabecera-acciones">
+        <button class="boton boton-principal" type="button" disabled aria-describedby="razon-nueva-area"><span data-icono="mas"></span>Nueva área</button>
+      </div>
+    </div>
+
+    <section class="tarjeta" aria-label="Lista de áreas de servicio">
+      <div class="tabla-envoltura">
+        <table class="tabla tabla-apilable" id="tabla-areas">
+          <thead>
+            <tr>
+              <th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th>
+              <th scope="col">Área</th>
+              <th scope="col">En la rueda</th>
+              <th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody data-ordenable data-guardar-al-mover></tbody>
+        </table>
+      </div>
+      <div class="pie-tabla">
+        <span id="razon-nueva-area">9 áreas: ya están todas las de la rueda (P1 a P9), por eso no se puede crear otra.</span>
+        <span>Arrastra o usa las flechas para ordenar; el cambio se guarda solo.</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portada · Carrusel de portadas · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="portada" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Carrusel de portadas|portadas.html>Portada">
+  <main>
+    <form data-edicion data-aviso-guardado="El carrusel del inicio ya muestra los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="portadas.html"><span data-icono="volver" class="icono-sm"></span>Carrusel de portadas</a>
+          <h1 class="titulo-pagina">Portada <span data-numero>2</span></h1>
+          <p>Imagen, textos y botones de esta portada. El orden y los segundos por portada se cambian en el carrusel.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-imagen">
+            <div class="tarjeta-cabecera"><h2 id="titulo-imagen">Imagen</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="selector-imagen" data-selector-imagen data-id="portada-imagen" data-etiqueta="Imagen principal" data-uso="inicio" data-ayuda="Mejor horizontal, de 1920 px de ancho o más."></div>
+              <div class="selector-imagen" data-selector-imagen data-opcional data-id="portada-movil" data-etiqueta="Imagen para celular" data-uso="inicio" data-ayuda="Opcional. Úsala cuando la imagen principal tiene texto que en el celular se cortaría. Si la dejas vacía, el celular usa la principal."></div>
+              <div class="fila-interruptor">
+                <button class="interruptor" id="decorativa" type="button" role="switch" aria-checked="true" aria-labelledby="decorativa-etq" aria-describedby="decorativa-ayuda"></button>
+                <div><p class="etiqueta" id="decorativa-etq">La imagen es decorativa</p><p class="ayuda" id="decorativa-ayuda">Actívalo si el texto de la portada ya dice lo importante; así los lectores de pantalla saltan la imagen.</p></div>
+              </div>
+              <p class="nota" id="nota-alt" hidden><span data-icono="info" class="icono-sm"></span><span>Los lectores de pantalla leen su texto alternativo: «<span data-alt></span>». Se cambia en Imágenes.</span></p>
+              <div class="campo">
+                <label for="encuadre">Encuadre en celular <span class="texto-suave" id="encuadre-valor">50 %</span></label>
+                <input id="encuadre" type="range" min="0" max="100" value="50" aria-describedby="encuadre-ayuda" style="accent-color: var(--primary)">
+                <p class="ayuda" id="encuadre-ayuda">En pantallas angostas la imagen se recorta: 0 muestra el lado izquierdo y 100 el derecho. Míralo con «Celular» en la vista previa.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-presentacion">
+            <div class="tarjeta-cabecera"><h2 id="titulo-presentacion">Presentación</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo ancho-completo">
+                <span class="etiqueta" id="disposicion-etq">Dónde va el texto</span>
+                <div class="segmentado" role="group" aria-labelledby="disposicion-etq" data-grupo-unico id="disposicion" data-valor="texto-derecha">
+                  <button type="button" data-valor="texto-derecha" aria-pressed="true">A la derecha</button>
+                  <button type="button" data-valor="texto-izquierda" aria-pressed="false">A la izquierda</button>
+                  <button type="button" data-valor="imagen-completa" aria-pressed="false">Sin texto</button>
+                </div>
+                <p class="nota" id="nota-sin-texto" hidden><span data-icono="info" class="icono-sm"></span><span>«Sin texto» es para imágenes que ya traen el texto escrito, como el banner SIGE Mype. Los botones se siguen mostrando.</span></p>
+              </div>
+              <div class="campo">
+                <label for="transicion">Cómo entra</label>
+                <select class="selector" id="transicion">
+                  <option value="fundido">Fundido</option>
+                  <option value="izquierda">Desde la izquierda</option>
+                  <option value="bajar">Desde arriba</option>
+                  <option value="recorte">Recorte</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-textos" data-solo-con-texto>
+            <div class="tarjeta-cabecera"><h2 id="titulo-textos">Textos</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="portada-titulo">Título</label>
+                <input class="entrada" id="portada-titulo" aria-describedby="titulo-ayuda">
+                <p class="ayuda" id="titulo-ayuda">Lo que escribas entre corchetes se pinta en amarillo. Ejemplo: Somos más que un [estudio contable].</p>
+              </div>
+              <div class="campo">
+                <label for="portada-subtitulo">Subtítulo</label>
+                <textarea class="area-texto" id="portada-subtitulo" rows="2" style="min-height: 4rem"></textarea>
+              </div>
+              <div class="selector-imagen" data-selector-imagen data-opcional data-logo data-id="portada-sello" data-etiqueta="Sello" data-uso="marca" data-ayuda="Opcional. Se muestra sobre el título, como el sello SIGE Mype de la portada 3."></div>
+              <div class="etiqueta-con-contador">
+                <span class="etiqueta" id="puntos-etq">Lista con vistos</span>
+                <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-puntos"><span data-icono="mas" class="icono-sm"></span>Agregar punto</button>
+              </div>
+              <ol class="lista-campos" id="lista-puntos" data-lista-campos data-ordenable aria-labelledby="puntos-etq"></ol>
+              <p class="lista-campos-vacia" data-vacio-de="lista-puntos" hidden>Sin lista. Es opcional.</p>
+              <template id="lista-puntos-plantilla">
+                <li>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <label class="oculto-visual" for="punto-__n__">Punto</label>
+                    <input class="entrada" id="punto-__n__" data-clave="texto" required>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir este punto"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar este punto"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar este punto"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-botones">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-botones">Botones</h2><p>Hasta dos. WhatsApp y llamada usan los celulares de Datos del estudio.</p></div>
+              <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-botones"><span data-icono="mas" class="icono-sm"></span>Agregar botón</button>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <ol class="lista-campos" id="lista-botones" data-lista-campos data-ordenable data-maximo="2"></ol>
+              <p class="lista-campos-vacia" data-vacio-de="lista-botones" hidden>Sin botones: la portada solo muestra la imagen y los textos.</p>
+              <template id="lista-botones-plantilla">
+                <li data-con-destino>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <div class="campo campo-sm"><label for="boton-texto-__n__">Texto del botón</label><input class="entrada" id="boton-texto-__n__" data-clave="etiqueta" required></div>
+                    <div class="campos-en-linea" style="--columnas: 2">
+                      <div class="campo campo-sm"><label for="boton-tipo-__n__">Qué hace</label>
+                        <select class="selector" id="boton-tipo-__n__" data-clave="tipo" data-tipo-destino>
+                          <option value="whatsapp">Escribir por WhatsApp</option>
+                          <option value="llamada">Llamar por teléfono</option>
+                          <option value="seccion">Ir a una sección del inicio</option>
+                          <option value="interna">Ir a una página del sitio</option>
+                          <option value="externa">Ir a otro sitio</option>
+                        </select>
+                      </div>
+                      <div class="campo campo-sm"><label for="boton-estilo-__n__">Estilo</label>
+                        <select class="selector" id="boton-estilo-__n__" data-clave="estilo">
+                          <option value="principal">Principal (relleno)</option>
+                          <option value="secundario">Secundario (contorno)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="campo campo-sm" data-si-tipo="whatsapp"><label for="boton-mensaje-__n__">Mensaje de WhatsApp</label><input class="entrada" id="boton-mensaje-__n__" data-clave="mensaje" placeholder="Hola, quiero información sobre sus servicios contables."><p class="ayuda">Si lo dejas vacío, se usa el mensaje por defecto.</p></div>
+                    <div class="campo campo-sm" data-si-tipo="seccion interna externa"><label for="boton-destino-__n__">Destino</label><input class="entrada" id="boton-destino-__n__" data-clave="destino" data-validar="destino"></div>
+                    <p class="ayuda" data-si-tipo="llamada">Llama al 952 249 102, el celular para llamadas de Datos del estudio.</p>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir este botón"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar este botón"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar este botón"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta">
+              <span id="titulo-vista">Vista previa: portada <span data-numero>2</span></span>
+              <div class="segmentado segmentado-sm" role="group" aria-label="Ver como" data-grupo-unico data-no-cuenta id="modo-vista" data-valor="escritorio">
+                <button type="button" data-valor="escritorio" aria-pressed="true"><span data-icono="monitor" class="icono-sm"></span>Escritorio</button>
+                <button type="button" data-valor="celular" aria-pressed="false"><span data-icono="celular" class="icono-sm"></span>Celular</button>
+              </div>
+            </div>
+            <div class="vista-portada-marco">
+              <div class="publica-portada" id="vista-portada" data-disposicion="texto-derecha" aria-hidden="true">
+                <div class="publica-portada-texto">
+                  <img id="vista-sello" class="publica-portada-sello" src="img/sige-312.png" alt="" hidden>
+                  <p class="publica-portada-titulo" id="vista-titulo"></p>
+                  <p id="vista-subtitulo" style="font-size: 0.8125rem"></p>
+                  <ul class="publica-lista publica-lista-clara" id="vista-lista"></ul>
+                  <p class="publica-botones" id="vista-botones"></p>
+                </div>
+                <p class="publica-botones publica-portada-sueltos" id="vista-botones-sueltos"></p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

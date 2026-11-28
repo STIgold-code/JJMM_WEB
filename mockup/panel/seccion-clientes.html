@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nuestros clientes · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="seccion" data-seccion="clientes" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Nuestros clientes">
+  <main>
+    <form data-edicion data-aviso-guardado="«Nuestros clientes» ya muestra los cambios en el inicio." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+          <h1 class="titulo-pagina">Nuestros clientes</h1>
+          <p>El encabezado del carrusel de logotipos. Los logotipos se editan en Clientes.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-encabezado">
+            <div class="tarjeta-cabecera"><h2 id="titulo-encabezado">Encabezado de la sección</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seccion-titulo">Título</label>
+                <input class="entrada" id="seccion-titulo" value="Nuestros clientes" required>
+              </div>
+              <div class="campo">
+                <label for="seccion-bajada">Bajada</label>
+                <textarea class="area-texto" id="seccion-bajada" rows="2" aria-describedby="seccion-bajada-ayuda" style="min-height: 4rem"></textarea>
+                <p class="ayuda" id="seccion-bajada-ayuda">Opcional. Texto corto debajo del título.</p>
+              </div>
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Enlace desde el menú (ancla)</summary>
+                <div class="campo" style="margin-top: 0.75rem">
+                  <label for="seccion-ancla">Ancla</label>
+                  <input class="entrada" id="seccion-ancla" value="" placeholder="clientes" data-validar="ancla" aria-describedby="seccion-ancla-ayuda">
+                  <p class="ayuda" id="seccion-ancla-ayuda">Nombre corto para que el menú lleve a esta sección, sin #.</p>
+                </div>
+              </details>
+              <div class="nota" id="ancla-info"></div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-logos">
+            <div class="tarjeta-cuerpo fila-interruptor" style="justify-content: space-between; flex-wrap: wrap">
+              <div><h2 id="titulo-logos">Logotipos</h2><p class="ayuda">11 clientes visibles; 2 con el nombre por confirmar.</p></div>
+              <a class="boton boton-secundario" href="clientes.html"><span data-icono="edificio" class="icono-sm"></span>Ir a Clientes</a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Nuestros clientes» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica publica-seccion">
+              <p class="publica-titulo" data-refleja="seccion-titulo">Nuestros clientes</p>
+              <p class="publica-bajada" data-refleja="seccion-bajada" data-ocultar-vacio></p>
+              <ul class="publica-logos" id="vista-logos"></ul>
+              <p class="publica-meta" style="text-align: center">Los logotipos pasan solos en carrusel.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

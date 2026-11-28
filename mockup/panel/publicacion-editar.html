@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publicación · Publicaciones · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="publicaciones" data-pantalla="publicacion" data-migas="Inicio|inicio.html>Publicaciones|publicaciones.html>Publicación">
+  <main>
+    <form id="form-publicacion" novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="publicaciones.html"><span data-icono="volver" class="icono-sm"></span>Publicaciones</a>
+          <h1 class="oculto-visual">Editar publicación</h1>
+        </div>
+      </div>
+
+      <div class="aviso-ejemplo" id="aviso-ejemplo" style="margin-bottom: 1.25rem"><span class="ejemplo">Ejemplo</span><p>El blog todavía no tiene publicaciones: esta, sus categorías y etiquetas son de ejemplo para ver el editor con contenido.</p></div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta" aria-label="Título y dirección">
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="pub-titulo">Título</label>
+                <input class="entrada entrada-titulo" id="pub-titulo" required placeholder="Por ejemplo, Cómo preparar tus documentos para el cierre del mes">
+              </div>
+              <div class="slug" id="slug-vista">
+                <span>Dirección:</span><code>/blog/<span id="slug-texto"></span></code>
+                <button class="boton boton-fantasma boton-sm" type="button" id="slug-cambiar"><span data-icono="lapiz" class="icono-sm"></span>Cambiar</button>
+              </div>
+              <div class="campo" id="slug-edicion" hidden>
+                <label for="pub-slug">Dirección en el blog</label>
+                <div class="slug"><span>/blog/</span><input class="entrada" id="pub-slug" required data-validar="slug" aria-describedby="slug-ayuda"><button class="boton boton-secundario boton-sm" type="button" id="slug-listo">Listo</button></div>
+                <p class="ayuda" id="slug-ayuda">Sale del título. Minúsculas, números y guiones.</p>
+                <p class="nota nota-pendiente" id="slug-aviso" hidden><span data-icono="alerta" class="icono-sm"></span><span>Ya está publicada: si cambias la dirección, los enlaces que compartiste dejan de funcionar.</span></p>
+              </div>
+              <div class="campo">
+                <div class="etiqueta-con-contador"><label for="pub-extracto">Extracto</label><span class="contador-caracteres" id="pub-extracto-contador" aria-live="polite"></span></div>
+                <textarea class="area-texto" id="pub-extracto" rows="3" required maxlength="300" data-contar aria-describedby="pub-extracto-ayuda" style="min-height: 4.5rem"></textarea>
+                <p class="ayuda" id="pub-extracto-ayuda">El resumen que se ve en el listado del blog.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="contenido-etq">
+            <div class="tarjeta-cabecera"><h2 id="contenido-etq">Contenido</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="editor-texto" data-editor-texto>
+                <div class="barra-formato" role="toolbar" aria-label="Formato del contenido" aria-controls="pub-contenido" data-no-cuenta>
+                  <label class="oculto-visual" for="formato-bloque">Estilo del párrafo</label>
+                  <select class="selector" id="formato-bloque" data-bloque>
+                    <option value="p">Párrafo</option>
+                    <option value="h2">Título</option>
+                    <option value="h3">Subtítulo</option>
+                  </select>
+                  <span class="separador"></span>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="bold" aria-pressed="false" aria-label="Negrita" title="Negrita (Ctrl+B)"><span data-icono="negrita" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="italic" aria-pressed="false" aria-label="Cursiva" title="Cursiva (Ctrl+I)"><span data-icono="cursiva" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="createLink" aria-pressed="false" aria-label="Enlace" title="Enlace: selecciona el texto primero"><span data-icono="enlace" class="icono-sm"></span></button>
+                  <span class="separador"></span>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="insertUnorderedList" aria-pressed="false" aria-label="Lista con viñetas" title="Lista con viñetas"><span data-icono="lista" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="insertOrderedList" aria-pressed="false" aria-label="Lista numerada" title="Lista numerada"><span data-icono="lista-numerada" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="blockquote" aria-pressed="false" aria-label="Cita" title="Cita destacada"><span data-icono="cita" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="insertImage" aria-label="Insertar imagen" title="Insertar una imagen de Imágenes"><span data-icono="imagen" class="icono-sm"></span></button>
+                  <span class="separador"></span>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="undo" aria-label="Deshacer" title="Deshacer (Ctrl+Z)"><span data-icono="deshacer-texto" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="redo" aria-label="Rehacer" title="Rehacer"><span data-icono="rehacer" class="icono-sm"></span></button>
+                </div>
+                <div class="area-editable" id="pub-contenido" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="contenido-etq" aria-describedby="pub-contenido-error" data-placeholder="Escribe aquí el artículo. Usa «Título» para separar sus partes."></div>
+              </div>
+              <p class="error-campo" id="pub-contenido-error" hidden><span data-icono="alerta" class="icono-sm"></span>Escribe el contenido antes de publicar. Un borrador sí se puede guardar vacío.</p>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-seo">
+            <div class="tarjeta-cabecera"><div><h2 id="titulo-seo">Cómo aparece en Google</h2><p>Opcional. Si lo dejas vacío, se usan el título y el extracto.</p></div></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seo-titulo">Título para Google</label>
+                <input class="entrada" id="seo-titulo">
+              </div>
+              <div class="campo">
+                <div class="etiqueta-con-contador"><label for="seo-descripcion">Descripción para Google</label><span class="contador-caracteres" id="seo-descripcion-contador" aria-live="polite"></span></div>
+                <textarea class="area-texto" id="seo-descripcion" rows="2" maxlength="160" data-contar style="min-height: 4rem"></textarea>
+              </div>
+              <div class="vista-previa-marco" aria-label="Vista previa del resultado en Google" role="group">
+                <div class="publica-google">
+                  <span class="publica-google-url">Estudio Contable JJMM › blog › <span id="google-slug"></span></span>
+                  <span class="publica-google-titulo"><span id="google-titulo"></span> | Estudio Contable JJMM</span>
+                  <span class="publica-google-texto" id="google-texto"></span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="lateral-publicacion">
+          <section class="tarjeta" aria-labelledby="titulo-estado">
+            <div class="tarjeta-cuerpo estado-publicacion">
+              <div class="etiqueta-con-contador"><h2 id="titulo-estado">Estado</h2><span class="insignia" id="estado-insignia" data-estado="en-curso">Borrador</span></div>
+              <p class="ayuda" id="estado-texto"></p>
+              <div class="campo">
+                <label for="pub-fecha">Fecha de publicación</label>
+                <input class="entrada" id="pub-fecha" type="datetime-local" required aria-describedby="pub-fecha-ayuda">
+                <p class="ayuda" id="pub-fecha-ayuda">La que ven los lectores; el blog ordena de la más reciente a la más antigua.</p>
+              </div>
+              <button class="boton boton-secundario" type="button" data-abre="hoja-vista"><span data-icono="ojo" class="icono-sm"></span>Vista previa</button>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-organizacion">
+            <div class="tarjeta-cuerpo pila-sm">
+              <h2 id="titulo-organizacion">Categoría y etiquetas</h2>
+              <div class="campo">
+                <label for="pub-categoria">Categoría</label>
+                <select class="selector" id="pub-categoria" required></select>
+                <button class="boton boton-fantasma boton-sm" type="button" id="nueva-categoria-abrir" style="justify-self: start"><span data-icono="mas" class="icono-sm"></span>Nueva categoría</button>
+                <div class="fila-alta" id="nueva-categoria" hidden data-no-cuenta>
+                  <label class="oculto-visual" for="nueva-categoria-nombre">Nombre de la nueva categoría</label>
+                  <input class="entrada" id="nueva-categoria-nombre" placeholder="Nombre de la categoría">
+                  <button class="boton boton-secundario boton-sm" type="button" id="nueva-categoria-crear">Crear</button>
+                </div>
+              </div>
+              <div class="campo">
+                <span class="etiqueta" id="etiquetas-etq">Etiquetas</span>
+                <ul class="lista-chips" id="pub-etiquetas" aria-labelledby="etiquetas-etq"></ul>
+                <p class="ayuda" id="sin-etiquetas">Sin etiquetas. Son opcionales.</p>
+                <div class="fila-alta" data-no-cuenta>
+                  <label class="oculto-visual" for="pub-etiqueta-nueva">Agregar una etiqueta</label>
+                  <input class="entrada" id="pub-etiqueta-nueva" list="etiquetas-sugeridas" placeholder="Escribe o elige una" aria-describedby="etiqueta-ayuda">
+                  <datalist id="etiquetas-sugeridas"></datalist>
+                  <button class="boton boton-secundario boton-sm" type="button" id="pub-etiqueta-agregar">Agregar</button>
+                </div>
+                <p class="ayuda" id="etiqueta-ayuda">Si no existe, se crea. Colores y nombres en <a href="categorias-y-etiquetas.html">Categorías y etiquetas</a>.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-label="Imagen principal">
+            <div class="tarjeta-cuerpo">
+              <div class="selector-imagen selector-imagen-lateral" data-selector-imagen data-opcional data-id="pub-imagen" data-etiqueta="Imagen principal" data-ayuda="Opcional. Se ve en el listado y al abrir el artículo."></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado></span>
+        <button class="boton boton-secundario" type="button" id="despublicar" hidden>Despublicar</button>
+        <button class="boton boton-secundario" type="button" id="guardar-borrador" disabled>Guardar borrador</button>
+        <button class="boton boton-principal" type="submit" id="publicar">Publicar</button>
+      </div>
+    </form>
+  </main>
+
+  <div class="capa" id="hoja-vista" hidden>
+    <div class="capa-fondo"></div>
+    <section class="hoja hoja-ancha" role="dialog" aria-modal="true" aria-labelledby="vista-titulo-hoja">
+      <div class="hoja-cabecera">
+        <div class="pila-sm"><h2 id="vista-titulo-hoja">Vista previa</h2>
+          <div class="segmentado segmentado-sm" role="group" aria-label="Ver como" data-grupo-unico id="modo-vista-pub" data-valor="articulo">
+            <button type="button" data-valor="articulo" aria-pressed="true">El artículo</button>
+            <button type="button" data-valor="listado" aria-pressed="false">En el listado del blog</button>
+          </div>
+        </div>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar la vista previa"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo" id="vista-contenido"></div>
+    </section>
+  </div>
+</body>
+</html>

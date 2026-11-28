@@ -15,7 +15,9 @@
         <p>Los artículos del blog. Un borrador solo lo ve el equipo; se muestra en el sitio cuando lo publicas.</p>
       </div>
       <div class="cabecera-acciones">
-        <a class="boton boton-principal" role="link" aria-disabled="true" title="El editor de publicaciones no forma parte de esta maqueta"><span data-icono="mas"></span>Nueva publicación</a>
+        <button class="boton boton-secundario" type="button" data-abre="hoja-textos-blog"><span data-icono="lapiz"></span>Textos de la página</button>
+        <a class="boton boton-secundario" href="categorias-y-etiquetas.html"><span data-icono="etiqueta"></span>Categorías y etiquetas</a>
+        <a class="boton boton-principal" href="publicacion-editar.html?nueva"><span data-icono="mas"></span>Nueva publicación</a>
       </div>
     </div>
 
@@ -43,7 +45,7 @@
                 <td class="lado-movil"><span class="insignia" data-estado="en-curso">Borrador</span></td>
                 <td class="debajo-movil texto-suave">Sin publicar</td>
                 <td class="derecha debajo-movil"><div class="orden-botones">
-                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="El editor de publicaciones no forma parte de esta maqueta">Editar</a>
+                  <a class="boton boton-secundario boton-sm" href="publicacion-editar.html?id=cronograma" aria-label="Editar «Cronograma de obligaciones de diciembre»">Editar</a>
                   <button class="boton boton-fantasma boton-icono boton-sm" type="button" aria-label="Eliminar «Cronograma de obligaciones de diciembre»" data-eliminar data-titulo="¿Eliminar «Cronograma de obligaciones de diciembre»?" data-texto="Se borra el borrador y su historial. No se puede deshacer." data-accion="Eliminar publicación" data-hecho="Publicación eliminada"><span data-icono="basura" class="icono-sm"></span></button>
                 </div></td>
               </tr>
@@ -52,7 +54,7 @@
                 <td class="lado-movil"><span class="insignia" data-estado="listo">Publicada</span></td>
                 <td class="debajo-movil texto-suave">18 nov. 2026</td>
                 <td class="derecha debajo-movil"><div class="orden-botones">
-                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="El editor de publicaciones no forma parte de esta maqueta">Editar</a>
+                  <a class="boton boton-secundario boton-sm" href="publicacion-editar.html?id=cierre" aria-label="Editar «Cómo preparar tus documentos para el cierre del mes»">Editar</a>
                   <button class="boton boton-fantasma boton-icono boton-sm" type="button" aria-label="Eliminar «Cómo preparar tus documentos para el cierre del mes»" data-eliminar data-titulo="¿Eliminar «Cómo preparar tus documentos para el cierre del mes»?" data-texto="Deja de verse en el blog y se borra su historial. Si solo quieres retirarla, despublícala. No se puede deshacer." data-accion="Eliminar publicación" data-hecho="Publicación eliminada"><span data-icono="basura" class="icono-sm"></span></button>
                 </div></td>
               </tr>
@@ -61,7 +63,7 @@
                 <td class="lado-movil"><span class="insignia" data-estado="listo">Publicada</span></td>
                 <td class="debajo-movil texto-suave">4 nov. 2026</td>
                 <td class="derecha debajo-movil"><div class="orden-botones">
-                  <a class="boton boton-secundario boton-sm" role="link" aria-disabled="true" title="El editor de publicaciones no forma parte de esta maqueta">Editar</a>
+                  <a class="boton boton-secundario boton-sm" href="publicacion-editar.html?id=cierre" aria-label="Editar «Libros electrónicos: qué son y quién debe llevarlos»" title="En la maqueta abre el editor con otra publicación de ejemplo">Editar</a>
                   <button class="boton boton-fantasma boton-icono boton-sm" type="button" aria-label="Eliminar «Libros electrónicos: qué son y quién debe llevarlos»" data-eliminar data-titulo="¿Eliminar «Libros electrónicos: qué son y quién debe llevarlos»?" data-texto="Deja de verse en el blog y se borra su historial. Si solo quieres retirarla, despublícala. No se puede deshacer." data-accion="Eliminar publicación" data-hecho="Publicación eliminada"><span data-icono="basura" class="icono-sm"></span></button>
                 </div></td>
               </tr>
@@ -78,9 +80,48 @@
         <span class="vacio-icono"><span data-icono="periodico" class="icono-lg"></span></span>
         <h2>El blog todavía no tiene publicaciones</h2>
         <p>Aquí aparecerán los artículos del blog con su imagen, su categoría y si están publicados o en borrador. Empieza con un borrador: nadie lo ve hasta que lo publiques.</p>
-        <a class="boton boton-principal" role="link" aria-disabled="true" title="El editor de publicaciones no forma parte de esta maqueta"><span data-icono="mas"></span>Escribir la primera publicación</a>
+        <a class="boton boton-principal" href="publicacion-editar.html?nueva"><span data-icono="mas"></span>Escribir la primera publicación</a>
       </div>
     </section>
   </main>
+
+  <div class="capa" id="hoja-textos-blog" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="textos-blog-titulo" data-hoja-guardar="La página /blog ya muestra los textos nuevos." novalidate>
+      <div class="hoja-cabecera">
+        <div><h2 id="textos-blog-titulo">Textos de la página del blog</h2><p class="ayuda">Lo que se ve en /blog arriba de las publicaciones.</p></div>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo">
+          <label for="blog-titulo">Título</label>
+          <input class="entrada" id="blog-titulo" value="Blog" required>
+        </div>
+        <div class="campo">
+          <label for="blog-introduccion">Introducción</label>
+          <textarea class="area-texto" id="blog-introduccion" rows="3" aria-describedby="blog-introduccion-ayuda"></textarea>
+          <p class="ayuda" id="blog-introduccion-ayuda">Opcional. Hoy está vacía.</p>
+        </div>
+        <div class="campo">
+          <label for="blog-vacio">Texto cuando no hay publicaciones</label>
+          <input class="entrada" id="blog-vacio" value="Todavía no hay publicaciones." required>
+        </div>
+        <h3>Cómo aparece en Google</h3>
+        <div class="campo">
+          <label for="blog-seo-titulo">Título para Google</label>
+          <input class="entrada" id="blog-seo-titulo" aria-describedby="blog-seo-ayuda">
+          <p class="ayuda" id="blog-seo-ayuda">Opcional. Si lo dejas vacío, se usan el título y la introducción de arriba.</p>
+        </div>
+        <div class="campo">
+          <div class="etiqueta-con-contador"><label for="blog-seo-descripcion">Descripción para Google</label><span class="contador-caracteres" id="blog-seo-descripcion-contador" aria-live="polite"></span></div>
+          <textarea class="area-texto" id="blog-seo-descripcion" rows="2" maxlength="160" data-contar></textarea>
+        </div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

@@ -12,30 +12,57 @@
     <header>
       <img src="img/logo-jjmm.png" alt="JJMM, Mariñas &amp; Asociados, Estudio Contable" width="216" height="128">
       <h1 class="titulo-pagina">Panel propio del estudio: maqueta navegable</h1>
-      <p class="texto-suave">Propuesta de las pantallas principales para aprobar antes de construir. Funciona sin conexión: abre cualquier pantalla y navega desde el menú.</p>
+      <p class="texto-suave">Propuesta de las pantallas del panel para aprobar antes de construir. Funciona sin conexión: abre cualquier pantalla y navega desde el menú.</p>
       <div class="aviso-ejemplo">
         <span class="ejemplo">Ejemplo</span>
-        <p>Los datos con esta marca son de ejemplo (mensajes, publicaciones, nombres de cuentas). Lo demás es contenido real del sitio: planes, sedes, celulares, áreas, avisos, vencimientos, clientes e imágenes. El botón amarillo «Maqueta», abajo en cada pantalla, cambia el escenario (por ejemplo, con o sin pendientes, o entrar como editor).</p>
+        <p>Los datos con esta marca son de ejemplo (mensajes, publicaciones, categorías, etiquetas, nombres de cuentas). Lo demás es contenido real del sitio: planes, sedes, celulares, áreas, valores, clientes, avisos, vencimientos, menú e imágenes. El botón amarillo «Maqueta», arriba a la derecha en cada pantalla, cambia el escenario (por ejemplo, con o sin pendientes, o entrar como editor).</p>
       </div>
     </header>
 
-    <h2>Pantallas</h2>
-    <ul class="lista-pantallas">
-      <li><a href="ingreso.html">Ingreso</a><p>Correo, contraseña con botón para verla y el error de acceso.</p></li>
-      <li><a href="inicio.html">Inicio</a><p>Saludo, «Requiere atención», cifras del sitio, pendientes y lo que falta completar.</p></li>
-      <li><a href="mensajes.html">Mensajes de contacto</a><p>La tarea diaria: filtros, búsqueda y el mensaje en un panel lateral.</p></li>
-      <li><a href="planes.html">Planes</a><p>Listado con visible y orden.</p></li>
-      <li><a href="plan-editar.html">Editar un plan</a><p>Qué incluye el plan, con vista previa de «Nuestros planes».</p></li>
-      <li><a href="sedes.html">Sedes</a><p>Listado con visible.</p></li>
-      <li><a href="sede-editar.html">Editar una sede</a><p>Dirección, celulares, mapa y vista previa de «Contáctanos».</p></li>
-      <li><a href="pagina-de-inicio.html">Página de inicio</a><p>Las siete secciones del inicio en su orden.</p></li>
-      <li><a href="portadas.html">Carrusel de portadas</a><p>Editar una portada: imagen, textos y vista previa.</p></li>
-      <li><a href="guia-de-clientes.html">Guía de clientes</a><p>Avisos y vencimientos en una sola pantalla.</p></li>
-      <li><a href="publicaciones.html">Publicaciones</a><p>Blog con borradores y su estado vacío.</p></li>
-      <li><a href="medios.html">Imágenes</a><p>Biblioteca con las imágenes reales del sitio.</p></li>
-      <li><a href="usuarios.html">Usuarios</a><p>Solo para el administrador.</p></li>
-      <li><a href="mi-cuenta.html">Mi cuenta</a><p>Datos y cambio de contraseña.</p></li>
-    </ul>
+    <section class="bloque-pantallas bloque-pantallas-nuevas" aria-labelledby="titulo-nuevas">
+      <header>
+        <h2 id="titulo-nuevas">Pantallas nuevas por aprobar</h2>
+        <span class="insignia" data-estado="en-curso">Por aprobar</span>
+      </header>
+      <p class="texto-suave texto-sm">Lo que la maqueta aprobada dejó como «No incluida». Siguen el mismo diseño y los mismos componentes.</p>
+      <ul class="lista-pantallas">
+        <li><a href="areas.html">Áreas de servicio</a><p>Las nueve áreas de la rueda SIGE Mype, con su orden.</p></li>
+        <li><a href="area-editar.html?codigo=P6">Editar un área</a><p>Nombre, pestaña, qué incluye y gajo, con vista previa de la rueda.</p></li>
+        <li><a href="caracteristicas.html">Filas de la tabla de planes</a><p>Renombrar, ordenar, agregar y quitar filas, desde Planes.</p></li>
+        <li><a href="clientes.html">Clientes</a><p>Logotipos con visible y orden; avisa los dos sin nombre confirmado.</p></li>
+        <li><a href="valores.html">Valores</a><p>Las razones de «¿Por qué elegirnos?» con su ícono.</p></li>
+        <li><a href="seccion-quienes-somos.html">Secciones del inicio</a><p>Un mismo editor para las seis: <a href="seccion-quienes-somos.html">Quiénes somos</a>, <a href="seccion-servicios.html">Servicios</a>, <a href="seccion-planes.html">Planes</a>, <a href="seccion-por-que-elegirnos.html">Por qué elegirnos</a>, <a href="seccion-clientes.html">Clientes</a> y <a href="seccion-contacto.html">Contáctanos</a>.</p></li>
+        <li><a href="portada-editar.html?n=2">Portadas 2 a 4</a><p>Mismo editor que la portada 1, con imagen para celular, sello, lista y botones: <a href="portada-editar.html?n=2">2</a>, <a href="portada-editar.html?n=3">3</a> y <a href="portada-editar.html?n=4">4</a>.</p></li>
+        <li><a href="publicacion-editar.html?id=cronograma">Editar una publicación</a><p>Borrador, publicar y despublicar, texto con formato y vista previa. También <a href="publicacion-editar.html?id=cierre">una ya publicada</a> y <a href="publicacion-editar.html?nueva">una nueva</a>.</p></li>
+        <li><a href="categorias-y-etiquetas.html">Categorías y etiquetas</a><p>Las del blog, con su página y su color.</p></li>
+        <li><a href="publicaciones.html">Textos del blog, de la guía y Google del inicio</a><p>Paneles laterales «Textos de la página» en <a href="publicaciones.html">Publicaciones</a> y <a href="guia-de-clientes.html">Guía de clientes</a>, y «Cómo aparece en Google» en <a href="pagina-de-inicio.html">Página de inicio</a>.</p></li>
+        <li><a href="datos-del-estudio.html">Datos del estudio</a><p>Solo el administrador: marca, celulares, redes y Google.</p></li>
+        <li><a href="menu-del-sitio.html">Menú del sitio</a><p>Solo el administrador: ítems, orden, SIGEFact y vista de la cabecera.</p></li>
+      </ul>
+    </section>
+
+    <section class="bloque-pantallas" aria-labelledby="titulo-aprobadas">
+      <header>
+        <h2 id="titulo-aprobadas">Pantallas aprobadas</h2>
+        <span class="insignia" data-estado="listo">Aprobadas el 27/11/2026</span>
+      </header>
+      <ul class="lista-pantallas">
+        <li><a href="ingreso.html">Ingreso</a><p>Correo, contraseña con botón para verla y el error de acceso.</p></li>
+        <li><a href="inicio.html">Inicio</a><p>Saludo, «Requiere atención», cifras del sitio, pendientes y lo que falta completar.</p></li>
+        <li><a href="mensajes.html">Mensajes de contacto</a><p>La tarea diaria: filtros, búsqueda y el mensaje en un panel lateral.</p></li>
+        <li><a href="planes.html">Planes</a><p>Listado con visible y orden.</p></li>
+        <li><a href="plan-editar.html">Editar un plan</a><p>Qué incluye el plan, con vista previa de «Nuestros planes».</p></li>
+        <li><a href="sedes.html">Sedes</a><p>Listado con visible.</p></li>
+        <li><a href="sede-editar.html">Editar una sede</a><p>Dirección, celulares, mapa y vista previa de «Contáctanos».</p></li>
+        <li><a href="pagina-de-inicio.html">Página de inicio</a><p>Las siete secciones del inicio en su orden.</p></li>
+        <li><a href="portadas.html">Carrusel de portadas</a><p>Editar una portada: imagen, textos y vista previa.</p></li>
+        <li><a href="guia-de-clientes.html">Guía de clientes</a><p>Avisos y vencimientos en una sola pantalla.</p></li>
+        <li><a href="publicaciones.html">Publicaciones</a><p>Blog con borradores y su estado vacío.</p></li>
+        <li><a href="medios.html">Imágenes</a><p>Biblioteca con las imágenes reales del sitio.</p></li>
+        <li><a href="usuarios.html">Usuarios</a><p>Solo para el administrador.</p></li>
+        <li><a href="mi-cuenta.html">Mi cuenta</a><p>Datos y cambio de contraseña.</p></li>
+      </ul>
+    </section>
   </main>
 </body>
 </html>

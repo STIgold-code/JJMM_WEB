@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nuestros planes · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="seccion" data-seccion="planes" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Nuestros planes">
+  <main>
+    <form data-edicion data-aviso-guardado="«Nuestros planes» ya muestra los cambios en el inicio." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+          <h1 class="titulo-pagina">Nuestros planes</h1>
+          <p>Los textos alrededor de la tabla comparativa. Los planes y sus filas se editan en Planes. Nunca se publican montos: cada plan dice «Consultar».</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-encabezado">
+            <div class="tarjeta-cabecera"><h2 id="titulo-encabezado">Encabezado de la sección</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seccion-titulo">Título</label>
+                <input class="entrada" id="seccion-titulo" value="Nuestros planes" required>
+              </div>
+              <div class="campo">
+                <label for="seccion-bajada">Bajada</label>
+                <textarea class="area-texto" id="seccion-bajada" rows="2" aria-describedby="seccion-bajada-ayuda" style="min-height: 4rem">Outsourcing contable para pymes. Compara lo que incluye cada plan y consúltanos por el que necesitas.</textarea>
+                <p class="ayuda" id="seccion-bajada-ayuda">Opcional. Texto corto debajo del título.</p>
+              </div>
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Enlace desde el menú (ancla)</summary>
+                <div class="campo" style="margin-top: 0.75rem">
+                  <label for="seccion-ancla">Ancla</label>
+                  <input class="entrada" id="seccion-ancla" value="planes" data-validar="ancla" aria-describedby="seccion-ancla-ayuda">
+                  <p class="ayuda" id="seccion-ancla-ayuda">Nombre corto para que el menú lleve a esta sección, sin #.</p>
+                </div>
+              </details>
+              <div class="nota" id="ancla-info"></div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-tabla">
+            <div class="tarjeta-cabecera"><h2 id="titulo-tabla">Textos de la tabla</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo">
+                <label for="seccion-encabezado">Encabezado de la columna de filas</label>
+                <input class="entrada" id="seccion-encabezado" value="Qué incluye" required>
+              </div>
+              <div class="campo">
+                <label for="seccion-boton">Texto del botón de cada plan</label>
+                <input class="entrada" id="seccion-boton" value="Solicitar" required>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="seccion-nota">Nota al pie de la tabla</label>
+                <input class="entrada" id="seccion-nota" value="Precio de cada plan: consultar." data-validar="sin-montos" aria-describedby="seccion-nota-ayuda">
+                <p class="ayuda" id="seccion-nota-ayuda">Opcional. Sin montos ni precios.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-planes">
+            <div class="tarjeta-cuerpo fila-interruptor" style="justify-content: space-between; flex-wrap: wrap">
+              <div><h2 id="titulo-planes">Planes y filas</h2><p class="ayuda">4 planes, 22 filas. Qué incluye cada plan se marca en su edición.</p></div>
+              <div class="cabecera-acciones">
+                <a class="boton boton-secundario" href="caracteristicas.html"><span data-icono="lista" class="icono-sm"></span>Filas de la tabla</a>
+                <a class="boton boton-secundario" href="planes.html"><span data-icono="capas" class="icono-sm"></span>Ir a Planes</a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Nuestros planes» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica vista-previa-scroll">
+              <p class="publica-titulo" data-refleja="seccion-titulo">Nuestros planes</p>
+              <p class="publica-bajada" data-refleja="seccion-bajada" data-ocultar-vacio></p>
+              <table class="publica-tabla">
+                <caption class="oculto-visual">Vista previa de la tabla de planes</caption>
+                <thead><tr><th scope="col" data-refleja="seccion-encabezado">Qué incluye</th><th scope="col">Emprende</th><th scope="col">SIGEMype I</th><th scope="col" class="resaltada">SIGEMype II</th><th scope="col">SIGEMype Business</th></tr></thead>
+                <tbody id="vista-tabla-planes"></tbody>
+              </table>
+              <p class="publica-pie"><span data-refleja="seccion-nota" data-ocultar-vacio></span> <span class="publica-boton" data-refleja="seccion-boton" data-respaldo="Botón sin texto">Solicitar</span></p>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiénes somos · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="seccion" data-seccion="quienes-somos" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Quiénes somos">
+  <main>
+    <form data-edicion data-aviso-guardado="«Quiénes somos» ya muestra los cambios en el inicio." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+          <h1 class="titulo-pagina">Quiénes somos</h1>
+          <p>La presentación del estudio y sus cifras. Todo lo de esta sección se edita aquí.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-encabezado">
+            <div class="tarjeta-cabecera"><h2 id="titulo-encabezado">Encabezado de la sección</h2></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seccion-titulo">Título</label>
+                <input class="entrada" id="seccion-titulo" value="Quiénes somos" required>
+              </div>
+              <div class="campo">
+                <label for="seccion-bajada">Bajada</label>
+                <textarea class="area-texto" id="seccion-bajada" rows="2" aria-describedby="seccion-bajada-ayuda" style="min-height: 4rem"></textarea>
+                <p class="ayuda" id="seccion-bajada-ayuda">Opcional. Texto corto debajo del título.</p>
+              </div>
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Enlace desde el menú (ancla)</summary>
+                <div class="campo" style="margin-top: 0.75rem">
+                  <label for="seccion-ancla">Ancla</label>
+                  <input class="entrada" id="seccion-ancla" value="quienes-somos" data-validar="ancla" aria-describedby="seccion-ancla-ayuda">
+                  <p class="ayuda" id="seccion-ancla-ayuda">Nombre corto para que el menú lleve a esta sección, sin #.</p>
+                </div>
+              </details>
+              <div class="nota" id="ancla-info"></div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-cifras">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-cifras">Cifras</h2><p>Los círculos de la sección, en este orden.</p></div>
+              <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-cifras"><span data-icono="mas" class="icono-sm"></span>Agregar cifra</button>
+            </div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="nota nota-pendiente"><span data-icono="alerta"></span><p>Solo cifras reales y comprobables del estudio. No publiques cifras estimadas.</p></div>
+              <ol class="lista-campos" id="lista-cifras" data-lista-campos data-ordenable></ol>
+              <p class="lista-campos-vacia" data-vacio-de="lista-cifras" hidden>Sin cifras: la sección muestra solo la presentación.</p>
+              <template id="lista-cifras-plantilla">
+                <li>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <div class="campos-en-linea">
+                      <div class="campo campo-sm"><label for="cifra-pre-__n__">Antes del número</label><input class="entrada" id="cifra-pre-__n__" data-clave="prefijo"></div>
+                      <div class="campo campo-sm"><label for="cifra-num-__n__">Número</label><input class="entrada" id="cifra-num-__n__" data-clave="valor" type="number" min="0" inputmode="numeric" required></div>
+                      <div class="campo campo-sm"><label for="cifra-suf-__n__">Después del número</label><input class="entrada" id="cifra-suf-__n__" data-clave="sufijo"></div>
+                    </div>
+                    <div class="campo campo-sm"><label for="cifra-desc-__n__">Descripción</label><input class="entrada" id="cifra-desc-__n__" data-clave="descripcion" required></div>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir esta cifra"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar esta cifra"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar esta cifra"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="presentacion-etq">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="presentacion-etq">Presentación</h2><p>Selecciona una parte y pulsa «Resaltar» para que se vea en azul y en negrita.</p></div>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <div class="editor-texto" data-editor-texto>
+                <div class="barra-formato" role="toolbar" aria-label="Formato de la presentación" aria-controls="presentacion" data-no-cuenta>
+                  <button class="boton boton-fantasma boton-sm" type="button" data-formato="bold" aria-pressed="false"><span data-icono="negrita" class="icono-sm"></span>Resaltar</button>
+                  <span class="separador"></span>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="undo" aria-label="Deshacer" title="Deshacer"><span data-icono="deshacer-texto" class="icono-sm"></span></button>
+                  <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-formato="redo" aria-label="Rehacer" title="Rehacer"><span data-icono="rehacer" class="icono-sm"></span></button>
+                </div>
+                <div class="area-editable area-editable-corta" id="presentacion" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="presentacion-etq" data-placeholder="Presenta al estudio en uno o dos párrafos."><p>Somos el <strong>Estudio Contable JJMM S.A.C.</strong>, empresa que busca la satisfacción de sus clientes y la excelencia en la prestación de servicios. Desarrollamos en todos los niveles de la organización un <strong>Sistema de Gestión de Calidad Genuino</strong>, con un alto índice de responsabilidad, calidad y profesionalismo, y promovemos la mejora continua en nuestros servicios. Con base en esa retroalimentación creamos el sistema de gestión empresarial <strong>SIGE Mype</strong>.</p></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Quiénes somos» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica publica-seccion vista-previa-scroll">
+              <p class="publica-titulo" data-refleja="seccion-titulo">Quiénes somos</p>
+              <p class="publica-bajada" data-refleja="seccion-bajada" data-ocultar-vacio></p>
+              <ul class="publica-cifras" id="vista-cifras"></ul>
+              <div id="vista-presentacion"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

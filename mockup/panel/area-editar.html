@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editar área · Áreas de servicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="areas" data-pantalla="area" data-migas="Inicio|inicio.html>Áreas de servicio|areas.html>Área">
+  <main>
+    <form data-edicion data-aviso-guardado="«Nuestros servicios» ya muestra los cambios en la rueda y en su pestaña." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <a class="volver" href="areas.html"><span data-icono="volver" class="icono-sm"></span>Áreas de servicio</a>
+          <h1 class="titulo-pagina"><span class="codigo-area codigo-area-titulo" id="area-codigo">P1</span> <span data-titulo-area>Área</span></h1>
+          <p>Lo que cambies aquí se ve en la pestaña de esta área y al pulsar su gajo en la rueda SIGE Mype.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-datos">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-datos">Datos del área</h2><p>El código es fijo: identifica el gajo de la rueda.</p></div>
+            </div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo">
+                <label for="area-nombre">Nombre</label>
+                <input class="entrada" id="area-nombre" required aria-describedby="area-nombre-ayuda">
+                <p class="ayuda" id="area-nombre-ayuda">Título de la pestaña abierta, por ejemplo «Sistema de calidad».</p>
+              </div>
+              <div class="campo">
+                <label for="area-corto">Nombre corto</label>
+                <input class="entrada" id="area-corto" required aria-describedby="area-corto-ayuda">
+                <p class="ayuda" id="area-corto-ayuda">Va en el botón de la pestaña, debajo del código. Por ejemplo «Calidad».</p>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="area-descripcion">Descripción</label>
+                <textarea class="area-texto" id="area-descripcion" rows="5" required></textarea>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="area-mensaje">Mensaje de WhatsApp al pulsar «Consultar este servicio»</label>
+                <input class="entrada" id="area-mensaje" aria-describedby="area-mensaje-ayuda">
+                <p class="ayuda" id="area-mensaje-ayuda">Opcional. Si lo dejas vacío, se usa el mensaje por defecto de Datos del estudio.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-puntos">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-puntos">Qué incluye</h2><p>La lista con vistos de la pestaña, en este orden.</p></div>
+              <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-puntos"><span data-icono="mas" class="icono-sm"></span>Agregar punto</button>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <ol class="lista-campos" id="lista-puntos" data-lista-campos data-ordenable></ol>
+              <p class="lista-campos-vacia" data-vacio-de="lista-puntos" hidden>Sin puntos: la pestaña muestra solo la descripción.</p>
+              <template id="lista-puntos-plantilla">
+                <li>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <label class="oculto-visual" for="punto-__n__">Punto</label>
+                    <input class="entrada" id="punto-__n__" data-clave="texto" required>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir este punto"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar este punto"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar este punto"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-gajo">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-gajo">Gajo en la rueda</h2><p>Hace que se pueda pulsar esta área sobre la imagen de la rueda.</p></div>
+              <span id="estado-gajo"></span>
+            </div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <details class="nota">
+                <summary style="cursor: pointer; color: var(--foreground); font-weight: 600">Cambiar el contorno del gajo</summary>
+                <div class="campo" style="margin-top: 0.75rem">
+                  <label for="area-poligono">Puntos del contorno</label>
+                  <textarea class="area-texto" id="area-poligono" rows="3" data-validar="poligono" aria-describedby="area-poligono-ayuda" style="font-variant-numeric: tabular-nums"></textarea>
+                  <p class="ayuda" id="area-poligono-ayuda">Solo cámbialo si cambia la imagen de la rueda. Son puntos «x,y» separados por espacios, medidos sobre la imagen de 500 × 550 píxeles. Si lo dejas vacío, el área sigue en las pestañas pero no se puede pulsar en la rueda.</p>
+                </div>
+              </details>
+            </div>
+          </section>
+
+          <section class="tarjeta" aria-labelledby="titulo-eliminar" data-solo-admin>
+            <div class="tarjeta-cuerpo fila-interruptor" style="justify-content: space-between; flex-wrap: wrap">
+              <div><h2 id="titulo-eliminar">Eliminar el área</h2><p class="ayuda">Las áreas no tienen «Visible»: eliminarla es la única forma de quitarla del sitio.</p></div>
+              <button class="boton boton-destructivo-linea" type="button" data-eliminar data-accion="Eliminar área" data-hecho="Área eliminada" data-ir="areas.html"><span data-icono="basura" class="icono-sm"></span>Eliminar área</button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «Nuestros servicios» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="publica vista-previa-scroll" aria-hidden="true">
+              <p class="publica-titulo">Nuestros servicios empresariales integrales</p>
+              <svg class="publica-rueda" id="vista-rueda" viewBox="0 0 500 550"></svg>
+              <p class="publica-aviso" id="vista-sin-gajo" hidden>Sin gajo: esta área no se puede pulsar en la rueda; solo aparece en las pestañas.</p>
+              <div class="publica-areas" id="vista-pestanas"></div>
+              <div class="publica-area">
+                <h3 id="vista-nombre"></h3>
+                <p id="vista-descripcion"></p>
+                <ul class="publica-lista" id="vista-puntos"></ul>
+                <span class="publica-boton-azul">Consultar este servicio</span>
+                <p class="publica-meta">Abre WhatsApp con «<span id="vista-mensaje"></span>»</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

@@ -50,8 +50,8 @@ Supuestos, marcados como tales (no son parte del encargo):
 | P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | hecha y verificada en producción (L5) | `45d9675`, `2d828a6`, `563c0b5`, `7ca09f6` |
 | P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario (mensajes de contacto) | delegada (respaldo de contexto) + verificador (riesgo 2: primeras escrituras del panel) | hecha y verificada en producción (L6) | `46b5582` |
 | P5 | S1, S3, S4.2 | Fase 3: el catálogo principal (planes) | delegada (respaldo de contexto) + verificador (riesgo 1: migración; riesgo 2: escrituras; riesgo 3: tabla pública) | hecha y verificada en producción (L7) | `8b6ef1e` |
-| P6 | S1, S3, S4.2 | Fase 4: el resto de secciones, por pantalla: sedes, página de inicio, guía de clientes, publicaciones, imágenes, usuarios, mi cuenta | delegada por pantalla (respaldo de contexto) + verificador por escrituras | sedes en curso | — |
-| P6b | S4.1 | Maqueta de Áreas de servicio, Clientes, Datos del estudio y Menú del sitio (no estaban en la aprobada) | por definir | pendiente | — |
+| P6 | S1, S3, S4.2 | Fase 4: el resto de secciones, por pantalla: sedes, página de inicio, guía de clientes, publicaciones, imágenes, usuarios, mi cuenta | delegada por pantalla (respaldo de contexto) + verificador por escrituras | hechas y en producción: sedes, usuarios, mi cuenta, guía, imágenes, página de inicio (L8–L12); publicaciones espera la maqueta L13 | `7154a08`, `90d4f85`, `d36c598`, `c0f0e19`, `a82bf8f` |
+| P6b | S4.1 | Maqueta de lo que no estaba en la aprobada: áreas, características, valores, clientes, datos del estudio, menú, secciones del inicio, publicaciones | delegada (respaldo de contexto) | hecha (L13); esperando la aprobación de Gian | — |
 | P7 | S0, S1 | Ocultar el `/admin` de Payload y dejarlo solo para el desarrollador | por definir | bloqueada por P3 | — |
 
 ## Log
@@ -172,4 +172,19 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844, solo lectura: la lista con las siete secciones y el editor con las cuatro portadas reales, imágenes sin romper, vista previa, sin desborde ni errores; el inicio público conserva su `h1` y sus secciones.
 - Sin verificar: ningún guardado. El primer guardado real es el que confirma el punto del texto enriquecido; conviene hacerlo con Gian presente.
 
-Siguiente paso: P6b, la maqueta de lo que falta (en curso), y su aprobación.
+**L13** (27/11/2026), P6b · maqueta de lo que falta, lista para aprobar:
+- En `mockup/panel/` (portada `index.html`, bloque «Pantallas nuevas por aprobar»): `areas.html` y `area-editar.html`; `caracteristicas.html` (filas de la tabla, bajo Planes); `clientes.html`; `valores.html`; seis `seccion-*.html` del inicio con un mismo patrón; `portada-editar.html` (portadas 2 a 4); `publicacion-editar.html` (borrador, publicada, nueva) y `categorias-y-etiquetas.html`; `datos-del-estudio.html` y `menu-del-sitio.html` (solo administrador); textos de página de la guía, el blog y el SEO del inicio en paneles laterales.
+- Solo muestra campos que existen en el modelo; áreas, clientes, valores, menú y datos del estudio usan datos reales; publicaciones, categorías y etiquetas van marcadas «Ejemplo».
+- Verificado por quien la hizo con capturas a 1440×900 y 390×844 y 41 pruebas de interacción; el orquestador revisó el editor de publicaciones y el menú del sitio.
+- Preguntas para Gian:
+  1. ¿«Valores» lleva entrada propia en el menú o se llega desde Página de inicio?
+  2. ¿«Filas de la tabla» es pantalla propia bajo Planes o una pestaña dentro de Planes?
+  3. ¿Áreas, valores y características necesitan un campo «Visible»? Hoy no lo tienen.
+  4. ¿Se pueden agregar o quitar secciones del inicio, o solo reordenarlas?
+  5. ¿Un editor puede publicar o solo guardar borradores? ¿Se puede programar una fecha futura?
+  6. ¿Cuáles son los nombres reales de los dos clientes de las posiciones 2 y 6?
+- Para la construcción: borrar una característica deja huérfanas sus celdas (falta un hook `beforeDelete`, como en planes).
+
+**Estado al cierre de la sesión del 27/11/2026.** En producción: ingreso, inicio, mensajes, planes, sedes, guía de clientes, imágenes, página de inicio (orden y carrusel), usuarios y mi cuenta. Pendiente de Gian: aprobar la maqueta L13; decidir sobre los datos de prueba en producción (mensaje id 1 «Prueba del panel (borrar)», plan id 5 «Plan de prueba (borrar)», oculto), la cuenta de editor de prueba y las pruebas de escritura con datos reales. Pendiente técnico: hook del último administrador en `coleccion-usuarios.ts`; hook de borrado en `medios`; el único administrador no puede cambiar su correo; mensaje del aviso general de la página de inicio; P7 (ocultar `/admin`) cuando todo lo anterior esté construido.
+
+Siguiente paso: aprobación de la maqueta L13 por Gian.

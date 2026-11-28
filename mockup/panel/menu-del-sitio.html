@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menú del sitio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="navegacion" data-pantalla="menuSitio" data-migas="Inicio|inicio.html>Menú del sitio">
+  <main>
+    <section class="tarjeta" data-solo-editor>
+      <div class="vacio">
+        <span class="vacio-icono"><span data-icono="candado" class="icono-lg"></span></span>
+        <h1 class="titulo-pagina">Solo para el administrador</h1>
+        <p>El menú del sitio lo cambia el administrador, porque un enlace roto se ve en todas las páginas.</p>
+        <a class="boton boton-secundario" href="inicio.html">Volver al inicio</a>
+      </div>
+    </section>
+
+    <form data-edicion data-solo-admin data-aviso-guardado="La cabecera y el menú del celular ya muestran los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <h1 class="titulo-pagina">Menú del sitio</h1>
+          <p>Los enlaces de la cabecera y del menú del celular, en el orden en que se muestran.</p>
+        </div>
+        <div class="cabecera-acciones">
+          <button class="boton boton-principal" type="button" id="nuevo-item"><span data-icono="mas"></span>Nuevo ítem</button>
+        </div>
+      </div>
+
+      <div class="pila">
+        <div class="vista-previa-marco">
+          <div class="vista-previa-etiqueta"><span>Vista previa: cabecera del sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+          <div class="publica-cabecera publica-cabecera-fila" aria-hidden="true">
+            <div class="publica-marca">
+              <img src="img/logo-jjmm.png" alt="">
+              <img class="publica-sello" src="img/logo-grupo-lenin.png" alt="">
+            </div>
+            <ul class="publica-nav" id="vista-nav"></ul>
+          </div>
+        </div>
+
+        <p class="nota nota-pendiente" id="nota-rotos" hidden><span data-icono="alerta"></span><span>Hay un ítem que lleva a una sección que no existe. Edítalo y elige una de las secciones del inicio.</span></p>
+
+        <section class="tarjeta" aria-labelledby="titulo-items">
+          <div class="tarjeta-cabecera"><div><h2 id="titulo-items">Ítems</h2><p>Arrastra o usa las flechas para cambiar el orden. Nada se publica hasta que guardes.</p></div></div>
+          <ol class="ordenable" id="lista-menu" data-ordenable></ol>
+          <div class="pie-tabla"><span id="total-items"></span><span>Las secciones del inicio se eligen de una lista, así el enlace no se rompe.</span></div>
+        </section>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+
+  <div class="capa" id="hoja-item" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="item-hoja-titulo" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="item-hoja-titulo">Editar ítem</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo">
+          <label for="item-etiqueta">Texto del enlace</label>
+          <input class="entrada" id="item-etiqueta" required>
+        </div>
+        <div class="campo">
+          <span class="etiqueta" id="item-tipo-etq">A dónde lleva</span>
+          <div class="segmentado" role="group" aria-labelledby="item-tipo-etq" data-grupo-unico id="item-tipo" data-valor="seccion">
+            <button type="button" data-valor="seccion" aria-pressed="true">Sección del inicio</button>
+            <button type="button" data-valor="interna" aria-pressed="false">Página del sitio</button>
+            <button type="button" data-valor="externa" aria-pressed="false">Otro sitio</button>
+          </div>
+        </div>
+        <div class="campo" id="campo-ancla">
+          <label for="item-ancla">Sección</label>
+          <select class="selector" id="item-ancla" aria-describedby="item-ancla-ayuda"></select>
+          <p class="ayuda" id="item-ancla-ayuda">Solo aparecen las secciones que tienen ancla. Se la pones al editar la sección, en Página de inicio.</p>
+          <p class="error-campo" id="item-ancla-rota" hidden><span data-icono="alerta" class="icono-sm"></span><span></span></p>
+        </div>
+        <div class="campo" id="campo-destino" hidden>
+          <label for="item-destino">Dirección</label>
+          <input class="entrada" id="item-destino" list="paginas-del-sitio" aria-describedby="item-destino-ayuda">
+          <datalist id="paginas-del-sitio"><option value="/"></option><option value="/blog"></option><option value="/guia"></option></datalist>
+          <p class="ayuda" id="item-destino-ayuda"></p>
+        </div>
+        <div class="fila-interruptor">
+          <button class="interruptor" id="item-nueva" type="button" role="switch" aria-checked="false" aria-labelledby="item-nueva-etq" aria-describedby="item-nueva-ayuda"></button>
+          <div><p class="etiqueta" id="item-nueva-etq">Abrir en una pestaña nueva</p><p class="ayuda" id="item-nueva-ayuda">Úsalo para otros sitios, como SIGEFact, así el visitante no pierde el tuyo.</p></div>
+        </div>
+        <div class="selector-imagen" data-selector-imagen data-logo data-opcional data-id="item-logo" data-etiqueta="Logo en lugar del texto" data-uso="marca" data-ayuda="Opcional. En la cabecera se muestra el logo en vez del texto, como el de SIGEFact. El texto sigue siendo lo que leen los lectores de pantalla."></div>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Listo</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

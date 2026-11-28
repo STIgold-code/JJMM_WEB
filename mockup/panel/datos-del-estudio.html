@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datos del estudio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="configuracion" data-pantalla="estudio" data-migas="Inicio|inicio.html>Datos del estudio">
+  <main>
+    <section class="tarjeta" data-solo-editor>
+      <div class="vacio">
+        <span class="vacio-icono"><span data-icono="candado" class="icono-lg"></span></span>
+        <h1 class="titulo-pagina">Solo para el administrador</h1>
+        <p>El nombre, el logotipo, los celulares y las redes del estudio los cambia el administrador, porque se ven en todo el sitio.</p>
+        <a class="boton boton-secundario" href="inicio.html">Volver al inicio</a>
+      </div>
+    </section>
+
+    <form data-edicion data-solo-admin data-aviso-guardado="La cabecera, el pie y los botones de WhatsApp ya muestran los cambios." novalidate>
+      <div class="cabecera">
+        <div class="cabecera-texto">
+          <h1 class="titulo-pagina">Datos del estudio</h1>
+          <p>Lo que usa todo el sitio: marca, celulares, correo, redes y lo que muestra Google cuando una página no tiene lo suyo.</p>
+        </div>
+      </div>
+
+      <div class="edicion">
+        <div class="pila">
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-marca">
+            <div class="tarjeta-cabecera"><h2 id="titulo-marca">Marca</h2></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo">
+                <label for="nombre-comercial">Nombre comercial</label>
+                <input class="entrada" id="nombre-comercial" value="Estudio Contable JJMM" required>
+              </div>
+              <div class="campo">
+                <label for="razon-social">Razón social</label>
+                <input class="entrada" id="razon-social" value="Estudio Contable JJMM S.A.C." required>
+              </div>
+              <div class="campo">
+                <label for="grupo">Nombre del grupo</label>
+                <input class="entrada" id="grupo" value="Grupo JJMM">
+              </div>
+              <div class="campo">
+                <label for="lema">Lema</label>
+                <input class="entrada" id="lema" value="Cada empresa guiada por nuestro sistema, llega a ser líder.">
+              </div>
+              <div class="ancho-completo selector-imagen" data-selector-imagen data-logo data-id="marca-logo" data-etiqueta="Logotipo" data-valor="logo-jjmm.png" data-uso="marca" data-ayuda="Va en la cabecera y en el pie. Mejor PNG con fondo transparente."></div>
+              <div class="ancho-completo selector-imagen" data-selector-imagen data-logo data-opcional data-id="marca-sello" data-etiqueta="Sello SIGE Mype" data-valor="logo-grupo-lenin.png" data-uso="marca" data-ayuda="Opcional. Acompaña al logotipo en la cabecera."></div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-contacto">
+            <div class="tarjeta-cabecera"><div><h2 id="titulo-contacto">Contacto</h2><p>Solo celulares: el sitio no publica teléfonos fijos. Los de cada sede se editan en Sedes.</p></div></div>
+            <div class="tarjeta-cuerpo rejilla-campos">
+              <div class="campo">
+                <label for="celular-whatsapp">Celular de WhatsApp</label>
+                <input class="entrada" id="celular-whatsapp" value="951 965 242" inputmode="numeric" required data-validar="celular" aria-describedby="celular-whatsapp-ayuda">
+                <p class="ayuda" id="celular-whatsapp-ayuda">Lo usan el botón flotante y los botones de WhatsApp de portadas, áreas y planes.</p>
+              </div>
+              <div class="campo">
+                <label for="celular-llamadas">Celular para llamadas</label>
+                <input class="entrada" id="celular-llamadas" value="952 249 102" inputmode="numeric" required data-validar="celular" aria-describedby="celular-llamadas-ayuda">
+                <p class="ayuda" id="celular-llamadas-ayuda">Lo usan los botones «Llamar» de las portadas.</p>
+              </div>
+              <div class="campo ancho-completo">
+                <label for="mensaje-whatsapp">Mensaje de WhatsApp por defecto</label>
+                <input class="entrada" id="mensaje-whatsapp" value="Hola, quiero información sobre sus servicios contables." required aria-describedby="mensaje-whatsapp-ayuda">
+                <p class="ayuda" id="mensaje-whatsapp-ayuda">Con este texto se abre el chat cuando un botón no trae su propio mensaje.</p>
+              </div>
+              <div class="campo">
+                <label for="texto-flotante">Texto del botón flotante</label>
+                <input class="entrada" id="texto-flotante" value="Escríbenos" required>
+              </div>
+              <div class="campo">
+                <label for="correo">Correo general</label>
+                <input class="entrada" id="correo" type="email" value="contabilidad@jjmm.com.pe" required data-validar="correo">
+              </div>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-redes">
+            <div class="tarjeta-cabecera">
+              <div><h2 id="titulo-redes">Redes sociales</h2><p>Los íconos de la barra superior, en este orden.</p></div>
+              <button class="boton boton-secundario boton-sm" type="button" data-agregar="lista-redes"><span data-icono="mas" class="icono-sm"></span>Agregar red</button>
+            </div>
+            <div class="tarjeta-cuerpo">
+              <ol class="lista-campos" id="lista-redes" data-lista-campos data-ordenable data-maximo="6"></ol>
+              <p class="lista-campos-vacia" data-vacio-de="lista-redes" hidden>Sin redes: la barra superior no muestra íconos.</p>
+              <template id="lista-redes-plantilla">
+                <li>
+                  <span class="posicion"></span>
+                  <div class="lista-campos-cuerpo">
+                    <div class="campos-en-linea" style="--columnas: 2; grid-template-columns: minmax(8rem, 0.5fr) minmax(0, 1.5fr)">
+                      <div class="campo campo-sm"><label for="red-__n__">Red</label>
+                        <select class="selector" id="red-__n__" data-clave="red">
+                          <option value="facebook">Facebook</option><option value="x">X (Twitter)</option><option value="youtube">YouTube</option><option value="instagram">Instagram</option><option value="tiktok">TikTok</option><option value="linkedin">LinkedIn</option>
+                        </select>
+                      </div>
+                      <div class="campo campo-sm"><label for="red-url-__n__">Dirección</label><input class="entrada" id="red-url-__n__" data-clave="url" type="url" inputmode="url" required placeholder="https://" data-validar="https"></div>
+                    </div>
+                  </div>
+                  <div class="lista-campos-acciones">
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="-1" aria-label="Subir esta red"><span data-icono="arriba" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-mover="1" aria-label="Bajar esta red"><span data-icono="abajo" class="icono-sm"></span></button>
+                    <button class="boton boton-fantasma boton-icono boton-sm" type="button" data-quitar-fila aria-label="Quitar esta red"><span data-icono="basura" class="icono-sm"></span></button>
+                  </div>
+                </li>
+              </template>
+            </div>
+          </section>
+
+          <section class="tarjeta seccion-edicion" aria-labelledby="titulo-seo">
+            <div class="tarjeta-cabecera"><div><h2 id="titulo-seo">Google y redes sociales</h2><p>Se usan en toda página que no tenga su propio título y descripción.</p></div></div>
+            <div class="tarjeta-cuerpo pila-sm">
+              <div class="campo">
+                <label for="seo-titulo">Título por defecto</label>
+                <input class="entrada" id="seo-titulo" value="JJMM | Estudio Contable | Asesoría contable y tributaria en Lima" required>
+              </div>
+              <div class="campo">
+                <div class="etiqueta-con-contador"><label for="seo-descripcion">Descripción por defecto</label><span class="contador-caracteres" id="seo-descripcion-contador" aria-live="polite"></span></div>
+                <textarea class="area-texto" id="seo-descripcion" rows="3" maxlength="160" required data-contar style="min-height: 4.5rem">Estudio Contable JJMM S.A.C.: outsourcing contable para MYPE en Lima con el sistema de gestión empresarial SIGE Mype. Escríbenos por WhatsApp.</textarea>
+              </div>
+              <div class="selector-imagen" data-selector-imagen data-opcional data-id="seo-imagen" data-etiqueta="Imagen al compartir en redes" data-valor="hero-plan.webp" data-uso="inicio" data-ayuda="Opcional. La que aparece cuando alguien comparte un enlace del sitio por WhatsApp o Facebook."></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="vista-previa" aria-labelledby="titulo-vista">
+          <div class="vista-previa-marco">
+            <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: así se ven en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+            <div class="vista-previa-scroll" aria-hidden="true">
+              <div class="publica-cabecera">
+                <div class="publica-barra">
+                  <span class="publica-redes" id="vista-redes"></span>
+                  <span><span data-icono="whatsapp"></span><span id="vista-celular"></span></span>
+                  <span><span data-icono="correo"></span><span id="vista-correo"></span></span>
+                </div>
+                <div class="publica-marca">
+                  <img id="vista-logo" src="img/logo-jjmm.png" alt="">
+                  <img id="vista-sello" class="publica-sello" src="img/logo-grupo-lenin.png" alt="">
+                </div>
+              </div>
+              <div class="publica" style="display: grid; gap: 1rem">
+                <p class="publica-meta">Botón flotante, abajo a la derecha:</p>
+                <span class="publica-flotante" style="justify-self: end"><span data-icono="whatsapp" class="icono-sm"></span><span data-refleja="texto-flotante" data-respaldo="Escríbenos">Escríbenos</span></span>
+                <p class="publica-meta">Resultado en Google de una página sin título propio:</p>
+                <div class="publica-google" style="border: 1px solid #dbe3ec; border-radius: 0.5rem">
+                  <span class="publica-google-url" data-refleja="nombre-comercial">Estudio Contable JJMM</span>
+                  <span class="publica-google-titulo" data-refleja="seo-titulo"></span>
+                  <span class="publica-google-texto" data-refleja="seo-descripcion"></span>
+                </div>
+                <p class="publica-meta">Al compartir un enlace:</p>
+                <img id="vista-seo-imagen" src="img/hero-plan.webp" alt="" style="border-radius: 0.5rem; aspect-ratio: 1.91 / 1; object-fit: cover; width: 100%">
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="barra-guardado">
+        <span class="sin-guardar" data-sin-guardar hidden>Cambios sin guardar</span>
+        <span class="guardado" data-guardado>Sin cambios.</span>
+        <button class="boton boton-secundario" type="button" data-descartar hidden>Descartar cambios</button>
+        <button class="boton boton-principal" type="submit" data-guardar disabled>Guardar cambios</button>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

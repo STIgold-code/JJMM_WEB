@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Valores · Página de inicio · Panel JJMM</title>
+  <link rel="stylesheet" href="panel.css">
+  <script src="panel.js" defer></script>
+</head>
+<body data-pagina="pagina-de-inicio" data-pantalla="valores" data-migas="Inicio|inicio.html>Página de inicio|pagina-de-inicio.html>Valores">
+  <main>
+    <div class="cabecera">
+      <div class="cabecera-texto">
+        <a class="volver" href="pagina-de-inicio.html"><span data-icono="volver" class="icono-sm"></span>Página de inicio</a>
+        <h1 class="titulo-pagina">Valores</h1>
+        <p>Las razones que muestra «¿Por qué elegirnos?», cada una con su ícono, en este orden. El título y la bajada de esa sección se editan en <a href="seccion-por-que-elegirnos.html">su sección</a>.</p>
+      </div>
+      <div class="cabecera-acciones">
+        <button class="boton boton-principal" type="button" id="nuevo-valor"><span data-icono="mas"></span>Nuevo valor</button>
+      </div>
+    </div>
+
+    <div class="edicion">
+      <section class="tarjeta" aria-label="Lista de valores">
+        <div class="tabla-envoltura">
+          <table class="tabla tabla-apilable" id="tabla-valores">
+            <thead>
+              <tr>
+                <th scope="col" class="estrecha"><span class="oculto-visual">Orden</span></th>
+                <th scope="col">Valor</th>
+                <th scope="col" class="derecha"><span class="oculto-visual">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody data-ordenable data-guardar-al-mover></tbody>
+          </table>
+        </div>
+        <div class="pie-tabla"><span id="total-valores"></span><span>Arrastra o usa las flechas para ordenar; el cambio se guarda solo.</span></div>
+      </section>
+
+      <aside class="vista-previa" aria-labelledby="titulo-vista">
+        <div class="vista-previa-marco">
+          <div class="vista-previa-etiqueta"><span id="titulo-vista">Vista previa: «¿Por qué elegirnos?» en el sitio</span><span data-icono="ojo" class="icono-sm"></span></div>
+          <div class="publica publica-seccion">
+            <p class="publica-titulo">¿Por qué elegirnos?</p>
+            <p class="publica-bajada">Aquí tienes algunas de las razones para escoger nuestros servicios.</p>
+            <ul class="publica-valores" id="vista-valores"></ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="capa" id="hoja-valor" hidden>
+    <div class="capa-fondo"></div>
+    <form class="hoja" role="dialog" aria-modal="true" aria-labelledby="valor-hoja-titulo" novalidate>
+      <div class="hoja-cabecera">
+        <h2 id="valor-hoja-titulo">Editar valor</h2>
+        <button class="boton boton-fantasma boton-icono" type="button" data-cierra aria-label="Cerrar"><span data-icono="cerrar"></span></button>
+      </div>
+      <div class="hoja-cuerpo">
+        <div class="campo">
+          <label for="valor-nombre">Nombre</label>
+          <input class="entrada" id="valor-nombre" required placeholder="Por ejemplo, Excelencia">
+        </div>
+        <fieldset class="opciones-visuales" id="opciones-icono" aria-describedby="valor-icono-ayuda">
+          <legend>Ícono</legend>
+        </fieldset>
+        <p class="ayuda" id="valor-icono-ayuda" style="margin-top: -0.75rem">Son los seis íconos que tiene el sitio. Un ícono nuevo necesita un cambio en el sitio.</p>
+        <p class="nota" id="valor-nuevo-nota" hidden><span data-icono="info" class="icono-sm"></span><span>Se agrega al final de la sección.</span></p>
+      </div>
+      <div class="hoja-pie">
+        <button class="boton boton-principal" type="submit">Guardar valor</button>
+        <button class="boton boton-secundario" type="button" data-cierra>Cancelar</button>
+        <span class="separador"></span>
+        <button class="boton boton-destructivo-linea" type="button" id="eliminar-valor"><span data-icono="basura" class="icono-sm"></span>Eliminar</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
