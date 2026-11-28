@@ -187,4 +187,9 @@ Supuestos, marcados como tales (no son parte del encargo):
 
 **Estado al cierre de la sesión del 27/11/2026.** En producción: ingreso, inicio, mensajes, planes, sedes, guía de clientes, imágenes, página de inicio (orden y carrusel), usuarios y mi cuenta. Pendiente de Gian: aprobar la maqueta L13; decidir sobre los datos de prueba en producción (mensaje id 1 «Prueba del panel (borrar)», plan id 5 «Plan de prueba (borrar)», oculto), la cuenta de editor de prueba y las pruebas de escritura con datos reales. Pendiente técnico: hook del último administrador en `coleccion-usuarios.ts`; hook de borrado en `medios`; el único administrador no puede cambiar su correo; mensaje del aviso general de la página de inicio; P7 (ocultar `/admin`) cuando todo lo anterior esté construido.
 
-Siguiente paso: aprobación de la maqueta L13 por Gian.
+**L14** (28/11/2026), Gian sobre la maqueta L13 y las decisiones pendientes, literal: «dale dale».
+- Interpretación del orquestador: la maqueta L13 queda aprobada y se construye; las seis preguntas de L13 quedan como se ven en la maqueta (Valores se alcanza desde Página de inicio; «Filas de la tabla» es pantalla bajo Planes; sin campo «Visible» nuevo en áreas, valores ni características; las secciones del inicio solo se reordenan; un editor puede publicar y no hay programación de fecha más allá del campo que ya existe; los dos clientes sin nombre siguen «por confirmar»).
+- Sobre las tres decisiones de datos: el orquestador borra los datos de prueba que él creó (mensaje id 1, plan id 5), prueba las escrituras con datos de prueba que crea y borra, y para ver el panel como editor crea una cuenta temporal con contraseña aleatoria que elimina al terminar. No se modifica ningún dato real del estudio.
+- Orden de construcción: (1) catálogo: áreas, valores, clientes y filas de la tabla; (2) datos del estudio y menú del sitio; (3) secciones del inicio, portadas y textos de páginas; (4) publicaciones, categorías y etiquetas; (5) reglas en las colecciones (último administrador, borrado de medios) y P7.
+
+Siguiente paso: construcción (1).
