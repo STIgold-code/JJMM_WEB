@@ -11,5 +11,3 @@ export function listaEnAdmin(slug: string, filtro = ''): string {
 export function documentoEnAdmin(slug: string, id: number | string): string {
   return `${listaEnAdmin(slug)}/${id}`
 }
-
-export const CUENTA_EN_ADMIN = `${RUTA_DEL_ADMIN}/account`

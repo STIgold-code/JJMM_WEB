@@ -1,10 +1,11 @@
 import { expect, vi } from 'vitest'
 
-// Dobles de Next y de la Local API de Payload para probar las acciones (planes, sedes) con la guardia
-// y el adaptador reales. Cada archivo de prueba registra los `vi.mock` (que se elevan) y toma
-// estos dobles con una importación dinámica dentro de la fábrica.
+// Dobles de Next y de la Local API de Payload para probar las acciones (planes, sedes, usuarios,
+// mi cuenta) con la guardia y el adaptador reales. Cada archivo de prueba registra los `vi.mock`
+// (que se elevan) y toma estos dobles con una importación dinámica dentro de la fábrica.
 export const dobles = {
   auth: vi.fn(),
+  login: vi.fn(),
   find: vi.fn(),
   update: vi.fn(),
   create: vi.fn(),
@@ -17,6 +18,7 @@ export const dobles = {
 
 export const payloadDoble = {
   auth: dobles.auth,
+  login: dobles.login,
   find: dobles.find,
   update: dobles.update,
   create: dobles.create,
@@ -49,9 +51,10 @@ export function redireccionDePrueba(ruta: string): never {
   throw new Error(`REDIRECCION ${ruta}`)
 }
 
-// Ninguna escritura llegó a Payload y nada se revalidó.
+// Ninguna escritura llegó a Payload y nada se revalidó. `login` cuenta como escritura: suma intentos
+// fallidos y abre sesiones.
 export function nadaSeEscribio(): void {
-  for (const doble of [dobles.update, dobles.create, dobles.delete, dobles.beginTransaction])
-    expect(doble).not.toHaveBeenCalled()
+  const escrituras = [dobles.update, dobles.create, dobles.delete, dobles.beginTransaction]
+  for (const doble of [...escrituras, dobles.login]) expect(doble).not.toHaveBeenCalled()
   expect(dobles.revalidatePath).not.toHaveBeenCalled()
 }

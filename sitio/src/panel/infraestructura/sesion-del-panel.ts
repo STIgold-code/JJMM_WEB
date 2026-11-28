@@ -32,6 +32,20 @@ export async function exigirSesion(): Promise<SesionDelPanel> {
   return sesion
 }
 
+// Una sesión que ya pasó por `exigirAdministrador`. Los adaptadores que solo usa el administrador
+// (cuentas) piden este tipo: así una acción no puede llegar a ellos sin la guardia.
+export interface SesionDeAdministrador extends SesionDelPanel {
+  readonly rol: 'administrador'
+}
+
+// Guardia de las pantallas y acciones solo del administrador. Sin sesión redirige al ingreso
+// (como `exigirSesion`); con la sesión de un editor devuelve `null` y quien la llama muestra
+// «sin permiso» o rechaza la acción sin escribir.
+export async function exigirAdministrador(): Promise<SesionDeAdministrador | null> {
+  const sesion = await exigirSesion()
+  return esAdministrador(sesion.usuario) ? { ...sesion, rol: 'administrador' } : null
+}
+
 // El rol siempre sale de la sesión validada en el servidor, nunca de lo que mande el navegador.
 export function rolDeLaSesion({ usuario }: Pick<SesionDelPanel, 'usuario'>): Rol {
   return esAdministrador(usuario) ? 'administrador' : 'editor'

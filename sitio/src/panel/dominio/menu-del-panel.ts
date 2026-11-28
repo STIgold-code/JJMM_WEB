@@ -5,6 +5,7 @@ import { RUTA_DE_MENSAJES } from './mensajes'
 import { RUTA_DE_PLANES } from './planes'
 import { RUTA_DEL_INICIO } from './rutas-del-panel'
 import { RUTA_DE_NUEVA_SEDE, RUTA_DE_SEDES } from './sedes'
+import { RUTA_DE_MI_CUENTA, RUTA_DE_USUARIOS } from './usuarios'
 
 // Menú lateral del panel, agrupado por tarea como en la maqueta aprobada. Una entrada sin
 // `ruta` es una sección que aún no se construye: se muestra deshabilitada («Próximamente»).
@@ -97,7 +98,7 @@ const MENU: readonly DefinicionDeGrupo[] = [
     titulo: 'Administración',
     soloAdministrador: true,
     entradas: [
-      entrada('usuarios', 'Usuarios', 'usuarios'),
+      entrada('usuarios', 'Usuarios', 'usuarios', RUTA_DE_USUARIOS),
       entrada('configuracion', 'Datos del estudio', 'ajustes'),
       entrada('navegacion', 'Menú del sitio', 'lista'),
     ],
@@ -138,18 +139,20 @@ const PAGINAS_DE_CREACION: Readonly<Record<string, string>> = {
 const paginaInterna = (clave: string, ruta: string): string =>
   PAGINAS_DE_CREACION[ruta] ?? PAGINAS_INTERNAS[clave] ?? 'Detalle'
 
+// Primera miga de toda página que no es el inicio.
+const INICIO: Miga = { texto: 'Inicio', ruta: RUTA_DEL_INICIO }
+
 // Ruta de la barra superior. La última miga es la página actual y no lleva enlace; toda
-// sección cuelga del inicio y sus páginas internas, de la sección.
+// sección cuelga del inicio y sus páginas internas, de la sección. «Mi cuenta» no está en el menú
+// (se entra desde la cuenta, abajo) y cuelga del inicio.
 export function migasDeRuta(ruta: string): Miga[] {
+  if (ruta === RUTA_DE_MI_CUENTA) return [INICIO, { texto: 'Mi cuenta', ruta: null }]
   const actual = MENU.flatMap((g) => g.entradas).find(
     (e) => e.ruta !== null && esRutaActual(e.ruta, ruta),
   )
   if (!actual?.ruta || actual.ruta === RUTA_DEL_INICIO) return [{ texto: 'Inicio', ruta: null }]
   const enLaSeccion = actual.ruta === ruta
-  const migas = [
-    { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
-    { texto: actual.texto, ruta: enLaSeccion ? null : actual.ruta },
-  ]
+  const migas = [INICIO, { texto: actual.texto, ruta: enLaSeccion ? null : actual.ruta }]
   if (enLaSeccion) return migas
   return [...migas, { texto: paginaInterna(actual.clave, ruta), ruta: null }]
 }

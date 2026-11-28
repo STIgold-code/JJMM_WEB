@@ -24,26 +24,36 @@ describe('menuDelPanel', () => {
     expect(textos).toContain('Mensajes de contacto')
   })
 
-  it.each(['administrador', 'editor'] as const)(
-    'para %s, solo el inicio, los mensajes, los planes y las sedes tienen ruta: el resto va sin enlace',
-    (rol) => {
-      const todas = entradas(menuDelPanel(rol, { mensajesNuevos: 0 }))
-      expect(todas.filter((e) => e.ruta !== null)).toEqual([
-        expect.objectContaining({ clave: 'inicio', ruta: RUTA_DEL_INICIO }),
-        expect.objectContaining({ clave: 'mensajes', ruta: '/panel/mensajes' }),
-        expect.objectContaining({ clave: 'planes', ruta: '/panel/planes' }),
-        expect.objectContaining({ clave: 'sedes', ruta: '/panel/sedes' }),
-      ])
-      expect(todas.filter((e) => e.ruta === null).length).toBeGreaterThan(0)
-    },
-  )
+  const SECCIONES_DEL_EQUIPO = [
+    expect.objectContaining({ clave: 'inicio', ruta: RUTA_DEL_INICIO }),
+    expect.objectContaining({ clave: 'mensajes', ruta: '/panel/mensajes' }),
+    expect.objectContaining({ clave: 'planes', ruta: '/panel/planes' }),
+    expect.objectContaining({ clave: 'sedes', ruta: '/panel/sedes' }),
+  ]
 
-  it('las entradas solo del administrador existen para él y siguen sin ruta', () => {
+  it('para el editor, solo el inicio, los mensajes, los planes y las sedes tienen ruta', () => {
+    const todas = entradas(menuDelPanel('editor', { mensajesNuevos: 0 }))
+    expect(todas.filter((e) => e.ruta !== null)).toEqual(SECCIONES_DEL_EQUIPO)
+    expect(todas.filter((e) => e.ruta === null).length).toBeGreaterThan(0)
+  })
+
+  it('para el administrador, además, «Usuarios» tiene ruta; el resto va sin enlace', () => {
+    const todas = entradas(menuDelPanel('administrador', { mensajesNuevos: 0 }))
+    expect(todas.filter((e) => e.ruta !== null)).toEqual([
+      ...SECCIONES_DEL_EQUIPO,
+      expect.objectContaining({ clave: 'usuarios', ruta: '/panel/usuarios' }),
+    ])
+  })
+
+  it('las entradas solo del administrador existen para él; datos y menú siguen sin ruta', () => {
     const administracion = entradas(menuDelPanel('administrador', { mensajesNuevos: 0 })).filter(
       (e) => ['usuarios', 'configuracion', 'navegacion'].includes(e.clave),
     )
     expect(administracion).toHaveLength(3)
-    expect(administracion.every((e) => e.ruta === null)).toBe(true)
+    expect(administracion.filter((e) => e.ruta === null).map((e) => e.clave)).toEqual([
+      'configuracion',
+      'navegacion',
+    ])
   })
 
   it('pone el contador de mensajes nuevos en «Mensajes de contacto»', () => {
@@ -93,6 +103,17 @@ describe('migasDeRuta', () => {
     expect(migasDeRuta('/panel/sedes/nueva')).toEqual([
       ...seccion,
       { texto: 'Nueva sede', ruta: null },
+    ])
+  })
+
+  it('«Usuarios» cuelga del inicio y «Mi cuenta», que no está en el menú, también', () => {
+    expect(migasDeRuta('/panel/usuarios')).toEqual([
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Usuarios', ruta: null },
+    ])
+    expect(migasDeRuta('/panel/cuenta')).toEqual([
+      { texto: 'Inicio', ruta: RUTA_DEL_INICIO },
+      { texto: 'Mi cuenta', ruta: null },
     ])
   })
 

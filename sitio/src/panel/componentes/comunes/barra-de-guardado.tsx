@@ -12,7 +12,13 @@ interface Props {
   alDescartar: () => void
   // Texto del botón principal; en una creación, por ejemplo, «Crear sede».
   textoDeGuardar?: string
+  // Pie fijo de una tarjeta corta (por ejemplo, «Mi cuenta»), en vez de flotar al pie de la página.
+  enTarjeta?: boolean
 }
+
+const DISPOSICION = 'flex flex-wrap items-center justify-end gap-3 px-4 py-[0.85rem]'
+const ESTILO_FLOTANTE = `sticky bottom-0 z-15 mt-6 rounded-lg border bg-white/96 shadow-md ${DISPOSICION}`
+const ESTILO_EN_TARJETA = `rounded-b-lg border-t ${DISPOSICION}`
 
 function Estado({ sucio, guardadoRecien }: Pick<Props, 'sucio' | 'guardadoRecien'>) {
   if (sucio)
@@ -35,7 +41,7 @@ export function BarraDeGuardado(props: Props) {
   const { sucio, guardando, guardadoRecien, alDescartar } = props
   const [confirmando, setConfirmando] = useState(false)
   return (
-    <div className="sticky bottom-0 z-15 mt-6 flex flex-wrap items-center justify-end gap-3 rounded-lg border bg-white/96 px-4 py-[0.85rem] shadow-md">
+    <div className={props.enTarjeta ? ESTILO_EN_TARJETA : ESTILO_FLOTANTE}>
       <p aria-live="polite" className="contents">
         <Estado sucio={sucio} guardadoRecien={guardadoRecien} />
       </p>

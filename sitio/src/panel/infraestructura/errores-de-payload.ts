@@ -30,3 +30,15 @@ export function traducirErrorDePayload(error: unknown): RechazoDePayload {
   if (error.status === ESTADO_HTTP_NO_ENCONTRADO) return { estado: 'no-encontrado' }
   throw error
 }
+
+// Una escritura de la Local API cuyo resultado no hace falta: «hecho» o el rechazo tipado.
+export async function escribirConPayload(
+  operacion: () => Promise<unknown>,
+): Promise<{ estado: 'hecho' } | RechazoDePayload> {
+  try {
+    await operacion()
+    return { estado: 'hecho' }
+  } catch (error) {
+    return traducirErrorDePayload(error)
+  }
+}
