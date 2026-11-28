@@ -164,4 +164,12 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844, solo lectura: 21 miniaturas sin ninguna rota, filtros con conteo, detalle con «Se usa en», sin desborde ni errores; la subida sin sesión responde 401.
 - Sin verificar: una subida real, editar un texto alternativo y un borrado.
 
-Siguiente paso: P6, Página de inicio (con maqueta para la lista de secciones y el carrusel) y, en paralelo, P6b: la maqueta de lo que falta.
+**L12** (27/11/2026), P6 · Página de inicio (orden y carrusel) terminada (`a82bf8f`):
+- `/panel/pagina-de-inicio`: las siete secciones en su orden real, reordenables con la barra de guardado; el carrusel abre su editor y las otras seis quedan «Próximamente». `/panel/pagina-de-inicio/portadas`: todas las portadas con sus campos reales (imagen, imagen para celular, encuadre, sello, textos, lista de puntos, hasta dos botones), `SelectorDeImagen`, vista previa y barra de guardado. No se tocó ningún componente público ni el esquema.
+- Guardado de la global: el servidor lee `pagina-de-inicio` con `depth: 0`, cambia solo el bloque del carrusel (o el orden) y escribe `secciones` en una llamada; del navegador solo toma los campos del carrusel. Un formulario cuyo `updatedAt` ya no coincide se rechaza y pide recargar. Cero portadas se bloquea en el servidor (el bloque tiene `minRows: 1` y el `h1` del inicio sale de la primera portada con título).
+- Verificador independiente: sin bloqueos. Confirmó en el código de Payload y drizzle que los otros seis bloques vuelven iguales (ids, listas anidadas, imágenes como ids, texto enriquecido) y que `seo` no se toca. Avisos anotados: Payload valida TODAS las secciones en cada guardado, así que un dato inválido ya guardado en otra sección bloquearía el carrusel (el panel lo informa, pero su mensaje manda a recargar); queda una ventana de milisegundos entre la comprobación de `updatedAt` y la escritura; no se pudo comprobar sin base que el texto enriquecido real de «Quiénes somos» pase su validación al reescribirse.
+- Diferencias con la maqueta: «Sin texto» se llama «Imagen completa» (el sitio igual dibuja título y botones); segundos por portada de 3 a 30 (límites del bloque).
+- Verificado en producción a 1440×900 y 390×844, solo lectura: la lista con las siete secciones y el editor con las cuatro portadas reales, imágenes sin romper, vista previa, sin desborde ni errores; el inicio público conserva su `h1` y sus secciones.
+- Sin verificar: ningún guardado. El primer guardado real es el que confirma el punto del texto enriquecido; conviene hacerlo con Gian presente.
+
+Siguiente paso: P6b, la maqueta de lo que falta (en curso), y su aprobación.
