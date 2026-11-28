@@ -49,8 +49,9 @@ Supuestos, marcados como tales (no son parte del encargo):
 | P2 | S4.1 | Aprobación de la maqueta por Gian | — | aprobada (L4) | — |
 | P3 | S1, S2, S4.2 | Fase 1: base (rutas, ingreso, layout, menú, shadcn/ui + Tailwind acotados al panel) e inicio | delegada (respaldo de contexto: sesión larga) + verificador independiente (riesgo 2: sesión y permisos; riesgo 5: dependencias) | hecha y verificada en producción (L5) | `45d9675`, `2d828a6`, `563c0b5`, `7ca09f6` |
 | P4 | S1, S3, S4.2 | Fase 2: la tarea de uso diario (mensajes de contacto) | delegada (respaldo de contexto) + verificador (riesgo 2: primeras escrituras del panel) | hecha y verificada en producción (L6) | `46b5582` |
-| P5 | S1, S3, S4.2 | Fase 3: el catálogo principal | por definir | bloqueada por P2 | — |
-| P6 | S1, S3, S4.2 | Fase 4: el resto de secciones | por definir | bloqueada por P2 | — |
+| P5 | S1, S3, S4.2 | Fase 3: el catálogo principal (planes) | delegada (respaldo de contexto) + verificador (riesgo 1: migración; riesgo 2: escrituras; riesgo 3: tabla pública) | hecha y verificada en producción (L7) | `8b6ef1e` |
+| P6 | S1, S3, S4.2 | Fase 4: el resto de secciones, por pantalla: sedes, página de inicio, guía de clientes, publicaciones, imágenes, usuarios, mi cuenta | delegada por pantalla (respaldo de contexto) + verificador por escrituras | sedes en curso | — |
+| P6b | S4.1 | Maqueta de Áreas de servicio, Clientes, Datos del estudio y Menú del sitio (no estaban en la aprobada) | por definir | pendiente | — |
 | P7 | S0, S1 | Ocultar el `/admin` de Payload y dejarlo solo para el desarrollador | por definir | bloqueada por P3 | — |
 
 ## Log
@@ -120,4 +121,14 @@ Supuestos, marcados como tales (no son parte del encargo):
 - Verificado en producción a 1440×900 y 390×844 con un mensaje de prueba enviado desde el formulario público («Prueba del panel (borrar)», id 1): redirección sin sesión, lista, panel lateral, error de correo inválido en el campo, marcar como atendido con aviso, conteos del menú y del inicio actualizados. Corregido después: los avisos tapaban los botones del panel lateral (ahora salen arriba).
 - Sin verificar: borrado real (el mensaje de prueba sigue en producción hasta que Gian confirme), vista de un editor, paginación con más de 25 mensajes.
 
-Siguiente paso: P5.
+**L7** (27/11/2026), P5 terminada (`8b6ef1e` y el commit de esquema anterior):
+- Esquema: `planes.activo` (`campoActivo`), migración `20261127_233245_planes_visible` (`ADD COLUMN "activo" boolean DEFAULT true`), tipos regenerados. El sitio público no dibuja los planes ocultos; con todos visibles el HTML de la tabla es idéntico al anterior (comparación byte a byte). Clave de caché renombrada a `planes.listarConVisibilidad`.
+- Hook `beforeDelete` en `planes`: borra sus inclusiones en la misma transacción (antes quedaban huérfanas, `ON DELETE SET NULL`); vale también para `/admin`.
+- `/panel/planes`: interruptor «visible», orden por arrastre (mouse) y con flechas, «Nuevo plan» en diálogo (se crea oculto y último). `/panel/planes/[id]`: datos, matriz «Qué incluye», vista previa, barra de guardado con estado de cambios, aviso al salir, eliminar (solo administrador). Plan e inclusiones se guardan en una transacción.
+- Verificador independiente: sin bloqueos. Aviso A1 corregido antes de subir (las celdas huérfanas se descartan al leer en vez de romper la pantalla). Avisos anotados: los ocultos cuentan dentro del máximo de 12 planes de la consulta pública; un plan oculto se lee por `/api/planes`; un editor aún puede borrar planes desde `/admin` (se resuelve con P7); el adaptador de Payload no informa una falla al confirmar la transacción.
+- Verificado en producción a 1440×900 y 390×844: la migración se aplicó y el sitio sigue mostrando los cuatro planes; listado y edición sin desborde ni errores; con un plan de prueba oculto («Plan de prueba (borrar)», id 5): creación, rechazo de un monto («No publiques montos…»), «Cambios sin guardar», guardado con aviso, persistencia tras recargar, aviso del navegador al salir con cambios, y el sitio público sin la columna del plan oculto.
+- Sin verificar: mostrar y ocultar un plan real, reordenar, eliminar (el plan de prueba sigue en producción hasta que Gian confirme), arrastre con el mouse, vista de un editor.
+- Detalles pendientes: la vista previa parte «trabajadores» sin guion; el aviso de guardado dice que la tabla ya muestra los cambios aunque el plan esté oculto; la ruta termina en «Editar plan»; editar las características (filas) queda para P6.
+- P6 se divide: lo que tiene maqueta aprobada (sedes, página de inicio, guía de clientes, publicaciones, imágenes, usuarios, mi cuenta) se construye; Áreas de servicio, Clientes, Datos del estudio y Menú del sitio no tienen maqueta («No incluida») y por S4.1 necesitan la suya antes.
+
+Siguiente paso: P6, empezando por Sedes.
